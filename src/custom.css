@@ -1,0 +1,51 @@
+@import "./reset.css";
+
+@font-face {
+  font-family: vazir;
+  src: url(./Fonts/Vazir-FD-WOL.ttf);
+}
+
+:root {
+  --main: #fb4707;
+  --border: #e2e2e2;
+}
+
+body {
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+*,
+body,
+html {
+  font-family: vazir;
+  font-size: 100%;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+input,
+button {
+  border: none;
+  outline: none;
+}
+a {
+  text-decoration: none;
+}
+button {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey;
+  border-radius: 1rem;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--main);
+  border-radius: 5px;
+}

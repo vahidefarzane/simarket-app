@@ -1,4 +1,7 @@
 import React from "react";
+import Services from "./Services/Services";
+import BannerAds from "./BannerAds/BannerAds";
+import "./Home.css";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -25,10 +28,12 @@ export default function Home() {
     //   <SwiperSlide><img src="./images/enamad.png" alt="" /></SwiperSlide>
     //   <SwiperSlide><img src="./images/kasbokar.png" alt="" /></SwiperSlide>
     //   <SwiperSlide><img src="./images/samandehi.png" alt="" /></SwiperSlide>
-      
+
     // </Swiper>
-    <div>
-      
+    <div className="home-container">
+      <Services />
+      <BannerAds/>
+     
     </div>
   );
 }

@@ -1,0 +1,35 @@
+.services-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 1rem;
+}
+.service-box {
+  display: flex;
+  align-items: center;
+  width: 25%;
+  border: 2px dashed #e2e2e2;
+  margin: 0.8rem;
+  padding: 1rem;
+  border-radius: 1.7rem;
+}
+.service-icon {
+  font-size: 3.5rem;
+  margin-left: 1.2rem;
+}
+.service-text {
+  display: flex;
+  flex-direction: column;
+}
+.service-company {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #b5b5b5;
+  line-height: 1.2rem;
+  margin-bottom: 0.9rem;
+}
+.service-title {
+  color: #b5b5b5;
+  font-size: 0.8rem;
+  font-weight: 400;
+}

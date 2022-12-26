@@ -1,0 +1,30 @@
+.header {
+  display: inline-block;
+  width: 100%;
+  margin-top: 2rem ;
+}
+.header-slider img {
+  float: right;
+  width: 66.5%;
+  height: auto;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+}
+.header-btn-wrapper {
+  float: left;
+  width: 32%;
+  height: auto;
+}
+.header-btn-wrapper img {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  min-width: 0;
+  word-wrap: break-word;
+  border-radius: 0.7rem;
+  margin-bottom: 1rem;
+}

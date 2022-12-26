@@ -13,10 +13,19 @@
   padding: 1rem;
   border-radius: 1.7rem;
 }
+.service-box:hover{
+  background-image: linear-gradient(to right, #fb4208, #ff6a00) !important;
+  border: 2px solid transparent;
+  color: white;
+}
+.service-box:hover .service-company,.service-box:hover .service-title{
+  color: white;
+}
 .service-icon {
   font-size: 3.5rem;
   margin-left: 1.2rem;
 }
+
 .service-text {
   display: flex;
   flex-direction: column;

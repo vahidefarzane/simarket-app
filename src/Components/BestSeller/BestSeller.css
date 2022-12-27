@@ -1,0 +1,73 @@
+.best-seller-wrapper {
+  margin: 2rem 0;
+  background-color: #212121;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.best-seller-view {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.best-seller-view img {
+  width: 100%;
+}
+.best-seller-view button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 0.7rem;
+  border-radius: 50rem;
+  color: white;
+}
+.best-seller-product {
+  width: 24%;
+  padding: 0;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #212121;
+  border-radius: 1.1rem;
+}
+.best-seller-img {
+  width: 100%;
+  height: 23rem;
+}
+.best-seller-img img {
+  width: 100%;
+  height: 23rem;
+  padding: 1.2rem;
+}
+.best-seller-name {
+  display: block;
+  height: 4rem;
+  padding: 1rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+.best-seller-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(
+    to right,
+    #e2e2e2 50%,
+    rgba(255, 255, 255, 0) 0%
+  );
+  background-position: top;
+  background-size: 1.5rem 1px;
+  background-repeat: repeat-x;
+}
+.best-seller-price-last {
+  color: #a8a8a8;
+  font-size: 0.7rem;
+  padding-right: 3rem;
+  text-decoration: line-through;
+}
+.best-seller-price-off {
+  background-color: #fb4208;
+  padding: 1.5rem;
+  color: white;
+  font-weight: 600;
+}

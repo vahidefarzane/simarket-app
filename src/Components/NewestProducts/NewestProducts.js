@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./NewestProducts.css";
 
 export default function NewestProducts() {
-  const [allProducts, setAllproducts] = useState("");
   const [newestProducts, setNewestProducts] = useState("");
 
   useEffect(() => {
@@ -15,8 +14,7 @@ export default function NewestProducts() {
     })
       .then((res) => res.json())
       .then((products) => {
-        setAllproducts(products);
-        console.log(allProducts);
+        setNewestProducts(products);
       });
   };
 
@@ -27,8 +25,8 @@ export default function NewestProducts() {
         <button>نمایش همه</button>
       </div>
       <div className="newest-product-info-wrapper">
-        {allProducts.length &&
-          allProducts.slice(1, 5).map((product) => (
+        {newestProducts.length &&
+          newestProducts.slice(1, 5).map((product) => (
             <div className="newest-product-info">
               <div className="newest-product-img">
                 <img src={product.image} alt={product.title} />

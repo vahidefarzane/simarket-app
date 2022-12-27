@@ -1,7 +1,4 @@
-/* 
-}
-.titles-pro::before {
-} */
+
 .newest-products-wrapper {
   margin: 1rem 0;
 }
@@ -53,9 +50,9 @@
   border: 1px solid #e2e2e2;
   border-radius: 1.1rem;
 }
-.newest-product-img{
-    width: 100%;
-    height: 23rem;
+.newest-product-img {
+  width: 100%;
+  height: 23rem;
 }
 .newest-product-img img {
   width: 100%;
@@ -65,7 +62,7 @@
 .newest-product-name {
   display: block;
   height: 4rem;
-  padding:1rem 0;
+  padding: 1rem 0;
   font-size: 0.8rem;
   font-weight: 600;
   text-align: center;
@@ -88,8 +85,6 @@
   font-size: 0.7rem;
   padding-right: 3rem;
   text-decoration: line-through;
-}
-.newest-product-price-new {
 }
 .newest-product-price-off {
   background-color: #fb4208;

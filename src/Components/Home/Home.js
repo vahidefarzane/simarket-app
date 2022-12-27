@@ -2,7 +2,9 @@ import React from "react";
 import Services from "./Services/Services";
 import BannerAds from "./BannerAds/BannerAds";
 import Header from "../Header/Header";
-import NewestProducts from "../NewestProducts/NewestProducts"
+import NewestProducts from "../NewestProducts/NewestProducts";
+import BestSeller from "../BestSeller/BestSeller";
+import Categories from "../Categories/Categories";
 import "./Home.css";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
@@ -33,11 +35,12 @@ export default function Home() {
 
     // </Swiper>
     <div className="home-container">
-      <Header/>
+      <Header />
       <Services />
-      <NewestProducts/>
-      <BannerAds/>
-     
+      <BestSeller />
+      <BannerAds />
+      <NewestProducts />
+      <Categories />
     </div>
   );
 }

@@ -1,0 +1,99 @@
+/* 
+}
+.titles-pro::before {
+} */
+.newest-products-wrapper {
+  margin: 1rem 0;
+}
+.newest-products-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.newest-products-top h1 {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+.newest-products-top h1::before {
+  display: inline-block;
+  content: "";
+  margin-left: 0.9375rem;
+  vertical-align: middle;
+  height: 27px;
+  width: 15px;
+  background-color: #e2e2e2;
+  border-top-right-radius: 50rem;
+  border-bottom-right-radius: 50rem;
+}
+.newest-products-top button {
+  color: #212121;
+  border: 1px solid #e2e2e2;
+  padding: 0.5rem 2rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border-radius: 3rem;
+  margin-left: 2rem;
+  background-color: transparent;
+}
+.newest-products-top button:hover {
+  background-image: linear-gradient(to right, #fb4208, #ff6a00) !important;
+  border: 1px solid transparent;
+  color: white;
+}
+.newest-product-info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+.newest-product-info {
+  width: 24%;
+  padding: 0;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #e2e2e2;
+  border-radius: 1.1rem;
+}
+.newest-product-img{
+    width: 100%;
+    height: 23rem;
+}
+.newest-product-img img {
+  width: 100%;
+  height: 23rem;
+  padding: 1.2rem;
+}
+.newest-product-name {
+  display: block;
+  height: 4rem;
+  padding:1rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+.newest-product-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(
+    to right,
+    #e2e2e2 50%,
+    rgba(255, 255, 255, 0) 0%
+  );
+  background-position: top;
+  background-size: 1.5rem 1px;
+  background-repeat: repeat-x;
+}
+.newest-product-price-last {
+  color: #a8a8a8;
+  font-size: 0.7rem;
+  padding-right: 3rem;
+  text-decoration: line-through;
+}
+.newest-product-price-new {
+}
+.newest-product-price-off {
+  background-color: #fb4208;
+  padding: 1.5rem;
+  color: white;
+  font-weight: 600;
+}

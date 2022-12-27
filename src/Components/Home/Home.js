@@ -2,6 +2,7 @@ import React from "react";
 import Services from "./Services/Services";
 import BannerAds from "./BannerAds/BannerAds";
 import Header from "../Header/Header";
+import NewestProducts from "../NewestProducts/NewestProducts"
 import "./Home.css";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
@@ -34,6 +35,7 @@ export default function Home() {
     <div className="home-container">
       <Header/>
       <Services />
+      <NewestProducts/>
       <BannerAds/>
      
     </div>

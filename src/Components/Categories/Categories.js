@@ -17,7 +17,7 @@ export default function Categories() {
       <h1 className="categories-title">دسته بندی ها</h1>
       <div className="category-wrapper">
         {categories.map((category) => (
-          <Link className="category">
+          <Link key={category.id} className="category">
             <div className="category-icon">{category.icon}</div>
             <div className="category-name">{category.name}</div>
           </Link>

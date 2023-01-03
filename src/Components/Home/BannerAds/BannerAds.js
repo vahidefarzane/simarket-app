@@ -12,7 +12,7 @@ export default function BannerAds() {
   return (
     <div className="banner-container">
       {imgs.map((img) => (
-        <Link className="banner">
+        <Link key={img.id} className="banner">
           <img key={img.id} src={img.src} />
         </Link>
       ))}

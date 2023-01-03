@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function useFetch(url) {
   const [allProducts, setAllProducts] = useState("");
-  const [isPending, setIsPending] = useState(true);
+  const [ispending, setIsPending] = useState(false);
 
   useEffect(() => {
-    fetch(url, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((products) => {
-        setAllProducts(products);
-        setIsPending(false);
-      });
+    axios.get(url).then((products) => {
+      setAllProducts(products.data);
+      setIsPending(true)
+    });
   }, []);
-  return { allProducts, isPending };
+  return { allProducts ,ispending};
 }

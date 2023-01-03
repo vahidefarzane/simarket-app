@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import useFetch from "../../hooks/useFetch";
 import "./NewestProducts.css";
 
 export default function NewestProducts() {
-  const { allProducts, isPending } = useFetch(
+  const { allProducts, ispending } = useFetch(
     "https://fakestoreapi.com/products"
   );
-
   return (
     <div className="newest-products-wrapper">
       <div className="newest-products-top">
@@ -14,8 +13,8 @@ export default function NewestProducts() {
         <button>نمایش همه</button>
       </div>
       <div className="newest-product-info-wrapper">
-        {allProducts.map((product) => (
-          <div className="newest-product-info">
+        {ispending && allProducts.slice(11, 15).map((product) => (
+          <div key={product.id} className="newest-product-info">
             <div className="newest-product-img">
               <img src={product.image} alt={product.title} />
             </div>

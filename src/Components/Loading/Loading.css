@@ -42,7 +42,7 @@
   left: 56px;
   animation: lds-ellipsis30.6sinfinite;
 }
-@keyframeslds-ellipsis1 {
+/* @keyframeslds-ellipsis1 {
   0% {
     transform: scale(0);
   }
@@ -65,4 +65,4 @@
   100% {
     transform: translate(24px, 0);
   }
-}
+} */

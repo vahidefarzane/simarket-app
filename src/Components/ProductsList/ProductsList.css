@@ -1,18 +1,22 @@
 .product-list-container {
   display: flex;
+  padding: 2rem;
   justify-content: space-between;
-  padding: 1rem;
-}
-.product-list-filter-price,
-.product-list-box {
-  border: 1px solid #e3e3e3;
-  border-radius: 0.7rem;
 }
 .product-list-sidebar {
-  width: 20%;
+  width: 22%;
+
 }
-.product-list-box {
-  width: 79%;
+.product-list-filter-price,
+.product-list-search,
+.product-categories-list {
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 3%);
+  border: 1px solid #e4e4e4;
+  border-radius: 0.7rem;
+}
+.product-list-filter-price h2 {
+}
+.product-list-filter-price input {
 }
 .product-list-filter-price {
   display: flex;
@@ -20,18 +24,78 @@
   align-items: right;
   padding: 1rem;
 }
-.product-list-filter-price h1 {
-  margin-bottom: 1rem;
+.show-filter-price-range {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
-.product-list-filter-price input {
-  display: block;
-  
+.product-list-filter-price button {
 }
-.show-filter-price-range{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+.product-list-search {
 }
-/* .product-list-filter-price button{
-
-} */
+.product-list-search h2 {
+}
+.product-list-search-box {
+}
+.product-list-search-box input {
+}
+.product-list-search-box button {
+}
+.product-categories-list {
+}
+.product-categories-list h2 {
+}
+.product-categories-list input {
+}
+.product-category-sidebar {
+}
+.product-list-box {
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 3%);
+  border: 1px solid #e4e4e4;
+  border-radius: 0.7rem;
+  width: 77%;
+}
+.product-list-head {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e4e4e4;
+  padding: 0.5rem 1rem 1rem;
+}
+.sort-icon-haed {
+  font-size: 2rem;
+  margin-left: 0.5rem;
+  color: #b5b2b2;
+}
+.product-list-head h2 {
+  font-size: 0.9rem;
+  margin-left: 2rem;
+  font-weight: 600;
+  color: #4d4d4d;
+}
+.product-filtered-head-title {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  display: flex;
+}
+.product-filtered-head-title li {
+  width: 7rem;
+  font-size: 0.9rem;
+  padding: 0.7rem;
+  cursor: pointer;
+  color: #4d4d4d;
+  font-weight: 500;
+  text-align: center;
+}
+.product-filtered-head-title li:nth-child(1),.product-filtered-head-title li:hover {
+  background-image: linear-gradient(to right, #fb4208, #ff6a00);
+  padding: 0.7rem;
+  color: white;
+  border-radius: 0.6rem;
+}
+.all-products-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* gap: 0.5rem; */
+}

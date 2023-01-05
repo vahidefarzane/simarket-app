@@ -5,7 +5,6 @@
 }
 .product-list-sidebar {
   width: 22%;
-
 }
 .product-list-filter-price,
 .product-list-search,
@@ -13,10 +12,31 @@
   box-shadow: 0 2px 4px 0 rgb(0 0 0 / 3%);
   border: 1px solid #e4e4e4;
   border-radius: 0.7rem;
+  padding: 1rem;
+  margin-bottom: 0.7rem;
 }
-.product-list-filter-price h2 {
+.product-list-filter-price h2,
+.product-list-search h2,
+.product-categories-list h2 {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
 }
-.product-list-filter-price input {
+.product-list-filter-price input[type="range"] {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 1rem;
+  -webkit-appearance: none;
+  background-color: #ff6a00;
+  border: 0.5px solid gray;
+}
+.product-list-filter-price input[type="range"]::-webkit-slider-thumb {
+  width: 0.7rem;
+  height: 0.7rem;
+  -webkit-appearance: none;
+  cursor: ew-resize;
+  background: white;
+  box-shadow: 130px 0 0 130px white;
 }
 .product-list-filter-price {
   display: flex;
@@ -27,23 +47,49 @@
 .show-filter-price-range {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin: 1.5rem 0;
+}
+.show-filter-price-range span {
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 .product-list-filter-price button {
+  background-image: linear-gradient(to right, #fb4208, #ff6a00) !important;
+  border-radius: 0.4rem;
+  color: white;
+  padding: 0.4rem 0;
 }
 .product-list-search {
 }
-.product-list-search h2 {
-}
 .product-list-search-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  height: 2.5rem;
 }
 .product-list-search-box input {
+  border: 1px solid rgb(218, 213, 213);
+  border-radius: 0.7rem;
+  width: 70%;
+  height: 100%;
+  padding-right: 0.7rem;
+  font-size: 0.8rem;
+
+
 }
 .product-list-search-box button {
+  background-image: linear-gradient(to right, #fb4208, #ff6a00) !important;
+  color: white;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  height: 100%;
+  padding: 0 0.5rem;
 }
-.product-categories-list {
-}
-.product-categories-list h2 {
+.category-box{
+display: flex;
+align-items: center;
+margin-bottom: 0.4rem;
 }
 .product-categories-list input {
 }
@@ -87,7 +133,8 @@
   font-weight: 500;
   text-align: center;
 }
-.product-filtered-head-title li:nth-child(1),.product-filtered-head-title li:hover {
+.product-filtered-head-title li:nth-child(1),
+.product-filtered-head-title li:hover {
   background-image: linear-gradient(to right, #fb4208, #ff6a00);
   padding: 0.7rem;
   color: white;

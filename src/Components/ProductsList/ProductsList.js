@@ -20,11 +20,16 @@ export default function ProductsList() {
         setCategoriesIsPending(true);
       });
   }, []);
+  const changePriceHandler =(
+    
+  )=>{
+
+  }
   return (
     <div className="product-list-container">
       <div className="product-list-sidebar">
         <div className="product-list-filter-price">
-          <h2>فیلتر بر اساس قیمت</h2>
+          <h2>فیلتر بر اساس قیمت :</h2>
           <input type="range" />
           <div className="show-filter-price-range">
             <span className="maximum-price">500,000</span>
@@ -33,21 +38,21 @@ export default function ProductsList() {
           <button>صافی</button>
         </div>
         <div className="product-list-search">
-          <h2>جستجو در محصولات</h2>
+          <h2>جستجو در محصولات :</h2>
           <div className="product-list-search-box">
-            <input type="search" />
+            <input type="search" placeholder="جستجو محصول ..." />
             <button>جستجو</button>
           </div>
         </div>
         <div className="product-categories-list">
-          <h2>فیلتر بر اساس دسته بندی</h2>
+          <h2>فیلتر بر اساس دسته بندی :</h2>
           {categoriesIsPending &&
             categories.map((category) => (
-              <>
+              <div className="category-box">
                 <input type="checkbox" name="category" value={category} />
                 <span className="product-category-sidebar">{category}</span>
                 <br />
-              </>
+              </div>
             ))}
         </div>
       </div>

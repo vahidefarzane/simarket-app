@@ -1,5 +1,6 @@
 import React from "react";
-import './ContactUs.css'
+import "./ContactUs.css";
+import MyButton from "../MyButton/MyButton";
 
 export default function ContactUs() {
   return (

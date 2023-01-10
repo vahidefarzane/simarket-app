@@ -1,10 +1,11 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { BsCartDash } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Badge } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Button } from "@mui/material";
+import MyButton from "../MyButton/MyButton";
 import "./NavBar.css";
 
 export default function Header() {
@@ -32,7 +33,7 @@ export default function Header() {
           </div>
         </div>
         <div className="top-nav-left">
-          <button className="top-login-btn">ورود / ثبت نام </button>
+          <MyButton borderradius={"2rem"} marginleft={"2rem"}>ورود / ثبت نام</MyButton>
           <StyledBadge
             badgeContent={4}
             sx={{ fontSize: "1.7rem", cursor: "pointer" }}
@@ -56,6 +57,9 @@ export default function Header() {
         </li>
         <li>
           <Link to="/contactUs">تماس با ما </Link>
+        </li>
+        <li>
+          <Link to="/product">محصول</Link>
         </li>
       </ul>
     </div>

@@ -5,3 +5,7 @@
 .list-item:hover {
   border-bottom: 2px solid #fb4707;
 }
+.BottomNavigationAction {
+  margin-bottom: 0.1rem;
+  /* width: inherit; */
+}

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import { React, useState } from "react";
 import {
   Badge,
   AppBar,
@@ -22,11 +22,20 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import BottomNavigation from "@mui/material/BottomNavigation";
+
+// import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import MuiBottomNavigationAction from "@mui/material/BottomNavigationAction";
+import HomeIcon from "@mui/icons-material/Home";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+
+import CategoryIcon from "@mui/icons-material/Category";
 import MyButton from "../MyButton/MyButton";
 import Logo from "../../logo.png";
 import "./NavBar.css";
+import MenuResponsive from "../MenuResponsive/MenuResponsive";
 
 // desktop styled
 
@@ -50,11 +59,13 @@ const Search = styled("div")(({ theme }) => ({
     margin: "0",
     width: "70%",
     padding: "0",
+    fontSize: "0.6rem",
   },
   [theme.breakpoints.up("md")]: {
     margin: "0 2rem",
     width: "40%",
     padding: "0.15rem",
+    fontSize: "0.9rem",
   },
 }));
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -105,10 +116,19 @@ const BoxMobileView = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     display: "none",
   },
-  
 }));
 
+const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
+  padding:1rem;
+  fontSize:0.7rem;
+  &.Mui-selected {
+    color: #fb4707;
+  }
+`);
+
+
 export default function Navbar() {
+  const [value, setValue] = useState(0);
   const mobileview = (
     <BoxMobileView>
       <Stack
@@ -203,6 +223,42 @@ export default function Navbar() {
           <ChevronLeftIcon sx={{ color: "#fb4707" }} />
         </IconButton>
       </Stack>
+      <Box>
+        <BottomNavigation
+          showLabels
+          value={value}
+          sx={{
+            justifyContent: "space-between",
+            boxShadow: "5px 6px 11px rgb(0 0 0 / 40%)",
+            position: "fixed",
+            bottom: 0,
+            right: 0,
+            left: 0,
+          }}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction
+            label="خانه"
+            icon={<HomeIcon className="BottomNavigationAction" />}
+          />
+          <BottomNavigationAction
+            label="دسته ها"
+            icon={<CategoryIcon className="BottomNavigationAction" />}
+          />
+          <BottomNavigationAction
+            label="علاقه مندی ها"
+            icon={<FavoriteBorderIcon className="BottomNavigationAction" />}
+          />
+          <BottomNavigationAction
+            label="حساب کاربری"
+            icon={
+              <PersonOutlineOutlinedIcon className="BottomNavigationAction" />
+            }
+          />
+        </BottomNavigation>
+      </Box>
     </BoxMobileView>
   );
   return (

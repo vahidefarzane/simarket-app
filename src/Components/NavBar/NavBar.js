@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import {
   Badge,
@@ -5,41 +6,43 @@ import {
   Box,
   Toolbar,
   IconButton,
-  Typography,
   InputBase,
-  MenuItem,
-  Menu,
   List,
   ListItem,
-  ListItemText,
+  Grid,
+  Button,
+  Stack,
+  Typography,
 } from "@mui/material";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import { useState } from "react";
-import Logo from "../../logo.png";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import MyButton from "../MyButton/MyButton";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import Logo from "../../logo.png";
 import "./NavBar.css";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: "2rem",
-  color: "#000",
-  backgroundColor: "transparent",
-  border: "1px solid gray",
-  marginLeft: 0,
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: "white",
+  color: "#212121",
   [theme.breakpoints.down("md")]: {
-    marginRight: "0.2rem",
+    display: "none",
   },
   [theme.breakpoints.up("md")]: {
-    marginRight: "2rem",
-    width: "35%",
+    display: "flex",
   },
+}));
+const Search = styled("div")(() => ({
+  width: "40%",
+  position: "relative",
+  borderRadius: "0.7rem",
+  color: "#212121",
+  backgroundColor: "transparent",
+  border: "1px solid #e2e2e2",
+  margin: "0 2rem",
+  padding: "0.15rem",
 }));
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 1),
@@ -49,42 +52,29 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "#212121",
 }));
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 5),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
-    // width: "100%",
-    // [theme.breakpoints.up("md")]: {
-    //   width: "20ch",
-    // },
   },
 }));
-const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  display: "flex",
-  backgroundColor: "white",
-  color: "#000",
-  [theme.breakpoints.down("sm")]: {
-    display: "none",
-  },
+const LocationStyled = styled(Button)(() => ({
+  borderRadius: "0.7rem",
+  cursor: "pointer",
+  border: "1px solid #e2e2e2",
+  height: "3rem",
 }));
-const StyledList = styled(List)(({ theme }) => ({
-  padding: 0,
-  margin: "1rem 1rem 0 1rem",
-  display: "flex",
-  fontSize: "0.9rem",
-}));
-
 const badgeStyle = {
   "& .MuiBadge-badge": {
     backgroundColor: "#fb4707",
     color: "#fff",
   },
 };
+
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     display: "flex",
@@ -94,34 +84,68 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
+const StyledList = styled(List)(({ theme }) => ({
+  padding: 0,
+  margin: "1rem 1rem 0 1rem",
+  display: "flex",
+  fontSize: "0.9rem",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
+const BoxMobileView = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down("md")]: {
+    display: "flex",
+  },
+}));
+
 export default function Navbar() {
+  const mobileview = (
+    <BoxMobileView>
+      <Box>
+        <StyledIconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+        >
+          <MenuIcon />
+        </StyledIconButton>
+        <Box
+          component="img"
+          sx={{
+            height: 50,
+            width: {
+              md: 130,
+              sm: 100,
+            },
+          }}
+          alt="Your logo"
+          src={Logo}
+        ></Box>
+      </Box>
+    </BoxMobileView>
+  );
+  {
+    /* <IconButton
+              // size="large"
+              aria-label="login or register"
+              sx={{ color: "#212121" }}
+            >
+              <AccountCircleIcon />
+            </IconButton> */
+  }
   return (
     <Box>
       <StyledAppBar>
         <Toolbar>
-          <StyledIconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{
-              display: {
-                sm: "flex",
-              },
-            }}
-          >
-            <MenuIcon />
-          </StyledIconButton>
           <Box
             component="img"
             sx={{
               height: 50,
-              width: {
-                md: 130,
-                sm: 100,
-              },
+              width: 130,
             }}
-            alt="Your logo."
+            alt="Your logo"
             src={Logo}
           ></Box>
           <Search>
@@ -133,22 +157,30 @@ export default function Navbar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+          <LocationStyled startIcon={<FmdGoodOutlinedIcon color="#212121" />}>
+            <Stack textAlign="right" marginRight="0.5rem">
+              <Typography fontSize="0.7rem" color="#212121">
+                انتخاب مکان
+              </Typography>
+              <Typography fontSize="0.8rem">موقعیت شما</Typography>
+            </Stack>
+          </LocationStyled>
           <Box sx={{ flexGrow: 1 }} />
           <Box>
             <MyButton
-              marginleft={"1rem"}
-              borderradius={"2rem"}
+              marginleft={"1.2rem"}
+              borderradius={"0.7rem"}
               fontsize={"0.8rem"}
+              padding={"0.75rem 1.5rem"}
             >
               ورود / ثبت نام
             </MyButton>
             <IconButton
-              // size="large"
               aria-label="show 17 new notifications"
-              sx={{ color: "#000" }}
+              sx={{ color: "#212121" }}
             >
               <Badge badgeContent={4} sx={badgeStyle}>
-                <AiOutlineShoppingCart />
+                <AddShoppingCartIcon />
               </Badge>
             </IconButton>
           </Box>
@@ -168,6 +200,7 @@ export default function Navbar() {
           </Link>
         </StyledList>
       </StyledAppBar>
+      {/* {mobileview} */}
     </Box>
   );
 }

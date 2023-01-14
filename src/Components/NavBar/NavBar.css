@@ -1,11 +1,7 @@
 .list-item-links {
-  color: #000;
+  color: #212121;
   height: 2rem;
 }
-
 .list-item:hover {
   border-bottom: 2px solid #fb4707;
-}
-.list-item{
-  transition: 2s fade;
 }

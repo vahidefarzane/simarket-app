@@ -13,16 +13,22 @@ import {
   Button,
   Stack,
   Typography,
+  Paper,
+  Divider,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MyButton from "../MyButton/MyButton";
 import Logo from "../../logo.png";
 import "./NavBar.css";
+
+// desktop styled
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "white",
@@ -34,15 +40,22 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
     display: "flex",
   },
 }));
-const Search = styled("div")(() => ({
-  width: "40%",
+const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "0.7rem",
   color: "#212121",
   backgroundColor: "transparent",
   border: "1px solid #e2e2e2",
-  margin: "0 2rem",
-  padding: "0.15rem",
+  [theme.breakpoints.down("md")]: {
+    margin: "0",
+    width: "70%",
+    padding: "0",
+  },
+  [theme.breakpoints.up("md")]: {
+    margin: "0 2rem",
+    width: "40%",
+    padding: "0.15rem",
+  },
 }));
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 1),
@@ -74,67 +87,124 @@ const badgeStyle = {
     color: "#fff",
   },
 };
-
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
-  [theme.breakpoints.down("md")]: {
-    display: "flex",
-  },
-  [theme.breakpoints.up("md")]: {
-    display: "none",
-  },
-}));
-
-const StyledList = styled(List)(({ theme }) => ({
+const StyledList = styled(List)(() => ({
   padding: 0,
   margin: "1rem 1rem 0 1rem",
   display: "flex",
   fontSize: "0.9rem",
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
 }));
+
+// Responsive Style
+
 const BoxMobileView = styled(Box)(({ theme }) => ({
+  margin: "0.8rem 0.7rem",
   [theme.breakpoints.down("md")]: {
     display: "flex",
+    flexDirection: "column",
   },
+  [theme.breakpoints.up("md")]: {
+    display: "none",
+  },
+  
 }));
 
 export default function Navbar() {
   const mobileview = (
     <BoxMobileView>
-      <Box>
-        <StyledIconButton
-          size="large"
+      <Stack
+        direction="row"
+        sx={{
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <IconButton
           edge="start"
           color="inherit"
           aria-label="open drawer"
+          size="small"
         >
-          <MenuIcon />
-        </StyledIconButton>
+          <MenuIcon sx={{ marginLeft: "0.3rem" }} />
+          <Typography component="span">منو</Typography>
+        </IconButton>
         <Box
           component="img"
           sx={{
-            height: 50,
-            width: {
-              md: 130,
-              sm: 100,
-            },
+            width: 100,
           }}
           alt="Your logo"
           src={Logo}
         ></Box>
-      </Box>
+        <IconButton color="inherit">
+          <HelpOutlineOutlinedIcon />
+        </IconButton>
+      </Stack>
+      <Stack
+        direction="row"
+        sx={{
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: "0.7rem",
+        }}
+      >
+        <Search flexGrow="1">
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="جستجو..."
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+        <Box sx={{ flexGrow: 1 }} />
+
+        <IconButton aria-label="login or register" sx={{ color: "#212121" }}>
+          <PersonOutlineOutlinedIcon />
+        </IconButton>
+        <IconButton
+          aria-label="show 17 new notifications"
+          sx={{ color: "#212121" }}
+        >
+          <Badge badgeContent={4} sx={badgeStyle}>
+            <AddShoppingCartIcon />
+          </Badge>
+        </IconButton>
+      </Stack>
+      <Stack
+        direction="row"
+        sx={{
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: "0.7rem",
+          borderTop: "1px solid #e2e2e2",
+          borderBottom: "1px solid #e2e2e2",
+        }}
+      >
+        <Stack
+          direction="row"
+          sx={{
+            width: "100%",
+            justifyContent: "start",
+            alignItems: "center",
+            margin: "0.2rem 0",
+          }}
+        >
+          <IconButton>
+            <FmdGoodOutlinedIcon sx={{ color: "#fb4707" }} />
+          </IconButton>
+          <Typography sx={{ fontSize: "0.7rem" }}>
+            مکان را جهت فیلتر محصولات انتخاب کنید
+          </Typography>
+        </Stack>
+        <IconButton>
+          <ChevronLeftIcon sx={{ color: "#fb4707" }} />
+        </IconButton>
+      </Stack>
     </BoxMobileView>
   );
-  {
-    /* <IconButton
-              // size="large"
-              aria-label="login or register"
-              sx={{ color: "#212121" }}
-            >
-              <AccountCircleIcon />
-            </IconButton> */
-  }
   return (
     <Box>
       <StyledAppBar>
@@ -157,7 +227,7 @@ export default function Navbar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <LocationStyled startIcon={<FmdGoodOutlinedIcon color="#212121" />}>
+          <LocationStyled startIcon={<FmdGoodOutlinedIcon color="red" />}>
             <Stack textAlign="right" marginRight="0.5rem">
               <Typography fontSize="0.7rem" color="#212121">
                 انتخاب مکان
@@ -200,7 +270,7 @@ export default function Navbar() {
           </Link>
         </StyledList>
       </StyledAppBar>
-      {/* {mobileview} */}
+      {mobileview}
     </Box>
   );
 }

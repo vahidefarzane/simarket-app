@@ -10,9 +10,9 @@ function App() {
   return (
     <>
       <Stack className="main">
-        <NavBar />
-        {/* {router}
-        <Footer/> */}
+        {/* <NavBar /> */}
+        {/* {router} */}
+        <Footer/>
       </Stack>
     </>
   );

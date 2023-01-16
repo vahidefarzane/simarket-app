@@ -10,8 +10,8 @@ function App() {
   return (
     <>
       <Stack className="main">
-        {/* <NavBar /> */}
-        {/* {router} */}
+        <NavBar />
+        {router}
         <Footer/>
       </Stack>
     </>

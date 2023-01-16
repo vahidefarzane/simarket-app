@@ -42,6 +42,7 @@ import MenuResponsive from "../MenuResponsive/MenuResponsive";
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "white",
   color: "#212121",
+  position:'sticky',
   [theme.breakpoints.down("md")]: {
     display: "none",
   },

@@ -29,7 +29,7 @@ const FooterContainerStyled = styled(Stack)(({ theme }) => ({
   },
   [theme.breakpoints.down("md")]: {
     marginTop: "1.5rem",
-    padding: "2rem 1rem 0.5rem 1rem",
+    padding: "2rem 1rem 4rem 1rem",
   },
 }));
 const DesktopViewFooter = styled(Box)(({ theme }) => ({

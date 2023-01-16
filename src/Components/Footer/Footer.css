@@ -14,3 +14,12 @@
   border-radius: 1rem;
   margin-right: 0.7rem;
 }
+.enamad-responsive{
+  width: 25%;
+}
+.enamad-responsive img {
+  width: 80%;
+  height: 100%;
+  border: 2px solid #81858b;
+  border-radius: 1rem;
+}

@@ -1,9 +1,15 @@
-import { Box } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import React from "react";
 import { Link } from "react-router-dom";
+import { Box } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper";
 import "./Header.css";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 export default function Header() {
   return (
@@ -13,7 +19,7 @@ export default function Header() {
         pagination={{
           clickable: true,
         }}
-        modules={[Navigation,Pagination]}
+        modules={[Navigation, Pagination]}
         className="mySwiper"
       >
         <SwiperSlide>

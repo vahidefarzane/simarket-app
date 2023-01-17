@@ -1,9 +1,0 @@
-.banner-container{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.banner img{
-    width: 20rem;
-}

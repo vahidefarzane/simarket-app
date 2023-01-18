@@ -1,12 +1,1 @@
 
-.categories-title::before {
-  display: inline-block;
-  content: "";
-  margin-left: 0.9375rem;
-  vertical-align: middle;
-  height: 27px;
-  width: 15px;
-  background-color: #e2e2e2;
-  border-top-right-radius: 50rem;
-  border-bottom-right-radius: 50rem;
-}

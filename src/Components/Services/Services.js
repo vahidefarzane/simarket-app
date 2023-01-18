@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   serviceBox: {
     display: "flex",
     width: "25%",
-    height: "6rem",
+    height: "7rem",
     alignItems: "center",
     border: "2px dashed #e2e2e2",
     margin: "0.8rem",
@@ -36,11 +36,13 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: "1.3rem",
     },
     [theme.breakpoints.down("sm")]: {
+      height: "4rem",
       width: "49%",
-      margin: "0.1rem",
-      padding: "0.5rem",
+      margin: "1px",
+      padding: "0.1rem",
       borderRadius: "1rem",
     },
+
     "&:hover": {
       backgroundImage: "linear-gradient(to right, #fb4208, #ff6a00) !important",
       border: "2px solid transparent",
@@ -57,11 +59,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#b5b5b5",
   },
   serviceIcon: {
-    fontSize: "5rem",
     color: "#212121",
-    marginLeft: "1rem",
-    [theme.breakpoints.down("md")]: {
-      fontSize: "2rem",
+    marginLeft: "0.9rem",
+
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "0.7rem",
     },
   },
 }));
@@ -71,22 +73,62 @@ export default function Services() {
   const [services, setServices] = useState([
     {
       id: 1,
-      icon: <SupportOutlinedIcon />,
+      icon: (
+        <SupportOutlinedIcon
+          sx={{
+            fontSize: {
+              md: "3.9rem",
+              sm: "3rem",
+              xs: "2.5rem",
+            },
+          }}
+        />
+      ),
       text: "پشتیبانی 24/7",
     },
     {
       id: 2,
-      icon: <CalendarMonthOutlinedIcon />,
+      icon: (
+        <CalendarMonthOutlinedIcon
+          sx={{
+            fontSize: {
+              md: "3.9rem",
+              sm: "3rem",
+              xs: "2.5rem",
+            },
+          }}
+        />
+      ),
       text: "6 روز گارانتی کالا",
     },
     {
       id: 3,
-      icon: <AccountBalanceWalletOutlinedIcon />,
+      icon: (
+        <AccountBalanceWalletOutlinedIcon
+          sx={{
+            fontSize: {
+              md: "3.9rem",
+              sm: "3rem",
+              xs: "2.5rem",
+            },
+          }}
+        />
+      ),
       text: "تضمین قیمت کالا",
     },
     {
       id: 4,
-      icon: <LocalShippingOutlinedIcon />,
+      icon: (
+        <LocalShippingOutlinedIcon
+          sx={{
+            fontSize: {
+              md: "3.9rem",
+              sm: "3rem",
+              xs: "2.5rem",
+            },
+          }}
+        />
+      ),
       text: "ارسال به سراسر کشور",
     },
   ]);
@@ -100,15 +142,29 @@ export default function Services() {
               className={classes.serviceText}
               sx={{
                 fontWeight: "600",
-                fontSize: "0.9rem",
-                marginBottom: "0.6rem",
+                fontSize: {
+                  md: "0.9rem",
+                  sm: "0.7rem",
+                  xs: "0.6rem",
+                },
+                marginBottom: {
+                  md: "0.6rem",
+                  sm: "0.4rem",
+                  xs: "0.2rem",
+                },
               }}
             >
               پارس کالا
             </Typography>
             <Typography
               className={classes.serviceText}
-              sx={{ fontSize: "0.8rem" }}
+              sx={{
+                fontSize: {
+                  md: "0.9rem",
+                  sm: "0.7rem",
+                  xs: "0.6rem",
+                },
+              }}
             >
               {service.text}
             </Typography>

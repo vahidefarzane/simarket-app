@@ -7,7 +7,6 @@ import "./BannerAds.css";
 const useStyles = makeStyles((theme) => ({
   imageContainer: {
     width: "100%",
-    margin:'0.5rem',
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -16,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   imageBanner: {
-    width: "25%",
+    width: "24%",
     [theme.breakpoints.down("sm")]: {
       width: "46%",
-      margin:'0'
+      margin: "0",
     },
   },
 }));

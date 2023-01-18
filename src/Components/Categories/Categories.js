@@ -7,6 +7,7 @@ import "./Categories.css";
 import { Link } from "react-router-dom";
 import { Stack, Typography, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
 
 const useStyles = makeStyles((theme) => ({
   categoriesWrapper: {
@@ -14,10 +15,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     flexDirection: "column",
   },
-  categoriesTitle: {
-    fontWeight: "700",
-    fontSize: " 1.3rem",
-  },
+
   categoryWrapper: {
     display: "flex",
     justifyContent: "space-between",
@@ -82,7 +80,6 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "0.8rem",
       marginTop: " 0",
     },
-    
   },
 }));
 
@@ -96,9 +93,7 @@ export default function Categories() {
   ]);
   return (
     <Stack className={classes.categoriesWrapper}>
-      <Typography component={"h1"} className={classes.categoriesTitle}>
-        دسته بندی ها
-      </Typography>
+      <HomeTitleComponent title="دسته بندی ها" />
       <Box className={classes.categoryWrapper}>
         {categories.map((category) => (
           <Box key={category.id} className={classes.category}>

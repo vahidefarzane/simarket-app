@@ -1,31 +1,82 @@
 import React from "react";
 import "./BestSeller.css";
 import useFetch from "../../hooks/useFetch";
+import { Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper";
+
+import HomeProductBox from "../HomeProductBox/HomeProductBox";
+import MyButton from "../MyButton/MyButton";
+import { Stack } from "@mui/system";
+import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
+
+const useStyles = makeStyles((theme) => ({
+  bestSellerWrapper: {
+    margin: "2rem 0",
+    backgroundColor: "#212121",
+    padding: "2rem",
+    display: "flex",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("md")]: {
+      padding: "1rem",
+    },
+  },
+}));
 
 export default function BestSeller() {
+  const classes = useStyles();
   const { allProducts, ispending } = useFetch(
     "https://fakestoreapi.com/products"
   );
   return (
-    <div className="best-seller-wrapper">
-      <div className="best-seller-view">
-        <img src="./images/parsamazing.png" alt="" />
-        <button src="#">مشاهده همه</button>
-      </div>
-
-      {ispending && allProducts.slice(11, 14).map((product) => (
-          <div key={product.id} className="best-seller-product">
-            <div className="best-seller-img">
-              <img src={product.image} alt={product.title} />
-            </div>
-            <span className="best-seller-name">{product.title}</span>
-            <div className="best-seller-price">
-              <span className="best-seller-price-last">{product.price}</span>
-              <span className="best-seller-price-new">{product.price}</span>
-              <span className="best-seller-price-off">12%</span>
-            </div>
-          </div>
-        ))}
-    </div>
+    <Stack className={classes.bestSellerWrapper}>
+      <HomeTitleComponent title="پرفروش ترین محصولات" />
+      <Swiper
+        spaceBetween={10}
+        Navigation={true}
+        breakpoints={{
+          300:{
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          400:{
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          600: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          700: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          900: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1200: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+        }}
+        modules={[Navigation]}
+        className="mySwiper"
+      >
+        {ispending &&
+          allProducts.slice(11, 15).map((product) => (
+            <SwiperSlide>
+              <HomeProductBox
+                productId={product.id}
+                productImage={product.image}
+                productTitle={product.title}
+                productPrice={product.price}
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+    </Stack>
   );
 }

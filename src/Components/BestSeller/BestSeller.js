@@ -27,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       padding: "1rem",
     },
+    [theme.breakpoints.down("md")]: {
+      padding: "0.6rem 2rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "0.7rem 3rem",
+    },
   },
 }));
 
@@ -42,58 +48,60 @@ export default function BestSeller() {
         color="#fff"
         margin="1rem 1rem 2rem"
       />
-      <Swiper
-        style={{
-          "--swiper-navigation-color": "#fb4707",
-          "--swiper-pagination-color": "#fb4707",
-          padding: "0 0 3rem 0",
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        breakpoints={{
-          300: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          400: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          600: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-          },
-          700: {
-            slidesPerView: 3,
-            spaceBetween: 10,
-          },
-          900: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1200: {
-            slidesPerView: 4,
-            spaceBetween: 10,
-          },
-        }}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
-        {ispending &&
-          allProducts.slice(1, 9).map((product) => (
-            <SwiperSlide>
-              <HomeProductBox
-                productId={product.id}
-                productImage={product.image}
-                productTitle={product.title}
-                productPrice={product.price}
-                isSlider={true}
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper>
+      <Box className="swiper-best-seller-product-wraper">
+        <Swiper
+          style={{
+            "--swiper-navigation-color": "#fb4707",
+            "--swiper-pagination-color": "#fb4707",
+            padding: "0 0 3rem 0",
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          breakpoints={{
+            300: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            400: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            600: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            700: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+            900: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1200: {
+              slidesPerView: 4,
+              spaceBetween: 10,
+            },
+          }}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+        >
+          {ispending &&
+            allProducts.slice(1, 9).map((product) => (
+              <SwiperSlide>
+                <HomeProductBox
+                  productId={product.id}
+                  productImage={product.image}
+                  productTitle={product.title}
+                  productPrice={product.price}
+                  isSlider={true}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      </Box>
     </Stack>
   );
 }

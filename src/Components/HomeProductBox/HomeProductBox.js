@@ -32,15 +32,15 @@ const useStyles = makeStyles((theme) => ({
   },
   bestSellerName: {
     display: "block",
-    height: "4.5rem",
+    height: "4rem",
     padding: "0.5rem 0",
     fontWeight: "600",
     textAlign: "center",
     [theme.breakpoints.down("md")]: {
-      height: "5.5rem",
+      height: "3.5rem",
     },
     [theme.breakpoints.down("sm")]: {
-      height: "4rem",
+      height: "3.2rem",
     },
   },
   bestSellerPrice: {

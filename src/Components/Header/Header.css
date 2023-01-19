@@ -26,9 +26,71 @@
   width: 100%;
   height: 100%;
 }
-@media screen and (max-width: 600px) {
-  .swiper-button-prev::after,
-  .swiper-button-next::after {
-    width: 10rem;
+.swiper-header-wraper .swiper-button-next::after,
+.swiper-header-wraper .swiper-button-prev::after {
+  transition: 0.2s all;
+  color: #fff;
+}
+
+@media screen and (width < 600px) {
+  .swiper-header-wraper .swiper-button-prev::after,
+  .swiper-header-wraper .swiper-button-next::after {
+    font-size: 1rem;
+    padding: 0;
+  }
+  .swiper-header-wraper .swiper-rtl .swiper-button-next {
+    left: -4px;
+  }
+  .swiper-header-wraper .swiper-rtl .swiper-button-prev {
+    right: -4px;
+  }
+}
+@media screen and (600px <width < 900px) {
+  .swiper-header-wraper .swiper-button-prev::after,
+  .swiper-header-wraper .swiper-button-next::after {
+    font-size: 1rem;
+    padding: 0.5rem 0.7rem;
+    background: rgba(33, 33, 33, 0.2);
+    border: 1px solid;
+  }
+  .swiper-header-wraper .swiper-rtl .swiper-button-next {
+    left: 3px;
+  }
+  .swiper-header-wraper .swiper-rtl .swiper-button-prev {
+    right: 3px;
+  }
+  .swiper-header-wraper .swiper-button-prev::after {
+    border-top-left-radius: 0.9rem;
+    border-bottom-left-radius: 0.9rem;
+  }
+  
+  .swiper-header-wraper .swiper-button-next::after {
+    border-top-right-radius: 0.9rem;
+    border-bottom-right-radius: 0.9rem;
+  }
+  
+}
+@media screen and (width > 900px) {
+  .swiper-header-wraper .swiper-button-prev::after,
+  .swiper-header-wraper .swiper-button-next::after {
+    font-size: 1.7rem;
+    padding: 0.9rem 1.2rem;
+    background: rgba(33, 33, 33, 0.2);
+    border: 1px solid;
+  }
+  .swiper-header-wraper .swiper-rtl .swiper-button-next {
+    left: 3px;
+  }
+  .swiper-header-wraper .swiper-rtl .swiper-button-prev {
+    right: 3px;
+  }
+  .swiper-header-wraper .swiper-button-prev::after {
+    border-top-left-radius: 1.2rem;
+    border-bottom-left-radius: 1.2rem;
+  }
+  
+  .swiper-header-wraper .swiper-button-next::after {
+    border-top-right-radius: 1.2rem;
+    border-bottom-right-radius: 1.2rem;
   }
 }

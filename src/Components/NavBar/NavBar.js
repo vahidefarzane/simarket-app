@@ -15,6 +15,7 @@ import {
   Typography,
   Paper,
   Divider,
+  BottomNavigationAction,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -42,7 +43,7 @@ import MenuResponsive from "../MenuResponsive/MenuResponsive";
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "white",
   color: "#212121",
-  position:'sticky',
+  position: "sticky",
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -118,14 +119,17 @@ const BoxMobileView = styled(Box)(({ theme }) => ({
     display: "none",
   },
 }));
+const BottomNavigationActionStyled = styled(BottomNavigationAction)(
+  ({ theme }) => ({
+    minWidth: "1rem",
+    width:'25%',
+    '&.Mui-selected': {
+      color:' #fb4707',
+    },
+    [theme.breakpoints.down("sm")]: {},
+  })
+);
 
-const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
-  padding:1rem;
-  fontSize:0.7rem;
-  &.Mui-selected {
-    color: #fb4707;
-  }
-`);
 
 
 export default function Navbar() {
@@ -224,44 +228,42 @@ export default function Navbar() {
           <ChevronLeftIcon sx={{ color: "#fb4707" }} />
         </IconButton>
       </Stack>
-      <Box>
-        <BottomNavigation
-          showLabels
-          value={value}
-          sx={{
-            justifyContent: "space-between",
-            boxShadow: "5px 6px 11px rgb(0 0 0 / 40%)",
-            position: "fixed",
-            bottom: 0,
-            right: 0,
-            left: 0,
-            zIndex: '1000',
-            width:'100%',
-          }}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
-          <BottomNavigationAction
-            label="خانه"
-            icon={<HomeIcon className="BottomNavigationAction" />}
-          />
-          <BottomNavigationAction
-            label="دسته ها"
-            icon={<CategoryIcon className="BottomNavigationAction" />}
-          />
-          <BottomNavigationAction
-            label="علاقه مندی ها"
-            icon={<FavoriteBorderIcon className="BottomNavigationAction" />}
-          />
-          <BottomNavigationAction
-            label="حساب کاربری"
-            icon={
-              <PersonOutlineOutlinedIcon className="BottomNavigationAction" />
-            }
-          />
-        </BottomNavigation>
-      </Box>
+      <BottomNavigation
+        showLabels
+        value={value}
+        sx={{
+          justifyContent: "space-between",
+          boxShadow: "5px 6px 11px rgb(0 0 0 / 40%)",
+          position: "fixed",
+          bottom: 0,
+          right: 0,
+          left: 0,
+          zIndex: "1000",
+          width: "100%",
+        }}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      >
+        <BottomNavigationActionStyled
+          label="خانه"
+          icon={<HomeIcon className="BottomNavigationAction" />}
+        />
+        <BottomNavigationActionStyled
+          label="دسته ها"
+          icon={<CategoryIcon className="BottomNavigationAction" />}
+        />
+        <BottomNavigationActionStyled
+          label="علاقه مندی ها"
+          icon={<FavoriteBorderIcon className="BottomNavigationAction" />}
+        />
+        <BottomNavigationActionStyled
+          label="حساب کاربری"
+          icon={
+            <PersonOutlineOutlinedIcon className="BottomNavigationAction" />
+          }
+        />
+      </BottomNavigation>
     </BoxMobileView>
   );
   return (

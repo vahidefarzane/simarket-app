@@ -1,0 +1,12 @@
+.swiper-best-seller-product-wraper .swiper-button-next::after,
+.swiper-best-seller-product-wraper .swiper-button-prev::after {
+  transition: 0.2s all;
+}
+
+@media screen and (width < 600px) {
+  .swiper-best-seller-product-wraper .swiper-button-prev::after,
+  .swiper-best-seller-product-wraper .swiper-button-next::after {
+    font-size: 1.7rem;
+    padding: 0;
+  }
+}

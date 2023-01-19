@@ -8,26 +8,26 @@ const useStyles = makeStyles((theme) => ({
     padding: "0",
     backgroundColor: " #fff",
     overflow: "hidden",
-    border: "1px solid #212121",
     borderRadius: "1.1rem",
+    width:'100%'
   },
   bestSellerImgwraper: {
-    height: "23rem",
-    [theme.breakpoints.down("md")]: {
-      height: "18rem",
-    },
-    [theme.breakpoints.down("sm")]: {
-      height: "16rem",
-    },
+    // height: "19rem",
+    // [theme.breakpoints.down("md")]: {
+    //   height: "18rem",
+    // },
+    // [theme.breakpoints.down("sm")]: {
+    //   height: "16rem",
+    // },
   },
   bestSellerImg: {
-    height: "23rem",
     padding: "1rem",
     [theme.breakpoints.down("md")]: {
-      height: "18rem",
+      height: "17rem",
     },
     [theme.breakpoints.down("sm")]: {
-      height: "16rem",
+      height: "14rem",
+
     },
   },
   bestSellerName: {
@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     [theme.breakpoints.down("md")]: {
       height: "5.5rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: "4rem",
     },
   },
   bestSellerPrice: {
@@ -71,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       padding: "1rem",
       fontSize: "0.7rem",
-
     },
   },
 }));
@@ -88,6 +90,20 @@ export default function HomeProductBox(props) {
           component="img"
           src={productImage}
           alt={productTitle}
+          sx={{ width: {
+            lg:`${props.isSlider && "14rem"}`,
+            md:`${props.isSlider && "12rem"}`,
+            sm:`${props.isSlider && "10rem"}`,
+            xs:`${props.isSlider && "7rem"}`,
+          } ,padding:{
+            md:'0.7rem',
+            sm:'0.7rem',
+          },height:{
+            lg:'17rem',
+            md:'15rem',
+            sm:'12rem',
+            xs:'10rem',
+          }}}
         />
       </Box>
       <Typography

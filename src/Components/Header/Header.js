@@ -13,35 +13,33 @@ import "swiper/css/scrollbar";
 
 export default function Header() {
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+    <Box sx={{ display: "flex", justifyContent: "space-between",padding:'0.5rem' }}>
       <Swiper
         navigation={true}
-        pagination={{
-          clickable: true,
-        }}
         modules={[Navigation, Pagination]}
         className="mySwiper"
+        style={{marginLeft:'0.2rem'}}
       >
-        <SwiperSlide>
+        <SwiperSlide className="swiper-image-box">
           <Box component="img" src="./images/slider1_orginal.jpg" alt="" />
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide className="swiper-image-box">
           <Box component="img" src="./images/slider2_orginal.jpg" alt="" />
         </SwiperSlide>
       </Swiper>
 
-      <Box sx={{ display: "flex", flexDirection: "column", width: "33%" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", width: "33%" ,justifyContent:'space-between'}}>
         <Box
           component="img"
           src="./images/banner-btn2.jpg"
           alt=""
-          sx={{ margin: "0.5rem" }}
+          
         />
         <Box
           component="img"
           src="./images/banner-top.jpg"
           alt=""
-          sx={{ margin: "0.5rem" }}
+          
         />
       </Box>
     </Box>

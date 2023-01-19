@@ -3,7 +3,6 @@ import Header from '../Header/Header'
 import Services from '../Services/Services'
 import BestSeller from '../BestSeller/BestSeller'
 import BannerAds from '../BannerAds/BannerAds'
-import NewestProducts from '../NewestProducts/NewestProducts'
 import Categories from '../Categories/Categories'
 import "./Home.css";
 
@@ -16,7 +15,6 @@ export default function Home() {
       <Services />
       <BestSeller />
       <BannerAds />
-      <NewestProducts />
       <Categories />
     </div>
   );

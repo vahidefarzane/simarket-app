@@ -235,6 +235,8 @@ export default function Navbar() {
             bottom: 0,
             right: 0,
             left: 0,
+            zIndex: '1000',
+            width:'100%',
           }}
           onChange={(event, newValue) => {
             setValue(newValue);

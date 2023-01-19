@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
+    marginTop: "2rem",
   },
 
   categoryWrapper: {
     display: "flex",
     justifyContent: "space-between",
-    marginTop: "2rem",
-    padding: "2rem",
+    padding: "1.5rem 0",
     [theme.breakpoints.down("md")]: {
       margin: "0.7rem",
       padding: "1rem",

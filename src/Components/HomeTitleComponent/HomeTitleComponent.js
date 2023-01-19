@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const H2ElemStyled = styled(Typography)(({ theme }) => ({
-  fontWeight: "700",
+  fontWeight: "600",
   fontSize: " 1.5rem",
   "&:before": {
     display: "inline-block",
@@ -38,5 +38,12 @@ const H2ElemStyled = styled(Typography)(({ theme }) => ({
 }));
 
 export default function HomeTitleComponent(props) {
-  return <H2ElemStyled component={"h2"}>{props.title}</H2ElemStyled>;
+  return (
+    <H2ElemStyled
+      component={"h2"}
+      sx={{ color: `${props.color}`, margin: `${props.margin}` }}
+    >
+      {props.title}
+    </H2ElemStyled>
+  );
 }

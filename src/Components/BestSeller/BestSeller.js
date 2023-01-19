@@ -1,5 +1,4 @@
 import React from "react";
-import "./BestSeller.css";
 import useFetch from "../../hooks/useFetch";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -11,12 +10,18 @@ import HomeProductBox from "../HomeProductBox/HomeProductBox";
 import MyButton from "../MyButton/MyButton";
 import { Stack } from "@mui/system";
 import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
+import "./BestSeller.css";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 const useStyles = makeStyles((theme) => ({
   bestSellerWrapper: {
     margin: "2rem 0",
     backgroundColor: "#212121",
-    padding: "2rem",
+    padding: "1.2rem",
     display: "flex",
     justifyContent: "space-between",
     [theme.breakpoints.down("md")]: {
@@ -32,16 +37,27 @@ export default function BestSeller() {
   );
   return (
     <Stack className={classes.bestSellerWrapper}>
-      <HomeTitleComponent title="پرفروش ترین محصولات" />
+      <HomeTitleComponent
+        title="پرفروش ترین محصولات"
+        color="#fff"
+        margin="1rem 1rem 2rem"
+      />
       <Swiper
-        spaceBetween={10}
-        Navigation={true}
+        style={{
+          "--swiper-navigation-color": "#fb4707",
+          "--swiper-pagination-color": "#fb4707",
+          padding: "0 0 3rem 0",
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
         breakpoints={{
-          300:{
+          300: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
-          400:{
+          400: {
             slidesPerView: 2,
             spaceBetween: 10,
           },
@@ -62,17 +78,18 @@ export default function BestSeller() {
             spaceBetween: 10,
           },
         }}
-        modules={[Navigation]}
+        modules={[Pagination, Navigation]}
         className="mySwiper"
       >
         {ispending &&
-          allProducts.slice(11, 15).map((product) => (
+          allProducts.slice(1, 9).map((product) => (
             <SwiperSlide>
               <HomeProductBox
                 productId={product.id}
                 productImage={product.image}
                 productTitle={product.title}
                 productPrice={product.price}
+                isSlider={true}
               />
             </SwiperSlide>
           ))}

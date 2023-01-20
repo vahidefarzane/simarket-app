@@ -1,19 +1,12 @@
 .product-list-container {
-  display: flex;
-  padding: 2rem;
-  justify-content: space-between;
+  
 }
 .product-list-sidebar {
-  width: 22%;
 }
 .product-list-filter-price,
 .product-list-search,
 .product-categories-list {
-  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 3%);
-  border: 1px solid #e4e4e4;
-  border-radius: 0.7rem;
-  padding: 1rem;
-  margin-bottom: 0.7rem;
+  
 }
 .product-list-filter-price h2,
 .product-list-search h2,

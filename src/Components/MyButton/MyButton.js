@@ -5,6 +5,7 @@ export default function MyButton(props) {
     <Button
       variant="contained"
       sx={{
+        width:props.width,
         backgroundImage: "linear-gradient(to right, #fb4208, #ff6a00)",
         padding: props.padding,
         fontWeight: "600",

@@ -27,8 +27,7 @@ import {
 
 import "./ProductsList.css";
 
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+
 
 const useStyles = makeStyles((theme) => ({
   productListContainer: {
@@ -38,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
   productListSidebar: {
     width: "22%",
+    position:'sticky',
+    top:'1rem',
+    height:'100vh',
+    bottom:'1rem',
   },
   categoryBox: {
     display: "flex",
@@ -253,7 +256,7 @@ export default function ProductsList() {
               <Product
                 key={product.id}
                 productImage={product.image}
-                productTtile={product.title}
+                productTtile={product.title.slice(0, 20)}
                 productPrice={product.price}
               />
             ))}

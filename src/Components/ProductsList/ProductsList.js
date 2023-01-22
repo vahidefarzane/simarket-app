@@ -1,14 +1,4 @@
-import axios from "axios";
-import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
-import { Link } from "react-router-dom";
-
 import React, { useEffect, useState } from "react";
-import useFetch from "../../hooks/useFetch";
-import Product from "../Product/Product";
-import SortIcon from "@mui/icons-material/Sort";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MyButton from "../MyButton/MyButton";
 import {
   Stack,
   Slider,
@@ -24,23 +14,25 @@ import {
   ListItemText,
   List,
 } from "@mui/material";
-
+import axios from "axios";
+import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
+import Product from "../Product/Product";
+import SortIcon from "@mui/icons-material/Sort";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MyButton from "../MyButton/MyButton";
 import "./ProductsList.css";
-
-
 
 const useStyles = makeStyles((theme) => ({
   productListContainer: {
     display: "flex",
     padding: "2rem",
     justifyContent: "space-between",
-  },
-  productListSidebar: {
-    width: "22%",
-    position:'sticky',
-    top:'1rem',
-    height:'100vh',
-    bottom:'1rem',
+    [theme.breakpoints.down("md")]: {
+      padding: "1rem",
+    },
   },
   categoryBox: {
     display: "flex",
@@ -51,17 +43,40 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #e4e4e4",
     borderRadius: " 0.7rem",
     width: "77%",
+    [theme.breakpoints.between("md", "lg")]: {
+      width: "70%",
+    },
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
   },
   productListHead: {
     display: "flex",
     alignItems: "center",
     borderBottom: "1px solid #e4e4e4",
-    padding: "0.5rem 1rem 1rem",
+    padding: "0.5rem",
+    [theme.breakpoints.down("sm")]: {
+      alignItems: "flex-start",
+      flexDirection: "column",
+    },
   },
   allProductsList: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-between",
+  },
+}));
+const SideBarStyled = styled(Stack)(({ theme }) => ({
+  width: "22%",
+  position: "sticky",
+  top: "1rem",
+  height: "120vh",
+  bottom: "1rem",
+  [theme.breakpoints.between("md", "lg")]: {
+    width: "29%",
+  },
+  [theme.breakpoints.down("md")]: {
+    display: "none",
   },
 }));
 const AccordionStyled = styled(Accordion)(({ theme }) => ({
@@ -84,40 +99,6 @@ const AccordionStyled = styled(Accordion)(({ theme }) => ({
     margin: "0.5rem 0",
   },
 }));
-const TextFieldStyled = styled(TextField)(({ theme }) => ({
-  "& .MuiInputBase-root": {
-    height:'2.5rem',
-    fontSize: "0.8rem",
-    marginLeft: "0.5rem",
-    color: "#81858b",
-  },
-  
-}));
-const H2ElemSideBar = styled(Typography)(({ theme }) => ({
-  fontSize: "0.9rem",
-  fontWeight: "600",
-}));
-
-const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
-  "& .MuiTypography-root ": {
-    fontSize: "0.9rem",
-  },
-}));
-const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
-  transition: "none",
-  color: " #4d4d4d",
-  marginLeft: "0.3rem",
-  "&:hover": {
-    background: "#ff6a00",
-    color: "#fff",
-    borderRadius: "0.7rem",
-  },
-  "&:focus": {
-    background: "#ff6a00",
-    color: "#fff",
-    borderRadius: "0.7rem",
-  },
-}));
 const CustomSlider = styled(Slider)(({ theme }) => ({
   "& .MuiSlider-thumb": {
     backgroundColor: "#fff",
@@ -129,17 +110,61 @@ const CustomSlider = styled(Slider)(({ theme }) => ({
     height: "2px",
   },
 }));
+const H2ElemSideBar = styled(Typography)(({ theme }) => ({
+  fontSize: "0.9rem",
+  fontWeight: "600",
+}));
+const TextFieldStyled = styled(TextField)(({ theme }) => ({
+  "& .MuiInputBase-root": {
+    height: "2.5rem",
+    fontSize: "0.8rem",
+    marginLeft: "0.5rem",
+    color: "#81858b",
+  },
+}));
+
+const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
+  transition: "none",
+  color: " #4d4d4d",
+  marginLeft: "0.3rem",
+
+  "&:hover": {
+    background: "#ff6a00",
+    color: "#fff",
+    borderRadius: "0.7rem",
+  },
+  "&:focus": {
+    background: "#ff6a00",
+    color: "#fff",
+    borderRadius: "0.7rem",
+  },
+  [theme.breakpoints.down("lg")]: {
+    padding: "0.6rem",
+  },
+  [theme.breakpoints.down("md")]: {
+    padding: "0.5rem",
+  },
+}));
+const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
+  "& .MuiTypography-root ": {
+    fontSize: "0.9rem",
+
+    [theme.breakpoints.down("md")]: {
+      fontSize: "0.8rem",
+    },
+  },
+}));
+
 function valuetext(value) {
   return `${value}تومان`;
 }
 
 export default function ProductsList() {
-  const [value, setValue] = useState([100, 900]);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const classes = useStyles();
+  const { allProducts, ispending } = useFetch(
+    "https://fakestoreapi.com/products"
+  );
+  const [value, setValue] = useState([100, 900]);
   const [filteredList, setFilteredList] = useState([
     { id: 1, title: "پیشفرض" },
     { id: 2, title: "محبوب ترین" },
@@ -149,9 +174,7 @@ export default function ProductsList() {
   ]);
   const [categories, setAllcategories] = useState("");
   const [categoriesIsPending, setCategoriesIsPending] = useState(false);
-  const { allProducts, ispending } = useFetch(
-    "https://fakestoreapi.com/products"
-  );
+
   useEffect(() => {
     axios
       .get("https://fakestoreapi.com/products/categories")
@@ -161,10 +184,12 @@ export default function ProductsList() {
         setCategoriesIsPending(true);
       });
   }, []);
-
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <Box className={classes.productListContainer}>
-      <Stack className={classes.productListSidebar}>
+      <SideBarStyled>
         <AccordionStyled defaultExpanded={true}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -195,9 +220,9 @@ export default function ProductsList() {
             <H2ElemSideBar component={"h2"}>جستجو در محصولات :</H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails>
-            <Box sx={{ display: "flex",marginTop:"1rem" }}>
+            <Box sx={{ display: "flex", marginTop: "1rem" }}>
               <TextFieldStyled type="text" placeholder="جستجوی محصول ... " />
-              <MyButton >ثبت</MyButton>
+              <MyButton>ثبت</MyButton>
             </Box>
           </AccordionDetails>
         </AccordionStyled>
@@ -221,24 +246,42 @@ export default function ProductsList() {
               ))}
           </AccordionDetails>
         </AccordionStyled>
-      </Stack>
+      </SideBarStyled>
       <Stack className={classes.productListBox}>
         <Box className={classes.productListHead}>
-          <SortIcon
-            sx={{ fontSize: "2rem", marginLeft: "0.5rem", color: "#b5b2b2" }}
-          />
-          <Typography
-            component={"h2"}
-            sx={{
-              fontSize: " 0.9rem",
-              marginLeft: "2rem",
-              fontWeight: "600",
-              color: "#4d4d4d",
-            }}
-          >
-            مرتب سازی بر اساس:
-          </Typography>
-          <List sx={{ display: "flex", padding: "0" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <SortIcon
+              sx={{
+                fontSize: {
+                  md: "2rem",
+                  sm: "1.7rem",
+                },
+                marginLeft: "0.5rem",
+                color: "#b5b2b2",
+              }}
+            />
+            <Typography
+              component={"h2"}
+              sx={{
+                fontSize: {
+                  lg: "0.9rem",
+                  // md: "0.8rem",
+                  // sm: "0.8rem",
+                  xs: "0.8rem",
+                },
+                marginLeft: {
+                  md: "2rem",
+                  sm: "1.7rem",
+                },
+                fontWeight: "600",
+                color: "#4d4d4d",
+              }}
+            >
+              مرتب سازی بر اساس:
+            </Typography>
+          </Box>
+
+          <List sx={{ display: "flex", padding: "0", flexWrap: "wrap" }}>
             {filteredList.map((listItem) => (
               <Link key={listItem.id}>
                 <ListItem disablePadding>

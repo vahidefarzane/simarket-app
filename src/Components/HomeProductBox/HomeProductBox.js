@@ -11,15 +11,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "1.1rem",
     width:'100%'
   },
-  bestSellerImgwraper: {
-    // height: "19rem",
-    // [theme.breakpoints.down("md")]: {
-    //   height: "18rem",
-    // },
-    // [theme.breakpoints.down("sm")]: {
-    //   height: "16rem",
-    // },
-  },
+
   bestSellerImg: {
     padding: "1rem",
     [theme.breakpoints.down("md")]: {
@@ -84,7 +76,7 @@ export default function HomeProductBox(props) {
 
   return (
     <Stack key={productId} className={classes.bestSellerProduct}>
-      <Box className={classes.bestSellerImgwraper}>
+      <Box>
         <Box
           className={classes.bestSellerImg}
           component="img"

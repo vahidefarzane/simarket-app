@@ -1,18 +1,17 @@
 import React from "react";
-import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
-import StarIcon from "@mui/icons-material/Star";
-import IosShareIcon from "@mui/icons-material/IosShare";
-import { RiShareForwardBoxFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardMedia,
   CardContent,
   Typography,
-  Button,
   Stack,
   Box,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import StarIcon from "@mui/icons-material/Star";
+import IosShareIcon from "@mui/icons-material/IosShare";
 import "./Product.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,14 +35,22 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: " 1rem",
     borderTop: "1px dashed #e2e2e2",
+    [theme.breakpoints.between("md", "lg")]: {
+      padding: "0.5rem 0.2rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      borderTop: "none",
+    },
   },
   productPriceLast: {
     color: "#a8a8a8",
-    paddingRight: "0.8rem",
+    paddingRight: "0.6rem",
     textDecoration: "line-through",
     textAlign: "center",
+    [theme.breakpoints.between("md", "lg")]: {
+      paddingRight: "0.2rem",
+    },
   },
-
   productPriceOff: {
     backgroundColor: " #fb4208",
     color: "white",
@@ -53,8 +60,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CardMediaStyled = styled(CardMedia)(({ theme }) => ({
-  height: 200,
+  padding: "1rem",
+  objectFit: "contain",
+  height: "13rem",
+  [theme.breakpoints.down("md")]: {
+    height: "13rem",
+    padding: "0.7rem",
+  },
+  [theme.breakpoints.down("sm")]: {
+    height: "14rem",
+  },
 }));
+
 const CardContentStyled = styled(CardContent)(({ theme }) => ({
   padding: "0.2rem",
   "&:last-child": {
@@ -67,12 +84,29 @@ export default function Product(props) {
   const { productImage, productTtile, productPrice } = props;
   return (
     <>
-      <Card sx={{ width: "25%" }}>
-        <CardMediaStyled
-          component="img"
-          image={productImage}
-          alt={productTtile}
-        />
+      <Card
+        sx={{
+          width: {
+            lg: "25%",
+            md: "33.3%",
+            sm: "50%",
+            xs: "100%",
+          },
+          height: {
+            lg: "23rem",
+            md: "22rem",
+            sm: "23rem",
+            xs: "25rem",
+          },
+        }}
+      >
+        <Link to='/product'>
+          <CardMediaStyled
+            component="img"
+            image={productImage}
+            alt={productTtile}
+          />
+        </Link>
 
         <CardContentStyled>
           <Stack>

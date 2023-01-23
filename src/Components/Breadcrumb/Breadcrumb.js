@@ -8,8 +8,6 @@ export default function Breadcrumb() {
         container
         direction="row"
         sx={{
-          backgroundColor: "#e5e9e5",
-          borderRadius: "0.6rem",
           padding: {
             md: "1rem",
             sm: "0.8rem",

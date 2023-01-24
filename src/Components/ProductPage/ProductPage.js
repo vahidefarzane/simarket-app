@@ -42,6 +42,7 @@ import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import InsertCommentOutlinedIcon from "@mui/icons-material/InsertCommentOutlined";
 import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
 import AddCommentIcon from "@mui/icons-material/AddComment";
+import ProductProgressInfos from '../ProductProgressInfos/ProductProgressInfos'
 
 const useStyles = makeStyles((theme) => ({
   productDetailsContainer: {
@@ -108,18 +109,6 @@ const ToggleButton = styled(MuiToggleButton)({
     backgroundColor: "#ff6a00",
   },
 });
-const LinearProgressStyled = styled(LinearProgress)(({ theme }) => ({
-  height: 8,
-  borderRadius: 5,
-  display: "flex",
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: "#ebebeb",
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: "#ff6a00",
-  },
-}));
 
 const TabsStyled = styled(Tabs)(({ theme }) => ({
   display: "flex",
@@ -183,6 +172,12 @@ export default function ProductsList() {
     setvaluedata(newValue);
   };
   const [rateValue, setrateValue] = useState(3);
+  const [progressInfos, setProgressTitle] = useState([
+    { id: 1, title: "کیفیت ساخت", value: 80 },
+    { id: 2, title: "ارزش خرید به نسبت قیمت", value: 50 },
+    { id: 3, title: "امکانات و قابلیت ها", value: 60 },
+    { id: 4, title: "سهولت استفاده", value: 20 },
+  ]);
 
   return (
     <Stack>
@@ -431,98 +426,9 @@ export default function ProductsList() {
                   justifyContent: "space-between",
                 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "13rem",
-                    }}
-                  >
-                    <Typography component={"h4"}>کیفیت ساخت</Typography>
-                    <Typography component={"h4"}>0</Typography>
-                  </Box>
-                  <Box sx={{ width: "20rem" }}>
-                    <LinearProgressStyled variant="determinate" value={70} />
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "13rem",
-                    }}
-                  >
-                    <Typography component={"h4"}>
-                      ارزش خرید به نسبت قیمت
-                    </Typography>
-                    <Typography component={"h4"}>0</Typography>
-                  </Box>
-                  <Box sx={{ width: "20rem" }}>
-                    <LinearProgressStyled variant="determinate" value={50} />
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "13rem",
-                    }}
-                  >
-                    <Typography component={"h4"}>سهولت استفاده</Typography>
-                    <Typography component={"h4"}>0</Typography>
-                  </Box>
-                  <Box sx={{ width: "20rem" }}>
-                    <LinearProgressStyled variant="determinate" value={10} />
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "13rem",
-                    }}
-                  >
-                    <Typography component={"h4"}>
-                      امکانات و قابلیت ها
-                    </Typography>
-                    <Typography component={"h4"}>0</Typography>
-                  </Box>
-                  <Box sx={{ width: "20rem" }}>
-                    <LinearProgressStyled variant="determinate" value={10} />
-                  </Box>
-                </Box>
+                {progressInfos.map((progressInfos) => (
+                  <ProductProgressInfos key={progressInfos.id} title={progressInfos.title} value={progressInfos.value} />
+                ))}
               </Stack>
               <Stack sx={{ width: "50%", paddingLeft: "4rem" }}>
                 <Typography
@@ -543,9 +449,8 @@ export default function ProductsList() {
                   این محصول را قبلا از این فروشگاه خریده باشید، نظر شما به عنوان
                   مالک محصول ثبت خواهد شد.
                 </Typography>
-                <Link to='/addComment'>
+                <Link to="/addComment">
                   <MyButton
-                    
                     startIcon={
                       <AddCommentIcon
                         sx={{

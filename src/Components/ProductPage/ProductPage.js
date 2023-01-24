@@ -20,8 +20,12 @@ import {
   ToggleButtonGroup,
   Tabs,
   Tab,
+  Rating,
+  LinearProgress,
+  linearProgressClasses,
 } from "@mui/material";
 import MuiToggleButton from "@mui/material/ToggleButton";
+import MuiTabs from "@mui/material/Tabs";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
@@ -33,7 +37,11 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
-import PropTypes from 'prop-types';
+import { PropTypes } from "prop-types";
+import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
+import InsertCommentOutlinedIcon from "@mui/icons-material/InsertCommentOutlined";
+import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
+import AddCommentIcon from "@mui/icons-material/AddComment";
 
 const useStyles = makeStyles((theme) => ({
   productDetailsContainer: {
@@ -58,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     marginBottom: "1rem",
+    justifyContent: "space-between",
   },
   productDetailsPrice: {
     width: "50%",
@@ -69,6 +78,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     FlexDirection: "column",
     paddingRight: "1rem",
+  },
+  tabs: {
+    "& .MuiTabs-indicator": {
+      backgroundColor: "orange",
+      height: 3,
+    },
+    "& .MuiTab-root.Mui-selected": {
+      color: "red",
+    },
   },
 }));
 const ToggleButtonStyled = styled(Stack)(({ theme }) => ({}));
@@ -90,6 +108,28 @@ const ToggleButton = styled(MuiToggleButton)({
     backgroundColor: "#ff6a00",
   },
 });
+const LinearProgressStyled = styled(LinearProgress)(({ theme }) => ({
+  height: 8,
+  borderRadius: 5,
+  display: "flex",
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: "#ebebeb",
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: "#ff6a00",
+  },
+}));
+
+const TabsStyled = styled(Tabs)(({ theme }) => ({
+  display: "flex",
+  "& .MuiTabs-indicator": {
+    backgroundColor: "#ff6a00",
+  },
+  "& .MuiTab-root.Mui-selected": {
+    color: "#ff6a00",
+  },
+}));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -111,18 +151,16 @@ function TabPanel(props) {
   );
 }
 
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
-}; 
-
+};
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -139,11 +177,12 @@ export default function ProductsList() {
   const handleChange1 = (event, newValue) => {
     setValue(newValue);
   };
-  const [valuetab, setValuetab] = useState(0);
+  const [valuedata, setvaluedata] = useState(0);
 
   const handleChange3 = (event, newValue) => {
-    setValuetab(newValue);
+    setvaluedata(newValue);
   };
+  const [rateValue, setrateValue] = useState(3);
 
   return (
     <Stack>
@@ -171,24 +210,37 @@ export default function ProductsList() {
             ست تیشرت و شلوار مردانه Nike مدل 21077
           </Typography>
           <Box className={classes.productDetailsCategory}>
-            <FolderOutlinedIcon
-              sx={{
-                color: "#9e9e9e",
-                fontSize: "1.1rem",
-                marginLeft: "0.5rem",
-              }}
-            />
-            <Typography component={"span"}>دسته بندی :</Typography>
-            <Typography
-              component={"span"}
-              sx={{
-                color: "#9e9e9e",
-                fontSize: "0.9rem",
-                marginRight: "0.2rem",
-              }}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <FolderOutlinedIcon
+                sx={{
+                  color: "#9e9e9e",
+                  fontSize: "1.1rem",
+                  marginLeft: "0.5rem",
+                }}
+              />
+              <Typography component={"span"}>دسته بندی :</Typography>
+              <Typography
+                component={"span"}
+                sx={{
+                  color: "#9e9e9e",
+                  fontSize: "0.9rem",
+                  marginRight: "0.2rem",
+                }}
+              >
+                مردانه
+              </Typography>
+            </Box>
+            <Box
+              sx={{ display: "flex", alignItems: "center", fontSize: "0.8rem" }}
             >
-              مردانه
-            </Typography>
+              256 رای
+              <Rating
+                name="read-only"
+                value={rateValue}
+                readOnly
+                sx={{ marginRight: "0.5rem" }}
+              />
+            </Box>
           </Box>
           <Divider />
           <Box sx={{ display: "flex", padding: "2rem 0" }}>
@@ -292,24 +344,237 @@ export default function ProductsList() {
           </Stack>
         </Stack>
       </Box>
-      <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange3} aria-label="basic tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-        </Tabs>
+
+      <Box sx={{ width: "100%", padding: "0.5rem 3rem" }}>
+        <Box
+          sx={{
+            border: "1px solid rgba(0, 0, 0, 0.12)",
+            padding: "0.7rem 1.5rem",
+
+            borderRadius: "1.1rem",
+          }}
+        >
+          <TabsStyled
+            value={valuedata}
+            onChange={handleChange3}
+            aria-label="basic tabs example"
+          >
+            <Tab label="مشخصات" {...a11yProps(0)} />
+            <Tab label="نظرات" {...a11yProps(1)} />
+          </TabsStyled>
+        </Box>
+        <TabPanel value={valuedata} index={0}>
+          <Stack>
+            <Typography
+              component={"h4"}
+              sx={{
+                fontWeight: "bold",
+                marginBottom: "1rem",
+                fontSize: "1.1rem",
+              }}
+            >
+              توضیحات تکمیلی
+            </Typography>
+            <Box
+              sx={{
+                marginBottom: "1.5rem",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                component={"span"}
+                sx={{
+                  fontWeight: "bold",
+                  marginLeft: "0.8rem",
+                  fontSize: "0.9rem",
+                }}
+              >
+                نام محصول :
+              </Typography>
+              <Typography component={"span"}>
+                ست تیشرت و شلوار مردانه Nike مدل 21077
+              </Typography>
+            </Box>
+            <Typography component={"p"} sx={{ fontSize: "0.8rem" }}>
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+              در ستون و سطرآنچنان که لازم است، د.{" "}
+            </Typography>
+          </Stack>
+        </TabPanel>
+        <TabPanel value={valuedata} index={1}>
+          <Stack>
+            <Stack sx={{ marginBottom: "3rem" }}>
+              <Typography
+                component={"h4"}
+                sx={{
+                  fontWeight: "bold",
+                  marginBottom: "1rem",
+                  fontSize: "1.1rem",
+                }}
+              >
+                امتیاز کاربران به :
+              </Typography>
+
+              <Typography component={"span"}>
+                ست تیشرت و شلوار مردانه Nike مدل 21077
+              </Typography>
+            </Stack>
+            <Box sx={{ display: "flex", justifyContent: "start" }}>
+              <Stack
+                sx={{
+                  width: "50%",
+                  paddingLeft: "4rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "13rem",
+                    }}
+                  >
+                    <Typography component={"h4"}>کیفیت ساخت</Typography>
+                    <Typography component={"h4"}>0</Typography>
+                  </Box>
+                  <Box sx={{ width: "20rem" }}>
+                    <LinearProgressStyled variant="determinate" value={70} />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "13rem",
+                    }}
+                  >
+                    <Typography component={"h4"}>
+                      ارزش خرید به نسبت قیمت
+                    </Typography>
+                    <Typography component={"h4"}>0</Typography>
+                  </Box>
+                  <Box sx={{ width: "20rem" }}>
+                    <LinearProgressStyled variant="determinate" value={50} />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "13rem",
+                    }}
+                  >
+                    <Typography component={"h4"}>سهولت استفاده</Typography>
+                    <Typography component={"h4"}>0</Typography>
+                  </Box>
+                  <Box sx={{ width: "20rem" }}>
+                    <LinearProgressStyled variant="determinate" value={10} />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "13rem",
+                    }}
+                  >
+                    <Typography component={"h4"}>
+                      امکانات و قابلیت ها
+                    </Typography>
+                    <Typography component={"h4"}>0</Typography>
+                  </Box>
+                  <Box sx={{ width: "20rem" }}>
+                    <LinearProgressStyled variant="determinate" value={10} />
+                  </Box>
+                </Box>
+              </Stack>
+              <Stack sx={{ width: "50%", paddingLeft: "4rem" }}>
+                <Typography
+                  component={"h3"}
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  دیدگاه خود را در باره این کالا بیان کنید
+                </Typography>
+                <Typography
+                  component={"p"}
+                  sx={{ fontSize: "0.9rem", lineHeight: "1.8rem" }}
+                >
+                  برای ثبت نظر، لازم است ابتدا وارد حساب کاربری خود شوید. اگر
+                  این محصول را قبلا از این فروشگاه خریده باشید، نظر شما به عنوان
+                  مالک محصول ثبت خواهد شد.
+                </Typography>
+                <Link to='/addComment'>
+                  <MyButton
+                    
+                    startIcon={
+                      <AddCommentIcon
+                        sx={{
+                          marginLeft: "0.9rem",
+                          width: "1.8rem",
+                          height: "1.8rem",
+                        }}
+                      />
+                    }
+                    width="45%"
+                    padding="0.7rem 0"
+                    borderradius="0.6rem"
+                    fontsize="1.1rem"
+                    margintop="1.6rem"
+                  >
+                    افزودن دیدگاه
+                  </MyButton>
+                </Link>
+              </Stack>
+            </Box>
+            <Box sx={{ margin: "4rem 0" }}>
+              <Typography component={"h2"}>نظرات کاربران</Typography>
+              <Typography component={"p"}>
+                هیچ دیدگاهی برای این محصول نوشته نشده است.
+              </Typography>
+            </Box>
+          </Stack>
+        </TabPanel>
       </Box>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-    </Box>
     </Stack>
   );
 }

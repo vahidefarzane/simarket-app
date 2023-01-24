@@ -3,9 +3,12 @@ import { Button } from "@mui/material";
 export default function MyButton(props) {
   return (
     <Button
+      
       variant="contained"
+      startIcon={props.startIcon}
+      endIcon={props.endIcon}
       sx={{
-        width:props.width,
+        width: props.width,
         backgroundImage: "linear-gradient(to right, #fb4208, #ff6a00)",
         padding: props.padding,
         fontWeight: "600",
@@ -15,7 +18,6 @@ export default function MyButton(props) {
         borderRadius: props.borderradius,
         marginTop: props.margintop,
         fontSize: props.fontsize,
-        endIcon: props.endIcon,
       }}
     >
       {props.children}

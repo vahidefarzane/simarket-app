@@ -8,7 +8,11 @@ export default function MyButton(props) {
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       sx={{
-        width: props.width,
+        width:{
+          md:props.widthupmd,
+          sm:props.widthbetweenmdsm,
+          xs:props.widthdownsm,
+        },
         backgroundImage: "linear-gradient(to right, #fb4208, #ff6a00)",
         padding: props.padding,
         fontWeight: "600",
@@ -17,7 +21,10 @@ export default function MyButton(props) {
         },
         borderRadius: props.borderradius,
         marginTop: props.margintop,
-        fontSize: props.fontsize,
+        fontSize: {
+          md:props.fontsizeupmd,
+          xs:props.fontsizedownmd,
+        },
       }}
     >
       {props.children}

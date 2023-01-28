@@ -31,7 +31,10 @@ import ProductProgressInfos from "../ProductProgressInfos/ProductProgressInfos";
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
     padding: "1rem 2rem",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.down("md")]: {
+      padding: "0.7rem",
+    },
+    [theme.breakpoints.between("md", "lg")]: {
       padding: "1rem",
     },
   },
@@ -55,6 +58,13 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "start",
       margintop: "0.7rem",
     },
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
+    [theme.breakpoints.down("sm")]: {
+      border: "1px solid rgba(165,160,160,0.26)",
+      borderRadius: "1rem",
+    },
   },
   productImgPage: {
     width: "24rem",
@@ -63,12 +73,26 @@ const useStyles = makeStyles((theme) => ({
       width: "23rem",
       height: "23rem",
     },
+    [theme.breakpoints.down("md")]: {
+      width: "22rem",
+      height: "22rem",
+      padding: "1rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "18rem",
+      height: "17rem",
+      padding: "1rem",
+    },
   },
   productDetailsInfo: {
     width: "50%",
     padding: "0 3rem",
     [theme.breakpoints.between("md", "lg")]: {
       padding: "0 1rem",
+    },
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      padding: "1rem",
     },
   },
 
@@ -80,6 +104,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.between("md", "lg")]: {
       marginBottom: "0.7rem",
     },
+    [theme.breakpoints.down("md")]: {
+      flexWrap: "wrap",
+    },
   },
   productDetailsPart2: {
     display: "flex",
@@ -87,19 +114,38 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.between("md", "lg")]: {
       padding: "0.7rem 0",
     },
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      padding: "1rem 0",
+    },
   },
   productDetailsPrice: {
     width: "50%",
     display: "flex",
     borderLeft: "1px solid rgba(0, 0, 0, 0.12)",
-    [theme.breakpoints.between("md", "lg")]: {},
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      borderLeft: "none",
+      marginBottom: "0.7rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      borderLeft: "none",
+      marginBottom: "0.9rem",
+    },
   },
   productDetailsShare: {
     width: "50%",
     display: "flex",
     FlexDirection: "column",
     paddingRight: "1rem",
-    [theme.breakpoints.between("md", "lg")]: {},
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      paddingRight: "0rem",
+    },
   },
   tabs: {
     "& .MuiTabs-indicator": {
@@ -119,6 +165,12 @@ const ToggleButton = styled(MuiToggleButton)(({ theme }) => ({
     [theme.breakpoints.between("md", "lg")]: {
       width: "5rem",
     },
+    [theme.breakpoints.between("sm", "md")]: {
+      width: "4rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "5rem",
+    },
   },
   "&.MuiButtonBase-root:not(:last-of-type), &.MuiButtonBase-root:last-of-type":
     {
@@ -133,7 +185,6 @@ const ToggleButton = styled(MuiToggleButton)(({ theme }) => ({
     color: "#fff",
     backgroundColor: "#ff6a00",
   },
-  
 }));
 
 const TabsStyled = styled(Tabs)(({ theme }) => ({
@@ -164,7 +215,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 1 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -236,6 +287,7 @@ export default function ProductsList() {
               marginBottom: {
                 lg: "1rem",
                 md: "0.7rem",
+                sm: "1rem",
               },
             }}
           >
@@ -300,9 +352,14 @@ export default function ProductsList() {
                   padding: {
                     lg: "1rem",
                     md: "0.8rem",
+                    sm: "1rem",
+                    xs: "1rem",
                   },
                   color: "#fb4707",
-                  marginLeft: "1rem",
+                  marginLeft: {
+                    md: "1rem",
+                    xs: "2rem",
+                  },
                   fontWeight: "bold",
                 }}
               >
@@ -328,6 +385,7 @@ export default function ProductsList() {
                     fontSize: {
                       lg: "1.5rem",
                       md: "1rem",
+                      sm: "1.2rem",
                     },
                     color: "#fb4707",
                     fontWeight: "bold",
@@ -346,6 +404,8 @@ export default function ProductsList() {
                   marginBottom: {
                     lg: "0.7rem",
                     md: "0",
+                    sm: "0.7rem",
+                    xs: "0.7rem",
                   },
                 }}
               >
@@ -357,7 +417,7 @@ export default function ProductsList() {
                   sx={{
                     fontSize: {
                       lg: "0.8rem",
-                      md: "0.7rem",
+                      xs: "0.7rem",
                     },
                   }}
                 >
@@ -373,9 +433,16 @@ export default function ProductsList() {
                   sx={{
                     backgroundColor: "#c5c5c5",
                     borderRadius: "2rem",
-                    padding: "0.7rem 1.7rem",
+                    padding: {
+                      md: "0.7rem 1.7rem",
+                      xs: "0.6rem 1rem",
+                    },
                     color: "#212121",
                     marginRight: "0.7rem",
+                    fontSize: {
+                      md: "1rem",
+                      xs: "0.7rem",
+                    },
                   }}
                   startIcon={<ShareIcon sx={{ marginLeft: "0.7rem" }} />}
                 >
@@ -390,6 +457,7 @@ export default function ProductsList() {
               padding: {
                 lg: "1.5rem 0",
                 md: "0.7rem 0",
+                xs: "0.6rem 0",
               },
             }}
           >
@@ -400,10 +468,13 @@ export default function ProductsList() {
                 marginBottom: {
                   lg: "2rem",
                   md: "1rem",
+                  sm: "1rem",
+                  xs: "1rem",
                 },
                 fontSize: {
                   lg: "1rem",
                   md: "0.8rem",
+                  xs: "0.8rem",
                 },
               }}
             >
@@ -414,6 +485,8 @@ export default function ProductsList() {
                 marginBottom: {
                   lg: "2rem",
                   md: "1.5rem",
+                  sm: "1rem",
+                  xs: "1rem",
                 },
               }}
               value={alignment}
@@ -431,13 +504,18 @@ export default function ProductsList() {
           </Stack>
         </Stack>
       </Box>
-      <Box sx={{ width: "100%", padding: "0.5rem 0" }}>
+      <Box sx={{ width: "100%", padding: "0" }}>
         <Box
           sx={{
             border: "1px solid rgba(0, 0, 0, 0.12)",
-            padding: "0.7rem 1.5rem",
-
-            borderRadius: "1.1rem",
+            padding: {
+              md: "0.7rem 1.5rem",
+              xs: "0.2rem 0.7rem",
+            },
+            borderRadius: {
+              md: "1.1rem",
+              xs: "0.9rem",
+            },
           }}
         >
           <TabsStyled
@@ -456,7 +534,10 @@ export default function ProductsList() {
               sx={{
                 fontWeight: "bold",
                 marginBottom: "1rem",
-                fontSize: "1.1rem",
+                fontSize: {
+                  md: "1.1rem",
+                  xs: "1rem",
+                },
               }}
             >
               توضیحات تکمیلی
@@ -466,23 +547,43 @@ export default function ProductsList() {
                 marginBottom: "1.5rem",
                 display: "flex",
                 alignItems: "center",
+                flexWrap: "wrap",
               }}
             >
               <Typography
                 component={"span"}
                 sx={{
-                  fontWeight: "bold",
                   marginLeft: "0.8rem",
-                  fontSize: "0.9rem",
+                  fontSize: {
+                    md: "1rem",
+                    xs: "0.9rem",
+                  },
                 }}
               >
                 نام محصول :
               </Typography>
-              <Typography component={"span"}>
+              <Typography
+                component={"span"}
+                sx={{
+                  fontSize: {
+                    md: "1rem",
+                    xs: "0.9rem",
+                  },
+                }}
+              >
                 ست تیشرت و شلوار مردانه Nike مدل 21077
               </Typography>
             </Box>
-            <Typography component={"p"} sx={{ fontSize: "0.8rem" }}>
+            <Typography
+              component={"p"}
+              sx={{
+                fontSize: {
+                  md: "1rem",
+                  xs: "0.8rem",
+                },
+                textAlign: "justify",
+              }}
+            >
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
               استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
               در ستون و سطرآنچنان که لازم است، د.{" "}
@@ -491,33 +592,70 @@ export default function ProductsList() {
         </TabPanel>
         <TabPanel value={valuedata} index={1}>
           <Stack>
-            <Stack sx={{ marginBottom: "3rem" }}>
+            <Stack
+              sx={{
+                marginBottom: {
+                  md: "2.5rem",
+                  xs: "1rem",
+                },
+              }}
+            >
               <Typography
                 component={"h4"}
                 sx={{
                   fontWeight: "bold",
-                  marginBottom: "1rem",
-                  fontSize: "1.1rem",
+                  marginBottom: {
+                    md: "1rem",
+                    xs: "0.7rem",
+                  },
+                  fontSize: {
+                    md: "1.1rem",
+                    xs: "1rem",
+                  },
                 }}
               >
                 امتیاز کاربران به :
               </Typography>
 
-              <Typography component={"span"}>
+              <Typography
+                component={"span"}
+                sx={{
+                  fontSize: {
+                    md: "1rem",
+                    xs: "0.9rem",
+                  },
+                }}
+              >
                 ست تیشرت و شلوار مردانه Nike مدل 21077
               </Typography>
             </Stack>
-            <Box sx={{ display: "flex", justifyContent: "start" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "start",
+                flexDirection: {
+                  md: "row",
+                  xs: "column",
+                },
+              }}
+            >
               <Stack
                 sx={{
-                  width: "50%",
+                  width: {
+                    md: "50%",
+                    xs: "100%",
+                  },
                   paddingLeft: {
-                    lg:'3rem',
-                    md:'1rem',
+                    lg: "3rem",
+                    md: "1rem",
                   },
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
+                  marginBottom: {
+                    md: "0",
+                    xs: "1.5rem",
+                  },
                 }}
               >
                 {progressInfos.map((progressInfos) => (
@@ -528,21 +666,31 @@ export default function ProductsList() {
                   />
                 ))}
               </Stack>
-              <Stack sx={{ width: "50%", paddingLeft:{
-                lg:'4rem',
-                md:'0'
-              } }}>
+              <Stack
+                sx={{
+                  width: {
+                    md: "50%",
+                    xs: "100%",
+                  },
+                  paddingLeft: {
+                    lg: "4rem",
+                    md: "0",
+                  },
+                }}
+              >
                 <Typography
                   component={"h3"}
                   sx={{
                     fontWeight: "bold",
                     fontSize: {
-                      lg:'1.1rem',
-                      md:'1rem'
+                      lg: "1.1rem",
+                      md: "1rem",
+                      xs: "1rem",
                     },
                     marginBottom: {
-                      lg:'1rem',
-                      md:'0.7rem',
+                      lg: "1rem",
+                      md: "0.7rem",
+                      xs: "0.7rem",
                     },
                   }}
                 >
@@ -550,10 +698,15 @@ export default function ProductsList() {
                 </Typography>
                 <Typography
                   component={"p"}
-                  sx={{ fontSize: {
-                    lg:'0.9rem',
-                    md:'0.8rem'
-                  }, lineHeight: "1.8rem" }}
+                  sx={{
+                    fontSize: {
+                      lg: "0.9rem",
+                      md: "0.8rem",
+                      xs: "0.8rem",
+                    },
+                    lineHeight: "1.8rem",
+                    textAlign: "justify",
+                  }}
                 >
                   برای ثبت نظر، لازم است ابتدا وارد حساب کاربری خود شوید. اگر
                   این محصول را قبلا از این فروشگاه خریده باشید، نظر شما به عنوان
@@ -564,16 +717,28 @@ export default function ProductsList() {
                     startIcon={
                       <AddCommentIcon
                         sx={{
-                          marginLeft: "0.9rem",
-                          width: "1.8rem",
-                          height: "1.8rem",
+                          marginLeft: {
+                            md: "0.9rem",
+                            xs: "0.5rem",
+                          },
+                          width: {
+                            md: "1.8rem",
+                            xs: "1.3rem",
+                          },
+                          height: {
+                            md: "1.8rem",
+                            xs: "1.3rem",
+                          },
                         }}
                       />
                     }
-                    width="45%"
+                    widthupmd="45%"
+                    widthbetweenmdsm="30%"
+                    widthdownsm="60%"
                     padding="0.7rem 0"
                     borderradius="0.6rem"
-                    fontsize="1.1rem"
+                    fontsizeupmd="1.1rem"
+                    fontsizedownmd="0.9rem"
                     margintop="1rem"
                   >
                     افزودن دیدگاه

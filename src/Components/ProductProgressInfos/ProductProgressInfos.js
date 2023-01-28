@@ -20,6 +20,7 @@ const LinearProgressStyled = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
+
 export default function ProductCommentProgressBar(props) {
   const { id, title, value } = props;
   return (
@@ -35,13 +36,28 @@ export default function ProductCommentProgressBar(props) {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          width: "13rem",
+          width: {
+            lg:'15rem',
+            md:'14rem',
+            
+          },
         }}
       >
-        <Typography component={"h4"}>{title}</Typography>
-        <Typography component={"h4"}>{value}</Typography>
+        <Typography component={"h4"} sx={{fontSize:{
+          lg:'0.9rem',
+          md:'0.8rem',
+        }}}>
+          {title}
+        </Typography>
+        <Typography component={"h4"} sx={{fontSize:{
+          lg:'0.9rem',
+          md:'0.8rem',
+        },marginLeft:'0.5rem'}}>{value}%</Typography>
       </Box>
-      <Box sx={{ width: "20rem" }}>
+      <Box sx={{ width: {
+        lg:'19rem',
+        md:'15.5rem',
+      } }}>
         <LinearProgressStyled variant="determinate" value={value} />
       </Box>
     </Box>

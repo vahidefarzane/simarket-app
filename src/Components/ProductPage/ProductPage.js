@@ -5,15 +5,6 @@ import {
   Slider,
   Box,
   Typography,
-  TextField,
-  Checkbox,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  List,
   Divider,
   Button,
   IconButton,
@@ -21,8 +12,6 @@ import {
   Tabs,
   Tab,
   Rating,
-  LinearProgress,
-  linearProgressClasses,
 } from "@mui/material";
 import MuiToggleButton from "@mui/material/ToggleButton";
 import MuiTabs from "@mui/material/Tabs";
@@ -31,54 +20,86 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import MyButton from "../MyButton/MyButton";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
 import { PropTypes } from "prop-types";
-import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
-import InsertCommentOutlinedIcon from "@mui/icons-material/InsertCommentOutlined";
-import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
 import AddCommentIcon from "@mui/icons-material/AddComment";
-import ProductProgressInfos from '../ProductProgressInfos/ProductProgressInfos'
+import ProductProgressInfos from "../ProductProgressInfos/ProductProgressInfos";
 
 const useStyles = makeStyles((theme) => ({
-  productDetailsContainer: {
-    display: "flex",
-    padding: "1rem 3rem",
+  productPageContainer: {
+    padding: "1rem 2rem",
+    [theme.breakpoints.up("md")]: {
+      padding: "1rem",
+    },
   },
-  productDetailsImgContainer: {
-    width: "45%",
+  productInfoContainer: {
+    display: "flex",
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      flexDirection: "column",
+    },
+    [theme.breakpoints.between("md", "lg")]: {
+      display: "flex",
+      justifyContent: "space-between",
+    },
+  },
+  productInfoImg: {
+    width: "50%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.between("md", "lg")]: {
+      alignItems: "start",
+      margintop: "0.7rem",
+    },
   },
-  productDetailsImg: {
+  productImgPage: {
     width: "24rem",
     height: "25rem",
+    [theme.breakpoints.between("md", "lg")]: {
+      width: "23rem",
+      height: "23rem",
+    },
   },
   productDetailsInfo: {
-    width: "55%",
+    width: "50%",
     padding: "0 3rem",
+    [theme.breakpoints.between("md", "lg")]: {
+      padding: "0 1rem",
+    },
   },
-  productDetailsCategory: {
+
+  productDetailsPart1: {
     display: "flex",
     alignItems: "center",
     marginBottom: "1rem",
     justifyContent: "space-between",
+    [theme.breakpoints.between("md", "lg")]: {
+      marginBottom: "0.7rem",
+    },
+  },
+  productDetailsPart2: {
+    display: "flex",
+    padding: "2rem 0",
+    [theme.breakpoints.between("md", "lg")]: {
+      padding: "0.7rem 0",
+    },
   },
   productDetailsPrice: {
     width: "50%",
     display: "flex",
     borderLeft: "1px solid rgba(0, 0, 0, 0.12)",
+    [theme.breakpoints.between("md", "lg")]: {},
   },
   productDetailsShare: {
     width: "50%",
     display: "flex",
     FlexDirection: "column",
     paddingRight: "1rem",
+    [theme.breakpoints.between("md", "lg")]: {},
   },
   tabs: {
     "& .MuiTabs-indicator": {
@@ -90,10 +111,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const ToggleButtonStyled = styled(Stack)(({ theme }) => ({}));
-const ToggleButton = styled(MuiToggleButton)({
+const ToggleButton = styled(MuiToggleButton)(({ theme }) => ({
   "&.MuiButtonBase-root": {
     width: "6rem",
+    color: "#000",
+    fontWeight: "bold",
+    [theme.breakpoints.between("md", "lg")]: {
+      width: "5rem",
+    },
   },
   "&.MuiButtonBase-root:not(:last-of-type), &.MuiButtonBase-root:last-of-type":
     {
@@ -108,7 +133,8 @@ const ToggleButton = styled(MuiToggleButton)({
     color: "#fff",
     backgroundColor: "#ff6a00",
   },
-});
+  
+}));
 
 const TabsStyled = styled(Tabs)(({ theme }) => ({
   display: "flex",
@@ -117,6 +143,12 @@ const TabsStyled = styled(Tabs)(({ theme }) => ({
   },
   "& .MuiTab-root.Mui-selected": {
     color: "#ff6a00",
+  },
+}));
+const BoxShareProduct = styled(Box)(({ theme }) => ({
+  display: "flex",
+  [theme.breakpoints.between("md", "lg")]: {
+    display: "none",
   },
 }));
 
@@ -180,12 +212,11 @@ export default function ProductsList() {
   ]);
 
   return (
-    <Stack>
-      <Breadcrumb></Breadcrumb>
-      <Box className={classes.productDetailsContainer}>
-        <Box className={classes.productDetailsImgContainer}>
+    <Stack className={classes.productPageContainer}>
+      <Box className={classes.productInfoContainer}>
+        <Box className={classes.productInfoImg}>
           <Box
-            className={classes.productDetailsImg}
+            className={classes.productImgPage}
             component="img"
             src="./images/jacket.jpg"
             alt=""
@@ -196,15 +227,21 @@ export default function ProductsList() {
           <Typography
             component="h2"
             sx={{
-              fontSize: "1.2rem",
+              fontSize: {
+                lg: "1.2rem",
+                md: "0.9rem",
+              },
               fontWeight: "bold",
               lineHeight: "2.5rem",
-              marginBottom: "1rem",
+              marginBottom: {
+                lg: "1rem",
+                md: "0.7rem",
+              },
             }}
           >
             ست تیشرت و شلوار مردانه Nike مدل 21077
           </Typography>
-          <Box className={classes.productDetailsCategory}>
+          <Box className={classes.productDetailsPart1}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <FolderOutlinedIcon
                 sx={{
@@ -213,12 +250,25 @@ export default function ProductsList() {
                   marginLeft: "0.5rem",
                 }}
               />
-              <Typography component={"span"}>دسته بندی :</Typography>
+              <Typography
+                component={"span"}
+                sx={{
+                  fontSize: {
+                    lg: "1rem",
+                    md: "0.9rem",
+                  },
+                }}
+              >
+                دسته بندی :
+              </Typography>
               <Typography
                 component={"span"}
                 sx={{
                   color: "#9e9e9e",
-                  fontSize: "0.9rem",
+                  fontSize: {
+                    lg: "0.9rem",
+                    md: "0.8rem",
+                  },
                   marginRight: "0.2rem",
                 }}
               >
@@ -238,7 +288,7 @@ export default function ProductsList() {
             </Box>
           </Box>
           <Divider />
-          <Box sx={{ display: "flex", padding: "2rem 0" }}>
+          <Box className={classes.productDetailsPart2}>
             <Box className={classes.productDetailsPrice}>
               <Typography
                 component={"span"}
@@ -247,7 +297,10 @@ export default function ProductsList() {
                   alignItems: "center",
                   border: "1px solid  #fb4707",
                   borderRadius: "0.9rem",
-                  padding: "1rem",
+                  padding: {
+                    lg: "1rem",
+                    md: "0.8rem",
+                  },
                   color: "#fb4707",
                   marginLeft: "1rem",
                   fontWeight: "bold",
@@ -260,7 +313,10 @@ export default function ProductsList() {
                   component={"del"}
                   sx={{
                     color: "#b5b5b5",
-                    fontSize: "1.1rem",
+                    fontSize: {
+                      lg: "1.1rem",
+                      md: "0.9rem",
+                    },
                     marginBottom: "1rem",
                   }}
                 >
@@ -269,7 +325,10 @@ export default function ProductsList() {
                 <Typography
                   component={"span"}
                   sx={{
-                    fontSize: "1.5rem",
+                    fontSize: {
+                      lg: "1.5rem",
+                      md: "1rem",
+                    },
                     color: "#fb4707",
                     fontWeight: "bold",
                   }}
@@ -284,17 +343,28 @@ export default function ProductsList() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  marginBottom: "0.7rem",
+                  marginBottom: {
+                    lg: "0.7rem",
+                    md: "0",
+                  },
                 }}
               >
                 <BeenhereIcon
                   sx={{ fontSize: "0.8rem", marginLeft: "0.4rem" }}
                 />
-                <Typography component={"span"} sx={{ fontSize: "0.8rem" }}>
+                <Typography
+                  component={"span"}
+                  sx={{
+                    fontSize: {
+                      lg: "0.8rem",
+                      md: "0.7rem",
+                    },
+                  }}
+                >
                   گارانتی 18 ماهه فروشگاه اینترنتی پارس کالا
                 </Typography>
               </Box>
-              <Box>
+              <BoxShareProduct>
                 <IconButton>
                   <FavoriteBorderIcon />
                 </IconButton>
@@ -311,19 +381,41 @@ export default function ProductsList() {
                 >
                   دوستاتو با خبر کن
                 </Button>
-              </Box>
+              </BoxShareProduct>
             </Stack>
           </Box>
           <Divider />
-          <Stack sx={{ padding: "1.5rem 0" }}>
+          <Stack
+            sx={{
+              padding: {
+                lg: "1.5rem 0",
+                md: "0.7rem 0",
+              },
+            }}
+          >
             <Typography
               component={"h4"}
-              sx={{ fontWeight: "bold", marginBottom: "2rem" }}
+              sx={{
+                fontWeight: "bold",
+                marginBottom: {
+                  lg: "2rem",
+                  md: "1rem",
+                },
+                fontSize: {
+                  lg: "1rem",
+                  md: "0.8rem",
+                },
+              }}
             >
               انتخاب سایز
             </Typography>
             <ToggleButtonGroup
-              sx={{ marginBottom: "2rem" }}
+              sx={{
+                marginBottom: {
+                  lg: "2rem",
+                  md: "1.5rem",
+                },
+              }}
               value={alignment}
               exclusive
               onChange={handleChange}
@@ -339,8 +431,7 @@ export default function ProductsList() {
           </Stack>
         </Stack>
       </Box>
-
-      <Box sx={{ width: "100%", padding: "0.5rem 3rem" }}>
+      <Box sx={{ width: "100%", padding: "0.5rem 0" }}>
         <Box
           sx={{
             border: "1px solid rgba(0, 0, 0, 0.12)",
@@ -420,30 +511,49 @@ export default function ProductsList() {
               <Stack
                 sx={{
                   width: "50%",
-                  paddingLeft: "4rem",
+                  paddingLeft: {
+                    lg:'3rem',
+                    md:'1rem',
+                  },
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                 }}
               >
                 {progressInfos.map((progressInfos) => (
-                  <ProductProgressInfos key={progressInfos.id} title={progressInfos.title} value={progressInfos.value} />
+                  <ProductProgressInfos
+                    key={progressInfos.id}
+                    title={progressInfos.title}
+                    value={progressInfos.value}
+                  />
                 ))}
               </Stack>
-              <Stack sx={{ width: "50%", paddingLeft: "4rem" }}>
+              <Stack sx={{ width: "50%", paddingLeft:{
+                lg:'4rem',
+                md:'0'
+              } }}>
                 <Typography
                   component={"h3"}
                   sx={{
                     fontWeight: "bold",
-                    fontSize: "1.1rem",
-                    marginBottom: "1rem",
+                    fontSize: {
+                      lg:'1.1rem',
+                      md:'1rem'
+                    },
+                    marginBottom: {
+                      lg:'1rem',
+                      md:'0.7rem',
+                    },
                   }}
                 >
                   دیدگاه خود را در باره این کالا بیان کنید
                 </Typography>
                 <Typography
                   component={"p"}
-                  sx={{ fontSize: "0.9rem", lineHeight: "1.8rem" }}
+                  sx={{ fontSize: {
+                    lg:'0.9rem',
+                    md:'0.8rem'
+                  }, lineHeight: "1.8rem" }}
                 >
                   برای ثبت نظر، لازم است ابتدا وارد حساب کاربری خود شوید. اگر
                   این محصول را قبلا از این فروشگاه خریده باشید، نظر شما به عنوان
@@ -464,7 +574,7 @@ export default function ProductsList() {
                     padding="0.7rem 0"
                     borderradius="0.6rem"
                     fontsize="1.1rem"
-                    margintop="1.6rem"
+                    margintop="1rem"
                   >
                     افزودن دیدگاه
                   </MyButton>
@@ -472,8 +582,13 @@ export default function ProductsList() {
               </Stack>
             </Box>
             <Box sx={{ margin: "4rem 0" }}>
-              <Typography component={"h2"}>نظرات کاربران</Typography>
-              <Typography component={"p"}>
+              <Typography
+                component={"h2"}
+                sx={{ marginBottom: "1rem", fontWeight: "bold" }}
+              >
+                نظرات کاربران
+              </Typography>
+              <Typography component={"p"} sx={{ fontSize: "0.9rem" }}>
                 هیچ دیدگاهی برای این محصول نوشته نشده است.
               </Typography>
             </Box>

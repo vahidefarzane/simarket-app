@@ -1,18 +1,32 @@
-import { TextField, Stack, FormControl, Box, Typography } from "@mui/material";
-import {Link} from 'react-router-dom'
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Stack,
+  Box,
+  Typography,
+  FormGroup,
+} from "@mui/material";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
-import MyButton from '../MyButton/MyButton'
+import MyButton from "../MyButton/MyButton";
 import Logo from "../../logo.png";
+import FormInput from "../FormInput/FormInput";
 
 const useStyles = makeStyles((theme) => ({}));
-const TextFieldStyled = styled(TextField)(({ theme }) => ({
-  marginBottom: "1rem",
-  fontSize:'0.9rem'
+
+const ContainerImage = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up("md")]: {
+    display: "flex",
+    width: "55%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
 }));
+
 export default function Login() {
-  const classesStyles = useStyles();
+  const classes = useStyles();
 
   return (
     <Stack
@@ -20,63 +34,98 @@ export default function Login() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#fff",
       }}
     >
-      <FormControl
+      <Box
         sx={{
+          display: "flex",
           width: {
-            lg: "30%",
-            md: "35%",
-            sm: "45%",
-            xs: "80%",
+            lg: "75%",
+            md: "94%",
+            sm:'50%',
+            xs:'70%'
           },
-          backgroundColor: "#fff",
-          padding: "3rem 2rem",
-          marginTop: "2rem",
+          justifyContent: "center",
+          margin: {
+            md:'2rem 0',
+            xs:'1rem 0'
+
+          },
           boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
-          borderRadius: "0.7rem",
+          padding: {
+            md:'2rem 1.5rem',
+            xs:'1.5rem 1rem'
+          },
+          borderRadius: "1rem",
         }}
       >
         <Box
           sx={{
+            width: {
+              md:'45%',
+              xs:'100%'
+            },
             display: "flex",
             justifyContent: "center",
-            marginBottom:'1.5rem',
+            alignItems: "center",
           }}
         >
-          <Box
-            component="img"
-            sx={{
-              width: 150,
-            }}
-            alt="Your logo"
-            src={Logo}
-          ></Box>
-        </Box>
-          <Typography sx={{fontSize:'1.1rem',fontWeight:'600',marginBottom:'1.5rem'}}>ورود </Typography>
-        <TextFieldStyled
-          
-          id="outlined-username-input"
-          label="نام کاربری"
-          variant="outlined"
-          type="text"
-          placeholder="نام کاربری خود را وارد کنید"
-        />
-        <TextFieldStyled
-          id="outlined-password-input"
-          label="گذرواژه"
-          variant="outlined"
-          type="password"
-          placeholder="گذرواژه خود را وارد کنید"
-        />
-        <MyButton padding='0.7rem 0'>ورود</MyButton>
-        <Typography sx={{fontSize:"0.9rem",marginTop:'1rem'}}>
-            قبلا ثبت نام نکردید؟ 
-        <Link to='/register' style={{paddingRight:'0.3rem',fontWeight:'bold',color:'blue'}}>ثبت نام</Link>
+          <FormGroup sx={{ width: "85%" }}>
+            <Box sx={{ margin: "auto", marginBottom: "2rem" }}>
+              <Box
+                component="img"
+                sx={{
+                  width: 130,
+                }}
+                alt="Your logo"
+                src={Logo}
+              ></Box>
+            </Box>
 
-        </Typography>
-      </FormControl>
+            <FormInput lable="نام کاربری" type="text"></FormInput>
+            <FormInput lable="گذرواژه" type="password"></FormInput>
+            <MyButton padding="0.7rem 0" margintop="1.5rem">
+              ورود
+            </MyButton>
+            <Typography sx={{ fontSize: "0.8rem", marginTop: "2rem" }}>
+              رمز عبور خود را فراموش کردید؟
+              <Link
+                to="/register"
+                style={{
+                  paddingRight: "0.3rem",
+                  fontWeight: "bold",
+                  color: "blue",
+                }}
+              >
+                بازیابی رمز عبور
+              </Link>
+            </Typography>
+            <Typography sx={{ fontSize: "0.8rem", marginTop: "0.5rem" }}>
+              قبلا ثبت نام نکردید؟
+              <Link
+                to="/register"
+                style={{
+                  paddingRight: "0.3rem",
+                  fontWeight: "bold",
+                  color: "blue",
+                }}
+              >
+                ثبت نام
+              </Link>
+            </Typography>
+            
+          </FormGroup>
+        </Box>
+
+        <ContainerImage>
+          <Box
+            sx={{ width: "85%", height: "27rem" }}
+            component="img"
+            alt="Your logo"
+            src="./images/login.png"
+          ></Box>
+        </ContainerImage>
+      </Box>
     </Stack>
   );
 }

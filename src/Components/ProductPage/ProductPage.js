@@ -27,6 +27,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { PropTypes } from "prop-types";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ProductProgressInfos from "../ProductProgressInfos/ProductProgressInfos";
+import ReactImageMagnify from "react-image-magnify";
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   productInfoImg: {
     width: "50%",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "end",
     alignItems: "center",
     [theme.breakpoints.between("md", "lg")]: {
       alignItems: "start",
@@ -67,22 +68,22 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   productImgPage: {
-    width: "24rem",
-    height: "25rem",
-    [theme.breakpoints.between("md", "lg")]: {
-      width: "23rem",
-      height: "23rem",
-    },
-    [theme.breakpoints.down("md")]: {
-      width: "22rem",
-      height: "22rem",
-      padding: "1rem",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "18rem",
-      height: "17rem",
-      padding: "1rem",
-    },
+    // width: "24rem",
+    // height: "25rem",
+    // [theme.breakpoints.between("md", "lg")]: {
+    //   width: "23rem",
+    //   height: "23rem",
+    // },
+    // [theme.breakpoints.down("md")]: {
+    //   width: "22rem",
+    //   height: "22rem",
+    //   padding: "1rem",
+    // },
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "18rem",
+    //   height: "17rem",
+    //   padding: "1rem",
+    // },
   },
   productDetailsInfo: {
     width: "50%",
@@ -262,16 +263,30 @@ export default function ProductsList() {
     { id: 4, title: "سهولت استفاده", value: 20 },
   ]);
 
+  const imageProps = {
+    smallImage: {
+      alt: "Phasellus laoreet",
+      isFluidWidth: true,
+      src: "./images/jacket.jpg",
+    },
+    largeImage: {
+      src: "./images/jacket.jpg",
+      width: 800,
+      height: 800,
+    },
+    enlargedImageContainerStyle: {
+      background: "#fff",
+      border: "1px solid red",
+      zIndex: 9,
+      marginLeft: "-80rem",
+    },
+  };
+
   return (
     <Stack className={classes.productPageContainer}>
       <Box className={classes.productInfoContainer}>
-        <Box className={classes.productInfoImg}>
-          <Box
-            className={classes.productImgPage}
-            component="img"
-            src="./images/jacket.jpg"
-            alt=""
-          ></Box>
+        <Box sx={{ width: "50%" }}>
+          <ReactImageMagnify {...imageProps}  />
         </Box>
 
         <Stack className={classes.productDetailsInfo}>

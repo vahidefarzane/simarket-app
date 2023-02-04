@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import {
   Badge,
   AppBar,
@@ -16,6 +16,7 @@ import {
   Paper,
   Divider,
   BottomNavigationAction,
+  TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -25,8 +26,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import BottomNavigation from "@mui/material/BottomNavigation";
 
-// import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import MuiBottomNavigationAction from "@mui/material/BottomNavigationAction";
 import HomeIcon from "@mui/icons-material/Home";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
@@ -37,6 +36,15 @@ import MyButton from "../MyButton/MyButton";
 import Logo from "../../logo.png";
 import "./NavBar.css";
 import MenuResponsive from "../MenuResponsive/MenuResponsive";
+import Autocomplete from "@mui/material/Autocomplete";
+import CircularProgress from "@mui/material/CircularProgress";
+import SearchBox from "../SearchBox/SearchBox";
+
+function sleep(delay = 0) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
 
 // desktop styled
 
@@ -44,6 +52,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "white",
   color: "#212121",
   position: "sticky",
+  height:'7rem',
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -51,43 +60,9 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
     display: "flex",
   },
 }));
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: "0.7rem",
-  color: "#212121",
-  backgroundColor: "transparent",
-  border: "1px solid #e2e2e2",
-  [theme.breakpoints.down("md")]: {
-    margin: "0",
-    width: "70%",
-    padding: "0",
-    fontSize: "0.6rem",
-  },
-  [theme.breakpoints.up("md")]: {
-    margin: "0 2rem",
-    width: "40%",
-    padding: "0.15rem",
-    fontSize: "0.9rem",
-  },
-}));
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 1),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "#212121",
-}));
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 5),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-  },
-}));
+
+
+
 const LocationStyled = styled(Button)(() => ({
   borderRadius: "0.7rem",
   cursor: "pointer",
@@ -122,18 +97,21 @@ const BoxMobileView = styled(Box)(({ theme }) => ({
 const BottomNavigationActionStyled = styled(BottomNavigationAction)(
   ({ theme }) => ({
     minWidth: "1rem",
-    width:'25%',
-    '&.Mui-selected': {
-      color:' #fb4707',
+    width: "25%",
+    "&.Mui-selected": {
+      color: " #fb4707",
     },
     [theme.breakpoints.down("sm")]: {},
   })
 );
 
-
-
 export default function Navbar() {
   const [value, setValue] = useState(0);
+
+  const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState([]);
+  const loading = open && options.length === 0;
+
   const mobileview = (
     <BoxMobileView>
       <Stack
@@ -174,15 +152,7 @@ export default function Navbar() {
           marginTop: "0.7rem",
         }}
       >
-        <Search flexGrow="1">
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="جستجو..."
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search>
+        <SearchBox></SearchBox>
         <Box sx={{ flexGrow: 1 }} />
 
         <IconButton aria-label="login or register" sx={{ color: "#212121" }}>
@@ -279,15 +249,9 @@ export default function Navbar() {
             alt="Your logo"
             src={Logo}
           ></Box>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="جستجو..."
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+         
+          <SearchBox></SearchBox>
+
           <LocationStyled startIcon={<FmdGoodOutlinedIcon color="red" />}>
             <Stack textAlign="right" marginRight="0.5rem">
               <Typography fontSize="0.7rem" color="#212121">

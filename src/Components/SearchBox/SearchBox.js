@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 import SearchBoxBtn from "../SearchBoxBtn/SearchBoxBtn";
-import WhatshotIcon from '@mui/icons-material/Whatshot';
+import WhatshotIcon from "@mui/icons-material/Whatshot";
 
 const Search = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -14,17 +14,17 @@ const Search = styled(Box)(({ theme }) => ({
   color: "#212121",
   backgroundColor: "transparent",
   border: "1px solid #e2e2e2",
-  height: "3rem",
   [theme.breakpoints.down("md")]: {
-    width: "70%",
+    width: "100%",
     padding: "0",
-    fontSize: "0.6rem",
+    height: "2.5rem",
   },
   [theme.breakpoints.up("md")]: {
     margin: "0 2rem 0 1rem",
     width: "87%",
     padding: "0.15rem",
     fontSize: "0.9rem",
+    height: "3rem",
   },
 }));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -48,6 +48,9 @@ const SearchListBox = styled(Box)(({ theme }) => ({
   top: "0.7rem",
   right: "2rem",
   padding: "1.5rem 2rem",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
 }));
 export default function SearchBox() {
   const [showList, setShowList] = useState(false);
@@ -76,7 +79,11 @@ export default function SearchBox() {
         display: "flex",
         flexDirection: "column",
         height: "2.9rem",
-        width: "45%",
+        width: {
+          md: "45%",
+          sm: "55%",
+          xs: "70%",
+        },
       }}
     >
       <Search>
@@ -91,8 +98,8 @@ export default function SearchBox() {
       </Search>
       {showList && (
         <SearchListBox>
-          <Box sx={{ display: "flex",marginBottom:'1rem' }}>
-            <WhatshotIcon sx={{marginLeft:'0.7rem'}} />
+          <Box sx={{ display: "flex", marginBottom: "1rem" }}>
+            <WhatshotIcon sx={{ marginLeft: "0.7rem" }} />
             <Typography>جستجوی پرطرفدار</Typography>
           </Box>
           {hotBtns.map((btn) => (

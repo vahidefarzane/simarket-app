@@ -25,6 +25,7 @@ export default function MyButton(props) {
           md:props.fontsizeupmd,
           xs:props.fontsizedownmd,
         },
+        
       }}
     >
       {props.children}

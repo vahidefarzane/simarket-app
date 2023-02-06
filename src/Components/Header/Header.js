@@ -32,6 +32,7 @@ export default function Header() {
         display: "flex",
         justifyContent: "space-between",
         padding: "0.5rem",
+        marginTop:'8rem'
       }}
       className="swiper-header-wraper"
     >

@@ -6,20 +6,17 @@ import {
   Box,
   Toolbar,
   IconButton,
-  InputBase,
   List,
   ListItem,
-  Grid,
   Button,
   Stack,
   Typography,
-  Paper,
   Divider,
   BottomNavigationAction,
-  TextField,
   Modal,
   ListItemText,
   ListItemIcon,
+  Drawer,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -55,8 +52,7 @@ function sleep(delay = 0) {
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "white",
   color: "#212121",
-  position: "sticky",
-  height: "7rem",
+  height: "8rem",
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -82,7 +78,8 @@ const StyledList = styled(List)(() => ({
   padding: 0,
   margin: "1rem 1rem 0 1rem",
   display: "flex",
-  fontSize: "0.9rem",
+  fontSize: "0.8rem",
+  height: "5rem",
 }));
 
 // Responsive Style
@@ -107,6 +104,15 @@ const BottomNavigationActionStyled = styled(BottomNavigationAction)(
     [theme.breakpoints.down("sm")]: {},
   })
 );
+const DrawerStyled = styled(Drawer)(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    with: "100%",
+    height: "100vh",
+    borderRadius: 0,
+    padding: "1.5rem",
+  },
+  [theme.breakpoints.up("sm")]: {},
+}));
 const ModalStyled = styled(Box)(({ theme }) => ({
   backgroundColor: "#fff",
   [theme.breakpoints.down("sm")]: {
@@ -136,10 +142,9 @@ export default function Navbar() {
   const [options, setOptions] = useState([]);
   const loading = open && options.length === 0;
 
-
   const [openLocation, setOpenLocation] = useState(false);
-  const handleOpen = () => setOpenLocation(true);
-  const handleClose = () => setOpenLocation(false);
+  const handleOpenLocation = () => setOpenLocation(true);
+  const handleCloselocation = () => setOpenLocation(false);
 
   const cityHandeler = (e) => {
     setOpenLocation(false);
@@ -162,6 +167,14 @@ export default function Navbar() {
     { id: 7, name: "کرمان" },
     { id: 7, name: "کرمان" },
   ]);
+
+  const [cardBar, setCardBar] = useState(false);
+  const openCardHandler = () => {
+    setCardBar(true);
+  };
+  const closeCardHandler = () => {
+    setCardBar(false);
+  };
 
   const mobileview = (
     <BoxMobileView>
@@ -213,6 +226,7 @@ export default function Navbar() {
         <IconButton
           aria-label="show 17 new notifications"
           sx={{ color: "#212121" }}
+          onClick={openCardHandler}
         >
           <Badge badgeContent={4} sx={badgeStyle}>
             <AddShoppingCartIcon />
@@ -238,7 +252,7 @@ export default function Navbar() {
             alignItems: "center",
             margin: "0.2rem 0",
           }}
-          onClick={handleOpen}
+          onClick={handleOpenLocation}
         >
           <IconButton>
             <FmdGoodOutlinedIcon sx={{ color: "#fb4707" }} />
@@ -309,7 +323,7 @@ export default function Navbar() {
 
           <LocationStyled
             startIcon={<FmdGoodOutlinedIcon color="red" />}
-            onClick={handleOpen}
+            onClick={handleOpenLocation}
           >
             <Stack textAlign="right" marginRight="0.5rem">
               <Typography fontSize="0.7rem" color="#212121">
@@ -323,7 +337,7 @@ export default function Navbar() {
 
           <Modal
             open={openLocation}
-            onClose={handleClose}
+            onClose={handleCloselocation}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
@@ -340,7 +354,10 @@ export default function Navbar() {
                   <Typography id="modal-modal-title" component="h2">
                     منطقه ارسال خود را انتخاب کنید
                   </Typography>
-                  <CloseIcon onClick={handleClose} sx={{ cursor: "pointer" }} />
+                  <CloseIcon
+                    onClick={handleCloselocation}
+                    sx={{ cursor: "pointer" }}
+                  />
                 </Box>
                 <Divider />
                 <List
@@ -400,16 +417,146 @@ export default function Navbar() {
                 ورود / ثبت نام
               </MyButton>
             </Link>
-            <IconButton aria-label="card" sx={{ color: "#212121" }}>
+            <IconButton
+              aria-label="card"
+              sx={{ color: "#212121" }}
+              onClick={openCardHandler}
+            >
               <Badge badgeContent={4} sx={badgeStyle}>
                 <AddShoppingCartIcon sx={{ fontSize: "1.8rem" }} />
               </Badge>
             </IconButton>
+            {cardBar && (
+              <DrawerStyled
+                anchor="right"
+                open={cardBar}
+                onClose={closeCardHandler}
+                transitionDuration={700}
+              >
+                <Box
+                  sx={{
+                    width: {
+                      md: "24rem",
+                      sm: "23rem",
+                      xs: "100vw",
+                    },
+                  }}
+                >
+                  <Box
+                    component="div"
+                    sx={{
+                      padding: "1rem",
+                      color: "#fff",
+
+                      backgroundColor: "#EF394E",
+
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: "0.9rem" }}>
+                      {" "}
+                      شما این محصول را انتخاب کردید
+                    </Typography>
+                    <CloseIcon
+                      onClick={closeCardHandler}
+                      sx={{ cursor: "pointer" }}
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      height: "88vh",
+                    }}
+                  >
+                    <Box sx={{ padding: "0 0.5rem" }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          padding: "0 1rem",
+                        }}
+                      >
+                        <IconButton sx={{p:0}}>
+                          <CloseIcon />
+                        </IconButton>
+                        <Box
+                          component="img"
+                          src="./images/jacket.jpg"
+                          sx={{ width: "5rem", height: "5rem", margin: "1rem" }}
+                        />
+                        <Typography
+                          sx={{ fontSize: "0.8rem", fontWeight: "600" }}
+                        >
+                          تی شرت مردانه منان شهیدی مدل 3001158-26 سپرت - L
+                        </Typography>
+                      </Box>
+                      <Divider />
+                    </Box>
+                    <Box sx={{ borderTop: "1px solid #E0E0E0" }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          padding: "1rem",
+                        }}
+                      >
+                        <Typography fontWeight="bold" fontSize="1.1rem">
+                          مجموع :
+                        </Typography>
+                        <Typography fontWeight="bold" fontSize="1.1rem">
+                          189,000
+                        </Typography>
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "100%",
+                          padding: "0 1rem",
+                        }}
+                      >
+                        <MyButton
+                          widthdownsm="55%"
+                          borderradius="0.6rem"
+                          padding="0.7rem 0"
+                        >
+                          مشاهده سبد خرید
+                        </MyButton>
+                        <MyButton
+                          widthdownsm="40%"
+                          borderradius="0.6rem"
+                          padding="0.7rem 0"
+                        >
+                          تسویه حساب
+                        </MyButton>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+              </DrawerStyled>
+            )}
           </Box>
         </Toolbar>
+
         <StyledList>
           <Link className="list-item-links" to="/categories">
-            <ListItem className="list-item">دسته بندی</ListItem>
+            <ListItem className="list-item">
+              <MenuIcon sx={{ marginLeft: "0.7rem" }} />
+              <Typography
+                sx={{
+                  borderLeft: "2px solid",
+                  fontSize: "0.85rem",
+                  paddingLeft: "1rem",
+                  fontWeight: "bold",
+                }}
+              >
+                دسته بندی
+              </Typography>
+            </ListItem>
           </Link>
           <Link className="list-item-links" to="/">
             <ListItem className="list-item">صفحه اصلی</ListItem>

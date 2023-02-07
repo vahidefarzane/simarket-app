@@ -13,3 +13,9 @@
   
   /* width: inherit; */
 }
+.list-item-menu-bar{
+  display: flex;
+  color: #000;
+  align-items: center;
+  margin: 0.5rem;
+}

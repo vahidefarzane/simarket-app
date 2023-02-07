@@ -25,8 +25,10 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import BottomNavigation from "@mui/material/BottomNavigation";
+import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import PhoneCallbackOutlinedIcon from "@mui/icons-material/PhoneCallbackOutlined";
+import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 
-import HomeIcon from "@mui/icons-material/Home";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -39,7 +41,10 @@ import "./NavBar.css";
 import MenuResponsive from "../MenuResponsive/MenuResponsive";
 import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SearchBox from "../SearchBox/SearchBox";
+import { padding } from "@mui/system";
+import HomeIcon from "@mui/icons-material/Home";
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
@@ -111,7 +116,11 @@ const DrawerStyled = styled(Drawer)(({ theme }) => ({
     borderRadius: 0,
     padding: "1.5rem",
   },
-  [theme.breakpoints.up("sm")]: {},
+}));
+const MenuBarStyled = styled(Drawer)(({ theme }) => ({
+  [theme.breakpoints.up("md")]: {
+    display: "none",
+  },
 }));
 const ModalStyled = styled(Box)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -176,6 +185,15 @@ export default function Navbar() {
     setCardBar(false);
   };
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  const openMenuBar = () => {
+    setShowMenu(true);
+  };
+  const closeMenuBar = () => {
+    setShowMenu(false);
+  };
+
   const mobileview = (
     <BoxMobileView>
       <Stack
@@ -191,10 +209,84 @@ export default function Navbar() {
           color="inherit"
           aria-label="open drawer"
           size="small"
+          onClick={openMenuBar}
         >
           <MenuIcon sx={{ marginLeft: "0.3rem" }} />
-          <Typography component="span">منو</Typography>
         </IconButton>
+        {showMenu && (
+          <MenuBarStyled anchor="right" open={showMenu} onClose={closeMenuBar}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: {
+                  sm: "270px",
+                  xs: "220px",
+                },
+              }}
+            >
+              <Box
+                component="img"
+                src={Logo}
+                sx={{
+                  width: 100,
+                  margin: "auto",
+                  padding: "1rem 0",
+                }}
+              ></Box>
+              <List>
+                {[
+                  {
+                    id: 1,
+                    listName: "صفحه اصلی",
+                    icon: <HomeOutlinedIcon />,
+                    to: "/",
+                  },
+                  {
+                    id: 2,
+                    listName: "دسته بندی",
+                    icon: <CategoryOutlinedIcon />,
+                    to: "./categories",
+                  },
+                  {
+                    id: 3,
+                    listName: "لیست کالاها",
+                    icon: <ListOutlinedIcon />,
+                    to: "/productsList",
+                  },
+                  {
+                    id: 4,
+                    listName: "تماس با ما",
+                    icon: <PhoneCallbackOutlinedIcon />,
+                    to: "/contactUs",
+                  },
+                ].map((listItem) => (
+                  <>
+                    <Link
+                      key={listItem.id}
+                      className="list-item-menu-bar"
+                      to={listItem.to}
+                      onClick={closeMenuBar}
+                    >
+                      {listItem.icon}
+                      <ListItem
+                        sx={{
+                          margin: 0,
+                          fontSize: "0.9rem",
+                          color: "#000",
+                          padding: "0 0.5rem",
+                        }}
+                      >
+                        {listItem.listName}
+                      </ListItem>
+                    </Link>
+                    <Divider />
+                  </>
+                ))}
+              </List>
+            </Box>
+          </MenuBarStyled>
+        )}
         <Box
           component="img"
           sx={{
@@ -258,7 +350,8 @@ export default function Navbar() {
             <FmdGoodOutlinedIcon sx={{ color: "#fb4707" }} />
           </IconButton>
           <Typography sx={{ fontSize: "0.7rem" }}>
-            مکان را جهت فیلتر محصولات انتخاب کنید
+            {localStorage.getItem("yourLocation") ||
+              "مکان را جهت فیلتر محصولات انتخاب کنید"}
           </Typography>
         </Stack>
         <IconButton>
@@ -330,7 +423,7 @@ export default function Navbar() {
                 انتخاب مکان
               </Typography>
               <Typography fontSize="0.8rem">
-                {localStorage.getItem("yourLocation")}
+                {localStorage.getItem("yourLocation") || "مکان شما"}
               </Typography>
             </Stack>
           </LocationStyled>
@@ -480,7 +573,7 @@ export default function Navbar() {
                           padding: "0 1rem",
                         }}
                       >
-                        <IconButton sx={{p:0}}>
+                        <IconButton sx={{ p: 0 }}>
                           <CloseIcon />
                         </IconButton>
                         <Box

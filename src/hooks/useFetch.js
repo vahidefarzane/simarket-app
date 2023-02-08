@@ -9,7 +9,9 @@ export default function useFetch(url) {
     axios.get(url).then((products) => {
       setAllProducts(products.data);
       setIsPending(true)
+      console.log(products.data)
     });
+
   }, []);
   return { allProducts ,ispending};
 }

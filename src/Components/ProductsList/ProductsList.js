@@ -27,6 +27,7 @@ import "./ProductsList.css";
 
 const useStyles = makeStyles((theme) => ({
   productListContainer: {
+    marginTop: "8rem",
     display: "flex",
     padding: "2rem",
     justifyContent: "space-between",
@@ -155,16 +156,15 @@ const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
   },
 }));
 
-function valuetext(value) {
-  return `${value}تومان`;
-}
+// function valuetext(value) {
+//   return `${value}تومان`;
+// }
 
 export default function ProductsList() {
   const classes = useStyles();
   const { allProducts, ispending } = useFetch(
     "https://fakestoreapi.com/products"
   );
-  const [value, setValue] = useState([100, 900]);
   const [filteredList, setFilteredList] = useState([
     { id: 1, title: "پیشفرض" },
     { id: 2, title: "محبوب ترین" },
@@ -184,8 +184,17 @@ export default function ProductsList() {
         setCategoriesIsPending(true);
       });
   }, []);
+
+  const [newValue, setNewValue] = useState(800);
+  const [value, setValue] = useState([100,900]);
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setNewValue(newValue[1]-newValue[0])
+  };
+
+  const filterProductPrice = () => {
+    console.log(newValue);
   };
   return (
     <Box className={classes.productListContainer}>
@@ -202,13 +211,29 @@ export default function ProductsList() {
             <CustomSlider
               value={value}
               onChange={handleChange}
-              getAriaValueText={valuetext}
-              // valueLabelDisplay="on"
               min={100}
               max={900}
             />
-            <Typography>{value}</Typography>
-            <MyButton width="100%">صافی</MyButton>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: "0.7rem",
+              }}
+            >
+              <Typography sx={{ fontSize: "0.9rem" }}>
+                {value[1] + ",000" + "  تومان"}
+              </Typography>
+              <Typography sx={{ fontSize: "0.9rem" }}>
+                {value[0] + ",000" + "  تومان"}
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center",marginBottom:"0.6rem",fontSize:'1rem',fontWeight:'bold' }}>
+              {newValue+ ",000" + "   تومان"}
+            </Box>
+            <MyButton widthupmd="100%" onClick={filterProductPrice}>
+              صافی
+            </MyButton>
           </AccordionDetails>
         </AccordionStyled>
         <AccordionStyled defaultExpanded={true}>
@@ -301,6 +326,8 @@ export default function ProductsList() {
                 productImage={product.image}
                 productTtile={product.title.slice(0, 20)}
                 productPrice={product.price}
+                productRate={Math.round(product.rating.rate)}
+                ProductId={product.id}
               />
             ))}
         </Box>

@@ -28,9 +28,11 @@ import { PropTypes } from "prop-types";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ProductProgressInfos from "../ProductProgressInfos/ProductProgressInfos";
 import ReactImageMagnify from "react-image-magnify";
+import { height, padding } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
+    
     padding: "1rem 2rem",
     [theme.breakpoints.down("md")]: {
       padding: "0.7rem",
@@ -38,9 +40,13 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.between("md", "lg")]: {
       padding: "1rem",
     },
+    [theme.breakpoints.up("md")]: {
+      marginTop: "8rem",
+    },
   },
   productInfoContainer: {
     display: "flex",
+    justifyContent:'space-between',
     [theme.breakpoints.down("md")]: {
       display: "flex",
       flexDirection: "column",
@@ -86,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     // },
   },
   productDetailsInfo: {
-    width: "50%",
+    width: "61%",
     padding: "0 3rem",
     [theme.breakpoints.between("md", "lg")]: {
       padding: "0 1rem",
@@ -271,22 +277,29 @@ export default function ProductsList() {
     },
     largeImage: {
       src: "./images/jacket.jpg",
-      width: 800,
-      height: 800,
+      width: 600,
+      height: 900,
     },
     enlargedImageContainerStyle: {
       background: "#fff",
       border: "1px solid red",
       zIndex: 9,
-      marginLeft: "-80rem",
+      marginLeft: "-60rem",
     },
   };
 
   return (
     <Stack className={classes.productPageContainer}>
       <Box className={classes.productInfoContainer}>
-        <Box sx={{ width: "50%" }}>
-          <ReactImageMagnify {...imageProps}  />
+        <Box sx={{ width: {
+          lg:'40%',
+          md:'45%',
+          xs:'100%',
+        }, padding: {
+          md:'0 3rem 2rem 3rem',
+          xs:'1rem 3rem'
+        } }}>
+          <ReactImageMagnify {...imageProps} />
         </Box>
 
         <Stack className={classes.productDetailsInfo}>

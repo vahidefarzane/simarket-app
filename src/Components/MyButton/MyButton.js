@@ -7,6 +7,7 @@ export default function MyButton(props) {
       variant="contained"
       startIcon={props.startIcon}
       endIcon={props.endIcon}
+      onClick={props.onClick}
       sx={{
         width:{
           md:props.widthupmd,

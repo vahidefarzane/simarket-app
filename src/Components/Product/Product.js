@@ -7,6 +7,7 @@ import {
   Typography,
   Stack,
   Box,
+  Rating,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
@@ -81,7 +82,7 @@ const CardContentStyled = styled(CardContent)(({ theme }) => ({
 
 export default function Product(props) {
   const classes = useStyles();
-  const { productImage, productTtile, productPrice } = props;
+  const { productImage, productTtile, productPrice, productRate,ProductId } = props;
   return (
     <>
       <Card
@@ -100,7 +101,7 @@ export default function Product(props) {
           },
         }}
       >
-        <Link to='/product'>
+        <Link to="/product">
           <CardMediaStyled
             component="img"
             image={productImage}
@@ -118,8 +119,8 @@ export default function Product(props) {
                 <IosShareIcon
                   sx={{
                     color: "#fb4707",
-                    fontSize: "1.4rem",
-                    marginLeft: "0.5rem",
+                    fontSize: "1.2rem",
+                    marginLeft: "0rem",
                   }}
                 />
                 <Typography
@@ -130,8 +131,7 @@ export default function Product(props) {
                 </Typography>
               </Box>
               <Box>
-                <StarIcon sx={{ color: "#ffb518" }} />
-                <StarIcon sx={{ color: "#ffb518" }} />
+                <Rating name="half-rating" precision={1} value={productRate} size="small" readOnly/>
               </Box>
             </Box>
             <Box className={classes.productPriceBox}>

@@ -20,7 +20,6 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
@@ -28,29 +27,17 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import PhoneCallbackOutlinedIcon from "@mui/icons-material/PhoneCallbackOutlined";
 import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
-
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CloseIcon from "@mui/icons-material/Close";
-
 import CategoryIcon from "@mui/icons-material/Category";
 import MyButton from "../MyButton/MyButton";
 import Logo from "../../logo.png";
 import "./NavBar.css";
-import MenuResponsive from "../MenuResponsive/MenuResponsive";
-import Autocomplete from "@mui/material/Autocomplete";
-import CircularProgress from "@mui/material/CircularProgress";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SearchBox from "../SearchBox/SearchBox";
-import { padding } from "@mui/system";
 import HomeIcon from "@mui/icons-material/Home";
-
-function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
 
 // desktop styled
 

@@ -599,20 +599,32 @@ export default function Navbar() {
                           padding: "0 1rem",
                         }}
                       >
-                        <MyButton
-                          widthdownsm="55%"
-                          borderradius="0.6rem"
-                          padding="0.7rem 0"
+                        <Link
+                          to="/cart"
+                          className="view-card"
+                          onClick={closeCardHandler}
                         >
-                          مشاهده سبد خرید
-                        </MyButton>
-                        <MyButton
-                          widthdownsm="40%"
-                          borderradius="0.6rem"
-                          padding="0.7rem 0"
+                          <MyButton
+                            widthdownsm="100%"
+                            borderradius="0.6rem"
+                            padding="0.7rem 0"
+                          >
+                            مشاهده سبد خرید
+                          </MyButton>
+                        </Link>
+                        <Link
+                          to="/checkout"
+                          className="bill"
+                          onClick={closeCardHandler}
                         >
-                          تسویه حساب
-                        </MyButton>
+                          <MyButton
+                            widthdownsm="100%"
+                            borderradius="0.6rem"
+                            padding="0.7rem 0"
+                          >
+                            تسویه حساب
+                          </MyButton>
+                        </Link>
                       </Box>
                     </Box>
                   </Box>

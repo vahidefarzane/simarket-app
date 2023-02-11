@@ -1,7 +1,7 @@
 .list-item-links {
   color: #212121;
 }
-.list-item{
+.list-item {
   height: 2.8rem;
   font-weight: bold;
 }
@@ -10,12 +10,18 @@
 }
 .BottomNavigationAction {
   margin-bottom: 0.1rem;
-  
+
   /* width: inherit; */
 }
-.list-item-menu-bar{
+.list-item-menu-bar {
   display: flex;
   color: #000;
   align-items: center;
   margin: 0.5rem;
+}
+.view-card {
+  width: 55%;
+}
+.bill {
+  width: 40%;
 }

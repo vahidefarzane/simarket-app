@@ -1,0 +1,15 @@
+.card-info {
+  font-size: 0.9rem !important;
+  color: #4d4d4d !important;
+  font-weight: 500 !important;
+}
+.card-info-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.card-info-main {
+  font-size: 1.1rem !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+}

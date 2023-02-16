@@ -9,6 +9,7 @@ export default function MyButton(props) {
       endIcon={props.endIcon}
       onClick={props.onClick}
       sx={{
+        display:props.display,
         width:{
           md:props.widthupmd,
           sm:props.widthbetweenmdsm,
@@ -26,6 +27,7 @@ export default function MyButton(props) {
           md:props.fontsizeupmd,
           xs:props.fontsizedownmd,
         },
+        marginBottom:props.marginBottom
         
       }}
     >

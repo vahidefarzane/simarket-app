@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Box, Typography, Stack } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@mui/material";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
@@ -50,7 +59,7 @@ export default function OrderReceived() {
       dec: "انتقال مستقیم بانکی",
     },
   ]);
-  const [bankInfo, setBankInfo] = useState([
+  const [bankInfos, setBankInfos] = useState([
     {
       id: 1,
       icon: AccountBalanceOutlinedIcon,
@@ -76,14 +85,29 @@ export default function OrderReceived() {
       dec: "IR10000000000000000",
     },
   ]);
+  const [tableCells, setTableCells] = useState([
+    { id: 1, product: "نام محصول", total: "کاپشن اسپرت تک سایز Nike " },
+    { id: 2, product: "مجموع:", total: "236,000 تومان" },
+    { id: 3, product: "حمل و نقل:	", total: "حمل و نقل رایگان" },
+    { id: 4, product: "مالیات بر ارزش افزوده:	", total: "0 تومان" },
+    { id: 5, product: "روش پرداخت:	", total: "انتقال مستقیم بانکی " },
+    { id: 6, product: "قیمت نهایی:	", total: "236,000 تومان" },
+  ]);
   return (
     <Box>
       <BoxFullWidth>
         <CheckCircleOutlineIcon
           sx={{
             backgroundColor: "#ff6a00",
-            padding: "0.7rem",
-            fontSize: "7rem",
+            padding: {
+              md: "0.7rem",
+              xs: "0.5rem",
+            },
+            fontSize: {
+              md: "7rem",
+              sm: "6rem",
+              xs: "5rem",
+            },
             color: "#fff",
             borderRadius: "50%",
           }}
@@ -96,7 +120,17 @@ export default function OrderReceived() {
         </MyButton>
       </BoxFullWidth>
       <BoxFullWidth>
-        <Box sx={{ display: "flex" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: {
+              md: "none",
+              xs: "space-between",
+            },
+            width: "100%",
+            flexWrap: "wrap",
+          }}
+        >
           {infos.map((info) => (
             <Stack
               sx={{
@@ -104,12 +138,20 @@ export default function OrderReceived() {
                 flexDirection: "column",
                 alignItems: "center",
                 margin: "0 1.5rem",
+                width: {
+                  sm: "7rem",
+                  xs: "100%",
+                },
+                marginBottom: "1rem",
               }}
             >
               <info.icon
                 sx={{
                   color: "#BABABA",
-                  fontSize: "7rem",
+                  fontSize: {
+                    md: "6rem",
+                    xs: "6rem",
+                  },
                   marginBottom: "0.6rem",
                 }}
               />
@@ -122,7 +164,15 @@ export default function OrderReceived() {
               >
                 {info.title}
               </Typography>
-              <Typography sx={{ fontSize: "1rem", color: "#3F3F3F" }}>
+              <Typography
+                sx={{
+                  fontSize: {
+                    md: "1rem",
+                    xs: "0.8rem",
+                  },
+                  color: "#3F3F3F",
+                }}
+              >
                 {info.dec}
               </Typography>
             </Stack>
@@ -130,20 +180,40 @@ export default function OrderReceived() {
         </Box>
       </BoxFullWidth>
       <BoxFullWidth>
-        <Box sx={{ display: "flex" }}>
-          {bankInfo.map((info) => (
+        <Typography
+          sx={{ fontWeight: "bold", fontSize: "1.1rem", marginBottom: "1rem" }}
+        >
+          مشخصات بانکی ما
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: {
+              md: "none",
+              xs: "space-between",
+            },
+            width: "100%",
+            flexWrap: "wrap",
+          }}
+        >
+          {bankInfos.map((infos) => (
             <Stack
+              key={infos.id}
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                margin: "0 2rem",
+                margin: "0 1.5rem",
+                width: "7rem",
               }}
             >
-              <info.icon
+              <infos.icon
                 sx={{
                   color: "#BABABA",
-                  fontSize: "7rem",
+                  fontSize: {
+                    md: "6rem",
+                    xs: "5rem",
+                  },
                   marginBottom: "0.6rem",
                 }}
               />
@@ -154,15 +224,89 @@ export default function OrderReceived() {
                   marginBottom: "0.3rem",
                 }}
               >
-                {info.title}
+                {infos.title}
               </Typography>
-              <Typography sx={{ fontSize: "1rem", color: "#3F3F3F" }}>
-                {info.dec}
+              <Typography
+                sx={{
+                  fontSize: {
+                    md: "1rem",
+                    xs: "0.8rem",
+                  },
+                  color: "#3F3F3F",
+                }}
+              >
+                {infos.dec}
               </Typography>
             </Stack>
           ))}
         </Box>
       </BoxFullWidth>
+      <Table
+        sx={{
+          width: "100%",
+          border: "1px solid #E3E3E3",
+        }}
+      >
+        <TableHead sx={{ backgroundColor: "#909090" }}>
+          <TableRow>
+            <TableCell
+              align="right"
+              sx={{
+                color: "#fff",
+                fontWeight: "Bold",
+                fontSize: {
+                  sm: "1.1rem",
+                  xs: "0.9rem",
+                },
+              }}
+            >
+              محصول
+            </TableCell>
+            <TableCell
+              align="right"
+              sx={{
+                color: "#fff",
+                fontWeight: "Bold",
+                fontSize: {
+                  sm: "1.1rem",
+                  xs: "0.9rem",
+                },
+              }}
+            >
+              مجموع
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {tableCells.map((tableCell) => (
+            <TableRow key={tableCell.id}>
+              <TableCell
+                align="right"
+                sx={{
+                  fontSize: {
+                    sm: "1rem",
+                    xs: "0.8rem",
+                  },
+                }}
+              >
+                {tableCell.product}
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{
+                  fontSize: {
+                    sm: "1rem",
+                    xs: "0.8rem",
+                  },
+                }}
+              >
+                {" "}
+                {tableCell.total}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </Box>
   );
 }

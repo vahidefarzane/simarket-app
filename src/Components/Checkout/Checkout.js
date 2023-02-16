@@ -5,7 +5,6 @@ import {
   FormControlLabel,
   TextareaAutosize,
   Typography,
-  Divider,
   RadioGroup,
   Radio,
 } from "@mui/material";
@@ -62,22 +61,46 @@ export default function Checkout() {
               marginBottom: "1rem",
             }}
           >
-            <SelectBox></SelectBox>
-            <SelectBox></SelectBox>
+            <SelectBox name="نام استان : "></SelectBox>
+            <SelectBox name="نام شهر :"></SelectBox>
           </Box>
           <Input width="100%" lable="کد پستی:" />
-          <Input width="100%" lable="تلفن" />
-          <Input width="100%" lable="آدرس ایمیل" />
+          <Input width="100%" lable="تلفن :" />
+          <Input width="100%" lable="آدرس ایمیل :" />
           <Input width="100%" lable="کد ملی (اختیاری)" />
-          <FormControlLabel
-            sx={{ m: 0 }}
-            control={<Checkbox sx={{ p: 0, ml: 1 }} />}
-            label="می خواهید یک حساب کاربری ایجاد کنید ؟"
-          />
+          <Box sx={{ display: "flex" }}>
+            <Checkbox
+              sx={{
+                p: 0,
+                ml: 1,
+                "&.Mui-checked": {
+                  color: "#fb4208",
+                },
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: {
+                  md: "1rem",
+                  xs: "0.9rem",
+                },
+              }}
+            >
+              آیا میخواهید حساب جدید ایجاد کنید؟
+            </Typography>
+          </Box>
           <Box sx={{ margin: "1.5rem 0" }}>
             <Typography
               component="lable"
-              sx={{ display: "block", marginBottom: "0.6rem" }}
+              sx={{
+                display: "block",
+                marginBottom: "0.6rem",
+                fontSize: {
+                  md: "0.9rem",
+                  xs: "0.8rem",
+                },
+                color: "#909090",
+              }}
             >
               یادداشت سفارش (اختیاری)
             </Typography>
@@ -92,11 +115,27 @@ export default function Checkout() {
               placeholder="یادداشت ها درباره سفارش شما، برای مثال نکات مهم تحویل بار"
             />
           </Box>
-          <FormControlLabel
-            sx={{ m: 0 }}
-            control={<Checkbox sx={{ p: 0, ml: 1 }} />}
-            label="درخواست ارسال فاکتور خرید (اختیاری)"
-          />
+          <Box sx={{ display: "flex" }}>
+            <Checkbox
+              sx={{
+                p: 0,
+                ml: 1,
+                "&.Mui-checked": {
+                  color: "#fb4208",
+                },
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: {
+                  md: "1rem",
+                  xs: "0.9rem",
+                },
+              }}
+            >
+              درخواست ارسال فاکتور(اختیاری)
+            </Typography>
+          </Box>
         </Box>
       </Box>
       <Box
@@ -168,7 +207,15 @@ export default function Checkout() {
                 marginBottom: "0.8rem",
               }}
               value="انتقال مستقیم بانکی"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    "&.Mui-checked": {
+                      color: "#fb4208",
+                    },
+                  }}
+                />
+              }
               label="انتقال مستقیم بانکی"
             />
             <FormControlLabel
@@ -179,15 +226,39 @@ export default function Checkout() {
                 marginBottom: "2rem",
               }}
               value="پرداخت هنگام دریافت"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    "&.Mui-checked": {
+                      color: "#fb4208",
+                    },
+                  }}
+                />
+              }
               label="پرداخت هنگام دریافت"
             />
           </RadioGroup>
-          <FormControlLabel
-            sx={{ m: 0 }}
-            control={<Checkbox sx={{ p: 0, ml: 1 }} />}
-            label="من قوانین و مقررات شرایط و مقررات را خواندم و آن را می پذیرم."
-          />
+          <Box sx={{ display: "flex",width:'100%' ,marginBottom:'1.5rem'}}>
+            <Checkbox
+              sx={{
+                p: 0,
+                ml: 1,
+                "&.Mui-checked": {
+                  color: "#fb4208",
+                },
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: {
+                  md: "1rem",
+                  xs: "0.9rem",
+                },
+              }}
+            >
+              قوانین و مقررات را مطالعه کردم و میپذیرم
+            </Typography>
+          </Box>
 
           <MyButton
             widthupmd="100%"

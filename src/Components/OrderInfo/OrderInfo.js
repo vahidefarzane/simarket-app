@@ -222,7 +222,8 @@ export default function OrderInfo() {
               fontSize: "0.9rem",
               width: {
                 md: "15%",
-                xs: "30%",
+                sm:'30%',
+                xs: "40%",
               },
               marginLeft: "1rem",
             }}
@@ -249,6 +250,7 @@ export default function OrderInfo() {
             md: "0",
             xs: "1rem",
           },
+          height:'fit-content',
         }}
       >
         <Box className="card-info-container">

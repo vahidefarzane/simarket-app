@@ -109,8 +109,8 @@ export default function AddComment() {
       <Box
         sx={{
           width: {
-            md:'50%',
-            xs:'100%',
+            md: "50%",
+            xs: "100%",
           },
           padding: "2rem 1rem",
 
@@ -187,7 +187,13 @@ export default function AddComment() {
           </Typography>
         </Box>
 
-        <MyButton widthupmd="20%" display="block" marginBottom="1.5rem" widthbetweenmdsm='25%' widthdownsm='20%'>
+        <MyButton
+          widthupmd="20%"
+          display="block"
+          marginBottom="1.5rem"
+          widthbetweenmdsm="25%"
+          widthdownsm="20%"
+        >
           ثبت
         </MyButton>
         <Link style={{ fontSize: "0.9rem", textDecoration: "underLine" }}>

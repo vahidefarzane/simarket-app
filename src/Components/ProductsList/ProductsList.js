@@ -123,7 +123,6 @@ const TextFieldStyled = styled(TextField)(({ theme }) => ({
     color: "#81858b",
   },
 }));
-
 const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
   transition: "none",
   color: " #4d4d4d",
@@ -156,15 +155,10 @@ const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
   },
 }));
 
-// function valuetext(value) {
-//   return `${value}تومان`;
-// }
-
 export default function ProductsList() {
   const classes = useStyles();
-  const { allProducts, ispending } = useFetch(
-    "https://fakestoreapi.com/products"
-  );
+  const { allProducts, ispending } = useFetch("http://localhost:4000/products");
+  const {categories} = useFetch("http://localhost:4000/categories");
   const [filteredList, setFilteredList] = useState([
     { id: 1, title: "پیشفرض" },
     { id: 2, title: "محبوب ترین" },
@@ -172,25 +166,13 @@ export default function ProductsList() {
     { id: 4, title: "ارزان ترین" },
     { id: 5, title: "گران ترین" },
   ]);
-  const [categories, setAllcategories] = useState("");
-  const [categoriesIsPending, setCategoriesIsPending] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products/categories")
-      .then((category) => {
-        console.log(category.data);
-        setAllcategories(category.data);
-        setCategoriesIsPending(true);
-      });
-  }, []);
 
   const [newValue, setNewValue] = useState(800);
-  const [value, setValue] = useState([100,900]);
-  
+  const [value, setValue] = useState([100, 900]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    setNewValue(newValue[1]-newValue[0])
+    setNewValue(newValue[1] - newValue[0]);
   };
 
   const filterProductPrice = () => {
@@ -228,8 +210,16 @@ export default function ProductsList() {
                 {value[0] + ",000" + "  تومان"}
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center",marginBottom:"0.6rem",fontSize:'1rem',fontWeight:'bold' }}>
-              {newValue+ ",000" + "   تومان"}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "0.6rem",
+                fontSize: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              {newValue + ",000" + "   تومان"}
             </Box>
             <MyButton widthupmd="100%" onClick={filterProductPrice}>
               صافی
@@ -262,11 +252,11 @@ export default function ProductsList() {
             </H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails>
-            {categoriesIsPending &&
+            {ispending &&
               categories.map((category) => (
                 <Box className={classes.categoryBox}>
                   <Checkbox />
-                  <Typography component={"span"}>{category}</Typography>
+                  <Typography component={"span"}>{category.name}</Typography>
                 </Box>
               ))}
           </AccordionDetails>
@@ -315,6 +305,8 @@ export default function ProductsList() {
                   </ListItemButtonHeader>
                 </ListItem>
               </Link>
+
+
             ))}
           </List>
         </Box>
@@ -324,7 +316,7 @@ export default function ProductsList() {
               <Product
                 key={product.id}
                 productImage={product.image}
-                productTtile={product.title.slice(0, 20)}
+                productTtile={product.title}
                 productPrice={product.price}
                 productRate={Math.round(product.rating.rate)}
                 ProductId={product.id}

@@ -1,0 +1,441 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "ست تیشرت و شلوار مردانه Paris مدل 19671 اسپرت ",
+      "price": 485000,
+      "size": ["L", "XL", "XXL"],
+      "category": "تیشرت مردانه",
+      "image": "./images/products/4.jpg",
+      "rating": { "rate": 3, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 2,
+      "title": "ست تیشرت و شلوار مردانه Nike مدل 21077",
+      "size": ["L", "XL", "XXL"],
+      "price": 689000,
+      "category": "تیشرت مردانه",
+      "image": "./images/products/2.jpg",
+      "rating": { "rate": 2, "count": 10 },
+      "off": 31,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 3,
+      "title": "تی شرت مردانه منان شهیدی مدل 3001158-26 سپرت ",
+      "size": ["L", "XL", "XXL"],
+      "price": 389000,
+      "category": "تیشرت مردانه",
+      "image": "./images/products/1.jpg",
+      "rating": { "rate": 4, "count": 230 },
+      "off": 25,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 4,
+      "title": "تی شرت آستین کوتاه مردانه آر اِن اِس مدل 12021314-23 ",
+      "size": ["L", "XL", "XXL"],
+      "price": 329000,
+      "category": "تیشرت مردانه",
+      "image": "./images/products/3.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 5,
+      "title": "کفش پیاده روی مردانه پاما مدل VR-821 کد G1592",
+      "price": 865000,
+      "size": [40, 41, 42, 43],
+      "category": "کیف و کفش",
+      "image": "./images/products/5.jpg",
+      "rating": { "rate": 5, "count": 53 },
+      "off": 12,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 50, "poss": 50, "ease": 50 }
+    },
+
+    {
+      "id": 6,
+      "title": "کفش پیاده روی مردانه کلمبیا مدل FACET™ 15-811 ",
+      "price": 985000,
+      "size": [40, 41, 42, 43],
+      "category": "کیف و کفش",
+      "image": "./images/products/13.jpg",
+      "rating": { "rate": 3, "count": 12 },
+      "off": 28,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 7,
+      "title": "کفش پیاده روی مردانه پاما مدل VR-824 کد G1600 ",
+      "price": 1650000,
+      "size": [40, 41, 42, 43],
+      "category": "کیف و کفش",
+      "image": "./images/products/7.jpg",
+      "rating": { "rate": 4, "count": 69 },
+      "off": 24,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 8,
+      "title": "کفش پیاده روی مردانه پاما مدل VR-822 کد G1602 ",
+      "price": 1230000,
+      "size": [40, 41, 42, 43],
+      "category": "کیف و کفش",
+      "image": "./images/products/6.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 9,
+      "title": "کفش پیاده روی مردانه پاما مدل ساموئل کد G1421",
+      "price": 2560000,
+      "size": [40, 41, 42, 43],
+      "category": "کیف و کفش",
+      "image": "./images/products/8.jpg",
+      "rating": { "rate": 5, "count": 78 },
+      "off": 11,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 10,
+      "title": "کوله پشتي 30 ليتري هاي سيرا مدل 27I-026 Karadon",
+      "price": 1780000,
+      "category": "کیف و کفش",
+      "image": "./images/products/9.jpg",
+      "rating": { "rate": 5, "count": 430 },
+      "off": 32,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 11,
+      "title": "کوله پشتی میلت مدل UBIC 60 Plus10 1916",
+      "price": 950000,
+      "category": "کیف و کفش",
+      "image": "./images/products/10.jpg",
+      "rating": { "rate": 3, "count": 45 },
+      "off": 23,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 12,
+      "title": "کیف لوازم شخصی آیمکس کد 021 ",
+      "price": 560000,
+      "category": "کیف و کفش",
+      "image": "./images/products/4.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 13,
+      "title": "چمدان دلسی مدل Precisio سایز کوچک",
+      "price": 1450000,
+      "category": "کیف و کفش",
+      "image": "./images/products/12.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 14,
+      "title": "کاپشن مردانه Araz مدل 17435 اسپرت مردانه",
+      "price": 652000,
+      "size": ["L", "XL", "XXL"],
+      "category": "هودی و سویشرت",
+      "image": "./images/products/14.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 15,
+      "title": "هودی مردانه زی سا مدل 153156470 مانی سپرت",
+      "price": 485000,
+      "size": ["L", "XL", "XXL"],
+      "category": "هودی و سویشرت ",
+      "image": "./images/products/16.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 16,
+      "title": "هودی مردانه فانتازیو کد ۲۶۳ سپرت پوش",
+      "price": 856000,
+      "size": ["L", "XL", "XXL"],
+      "category": "هودی و سویشرت ",
+      "image": "./images/products/17.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 17,
+      "title": "هودی مردانه فانتازیو کد 143 یونی سپرت تک شیک  ",
+      "price": 485000,
+      "size": ["L", "XL", "XXL"],
+      "category": "هودی و سویشرت ",
+      "image": "./images/products/15.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 18,
+      "title": "کت تک اسپرت مردانه مدل MONT4-۶4 set  ",
+      "price": 485000,
+      "size": ["L", "XL", "XXL"],
+      "category": "کت شلوار",
+      "image": "./images/products/18.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 19,
+      "title": "کت تک مردانه مدل LEN2-2 sport master",
+      "price": 485000,
+      "size": ["L", "XL", "XXL"],
+      "category": "کت شلوار",
+      "image": "./images/products/19.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    },
+
+    {
+      "id": 20,
+      "title": "کت تک مردانه مدل MONT 3-3 ست بانک",
+      "price": 485000,
+      "size": ["L", "XL", "XXL"],
+      "category": "کت شلوار",
+      "image": "./images/products/20.jpg",
+      "rating": { "rate": 3.9, "count": 120 },
+      "off": 51,
+      "comments": [
+        { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" },
+        {
+          "id": 2,
+          "titleComment": "وقت بخیر",
+          "titledesc": "راضیم ازش",
+          "user": ""
+        }
+      ],
+      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "کیف و کفش",
+      "image": "./images/categories/running.png"
+    },
+    {
+      "id": 2,
+      "name": "کت شلوار",
+      "image": "./images/categories/jersey-blazer"
+    },
+    {
+      "id": 3,
+      "name": "هودی و سویشرت",
+      "image": "./images/categories/hoodie.png"
+    },
+    {
+      "id": 4,
+      "name": "تیشرت مردانه",
+      "image": "./images/categories/tshirt.png"
+    }
+  ]
+}

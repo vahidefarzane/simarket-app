@@ -16,10 +16,7 @@ import IosShareIcon from "@mui/icons-material/IosShare";
 import "./Product.css";
 
 const useStyles = makeStyles((theme) => ({
-  productName: {
-    height: "3rem",
-    textAlign: "center",
-  },
+  productName: {},
   productStockBox: {
     display: "flex",
     justifyContent: "space-between",
@@ -82,7 +79,8 @@ const CardContentStyled = styled(CardContent)(({ theme }) => ({
 
 export default function Product(props) {
   const classes = useStyles();
-  const { productImage, productTtile, productPrice, productRate,ProductId } = props;
+  const { productImage, productTtile, productPrice, productRate, ProductId } =
+    props;
   return (
     <>
       <Card
@@ -94,7 +92,7 @@ export default function Product(props) {
             xs: "100%",
           },
           height: {
-            lg: "23rem",
+            lg: "24rem",
             md: "22rem",
             sm: "23rem",
             xs: "25rem",
@@ -111,7 +109,10 @@ export default function Product(props) {
 
         <CardContentStyled>
           <Stack>
-            <Typography component={"h3"} className={classes.productName}>
+            <Typography
+              component={"h3"}
+              sx={{ height: "4.5rem", textAlign: "center",fontSize:'0.9rem' }}
+            >
               {productTtile}
             </Typography>
             <Box className={classes.productStockBox}>
@@ -131,7 +132,13 @@ export default function Product(props) {
                 </Typography>
               </Box>
               <Box>
-                <Rating name="half-rating" precision={1} value={productRate} size="small" readOnly/>
+                <Rating
+                  name="half-rating"
+                  precision={1}
+                  value={productRate}
+                  size="small"
+                  readOnly
+                />
               </Box>
             </Box>
             <Box className={classes.productPriceBox}>

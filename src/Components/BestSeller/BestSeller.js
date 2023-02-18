@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-
-import HomeProductBox from "../HomeProductBox/HomeProductBox";
 import MyButton from "../MyButton/MyButton";
-import { Stack } from "@mui/system";
+import HomeProductBox from "../HomeProductBox/HomeProductBox";
 import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
 import "./BestSeller.css";
 
@@ -38,9 +35,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BestSeller() {
   const classes = useStyles();
-  const { allProducts, ispending } = useFetch(
-    "https://fakestoreapi.com/products"
-  );
+  const { allProducts, ispending } = useFetch("http://localhost:4000/products");
+
   return (
     <Stack className={classes.bestSellerWrapper}>
       <HomeTitleComponent
@@ -48,6 +44,7 @@ export default function BestSeller() {
         color="#fff"
         margin="1rem 1rem 2rem"
       />
+
       <Box className="swiper-best-seller-product-wraper">
         <Swiper
           style={{
@@ -89,13 +86,14 @@ export default function BestSeller() {
           className="mySwiper"
         >
           {ispending &&
-            allProducts.slice(1, 9).map((product) => (
-              <SwiperSlide>
+            allProducts.map((product) => (
+              <SwiperSlide key={product.id}>
                 <HomeProductBox
                   productId={product.id}
                   productImage={product.image}
                   productTitle={product.title}
                   productPrice={product.price}
+                  offer={product.off}
                   isSlider={true}
                 />
               </SwiperSlide>

@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import "../BestSeller/BestSeller.css";
 import { makeStyles } from "@mui/styles";
 import { Stack, Box, Typography } from "@mui/material";
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: " #fff",
     overflow: "hidden",
     borderRadius: "1.1rem",
-    width:'100%'
+    width: "100%",
   },
 
   bestSellerImg: {
@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("sm")]: {
       height: "14rem",
-
     },
   },
   bestSellerName: {
@@ -72,8 +71,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HomeProductBox(props) {
   const classes = useStyles();
-  const { productId, productImage, productTitle, productPrice } = props;
+  const { productId, productImage, productTitle, productPrice, offer } = props;
+  const [offerPrice, setOfferPrice] = useState("");
+  const calculateOff = () => {
+    setOfferPrice(productPrice - productPrice * (offer / 100));
+  };
 
+  useEffect(() => {
+    calculateOff();
+  }, []);
   return (
     <Stack key={productId} className={classes.bestSellerProduct}>
       <Box>
@@ -82,20 +88,24 @@ export default function HomeProductBox(props) {
           component="img"
           src={productImage}
           alt={productTitle}
-          sx={{ width: {
-            lg:`${props.isSlider && "14rem"}`,
-            md:`${props.isSlider && "12rem"}`,
-            sm:`${props.isSlider && "10rem"}`,
-            xs:`${props.isSlider && "7rem"}`,
-          } ,padding:{
-            md:'0.7rem',
-            sm:'0.7rem',
-          },height:{
-            lg:'17rem',
-            md:'15rem',
-            sm:'12rem',
-            xs:'10rem',
-          }}}
+          sx={{
+            width: {
+              lg: `${props.isSlider && "14rem"}`,
+              md: `${props.isSlider && "12rem"}`,
+              sm: `${props.isSlider && "10rem"}`,
+              xs: `${props.isSlider && "7rem"}`,
+            },
+            padding: {
+              md: "0.7rem",
+              sm: "0.7rem",
+            },
+            height: {
+              lg: "16rem",
+              md: "15rem",
+              sm: "12rem",
+              xs: "10rem",
+            },
+          }}
         />
       </Box>
       <Typography
@@ -115,10 +125,10 @@ export default function HomeProductBox(props) {
           {productPrice}
         </Box>
         <Box component={"span"} className={classes.bestSellerPricenew}>
-          {productPrice}
+          {offerPrice}
         </Box>
         <Box component={"span"} className={classes.bestSellerPriceOff}>
-          12%
+          {offer}%
         </Box>
       </Box>
     </Stack>

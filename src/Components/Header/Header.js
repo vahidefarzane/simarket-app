@@ -32,7 +32,7 @@ export default function Header() {
         display: "flex",
         justifyContent: "space-between",
         padding: "0.5rem",
-        marginTop:'8rem'
+        marginTop: "8rem",
       }}
       className="swiper-header-wraper"
     >
@@ -42,14 +42,18 @@ export default function Header() {
         style={{ marginLeft: "0.2rem" }}
       >
         <SwiperSlide className="swiper-image-box">
-          <Box component="img" src="./images/slider1_orginal.jpg" alt="" />
+          <Link to="/productsList">
+            <Box component="img" src="./images/slider1_orginal.jpg" alt="" />
+          </Link>
         </SwiperSlide>
         <SwiperSlide className="swiper-image-box">
-          <Box component="img" src="./images/slider2_orginal.jpg" alt="" />
+          <Link to="/productsList">
+            <Box component="img" src="./images/slider2_orginal.jpg" alt="" />
+          </Link>
         </SwiperSlide>
       </Swiper>
 
-      <ImageBannerStyled >
+      <ImageBannerStyled>
         <Box component="img" src="./images/banner-btn2.jpg" alt="" />
         <Box component="img" src="./images/banner-top.jpg" alt="" />
       </ImageBannerStyled>

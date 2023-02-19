@@ -10,7 +10,6 @@ import Cart from "./Components/Cart/Cart"
 import Checkout from "./Components/Checkout/Checkout"
 const routes = [
   { path: "/", element: <Home /> },
-  { path: "/categories", element: <Categories /> },
   { path: "/productsList", element: <ProductsList /> },
   { path: "/contactUs", element: <ContactUs /> },
   { path: "/product", element: <ProductPage /> },

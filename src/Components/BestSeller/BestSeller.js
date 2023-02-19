@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   bestSellerWrapper: {
     margin: "2rem 0",
     backgroundColor: "#212121",
-    padding: "1.2rem",
+    padding: "0",
     display: "flex",
     justifyContent: "space-between",
     [theme.breakpoints.down("md")]: {
@@ -39,11 +39,7 @@ export default function BestSeller() {
 
   return (
     <Stack className={classes.bestSellerWrapper}>
-      <HomeTitleComponent
-        title="پرفروش ترین محصولات"
-        color="#fff"
-        margin="1rem 1rem 2rem"
-      />
+      <HomeTitleComponent title="پرفروش ترین محصولات" color="#fff" />
 
       <Box className="swiper-best-seller-product-wraper">
         <Swiper

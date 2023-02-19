@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       padding: "1rem",
     },
     [theme.breakpoints.up("md")]: {
-      marginTop: "8rem",
+      marginTop: "0",
     },
   },
   productInfoContainer: {

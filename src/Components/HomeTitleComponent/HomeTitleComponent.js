@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 const H2ElemStyled = styled(Typography)(({ theme }) => ({
   fontWeight: "600",
   fontSize: " 1.5rem",
+  padding:'1rem',
   "&:before": {
     display: "inline-block",
     content: '""',

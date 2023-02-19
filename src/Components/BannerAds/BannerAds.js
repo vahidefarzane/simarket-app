@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 import "./BannerAds.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -11,35 +12,36 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     [theme.breakpoints.down("sm")]: {
-      flexWrap: "wrap",
+     flexWrap:'wrap',
+     
     },
   },
   imageBanner: {
-    width: "24%",
+    width: "100%",
     [theme.breakpoints.down("sm")]: {
-      width: "46%",
+      width: "8rem",
       margin: "0",
     },
   },
 }));
 export default function BannerAds() {
   const classes = useStyles();
-  const [images, setImages] = useState([
-    { id: 1, src: "./images/banner_ads1.jpg" },
-    { id: 2, src: "./images/banner_ads2.jpg" },
-    { id: 3, src: "./images/banner_ads3.jpg" },
-    { id: 4, src: "./images/banner_ads4.jpg" },
-  ]);
+  const { bannerImgs, bannerImgsIsPending } = useFetch(
+    "http://localhost:4000/BannerImages"
+  );
+
   return (
     <Box className={classes.imageContainer}>
-      {images.map((img) => (
-        <Box
-          className={classes.imageBanner}
-          component={"img"}
-          key={img.id}
-          src={img.src}
-        />
-      ))}
+      {bannerImgsIsPending &&
+        bannerImgs.map((bannerImg) => (
+          <Link to={bannerImg.to} key={bannerImg.id}>
+            <Box
+              className={classes.imageBanner}
+              component="img"
+              src={bannerImg.src}
+            />
+          </Link>
+        ))}
     </Box>
   );
 }

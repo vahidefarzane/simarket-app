@@ -382,7 +382,7 @@
     {
       "id": 2,
       "name": "کت شلوار",
-      "image": "./images/categories/jersey-blazer"
+      "image": "./images/categories/jersey-blazer.png"
     },
     {
       "id": 3,
@@ -394,5 +394,11 @@
       "name": "تیشرت مردانه",
       "image": "./images/categories/tshirt.png"
     }
+  ],
+  "BannerImages":[
+    { "id": 1, "src": "./images/banner_ads1.jpg" ,"to":"/productsList" },
+    { "id": 2, "src": "./images/banner_ads2.jpg" ,"to":"/productsList" },
+    { "id": 3, "src": "./images/banner_ads3.jpg" ,"to":"/productsList" },
+    { "id": 4, "src": "./images/banner_ads4.jpg" ,"to":"/productsList" }
   ]
 }

@@ -77,7 +77,7 @@ const StyledList = styled(List)(() => ({
 // Responsive Style
 
 const BoxMobileView = styled(Box)(({ theme }) => ({
-  margin: "0.8rem 0.7rem",
+  padding: "0.8rem 0.7rem ",
   [theme.breakpoints.down("md")]: {
     display: "flex",
     flexDirection: "column",
@@ -131,7 +131,7 @@ const ModalStyled = styled(Box)(({ theme }) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar(props) {
   const [value, setValue] = useState(0);
 
   const [open, setOpen] = useState(false);
@@ -189,6 +189,14 @@ export default function Navbar() {
           width: "100%",
           justifyContent: "space-between",
           alignItems: "center",
+          position: props.isSticky ? "fixed" : "unset",
+          top: "0",
+          background: "#FFF",
+          padding: "1rem",
+          zIndex: "999",
+          boxShadow: props.isSticky
+            ? "rgba(0, 0, 0, 0.24) 0px 3px 8px"
+            : "none",
         }}
       >
         <IconButton
@@ -212,15 +220,17 @@ export default function Navbar() {
                 },
               }}
             >
-              <Box
-                component="img"
-                src={Logo}
-                sx={{
-                  width: 100,
-                  margin: "auto",
-                  padding: "1rem 0",
-                }}
-              ></Box>
+              <Link to="/" style={{display:'flex',}}>
+                <Box
+                  component="img"
+                  src={Logo}
+                  sx={{
+                    width: "40%",
+                    margin: "auto",
+                    padding: "1rem 0",
+                  }}
+                ></Box>
+              </Link>
               <List>
                 {[
                   {
@@ -274,6 +284,7 @@ export default function Navbar() {
             </Box>
           </MenuBarStyled>
         )}
+        <Link to="/">
         <Box
           component="img"
           sx={{
@@ -282,6 +293,7 @@ export default function Navbar() {
           alt="Your logo"
           src={Logo}
         ></Box>
+        </Link>
         <IconButton color="inherit">
           <HelpOutlineOutlinedIcon />
         </IconButton>
@@ -385,7 +397,7 @@ export default function Navbar() {
   );
   return (
     <Box>
-      <StyledAppBar>
+      <StyledAppBar sx={{ position: props.isSticky ? "fixed" : "unset" }}>
         <Toolbar>
           <Link to="/">
             <Box
@@ -635,7 +647,7 @@ export default function Navbar() {
         </Toolbar>
 
         <StyledList>
-          <Link className="list-item-links" to="/categories">
+          <Link className="list-item-links">
             <ListItem className="list-item">
               <MenuIcon sx={{ marginLeft: "0.7rem" }} />
               <Typography

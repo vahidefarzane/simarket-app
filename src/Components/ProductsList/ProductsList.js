@@ -27,7 +27,7 @@ import "./ProductsList.css";
 
 const useStyles = makeStyles((theme) => ({
   productListContainer: {
-    marginTop: "8rem",
+    
     display: "flex",
     padding: "2rem",
     justifyContent: "space-between",

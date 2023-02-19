@@ -93,7 +93,7 @@ export default function HomeProductBox(props) {
               lg: `${props.isSlider && "14rem"}`,
               md: `${props.isSlider && "12rem"}`,
               sm: `${props.isSlider && "10rem"}`,
-              xs: `${props.isSlider && "7rem"}`,
+              xs: `${props.isSlider && "10rem"}`,
             },
             padding: {
               md: "0.7rem",
@@ -103,7 +103,7 @@ export default function HomeProductBox(props) {
               lg: "16rem",
               md: "15rem",
               sm: "12rem",
-              xs: "10rem",
+              xs: "12rem",
             },
           }}
         />

@@ -73,7 +73,7 @@ export default function Cart() {
   return (
     <Stack
       sx={{
-        marginTop: "8rem",
+        
         padding: {
           md: "2.5rem",
           xs: "1rem",

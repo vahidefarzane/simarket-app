@@ -10,7 +10,7 @@ function App() {
   const [isSticky, setSticky] = useState(false);
   const handleScroll = () => {
     const windowScrollTop = window.scrollY;
-    if (windowScrollTop > 30) {
+    if (windowScrollTop > 150) {
       setSticky(true);
     } else {
       setSticky(false);

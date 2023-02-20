@@ -4,6 +4,8 @@ import axios from "axios";
 export default function useFetch(url) {
   const [allProducts, setAllProducts] = useState("");
   const [ispending, setIsPending] = useState(false);
+  const [product, setProduct] = useState("");
+  const [ispendingProduct, setIspendingProduct] = useState(false);
   const [categories, setCategories] = useState(null);
   const [categoriesIsPenging, setCategoriesIsPenging] = useState(false);
   const [bannerImgs, setBannerImgs] = useState(null);
@@ -11,16 +13,20 @@ export default function useFetch(url) {
 
   useEffect(() => {
     axios.get(url).then((products) => {
-      setAllProducts(products.data);
       setIsPending(true);
+      setAllProducts(products.data);
     });
     axios.get(url).then((category) => {
       setCategoriesIsPenging(true);
       setCategories(category.data);
     });
     axios.get(url).then((bannerImg) => {
-      setBannerImgs(bannerImg.data);
       setBannerImgsIsPending(true);
+      setBannerImgs(bannerImg.data);
+    });
+    axios.get(url).then((product) => {
+      setIspendingProduct(true);
+      setProduct(product.data);
     });
   }, []);
   return {
@@ -30,5 +36,7 @@ export default function useFetch(url) {
     categoriesIsPenging,
     bannerImgs,
     bannerImgsIsPending,
+    product,
+    ispendingProduct,
   };
 }

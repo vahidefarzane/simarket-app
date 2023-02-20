@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.down("sm")]: {
       flexWrap: "wrap",
-      marginBottom:'1rem',
+      marginBottom: "1rem",
     },
-    [theme.breakpoints.between("sm","md")]: {
+    [theme.breakpoints.between("sm", "md")]: {
       marginBottom: "1rem",
     },
   },
@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
       width: "15rem",
     },
     [theme.breakpoints.down("sm")]: {
-      width:'100%',
-      marginBottom:'0.4rem'
+      width: "100%",
+      marginBottom: "0.4rem",
     },
   },
   ProgressBar: {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
       width: "23rem",
     },
     [theme.breakpoints.down("sm")]: {
-      width:'100%'
+      width: "100%",
     },
   },
 }));
@@ -84,19 +84,21 @@ export default function ProductCommentProgressBar(props) {
         >
           {title}
         </Typography>
-        <Typography
-          component={"h4"}
-          sx={{
-            fontSize: {
-              lg: "0.9rem",
-              md: "0.8rem",
-              xs: "0.8rem",
-            },
-            marginLeft: "0.5rem",
-          }}
-        >
-          {value}%
-        </Typography>
+       
+          <Typography
+            component={"h4"}
+            sx={{
+              fontSize: {
+                lg: "0.9rem",
+                md: "0.8rem",
+                xs: "0.8rem",
+              },
+              marginLeft: "0.5rem",
+            }}
+          >
+            {value}%
+          </Typography>
+        
       </Box>
       <Box className={classes.ProgressBar} sx={{}}>
         <LinearProgressStyled variant="determinate" value={value} />

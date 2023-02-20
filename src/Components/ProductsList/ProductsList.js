@@ -27,7 +27,6 @@ import "./ProductsList.css";
 
 const useStyles = makeStyles((theme) => ({
   productListContainer: {
-    
     display: "flex",
     padding: "2rem",
     justifyContent: "space-between",
@@ -158,11 +157,13 @@ const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
 export default function ProductsList() {
   const classes = useStyles();
   const { allProducts, ispending } = useFetch("http://localhost:4000/products");
-  const {categories} = useFetch("http://localhost:4000/categories");
+  const { categories, setCategoriesIsPenging } = useFetch(
+    "http://localhost:4000/categories"
+  );
   const [filteredList, setFilteredList] = useState([
     { id: 1, title: "پیشفرض" },
     { id: 2, title: "محبوب ترین" },
-    { id: 3, title: "پربازدید ترین" },
+    { id: 3, title: "پر فروش ارین" },
     { id: 4, title: "ارزان ترین" },
     { id: 5, title: "گران ترین" },
   ]);
@@ -175,9 +176,7 @@ export default function ProductsList() {
     setNewValue(newValue[1] - newValue[0]);
   };
 
-  const filterProductPrice = () => {
-    console.log(newValue);
-  };
+  const filterProductPrice = () => {};
   return (
     <Box className={classes.productListContainer}>
       <SideBarStyled>
@@ -252,7 +251,7 @@ export default function ProductsList() {
             </H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails>
-            {ispending &&
+            {setCategoriesIsPenging &&
               categories.map((category) => (
                 <Box className={classes.categoryBox}>
                   <Checkbox />
@@ -305,8 +304,6 @@ export default function ProductsList() {
                   </ListItemButtonHeader>
                 </ListItem>
               </Link>
-
-
             ))}
           </List>
         </Box>
@@ -318,8 +315,9 @@ export default function ProductsList() {
                 productImage={product.image}
                 productTtile={product.title}
                 productPrice={product.price}
-                productRate={Math.round(product.rating.rate)}
+                productRate={product.rating.rate}
                 ProductId={product.id}
+                offer={product.off}
               />
             ))}
         </Box>

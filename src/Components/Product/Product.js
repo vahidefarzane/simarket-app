@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -79,8 +79,15 @@ const CardContentStyled = styled(CardContent)(({ theme }) => ({
 
 export default function Product(props) {
   const classes = useStyles();
-  const { productImage, productTtile, productPrice, productRate, ProductId } =
-    props;
+  const {
+    productImage,
+    productTtile,
+    productPrice,
+    productRate,
+    ProductId,
+    offer,
+  } = props;
+
   return (
     <>
       <Card
@@ -99,7 +106,7 @@ export default function Product(props) {
           },
         }}
       >
-        <Link to="/product">
+        <Link to={`/products/${ProductId}`}>
           <CardMediaStyled
             component="img"
             image={productImage}
@@ -111,7 +118,7 @@ export default function Product(props) {
           <Stack>
             <Typography
               component={"h3"}
-              sx={{ height: "4.5rem", textAlign: "center",fontSize:'0.9rem' }}
+              sx={{ height: "4.5rem", textAlign: "center", fontSize: "0.9rem" }}
             >
               {productTtile}
             </Typography>
@@ -162,7 +169,7 @@ export default function Product(props) {
                 className={classes.productPriceOff}
                 sx={{ fontSize: "0.8rem" }}
               >
-                12%
+                {offer}%
               </Typography>
             </Box>
           </Stack>

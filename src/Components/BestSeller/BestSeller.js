@@ -18,13 +18,13 @@ const useStyles = makeStyles((theme) => ({
   bestSellerWrapper: {
     margin: "2rem 0",
     backgroundColor: "#212121",
-    padding: "0",
+    padding: "0 1rem",
     display: "flex",
     justifyContent: "space-between",
     [theme.breakpoints.down("md")]: {
       padding: "1rem",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       padding: "0.6rem 2rem",
     },
     [theme.breakpoints.down("xs")]: {

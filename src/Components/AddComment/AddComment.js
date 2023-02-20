@@ -26,7 +26,7 @@ export default function AddComment() {
   return (
     <Stack
       sx={{
-        margin: "9rem 1rem 2rem 1rem",
+        margin: "1rem 1rem 2rem 1rem",
         border: "1px solid #e3e3e3",
         borderRadius: "0.8rem",
       }}

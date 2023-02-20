@@ -24,7 +24,12 @@
           "user": "mmd"
         }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -40,7 +45,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 75 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 100 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 100 }
+      ]
     },
 
     {
@@ -56,7 +66,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -72,7 +87,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 50, "poss": 50, "ease": 50 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -94,9 +114,13 @@
           "user": ""
         }
       ],
-      "commentBar": { "Qual": 50, "pur": 50, "poss": 100, "ease": 50 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
-
     {
       "id": 6,
       "title": "کفش پیاده روی مردانه کلمبیا مدل FACET™ 15-811 ",
@@ -116,7 +140,12 @@
           "user": ""
         }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -132,7 +161,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -154,7 +188,12 @@
           "user": ""
         }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -170,7 +209,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -191,7 +235,12 @@
           "user": ""
         }
       ],
-      "commentBar": { "Qual": 25, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -206,7 +255,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -227,7 +281,12 @@
           "user": ""
         }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -242,7 +301,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -258,7 +322,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -279,7 +348,12 @@
           "user": ""
         }
       ],
-      "commentBar": { "Qual": 25, "pur": 25, "poss": 0, "ease": 25 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -300,7 +374,12 @@
           "user": ""
         }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -316,7 +395,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -338,7 +422,12 @@
           "user": ""
         }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -354,7 +443,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     },
 
     {
@@ -370,7 +464,12 @@
       "comments": [
         { "id": 1, "titleComment": "سلام", "titledesc": "عالیه", "user": "" }
       ],
-      "commentBar": { "Qual": 50, "pur": 75, "poss": 50, "ease": 100 }
+      "commentBar": [
+        { "id": 1, "title": "کیفیت ساخت", "value": 50 },
+        { "id": 2, "title": "ارزش خرید به نسبت قیمت", "value": 50 },
+        { "id": 3, "title": "امکانات و قابلیت ها", "value": 50 },
+        { "id": 4, "title": "سهولت استفاده", "value": 50 }
+      ]
     }
   ],
   "categories": [
@@ -395,10 +494,10 @@
       "image": "./images/categories/tshirt.png"
     }
   ],
-  "BannerImages":[
-    { "id": 1, "src": "./images/banner_ads1.jpg" ,"to":"/productsList" },
-    { "id": 2, "src": "./images/banner_ads2.jpg" ,"to":"/productsList" },
-    { "id": 3, "src": "./images/banner_ads3.jpg" ,"to":"/productsList" },
-    { "id": 4, "src": "./images/banner_ads4.jpg" ,"to":"/productsList" }
+  "BannerImages": [
+    { "id": 1, "src": "./images/banner_ads1.jpg", "to": "/productsList" },
+    { "id": 2, "src": "./images/banner_ads2.jpg", "to": "/productsList" },
+    { "id": 3, "src": "./images/banner_ads3.jpg", "to": "/productsList" },
+    { "id": 4, "src": "./images/banner_ads4.jpg", "to": "/productsList" }
   ]
 }

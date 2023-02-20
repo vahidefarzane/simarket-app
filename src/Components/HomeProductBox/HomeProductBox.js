@@ -72,14 +72,7 @@ const useStyles = makeStyles((theme) => ({
 export default function HomeProductBox(props) {
   const classes = useStyles();
   const { productId, productImage, productTitle, productPrice, offer } = props;
-  const [offerPrice, setOfferPrice] = useState("");
-  const calculateOff = () => {
-    setOfferPrice(productPrice - productPrice * (offer / 100));
-  };
-
-  useEffect(() => {
-    calculateOff();
-  }, []);
+  
   return (
     <Stack key={productId} className={classes.bestSellerProduct}>
       <Box>
@@ -125,7 +118,7 @@ export default function HomeProductBox(props) {
           {productPrice}
         </Box>
         <Box component={"span"} className={classes.bestSellerPricenew}>
-          {offerPrice}
+          {10}
         </Box>
         <Box component={"span"} className={classes.bestSellerPriceOff}>
           {offer}%

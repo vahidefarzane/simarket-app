@@ -156,11 +156,25 @@ const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
 
 export default function ProductsList() {
   const classes = useStyles();
-  const { allProducts, ispending } = useFetch("http://localhost:4000/products");
+  const { allProducts, setAllProducts, ispending } = useFetch(
+    "http://localhost:4000/products"
+  );
+
+  const [filterbycategory, setfilterbycategory] = useState(null);
+
+  const { filteredProducts, setFilteredProducts } = useFetch(
+    `http://localhost:4000/products?category=${filterbycategory}`
+  );
+
+  const [newValue, setNewValue] = useState(800000);
+
+  const { filteredPrice } = useFetch(
+    `http://localhost:4000/products?price<${newValue}`
+  );
   const { categories, setCategoriesIsPenging } = useFetch(
     "http://localhost:4000/categories"
   );
-  const [filteredList, setFilteredList] = useState([
+  const [sortedList, setSortedList] = useState([
     { id: 1, title: "پیشفرض" },
     { id: 2, title: "محبوب ترین" },
     { id: 3, title: "پر فروش ارین" },
@@ -168,15 +182,21 @@ export default function ProductsList() {
     { id: 5, title: "گران ترین" },
   ]);
 
-  const [newValue, setNewValue] = useState(800);
-  const [value, setValue] = useState([100, 900]);
-
+  const [value, setValue] = useState([100000, 900000]);
+  const filterProductPrice = () => {
+    setFilteredProducts(false);
+    console.log(filteredPrice);
+    console.log(newValue);
+  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setNewValue(newValue[1] - newValue[0]);
   };
+  const checkboxHandler = (name, e) => {
+    setfilterbycategory(name);
+    setAllProducts(false);
+  };
 
-  const filterProductPrice = () => {};
   return (
     <Box className={classes.productListContainer}>
       <SideBarStyled>
@@ -192,8 +212,8 @@ export default function ProductsList() {
             <CustomSlider
               value={value}
               onChange={handleChange}
-              min={100}
-              max={900}
+              min={100000}
+              max={900000}
             />
             <Box
               sx={{
@@ -203,10 +223,10 @@ export default function ProductsList() {
               }}
             >
               <Typography sx={{ fontSize: "0.9rem" }}>
-                {value[1] + ",000" + "  تومان"}
+                {value[1] + "  تومان"}
               </Typography>
               <Typography sx={{ fontSize: "0.9rem" }}>
-                {value[0] + ",000" + "  تومان"}
+                {value[0] + "  تومان"}
               </Typography>
             </Box>
             <Box
@@ -218,7 +238,7 @@ export default function ProductsList() {
                 fontWeight: "bold",
               }}
             >
-              {newValue + ",000" + "   تومان"}
+              {newValue + "   تومان"}
             </Box>
             <MyButton widthupmd="100%" onClick={filterProductPrice}>
               صافی
@@ -251,11 +271,13 @@ export default function ProductsList() {
             </H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails>
-            {setCategoriesIsPenging &&
+            {ispending &&
               categories.map((category) => (
                 <Box className={classes.categoryBox}>
-                  <Checkbox />
-                  <Typography component={"span"}>{category.name}</Typography>
+                  <Checkbox
+                    onChange={(e) => checkboxHandler(category.name, e)}
+                  />
+                  <Typography component="span">{category.name}</Typography>
                 </Box>
               ))}
           </AccordionDetails>
@@ -296,7 +318,7 @@ export default function ProductsList() {
           </Box>
 
           <List sx={{ display: "flex", padding: "0", flexWrap: "wrap" }}>
-            {filteredList.map((listItem) => (
+            {sortedList.map((listItem) => (
               <Link key={listItem.id}>
                 <ListItem disablePadding>
                   <ListItemButtonHeader>
@@ -309,17 +331,19 @@ export default function ProductsList() {
         </Box>
         <Box className={classes.allProductsList}>
           {ispending &&
-            allProducts.map((product) => (
-              <Product
-                key={product.id}
-                productImage={product.image}
-                productTtile={product.title}
-                productPrice={product.price}
-                productRate={product.rating.rate}
-                ProductId={product.id}
-                offer={product.off}
-              />
-            ))}
+            (allProducts || filteredProducts || filteredPrice).map(
+              (product) => (
+                <Product
+                  key={product.id}
+                  productImage={product.image}
+                  productTtile={product.title}
+                  productPrice={product.price}
+                  productRate={product.rating.rate}
+                  ProductId={product.id}
+                  offer={product.off}
+                />
+              )
+            )}
         </Box>
       </Stack>
     </Box>

@@ -13,6 +13,8 @@ import {
   ListItemButton,
   ListItemText,
   List,
+  formLabelClasses,
+  Button,
 } from "@mui/material";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
@@ -126,6 +128,7 @@ const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
   transition: "none",
   color: " #4d4d4d",
   marginLeft: "0.3rem",
+  display: "flex",
 
   "&:hover": {
     background: "#ff6a00",
@@ -159,47 +162,97 @@ export default function ProductsList() {
   const { allProducts, setAllProducts, ispending } = useFetch(
     "http://localhost:4000/products"
   );
-
-  const [filterbycategory, setfilterbycategory] = useState(null);
-
-  const { filteredProducts, setFilteredProducts } = useFetch(
-    `http://localhost:4000/products?category=${filterbycategory}`
-  );
-
-  const [newValue, setNewValue] = useState(800000);
-
-  const { filteredPrice } = useFetch(
-    `http://localhost:4000/products?price<${newValue}`
-  );
-  const { categories, setCategoriesIsPenging } = useFetch(
+  const { categories, categoriesIsPenging } = useFetch(
     "http://localhost:4000/categories"
   );
-  const [sortedList, setSortedList] = useState([
-    { id: 1, title: "پیشفرض" },
-    { id: 2, title: "محبوب ترین" },
-    { id: 3, title: "پر فروش ارین" },
-    { id: 4, title: "ارزان ترین" },
-    { id: 5, title: "گران ترین" },
-  ]);
 
-  const [value, setValue] = useState([100000, 900000]);
-  const filterProductPrice = () => {
-    setFilteredProducts(false);
-    console.log(filteredPrice);
-    console.log(newValue);
-  };
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    setNewValue(newValue[1] - newValue[0]);
-  };
+  // ================> Filter by Category <================
+  const [filterbycategory, setfilterbycategory] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState("");
+
   const checkboxHandler = (name, e) => {
     setfilterbycategory(name);
     setAllProducts(false);
   };
 
+  // ================> Filter by price <================
+
+  const [newValue, setNewValue] = useState(1000000);
+  const [value, setValue] = useState([100000, 1100000]);
+  const handleChange = (event, newval) => {
+    setValue(newval);
+    setNewValue(newval[1] - newval[0]);
+  };
+  const filterProductPrice = () => {};
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:4000/products?category=${filterbycategory}&price_gte=0&price_lte=${newValue}`
+      )
+      .then((product) => {
+        setFilteredProducts(product.data);
+      });
+  }, [newValue, filterbycategory]);
+  const [sortedList, setSortedList] = useState([
+    { id: 1, title: "پیشفرض" },
+    { id: 2, title: "محبوب ترین" },
+    { id: 3, title: "پر فروش ترین" },
+    { id: 4, title: "ارزان ترین" },
+    { id: 5, title: "گران ترین" },
+  ]);
+
+  const { sortByStars } = useFetch(
+    "http://localhost:4000/products?_sort=rating.rate&_order=desc"
+  );
+  const { sortBySale } = useFetch(
+    "http://localhost:4000/products?_sort=numbersale&_order=desc"
+  );
+  const { sortByPriceUp } = useFetch(
+    "http://localhost:4000/products?_sort=price"
+  );
+  const { sortByPriceDown } = useFetch(
+    "http://localhost:4000/products?_sort=price&_order=desc"
+  );
+
+  const sortByStartsHandeler = () => {
+    setAllProducts(sortByStars);
+  };
+  const sortBySaleHandeler = () => {
+    setAllProducts(sortBySale);
+  };
+  const sortByPriceUpHandeler = () => {
+    setAllProducts(sortByPriceUp);
+  };
+  const sortByPriceDownHandeler = () => {
+    setAllProducts(sortByPriceDown);
+  };
+
   return (
     <Box className={classes.productListContainer}>
       <SideBarStyled>
+        <AccordionStyled defaultExpanded={true}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <H2ElemSideBar component={"h2"}>
+              فیلتر بر اساس دسته بندی :
+            </H2ElemSideBar>
+          </AccordionSummary>
+          <AccordionDetails>
+            {categoriesIsPenging &&
+              categories.map((category) => (
+                <Box className={classes.categoryBox}>
+                  <Checkbox
+                    onChange={(e) => checkboxHandler(category.name, e)}
+                  />
+                  <Typography component="span">{category.name}</Typography>
+                </Box>
+              ))}
+          </AccordionDetails>
+        </AccordionStyled>
         <AccordionStyled defaultExpanded={true}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -213,7 +266,7 @@ export default function ProductsList() {
               value={value}
               onChange={handleChange}
               min={100000}
-              max={900000}
+              max={1000000}
             />
             <Box
               sx={{
@@ -260,28 +313,6 @@ export default function ProductsList() {
             </Box>
           </AccordionDetails>
         </AccordionStyled>
-        <AccordionStyled defaultExpanded={true}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <H2ElemSideBar component={"h2"}>
-              فیلتر بر اساس دسته بندی :
-            </H2ElemSideBar>
-          </AccordionSummary>
-          <AccordionDetails>
-            {ispending &&
-              categories.map((category) => (
-                <Box className={classes.categoryBox}>
-                  <Checkbox
-                    onChange={(e) => checkboxHandler(category.name, e)}
-                  />
-                  <Typography component="span">{category.name}</Typography>
-                </Box>
-              ))}
-          </AccordionDetails>
-        </AccordionStyled>
       </SideBarStyled>
       <Stack className={classes.productListBox}>
         <Box className={classes.productListHead}>
@@ -318,32 +349,44 @@ export default function ProductsList() {
           </Box>
 
           <List sx={{ display: "flex", padding: "0", flexWrap: "wrap" }}>
-            {sortedList.map((listItem) => (
-              <Link key={listItem.id}>
-                <ListItem disablePadding>
-                  <ListItemButtonHeader>
-                    <ListItemTextStyled primary={listItem.title} />
-                  </ListItemButtonHeader>
-                </ListItem>
-              </Link>
-            ))}
+            <Box>
+              <ListItemButtonHeader>پیشفرض</ListItemButtonHeader>
+            </Box>
+            <Box>
+              <ListItemButtonHeader onClick={sortByStartsHandeler}>
+                محبوب ترین
+              </ListItemButtonHeader>
+            </Box>
+            <Box>
+              <ListItemButtonHeader onClick={sortBySaleHandeler}>
+                پر فروش ترین
+              </ListItemButtonHeader>
+            </Box>
+            <Box>
+              <ListItemButtonHeader onClick={sortByPriceUpHandeler}>
+                ارزان ترین
+              </ListItemButtonHeader>
+            </Box>
+            <Box>
+              <ListItemButtonHeader onClick={sortByPriceDownHandeler}>
+                گران ترین
+              </ListItemButtonHeader>
+            </Box>
           </List>
         </Box>
         <Box className={classes.allProductsList}>
           {ispending &&
-            (allProducts || filteredProducts || filteredPrice).map(
-              (product) => (
-                <Product
-                  key={product.id}
-                  productImage={product.image}
-                  productTtile={product.title}
-                  productPrice={product.price}
-                  productRate={product.rating.rate}
-                  ProductId={product.id}
-                  offer={product.off}
-                />
-              )
-            )}
+            (allProducts || filteredProducts).map((product) => (
+              <Product
+                key={product.id}
+                productImage={product.image}
+                productTtile={product.title}
+                productPrice={product.price}
+                productRate={product.rating.rate}
+                ProductId={product.id}
+                offer={product.off}
+              />
+            ))}
         </Box>
       </Stack>
     </Box>

@@ -11,8 +11,10 @@ export default function useFetch(url) {
   const [bannerImgs, setBannerImgs] = useState("");
   const [bannerImgsIsPending, setBannerImgsIsPending] = useState(false);
 
-  const [filteredProducts, setFilteredProducts] = useState("");
-  const [filteredPrice, setfilteredPrice] = useState(0);
+  const [sortByStars, setSortByStars] = useState(null);
+  const [sortBySale, setSortBySale] = useState(null);
+  const [sortByPriceUp, setSortByPriceUp] = useState(null);
+  const [sortByPriceDown, setSortByPriceDown] = useState(null);
 
   useEffect(() => {
     axios.get(url).then((products) => {
@@ -32,10 +34,16 @@ export default function useFetch(url) {
       setProduct(product.data);
     });
     axios.get(url).then((product) => {
-      setFilteredProducts(product.data);
+      setSortByStars(product.data);
     });
     axios.get(url).then((product) => {
-      setfilteredPrice(product.data);
+      setSortBySale(product.data);
+    });
+    axios.get(url).then((product) => {
+      setSortByPriceUp(product.data);
+    });
+    axios.get(url).then((product) => {
+      setSortByPriceDown(product.data);
     });
   }, []);
   return {
@@ -48,8 +56,9 @@ export default function useFetch(url) {
     bannerImgsIsPending,
     product,
     ispendingProduct,
-    filteredProducts,
-    setFilteredProducts,
-    filteredPrice,
+    sortByStars,
+    sortBySale,
+    sortByPriceUp,
+    sortByPriceDown,
   };
 }

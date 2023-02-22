@@ -100,7 +100,7 @@ export default function Product(props) {
           },
           height: {
             lg: "24rem",
-            md: "22rem",
+            md: "23rem",
             sm: "23rem",
             xs: "25rem",
           },

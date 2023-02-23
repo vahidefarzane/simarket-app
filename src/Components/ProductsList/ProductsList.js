@@ -168,11 +168,11 @@ export default function ProductsList() {
 
   // ================> Filter by Category <================
   const [filterbycategory, setfilterbycategory] = useState(null);
-  const [filteredProducts, setFilteredProducts] = useState("");
+
+  
 
   const checkboxHandler = (name, e) => {
     setfilterbycategory(name);
-    setAllProducts(false);
   };
 
   // ================> Filter by price <================
@@ -183,24 +183,27 @@ export default function ProductsList() {
     setValue(newval);
     setNewValue(newval[1] - newval[0]);
   };
-  const filterProductPrice = () => {};
+  const filterProductPrice = () => {
+    console.log(newValue);
+  };
 
   useEffect(() => {
-    axios
-      .get(
-        `http://localhost:4000/products?category=${filterbycategory}&price_gte=0&price_lte=${newValue}`
-      )
-      .then((product) => {
-        setFilteredProducts(product.data);
-      });
+    if (filterbycategory) {
+      axios
+        .get(
+          `http://localhost:4000/products?category=${filterbycategory}&price_gte=0&price_lte=${newValue}`
+        )
+        .then((product) => {
+          setAllProducts(product.data);
+        });
+    } else {
+      axios
+        .get(`http://localhost:4000/products?price_gte=0&price_lte=${newValue}`)
+        .then((product) => {
+          setAllProducts(product.data);
+        });
+    }
   }, [newValue, filterbycategory]);
-  const [sortedList, setSortedList] = useState([
-    { id: 1, title: "پیشفرض" },
-    { id: 2, title: "محبوب ترین" },
-    { id: 3, title: "پر فروش ترین" },
-    { id: 4, title: "ارزان ترین" },
-    { id: 5, title: "گران ترین" },
-  ]);
 
   const { sortByStars } = useFetch(
     "http://localhost:4000/products?_sort=rating.rate&_order=desc"
@@ -266,7 +269,7 @@ export default function ProductsList() {
               value={value}
               onChange={handleChange}
               min={100000}
-              max={1000000}
+              max={1100000}
             />
             <Box
               sx={{
@@ -376,7 +379,7 @@ export default function ProductsList() {
         </Box>
         <Box className={classes.allProductsList}>
           {ispending &&
-            (allProducts || filteredProducts).map((product) => (
+            allProducts.map((product) => (
               <Product
                 key={product.id}
                 productImage={product.image}

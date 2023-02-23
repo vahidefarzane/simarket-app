@@ -7,7 +7,7 @@
       "numbersale": 150,
       "size": ["L", "XL", "XXL"],
       "category": "تیشرت مردانه",
-      "image": "./images/products/4.jpg",
+      "image": "/images/products/4.jpg",
       "rating": { "rate": 3, "count": 120 },
       "off": 12,
       "comments": [
@@ -39,7 +39,7 @@
       "price": 689000,
       "numbersale": 170,
       "category": "تیشرت مردانه",
-      "image": "./images/products/2.jpg",
+      "image": "/images/products/2.jpg",
       "rating": { "rate": 2, "count": 10 },
       "off": 31,
       "comments": [
@@ -60,7 +60,7 @@
       "price": 335000,
       "numbersale": 280,
       "category": "تیشرت مردانه",
-      "image": "./images/products/1.jpg",
+      "image": "/images/products/1.jpg",
       "rating": { "rate": 4, "count": 230 },
       "off": 25,
       "comments": [
@@ -81,7 +81,7 @@
       "price": 329000,
       "numbersale": 15,
       "category": "تیشرت مردانه",
-      "image": "./images/products/3.jpg",
+      "image": "/images/products/3.jpg",
       "rating": { "rate": 5, "count": 87 },
       "off": 51,
       "comments": [
@@ -102,7 +102,7 @@
       "numbersale": 325,
       "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
-      "image": "./images/products/5.jpg",
+      "image": "/images/products/5.jpg",
       "rating": { "rate": 5, "count": 53 },
       "off": 12,
       "comments": [
@@ -128,7 +128,7 @@
       "numbersale": 12,
       "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
-      "image": "./images/products/13.jpg",
+      "image": "/images/products/13.jpg",
       "rating": { "rate": 3, "count": 12 },
       "off": 28,
       "comments": [
@@ -155,7 +155,7 @@
       "numbersale": 658,
       "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
-      "image": "./images/products/7.jpg",
+      "image": "/images/products/7.jpg",
       "rating": { "rate": 4, "count": 69 },
       "off": 24,
       "comments": [
@@ -176,7 +176,7 @@
       "numbersale": 40,
       "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
-      "image": "./images/products/6.jpg",
+      "image": "/images/products/6.jpg",
       "rating": { "rate": 4, "count": 120 },
       "off": 51,
       "comments": [
@@ -203,7 +203,7 @@
       "numbersale": 89,
       "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
-      "image": "./images/products/8.jpg",
+      "image": "/images/products/8.jpg",
       "rating": { "rate": 5, "count": 78 },
       "off": 11,
       "comments": [
@@ -223,7 +223,7 @@
       "price": 780000,
       "numbersale": 652,
       "category": "کیف و کفش",
-      "image": "./images/products/9.jpg",
+      "image": "/images/products/9.jpg",
       "rating": { "rate": 5, "count": 430 },
       "off": 32,
       "comments": [
@@ -249,7 +249,7 @@
       "price": 899000,
       "numbersale": 125,
       "category": "کیف و کفش",
-      "image": "./images/products/10.jpg",
+      "image": "/images/products/10.jpg",
       "rating": { "rate": 3, "count": 45 },
       "off": 23,
       "comments": [
@@ -269,7 +269,7 @@
       "price": 560000,
       "numbersale": 458,
       "category": "کیف و کفش",
-      "image": "./images/products/11.jpg",
+      "image": "/images/products/11.jpg",
       "rating": { "rate": 2, "count": 895 },
       "off": 51,
       "comments": [
@@ -295,7 +295,7 @@
       "price": 145000,
       "numbersale": 782,
       "category": "کیف و کفش",
-      "image": "./images/products/12.jpg",
+      "image": "/images/products/12.jpg",
       "rating": { "rate": 5, "count": 147 },
       "off": 51,
       "comments": [
@@ -316,7 +316,7 @@
       "numbersale": 45,
       "size": ["L", "XL", "XXL"],
       "category": "هودی و سویشرت",
-      "image": "./images/products/14.jpg",
+      "image": "/images/products/14.jpg",
       "rating": { "rate": 4, "count": 85 },
       "off": 51,
       "comments": [
@@ -337,7 +337,7 @@
       "numbersale": 365,
       "size": ["L", "XL", "XXL"],
       "category": "هودی و سویشرت",
-      "image": "./images/products/16.jpg",
+      "image": "/images/products/16.jpg",
       "rating": { "rate": 1, "count": 8 },
       "off": 51,
       "comments": [
@@ -363,7 +363,7 @@
       "numbersale": 57,
       "size": ["L", "XL", "XXL"],
       "category": "هودی و سویشرت",
-      "image": "./images/products/17.jpg",
+      "image": "/images/products/17.jpg",
       "rating": { "rate": 4, "count": 78 },
       "off": 51,
       "comments": [
@@ -389,7 +389,7 @@
       "numbersale": 456,
       "size": ["L", "XL", "XXL"],
       "category": "هودی و سویشرت",
-      "image": "./images/products/15.jpg",
+      "image": "/images/products/15.jpg",
       "rating": { "rate": 4, "count": 45 },
       "off": 51,
       "comments": [
@@ -410,7 +410,7 @@
       "numbersale": 47,
       "size": ["L", "XL", "XXL"],
       "category": "کت شلوار",
-      "image": "./images/products/18.jpg",
+      "image": "/images/products/18.jpg",
       "rating": { "rate": 5, "count": 895 },
       "off": 51,
       "comments": [
@@ -437,7 +437,7 @@
       "numbersale": 452,
       "size": ["L", "XL", "XXL"],
       "category": "کت شلوار",
-      "image": "./images/products/19.jpg",
+      "image": "/images/products/19.jpg",
       "rating": { "rate": 3, "count": 65 },
       "off": 51,
       "comments": [
@@ -458,7 +458,7 @@
       "numbersale": 752,
       "size": ["L", "XL", "XXL"],
       "category": "کت شلوار",
-      "image": "./images/products/20.jpg",
+      "image": "/images/products/20.jpg",
       "rating": { "rate": 4, "count": 12 },
       "off": 51,
       "comments": [

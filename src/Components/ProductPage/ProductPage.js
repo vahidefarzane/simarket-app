@@ -254,30 +254,11 @@ export default function ProductsList() {
   const handleChange3 = (event, newValue) => {
     setvaluedata(newValue);
   };
-  
 
   const { product, ispendingProduct } = useFetch(
     `http://localhost:4000${window.location.pathname}`
   );
-
-  const imageProps = {
-    smallImage: {
-      alt: "Phasellus laoreet",
-      isFluidWidth: true,
-      src: product.image,
-    },
-    largeImage: {
-      height: 900,
-      width: 600,
-      src: product.image,
-    },
-    enlargedImageContainerStyle: {
-      background: "#fff",
-      border: "1px solid red",
-      zIndex: 9,
-      marginLeft: "-60rem",
-    },
-  };
+  console.log(product);
 
   return (
     <>
@@ -297,7 +278,26 @@ export default function ProductsList() {
                 },
               }}
             >
-              <ReactImageMagnify {...imageProps} />
+              <ReactImageMagnify
+                fadeDurationInMs={400}
+                isHintEnabled={true}
+                smallImage={{
+                  alt: "Phasellus laoreet",
+                  isFluidWidth: true,
+                  src: product.image,
+                }}
+                largeImage={{
+                  height: 900,
+                  width: 850,
+                  src: product.image,
+                }}
+                enlargedImageContainerStyle={{
+                  background: "#fff",
+                  border: "1px solid red",
+                  zIndex: 9,
+                  marginLeft: "-58rem",
+                }}
+              />
             </Box>
 
             <Stack className={classes.productDetailsInfo}>

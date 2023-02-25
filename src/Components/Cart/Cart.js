@@ -61,19 +61,20 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
 export default function Cart() {
   const [activeStep, setActiveStep] = useState(0);
   const handleStep = (step) => () => {
-    setActiveStep(step);
+    
+      setActiveStep(step);
+    
   };
 
-  const [cities, setCities] = useState({
-    Iran: ["Tabriz", "Tehran", "Shiraz", "Esfahan", "Mashhad"],
-    Turkey: ["Istanbul", "Ezmir", "Ankara", "Antaliya"],
-    US: ["Los Angles", "San Diego", "Chicago"],
-  });
+  // const [cities, setCities] = useState({
+  //   Iran: ["Tabriz", "Tehran", "Shiraz", "Esfahan", "Mashhad"],
+  //   Turkey: ["Istanbul", "Ezmir", "Ankara", "Antaliya"],
+  //   US: ["Los Angles", "San Diego", "Chicago"],
+  // });
 
   return (
     <Stack
       sx={{
-        
         padding: {
           md: "2.5rem",
           xs: "1rem",

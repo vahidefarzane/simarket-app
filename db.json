@@ -499,5 +499,8 @@
     { "id": 2, "src": "./images/banner_ads2.jpg", "to": "/productsList" },
     { "id": 3, "src": "./images/banner_ads3.jpg", "to": "/productsList" },
     { "id": 4, "src": "./images/banner_ads4.jpg", "to": "/productsList" }
+  ],
+  "cart":[
+    
   ]
 }

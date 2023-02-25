@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useContext} from "react";
 import {
   Box,
   Checkbox,
@@ -11,8 +11,12 @@ import {
 import Input from "../Input/Input";
 import SelectBox from "../SelectBox/SelectBox";
 import MyButton from "../MyButton/MyButton";
+import productsContext from "../../Contexts/ProductsContext";
+
 
 export default function Checkout() {
+  const contextData = useContext(productsContext);
+
   return (
     <Box
       sx={{
@@ -163,7 +167,7 @@ export default function Checkout() {
         >
           <Box className="card-info-container">
             <Typography className="card-info">قیمت کالا ها</Typography>
-            <Typography className="card-info">289,000 تومان</Typography>
+            <Typography className="card-info">{contextData.totalPrice}</Typography>
           </Box>
           <Box className="card-info-container">
             <Typography className="card-info">
@@ -173,12 +177,12 @@ export default function Checkout() {
           </Box>
           <Box className="card-info-container">
             <Typography className="card-info">تخفیف کالا ها</Typography>
-            <Typography className="card-info">40,000 تومان</Typography>
+            <Typography className="card-info">0</Typography>
           </Box>
 
           <Box className="card-info-container">
             <Typography className="card-info-main">مجموع</Typography>
-            <Typography className="card-info-main">40,000 تومان</Typography>
+            <Typography className="card-info-main">{contextData.totalPrice}</Typography>
           </Box>
         </Box>
         <Box

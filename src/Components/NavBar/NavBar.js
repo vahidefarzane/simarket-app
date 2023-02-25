@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import {
   Badge,
   AppBar,
@@ -38,6 +38,7 @@ import "./NavBar.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SearchBox from "../SearchBox/SearchBox";
 import HomeIcon from "@mui/icons-material/Home";
+import productsContext from "../../Contexts/ProductsContext";
 
 // desktop styled
 
@@ -180,7 +181,7 @@ export default function Navbar(props) {
   const closeMenuBar = () => {
     setShowMenu(false);
   };
-
+  const contextData = useContext(productsContext);
   const mobileview = (
     <BoxMobileView>
       <Stack
@@ -220,7 +221,7 @@ export default function Navbar(props) {
                 },
               }}
             >
-              <Link to="/" style={{display:'flex',}}>
+              <Link to="/" style={{ display: "flex" }}>
                 <Box
                   component="img"
                   src={Logo}
@@ -285,14 +286,14 @@ export default function Navbar(props) {
           </MenuBarStyled>
         )}
         <Link to="/">
-        <Box
-          component="img"
-          sx={{
-            width: 100,
-          }}
-          alt="Your logo"
-          src={Logo}
-        ></Box>
+          <Box
+            component="img"
+            sx={{
+              width: 100,
+            }}
+            alt="Your logo"
+            src={Logo}
+          ></Box>
         </Link>
         <IconButton color="inherit">
           <HelpOutlineOutlinedIcon />
@@ -514,7 +515,7 @@ export default function Navbar(props) {
               sx={{ color: "#212121" }}
               onClick={openCardHandler}
             >
-              <Badge badgeContent={4} sx={badgeStyle}>
+              <Badge badgeContent={contextData.userCart.length} sx={badgeStyle}>
                 <AddShoppingCartIcon sx={{ fontSize: "1.8rem" }} />
               </Badge>
             </IconButton>
@@ -548,7 +549,7 @@ export default function Navbar(props) {
                   >
                     <Typography sx={{ fontSize: "0.9rem" }}>
                       {" "}
-                      شما این محصول را انتخاب کردید
+                      شما این محصولات را انتخاب کردید
                     </Typography>
                     <CloseIcon
                       onClick={closeCardHandler}
@@ -563,31 +564,47 @@ export default function Navbar(props) {
                       height: "88vh",
                     }}
                   >
-                    <Box sx={{ padding: "0 0.5rem" }}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          padding: "0 1rem",
-                        }}
-                      >
-                        <IconButton sx={{ p: 0 }}>
-                          <CloseIcon />
-                        </IconButton>
-                        <Box
-                          component="img"
-                          src="./images/jacket.jpg"
-                          sx={{ width: "5rem", height: "5rem", margin: "1rem" }}
-                        />
-                        <Typography
-                          sx={{ fontSize: "0.8rem", fontWeight: "600" }}
-                        >
-                          تی شرت مردانه منان شهیدی مدل 3001158-26 سپرت - L
-                        </Typography>
+                    {contextData.userCart.length !== 0 ? (
+                      <Box sx={{ padding: "0 0.5rem" }}>
+                        {contextData.userCart.map((product) => (
+                          <>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                padding: "0 1rem",
+                              }}
+                            >
+                              <IconButton sx={{ p: 0 }}>
+                                <CloseIcon />
+                              </IconButton>
+                              <Box
+                                component="img"
+                                src={product.image}
+                                sx={{
+                                  width: "5rem",
+                                  height: "5rem",
+                                  margin: "1rem",
+                                }}
+                              />
+                              <Typography
+                                sx={{ fontSize: "0.8rem", fontWeight: "600" }}
+                              >
+                               {product.title}
+                              </Typography>
+                              <Typography></Typography>
+                            </Box>
+                            <Divider />
+                          </>
+                        ))}
                       </Box>
-                      <Divider />
-                    </Box>
+                    ) : (
+                      <Box sx={{ margin: "1rem Auto" }}>
+                        در سبد خرید شما محصولی وجود ندارد.
+                      </Box>
+                    )}
+
                     <Box sx={{ borderTop: "1px solid #E0E0E0" }}>
                       <Box
                         sx={{
@@ -600,7 +617,7 @@ export default function Navbar(props) {
                           مجموع :
                         </Typography>
                         <Typography fontWeight="bold" fontSize="1.1rem">
-                          189,000
+                          {contextData.totalPrice}
                         </Typography>
                       </Box>
                       <Box

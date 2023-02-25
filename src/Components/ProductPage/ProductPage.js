@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Stack,
   Slider,
@@ -27,6 +27,7 @@ import { PropTypes } from "prop-types";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ProductProgressInfos from "../ProductProgressInfos/ProductProgressInfos";
 import ReactImageMagnify from "react-image-magnify";
+import productsContext from "../../Contexts/ProductsContext";
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -89,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     // },
   },
   productDetailsInfo: {
-    width: "61%",
+    width: "58%",
     padding: "0 3rem",
     [theme.breakpoints.between("md", "lg")]: {
       padding: "0 1rem",
@@ -258,7 +259,42 @@ export default function ProductsList() {
   const { product, ispendingProduct } = useFetch(
     `http://localhost:4000${window.location.pathname}`
   );
-  console.log(product);
+
+  const contextData = useContext(productsContext);
+
+  const addToCart = (product) => {
+    contextData.setTotalPrice((prevPrice) => prevPrice + product.price);
+
+    let isInUserCart = contextData.userCart.some(
+      (bagProduct) => bagProduct.title === product.title
+    );
+
+    if (!isInUserCart) {
+      let newUserCartProduct = {
+        id: contextData.userCart.length + 1,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        count: 1,
+      };
+
+      contextData.setUserCart((prevProducts) => [
+        ...prevProducts,
+        newUserCartProduct,
+      ]);
+    } else {
+      let userCart = [...contextData.userCart];
+
+      userCart.some((bagProduct) => {
+        if (bagProduct.title === product.title) {
+          bagProduct.count += 1;
+          return true;
+        }
+      });
+
+      contextData.setUserCart(userCart);
+    }
+  };
 
   return (
     <>
@@ -279,23 +315,22 @@ export default function ProductsList() {
               }}
             >
               <ReactImageMagnify
-                fadeDurationInMs={400}
                 isHintEnabled={true}
                 smallImage={{
-                  alt: "Phasellus laoreet",
                   isFluidWidth: true,
+                  alt: "Phasellus laoreet",
                   src: product.image,
                 }}
                 largeImage={{
+                  width: 800,
                   height: 900,
-                  width: 850,
                   src: product.image,
                 }}
                 enlargedImageContainerStyle={{
                   background: "#fff",
                   border: "1px solid red",
                   zIndex: 9,
-                  marginLeft: "-58rem",
+                  marginLeft: "-55rem",
                 }}
               />
             </Box>
@@ -528,11 +563,15 @@ export default function ProductsList() {
                   aria-label="Platform"
                 >
                   {product.size &&
-                    product.size.map((size) => (
-                      <ToggleButton>{size}</ToggleButton>
+                    product.size.map((size, index) => (
+                      <ToggleButton key={index}>{size}</ToggleButton>
                     ))}
                 </ToggleButtonGroup>
-                <MyButton padding="0.9rem 0" borderradius="0.9rem">
+                <MyButton
+                  padding="0.9rem 0"
+                  borderradius="0.9rem"
+                  onClick={() => addToCart(product)}
+                >
                   افزودن به سبد خرید
                 </MyButton>
               </Stack>

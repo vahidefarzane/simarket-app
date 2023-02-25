@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import {
   Box,
   Typography,
@@ -13,6 +13,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import MyButton from "../MyButton/MyButton";
+import productsContext from "../../Contexts/ProductsContext";
 
 export default function OrderInfo() {
   const [productNumberCart, setProductNumberCart] = useState(1);
@@ -27,6 +28,7 @@ export default function OrderInfo() {
   const minusProductHandler = () => {
     setProductNumberCart((prevNumber) => prevNumber - 1);
   };
+  const contextData = useContext(productsContext);
 
   return (
     <Box
@@ -54,165 +56,174 @@ export default function OrderInfo() {
           },
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "start",
-            flexDirection: {
-              sm: "row",
-              xs: "column",
-            },
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "right",
-
-              width: {
-                md: "72%",
-                xs: "100%",
-              },
-              flexDirection: {
-                sm: "row",
-                xs: "column",
-              },
-            }}
-          >
+        {contextData.userCart.map((productsInfo) => (
+          <>
             <Box
-              src="./images/jacket.jpg"
-              component="img"
               sx={{
-                margin: {
-                  md: "0 0 0 2rem",
-                  sm: "0 0 0 1rem",
-                  xs: "0 auto",
-                },
-                width: {
-                  md: "29%",
-                  sm: "28%",
-                  xs: "60%",
+                display: "flex",
+                justifyContent: "start",
+                flexDirection: {
+                  sm: "row",
+                  xs: "column",
                 },
               }}
-            ></Box>
-            <Box sx={{ marginTop: "1.5rem" }}>
-              <Typography sx={{ marginBottom: "1.5rem", fontWeight: "bold" }}>
-                جاکت مردانه
-              </Typography>
+            >
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
-                  marginBottom: "1rem",
+                  justifyContent: "right",
+
+                  width: {
+                    md: "72%",
+                    xs: "100%",
+                  },
+                  flexDirection: {
+                    sm: "row",
+                    xs: "column",
+                  },
                 }}
               >
-                <BeenhereIcon
-                  sx={{ fontSize: "0.8rem", marginLeft: "0.4rem" }}
-                />
+                <Box
+                  src={productsInfo.image}
+                  component="img"
+                  sx={{
+                    margin: {
+                      md: "0 0 0 2rem",
+                      sm: "0 0 0 1rem",
+                      xs: "0 auto",
+                    },
+                    width: {
+                      md: "29%",
+                      sm: "28%",
+                      xs: "60%",
+                    },
+                  }}
+                ></Box>
+                <Box sx={{ marginTop: "1.5rem" }}>
+                  <Typography
+                    sx={{ marginBottom: "1.5rem", fontWeight: "bold" }}
+                  >
+                    {productsInfo.title}
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    <BeenhereIcon
+                      sx={{ fontSize: "0.8rem", marginLeft: "0.4rem" }}
+                    />
+                    <Typography
+                      component="span"
+                      sx={{
+                        fontSize: {
+                          lg: "0.8rem",
+                          xs: "0.7rem",
+                        },
+                      }}
+                    >
+                      گارانتی 18 ماهه فروشگاه اینترنتی پارس کالا
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: "flex" }}>
+                    <Box
+                      sx={{
+                        border: "1px solid  #ff6a00",
+                        borderRadius: "0.6rem",
+                        padding: "0.2rem ",
+                      }}
+                    >
+                      <IconButton
+                        onClick={plusProductHandler}
+                        disableRipple={true}
+                        sx={{ color: " #ff6a00" }}
+                      >
+                        <AddIcon />
+                      </IconButton>
+                      <InputBase
+                        onChange={(e) => changeNumber(e)}
+                        type="tel"
+                        sx={{
+                          width: "4rem",
+                          color: " #ff6a00",
+                          textAlign: "center",
+                        }}
+                        value={1}
+                      >
+                        {productNumberCart}
+                      </InputBase>
+                      <IconButton
+                        onClick={minusProductHandler}
+                        disableRipple={true}
+                        sx={{ color: " #ff6a00" }}
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                    </Box>
+                    <Button
+                      variant="outlined"
+                      disableRipple={true}
+                      sx={{
+                        color: "#535353",
+                        borderColor: "#B2B1B1",
+                        marginRight: "1rem",
+                        borderRadius: "0.6rem",
+                        "&:hover": {
+                          backgroundColor: "transparent",
+                          borderColor: "#B2B1B1",
+                        },
+                      }}
+                      endIcon={
+                        <DeleteForeverOutlinedIcon
+                          sx={{ marginRight: "0.4rem" }}
+                        />
+                      }
+                    >
+                      حذف
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+              <Stack
+                sx={{
+                  marginTop: {
+                    sm: "0",
+                    xs: "1.5rem",
+                  },
+                }}
+              >
                 <Typography
-                  component="span"
+                  sx={{
+                    color: "red",
+                    fontSize: {
+                      md: "0.9rem",
+                      sm: "0.7rem",
+                      xs: "1rem",
+                    },
+                  }}
+                >
+                  {`تخفیف ${productsInfo.price} تومان`}
+                </Typography>
+                <Typography
                   sx={{
                     fontSize: {
-                      lg: "0.8rem",
-                      xs: "0.7rem",
+                      lg: "1.1rem",
+                      sm: "0.9rem",
+                      xs: "1.1rem",
                     },
+                    fontWeight: "bold",
                   }}
                 >
-                  گارانتی 18 ماهه فروشگاه اینترنتی پارس کالا
+                  {` ${productsInfo.price} تومان`}
                 </Typography>
-              </Box>
-              <Box sx={{ display: "flex" }}>
-                <Box
-                  sx={{
-                    border: "1px solid  #ff6a00",
-                    borderRadius: "0.6rem",
-                    padding: "0.2rem ",
-                  }}
-                >
-                  <IconButton
-                    onClick={plusProductHandler}
-                    disableRipple={true}
-                    sx={{ color: " #ff6a00" }}
-                  >
-                    <AddIcon />
-                  </IconButton>
-                  <InputBase
-                    onChange={(e) => changeNumber(e)}
-                    type="tel"
-                    sx={{
-                      width: "4rem",
-                      color: " #ff6a00",
-                      textAlign: "center",
-                    }}
-                    value={1}
-                  >
-                    {productNumberCart}
-                  </InputBase>
-                  <IconButton
-                    onClick={minusProductHandler}
-                    disableRipple={true}
-                    sx={{ color: " #ff6a00" }}
-                  >
-                    <RemoveIcon />
-                  </IconButton>
-                </Box>
-                <Button
-                  variant="outlined"
-                  disableRipple={true}
-                  sx={{
-                    color: "#535353",
-                    borderColor: "#B2B1B1",
-                    marginRight: "1rem",
-                    borderRadius: "0.6rem",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      borderColor: "#B2B1B1",
-                    },
-                  }}
-                  endIcon={
-                    <DeleteForeverOutlinedIcon sx={{ marginRight: "0.4rem" }} />
-                  }
-                >
-                  حذف
-                </Button>
-              </Box>
+              </Stack>
             </Box>
-          </Box>
-          <Stack
-            sx={{
-              marginTop: {
-                sm: "0",
-                xs: "1.5rem",
-              },
-            }}
-          >
-            <Typography
-              sx={{
-                color: "red",
-                fontSize: {
-                  md: "0.9rem",
-                  sm: "0.7rem",
-                  xs: "1rem",
-                },
-              }}
-            >
-              {`تخفیف ${"56,000"} تومان`}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: {
-                  lg: "1.1rem",
-                  sm: "0.9rem",
-                  xs: "1.1rem",
-                },
-                fontWeight: "bold",
-              }}
-            >
-              {` ${"565,000"} تومان`}
-            </Typography>
-          </Stack>
-        </Box>
-        <Divider sx={{ margin: "1.5rem 0" }} />
+            <Divider sx={{ margin: "1.5rem 0" }} />
+          </>
+        ))}
+
         <Box sx={{ display: "flex" }}>
           <InputBase
             sx={{
@@ -222,7 +233,7 @@ export default function OrderInfo() {
               fontSize: "0.9rem",
               width: {
                 md: "15%",
-                sm:'30%',
+                sm: "30%",
                 xs: "40%",
               },
               marginLeft: "1rem",
@@ -250,12 +261,12 @@ export default function OrderInfo() {
             md: "0",
             xs: "1rem",
           },
-          height:'fit-content',
+          height: "fit-content",
         }}
       >
         <Box className="card-info-container">
           <Typography className="card-info">قیمت کالا ها</Typography>
-          <Typography className="card-info">289,000 تومان</Typography>
+          <Typography className="card-info">{contextData.totalPrice}</Typography>
         </Box>
         <Box className="card-info-container">
           <Typography className="card-info">
@@ -265,12 +276,12 @@ export default function OrderInfo() {
         </Box>
         <Box className="card-info-container">
           <Typography className="card-info">تخفیف کالا ها</Typography>
-          <Typography className="card-info">40,000 تومان</Typography>
+          <Typography className="card-info">0 تومان</Typography>
         </Box>
         <Divider sx={{ marginBottom: "1rem" }} />
         <Box className="card-info-container">
           <Typography className="card-info-main">مجموع</Typography>
-          <Typography className="card-info-main">40,000 تومان</Typography>
+          <Typography className="card-info-main">{contextData.totalPrice}</Typography>
         </Box>
         <MyButton
           widthupmd="100%"

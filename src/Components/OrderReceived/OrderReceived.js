@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Box,
   Typography,
@@ -20,6 +20,7 @@ import SourceOutlinedIcon from "@mui/icons-material/SourceOutlined";
 import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
 import MyButton from "../MyButton/MyButton";
 import { styled } from "@mui/material/styles";
+import productsContext from "../../Contexts/ProductsContext";
 
 const BoxFullWidth = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -32,8 +33,9 @@ const BoxFullWidth = styled(Box)(({ theme }) => ({
   alignItems: "center",
 }));
 
-export default function OrderReceived() {
-  const [infos, setInfos] = useState([
+export default function OrderReceived({ handleBack }) {
+  const contextData = useContext(productsContext);
+  const [infos] = useState([
     {
       id: 1,
       icon: TextSnippetOutlinedIcon,
@@ -50,7 +52,7 @@ export default function OrderReceived() {
       id: 3,
       icon: CreditCardOutlinedIcon,
       title: " قیمت نهایی:",
-      dec: "236,000 تومان",
+      dec: `${contextData.totalPrice} تومان`,
     },
     {
       id: 4,
@@ -59,7 +61,7 @@ export default function OrderReceived() {
       dec: "انتقال مستقیم بانکی",
     },
   ]);
-  const [bankInfos, setBankInfos] = useState([
+  const [bankInfos] = useState([
     {
       id: 1,
       icon: AccountBalanceOutlinedIcon,
@@ -85,14 +87,15 @@ export default function OrderReceived() {
       dec: "IR10000000000000000",
     },
   ]);
-  const [tableCells, setTableCells] = useState([
-    { id: 1, product: "نام محصول", total: "کاپشن اسپرت تک سایز Nike " },
-    { id: 2, product: "مجموع:", total: "236,000 تومان" },
-    { id: 3, product: "حمل و نقل:	", total: "حمل و نقل رایگان" },
-    { id: 4, product: "مالیات بر ارزش افزوده:	", total: "0 تومان" },
-    { id: 5, product: "روش پرداخت:	", total: "انتقال مستقیم بانکی " },
-    { id: 6, product: "قیمت نهایی:	", total: "236,000 تومان" },
+  const [tableCells] = useState([
+    { id: 1, product: "حمل و نقل:	", total: "رایگان" },
+    { id: 2, product: "مالیات بر ارزش افزوده:	", total: "0 تومان" },
+    { id: 3, product: "روش پرداخت:	", total: "انتقال مستقیم بانکی " },
+    { id: 4, product: "قیمت نهایی:	", total: contextData.totalPrice },
   ]);
+
+  console.log(contextData);
+
   return (
     <Box>
       <BoxFullWidth>
@@ -260,7 +263,7 @@ export default function OrderReceived() {
                 },
               }}
             >
-              محصول
+              نام محصول
             </TableCell>
             <TableCell
               align="right"
@@ -273,11 +276,39 @@ export default function OrderReceived() {
                 },
               }}
             >
-              مجموع
+              قیمت
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
+          {contextData.userCart &&
+            contextData.userCart.map((tableCell) => (
+              <TableRow key={tableCell.id}>
+                <TableCell
+                  align="right"
+                  sx={{
+                    fontSize: {
+                      sm: "1rem",
+                      xs: "0.8rem",
+                    },
+                  }}
+                >
+                  {tableCell.title}
+                </TableCell>
+                <TableCell
+                  align="right"
+                  sx={{
+                    fontSize: {
+                      sm: "1rem",
+                      xs: "0.8rem",
+                    },
+                  }}
+                >
+                  {tableCell.price}
+                </TableCell>
+              </TableRow>
+            ))}
+
           {tableCells.map((tableCell) => (
             <TableRow key={tableCell.id}>
               <TableCell
@@ -307,6 +338,16 @@ export default function OrderReceived() {
           ))}
         </TableBody>
       </Table>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "2rem",
+        }}
+      >
+        <MyButton onClick={handleBack}>بازگشت به مرحله قبل</MyButton>
+        <MyButton>انتقال به درگاه پرداخت</MyButton>
+      </Box>
     </Box>
   );
 }

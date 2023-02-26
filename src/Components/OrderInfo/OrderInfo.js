@@ -15,7 +15,7 @@ import BeenhereIcon from "@mui/icons-material/Beenhere";
 import MyButton from "../MyButton/MyButton";
 import productsContext from "../../Contexts/ProductsContext";
 
-export default function OrderInfo() {
+export default function OrderInfo({handleNext}) {
   const [productNumberCart, setProductNumberCart] = useState(1);
 
   const changeNumber = (e) => {
@@ -288,6 +288,7 @@ export default function OrderInfo() {
           widthdownsm="100%"
           padding="0.7rem"
           borderradius="0.6rem"
+          onClick={handleNext}
         >
           اقدام به پرداخت
         </MyButton>

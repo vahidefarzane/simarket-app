@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, React } from "react";
 import {
   Stack,
   Slider,
@@ -11,7 +11,9 @@ import {
   Tabs,
   Tab,
   Rating,
+  Snackbar,
 } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import MuiToggleButton from "@mui/material/ToggleButton";
 import MuiTabs from "@mui/material/Tabs";
 import { makeStyles } from "@mui/styles";
@@ -261,8 +263,13 @@ export default function ProductsList() {
   );
 
   const contextData = useContext(productsContext);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  const handleClose = (event, reason) => {
+    setOpenSnackbar(false);
+  };
   const addToCart = (product) => {
+    setOpenSnackbar(true);
     contextData.setTotalPrice((prevPrice) => prevPrice + product.price);
 
     let isInUserCart = contextData.userCart.some(
@@ -292,7 +299,7 @@ export default function ProductsList() {
           contextData.setTotalPrice(
             (prevPrice) => prevPrice + product.price * contextData.productNumber
           );
-          
+
           return true;
         }
       });
@@ -579,6 +586,19 @@ export default function ProductsList() {
                 >
                   افزودن به سبد خرید
                 </MyButton>
+                <Snackbar
+                  open={openSnackbar}
+                  autoHideDuration={3000}
+                  onClose={handleClose}
+                >
+                  <MuiAlert
+                    elevation={6}
+                    variant="filled"
+                    severity="success"
+                  >
+                    محصول با موفقیت به سبد خرید اضافه شد
+                  </MuiAlert>
+                </Snackbar>
               </Stack>
             </Stack>
           </Box>

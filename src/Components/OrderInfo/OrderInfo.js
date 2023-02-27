@@ -1,4 +1,4 @@
-import { React, useState, useContext } from "react";
+import { React, useState, useContext, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -15,20 +15,21 @@ import BeenhereIcon from "@mui/icons-material/Beenhere";
 import MyButton from "../MyButton/MyButton";
 import productsContext from "../../Contexts/ProductsContext";
 
-export default function OrderInfo({handleNext}) {
-  const [productNumberCart, setProductNumberCart] = useState(1);
+export default function OrderInfo({ handleNext }) {
+  const contextData = useContext(productsContext);
 
   const changeNumber = (e) => {
-    setProductNumberCart(Number(e.target.value));
+    contextData.setProductNumber(e.target.value);
   };
 
-  const plusProductHandler = () => {
-    setProductNumberCart((prevNumber) => prevNumber + 1);
+  const plusProductHandler = (e, price) => {
+    contextData.setProductNumber((prevNumber) => prevNumber + 1);
+    console.log(contextData.productNumber, price);
   };
   const minusProductHandler = () => {
-    setProductNumberCart((prevNumber) => prevNumber - 1);
+    contextData.setProductNumber((prevNumber) => prevNumber - 1);
   };
-  const contextData = useContext(productsContext);
+  useEffect(() => {}, [contextData.productNumber]);
 
   return (
     <Box
@@ -136,7 +137,9 @@ export default function OrderInfo({handleNext}) {
                       }}
                     >
                       <IconButton
-                        onClick={plusProductHandler}
+                        onClick={(e) => {
+                          plusProductHandler(e, productsInfo.price);
+                        }}
                         disableRipple={true}
                         sx={{ color: " #ff6a00" }}
                       >
@@ -150,9 +153,9 @@ export default function OrderInfo({handleNext}) {
                           color: " #ff6a00",
                           textAlign: "center",
                         }}
-                        value={1}
+                        value={contextData.productNumber}
                       >
-                        {productNumberCart}
+                        {contextData.productNumber}
                       </InputBase>
                       <IconButton
                         onClick={minusProductHandler}
@@ -266,7 +269,9 @@ export default function OrderInfo({handleNext}) {
       >
         <Box className="card-info-container">
           <Typography className="card-info">قیمت کالا ها</Typography>
-          <Typography className="card-info">{contextData.totalPrice}</Typography>
+          <Typography className="card-info">
+            {contextData.totalPrice}
+          </Typography>
         </Box>
         <Box className="card-info-container">
           <Typography className="card-info">
@@ -281,7 +286,9 @@ export default function OrderInfo({handleNext}) {
         <Divider sx={{ marginBottom: "1rem" }} />
         <Box className="card-info-container">
           <Typography className="card-info-main">مجموع</Typography>
-          <Typography className="card-info-main">{contextData.totalPrice}</Typography>
+          <Typography className="card-info-main">
+            {contextData.totalPrice}
+          </Typography>
         </Box>
         <MyButton
           widthupmd="100%"

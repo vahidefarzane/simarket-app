@@ -182,6 +182,10 @@ export default function Navbar(props) {
     setShowMenu(false);
   };
   const contextData = useContext(productsContext);
+
+  function removeUserCartProduct(productID) {
+  }
+
   const mobileview = (
     <BoxMobileView>
       <Stack
@@ -320,7 +324,7 @@ export default function Navbar(props) {
           sx={{ color: "#212121" }}
           onClick={openCardHandler}
         >
-          <Badge badgeContent={4} sx={badgeStyle}>
+          <Badge badgeContent={contextData.userCart.length} sx={badgeStyle}>
             <AddShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -529,8 +533,8 @@ export default function Navbar(props) {
                 <Box
                   sx={{
                     width: {
-                      md: "24rem",
-                      sm: "23rem",
+                      md: "26rem",
+                      sm: "24rem",
                       xs: "100vw",
                     },
                   }}
@@ -548,7 +552,6 @@ export default function Navbar(props) {
                     }}
                   >
                     <Typography sx={{ fontSize: "0.9rem" }}>
-                      {" "}
                       شما این محصولات را انتخاب کردید
                     </Typography>
                     <CloseIcon
@@ -576,7 +579,10 @@ export default function Navbar(props) {
                                 padding: "0 1rem",
                               }}
                             >
-                              <IconButton sx={{ p: 0 }}>
+                              <IconButton
+                                sx={{ p: 0 }}
+                                onClick={removeUserCartProduct(product.id)}
+                              >
                                 <CloseIcon />
                               </IconButton>
                               <Box
@@ -591,9 +597,14 @@ export default function Navbar(props) {
                               <Typography
                                 sx={{ fontSize: "0.8rem", fontWeight: "600" }}
                               >
-                               {product.title}
+                                {product.title}
                               </Typography>
-                              <Typography></Typography>
+                              <Typography
+                                component="span"
+                                sx={{ margin: "0 1rem" }}
+                              >
+                                {product.count}
+                              </Typography>
                             </Box>
                             <Divider />
                           </>

@@ -271,7 +271,7 @@ export default function ProductsList() {
 
     if (!isInUserCart) {
       let newUserCartProduct = {
-        id: contextData.userCart.length + 1,
+        id: product.id,
         title: product.title,
         price: product.price,
         image: product.image,
@@ -288,6 +288,11 @@ export default function ProductsList() {
       userCart.some((bagProduct) => {
         if (bagProduct.title === product.title) {
           bagProduct.count += 1;
+          contextData.setProductNumber(bagProduct.count);
+          contextData.setTotalPrice(
+            (prevPrice) => prevPrice + product.price * contextData.productNumber
+          );
+          
           return true;
         }
       });

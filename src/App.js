@@ -27,6 +27,7 @@ function App() {
   
   const [userCart, setUserCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [productNumber, setProductNumber] = useState(null);
 
 
 
@@ -38,6 +39,9 @@ function App() {
           setUserCart,
           totalPrice,
           setTotalPrice,
+          productNumber,
+          setProductNumber,
+
         }}
         >
       <Stack className="main">

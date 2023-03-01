@@ -1,0 +1,36 @@
+.lable {
+  display: block;
+  font-size: 0.9rem;
+  margin: 0.7rem 0;
+  color: #757373;
+}
+.input-form {
+  border: 1px solid #b2b1b1;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.2rem 1rem;
+}
+.submit-btn {
+  background-image: linear-gradient(to right, #fb4208, #ff6a00);
+  color: white;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.4rem 0;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: block;
+}
+.alert {
+  font-size: 0.8rem;
+  color: #d32f2f;
+  margin-top: 0.4rem;
+}
+.link-container {
+  margin-top: 1rem;
+}
+.link {
+  font-size: 0.9rem;
+  display: block;
+  margin-top: 0.6rem;
+}

@@ -5,7 +5,7 @@ import ContactUs from "./Components/ContactUs/ContactUs";
 import ProductPage from "./Components/ProductPage/ProductPage";
 import AddComment from "./Components/AddComment/AddComment";
 import Login from "./Components/Login/Login";
-import Register from "./Components/Resgister/Register";
+import Register from "./Components/Register/Register";
 import Cart from "./Components/Cart/Cart";
 import Checkout from "./Components/Checkout/Checkout";
 const routes = [

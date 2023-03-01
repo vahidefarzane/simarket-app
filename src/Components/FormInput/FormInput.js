@@ -18,9 +18,11 @@ const InputLabelStyled = styled(InputLabel)(({ theme }) => ({
 
 export default function FormInput(props) {
   return (
+    <>
     <FormControl variant="outlined" sx={{ marginBottom: "1.5rem" }}>
       <InputLabelStyled>{props.lable}</InputLabelStyled>
       <Input type={props.type} />
     </FormControl>
+    </>
   );
 }

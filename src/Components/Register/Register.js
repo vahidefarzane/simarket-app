@@ -1,9 +1,9 @@
 import { Stack, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
-import { useForm } from "react-hook-form";
 import Logo from "../../logo.png";
+import { useForm } from "react-hook-form";
+import "./Register.css";
 
 const ContainerImage = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -21,13 +21,12 @@ const submitHandeler = (data) => {
   console.log(data);
 };
 
-export default function Login() {
+export default function Register() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   return (
     <Stack
       sx={{
@@ -42,8 +41,8 @@ export default function Login() {
           width: {
             lg: "75%",
             md: "94%",
-            sm: "50%",
-            xs: "70%",
+            sm: "60%",
+            xs: "100%",
           },
           justifyContent: "center",
           margin: {
@@ -66,15 +65,14 @@ export default function Login() {
             },
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
           }}
         >
-          <Stack sx={{ width: "85%" }}>
-            <Box sx={{ margin: "auto", marginBottom: "2rem" }}>
+          <Stack sx={{ width: "90%" }}>
+            <Box sx={{ margin: "1rem auto" }}>
               <Box
                 component="img"
                 sx={{
-                  width: 130,
+                  width: 150,
                 }}
                 alt="Your logo"
                 src={Logo}
@@ -90,7 +88,15 @@ export default function Login() {
                 className="input-form"
               />
               <p className="alert">{errors.userName?.message}</p>
-
+              <label className="lable">ایمیل :</label>
+              <input
+                {...register("email", {
+                  required: "لطفا ایمیل خود را وارد کنید .",
+                })}
+                type="email"
+                className="input-form"
+              />
+              <p className="alert">{errors.email?.message}</p>
               <label className="lable">گذرواژه :</label>
               <input
                 {...register("password", {
@@ -100,15 +106,11 @@ export default function Login() {
                 className="input-form"
               />
               <p className="alert">{errors.password?.message}</p>
-              <input type="submit" className="submit-btn" value="ورود" />
+              <input type="submit" className="submit-btn" value="ثبت نام" />
               <div className="link-container">
-                <span className="link">
-                     رمز عبور خود را فراموش کردید؟
-                  <Link to="/register">بازیابی رمز عبور</Link>
-                </span>
-                <span className="link">
-                  قبلا ثبت نام نکردید؟ <Link to="/register">ثبت نام</Link>
-                </span>
+
+              <span className="link"> قبلا ثبت نام کردید؟ <Link to='/login'>ورود</Link></span>
+              
               </div>
             </form>
           </Stack>
@@ -116,7 +118,7 @@ export default function Login() {
 
         <ContainerImage>
           <Box
-            sx={{ width: "85%", height: "27rem" }}
+            sx={{ width: "87%", height: "29rem" }}
             component="img"
             alt="Your logo"
             src="./images/login.png"

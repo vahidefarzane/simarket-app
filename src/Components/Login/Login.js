@@ -1,9 +1,12 @@
-import { Stack, Box } from "@mui/material";
+import { useState } from "react";
+import { Stack, Box,Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+
 import { Link } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Logo from "../../logo.png";
+import axios from "axios";
 
 const ContainerImage = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -27,6 +30,32 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [loginSuccessSnackbar, setLoginSuccessSnackbar] = useState(false);
+  const [loginFailedSnackbar, setLoginFailedSnackbar] = useState(false);
+  const handleClose = () => {
+    setLoginSuccessSnackbar(false);
+    setLoginFailedSnackbar(false)
+  };
+
+  const submitHandeler = (data) => {
+    axios
+      .get(
+        `http://localhost:4000/users?username=${data.userName}&password=${data.password}`
+      )
+      .then((response) => {
+        if (response.data.length) {
+          console.log(response.data[0].username);
+          localStorage.setItem("username", response.data[0].username);
+          setLoginSuccessSnackbar(true);
+
+          setTimeout(() => {
+            window.location.href = "http://localhost:3000";
+          }, 2000);
+        } else {
+          setLoginFailedSnackbar(true)
+        }
+      });
+  };
 
   return (
     <Stack
@@ -103,13 +132,33 @@ export default function Login() {
               <input type="submit" className="submit-btn" value="ورود" />
               <div className="link-container">
                 <span className="link">
-                     رمز عبور خود را فراموش کردید؟
+                  رمز عبور خود را فراموش کردید؟
                   <Link to="/register">بازیابی رمز عبور</Link>
                 </span>
                 <span className="link">
                   قبلا ثبت نام نکردید؟ <Link to="/register">ثبت نام</Link>
                 </span>
               </div>
+              <Snackbar
+                open={loginSuccessSnackbar}
+                autoHideDuration={2000}
+                onClose={handleClose}
+                
+              >
+                <MuiAlert elevation={6} variant="filled" severity="success">
+                  شما با موفیت وارد شدید
+                </MuiAlert>
+              </Snackbar>
+              <Snackbar
+                open={loginFailedSnackbar}
+                autoHideDuration={2000}
+                onClose={handleClose}
+                
+              >
+                <MuiAlert elevation={6} variant="filled" severity="error">
+              اطلاعات درست را وارد کنید
+                </MuiAlert>
+              </Snackbar>
             </form>
           </Stack>
         </Box>

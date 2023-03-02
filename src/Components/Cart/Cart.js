@@ -96,7 +96,6 @@ export default function Cart() {
   };
 
   const handleBack = () => {
-    console.log('hi');
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 

@@ -183,8 +183,9 @@ export default function Navbar(props) {
   };
   const contextData = useContext(productsContext);
 
-  function removeUserCartProduct(productID) {
-  }
+  function removeUserCartProduct(productID) {}
+
+  const userName = localStorage.getItem("username");
 
   const mobileview = (
     <BoxMobileView>
@@ -504,14 +505,14 @@ export default function Navbar(props) {
           <Box sx={{ flexGrow: 1 }} />
 
           <Box>
-            <Link to="/login">
+            <Link to={userName? '/contactUs':"/login"}>
               <MyButton
                 marginleft={"1.5rem"}
                 borderradius={"1.8rem"}
                 fontsize={"0.8rem"}
                 padding={"0.75rem 1.5rem"}
               >
-                ورود / ثبت نام
+                {userName || " ورود / ثبت نام"}
               </MyButton>
             </Link>
             <IconButton

@@ -1,8 +1,11 @@
-import { Stack, Box } from "@mui/material";
+import { useState } from "react";
+import { Stack, Box, Snackbar } from "@mui/material";
 import { Link } from "react-router-dom";
+import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import Logo from "../../logo.png";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import "./Register.css";
 
 const ContainerImage = styled(Box)(({ theme }) => ({
@@ -17,16 +20,33 @@ const ContainerImage = styled(Box)(({ theme }) => ({
   },
 }));
 
-const submitHandeler = (data) => {
-  console.log(data);
-};
-
 export default function Register() {
+  const [registerSuccessSnackbar, setRegisterSuccessSnackbar] = useState(false);
+  const handleClose = () => {
+    setRegisterSuccessSnackbar(false);
+  };
+  const submitHandeler = (data) => {
+    axios
+      .post("http://localhost:4000/users/", {
+        username: data.userName,
+        email: data.email,
+        password: data.password,
+      })
+      .then((response) => {
+        console.log(response);
+        setRegisterSuccessSnackbar(true);
+        setTimeout(() => {
+          window.location.href = "http://localhost:3000/login";
+        }, 2000);
+      });
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   return (
     <Stack
       sx={{
@@ -108,10 +128,19 @@ export default function Register() {
               <p className="alert">{errors.password?.message}</p>
               <input type="submit" className="submit-btn" value="ثبت نام" />
               <div className="link-container">
-
-              <span className="link"> قبلا ثبت نام کردید؟ <Link to='/login'>ورود</Link></span>
-              
+                <span className="link">
+                  قبلا ثبت نام کردید؟ <Link to="/login">ورود</Link>
+                </span>
               </div>
+              <Snackbar
+                open={registerSuccessSnackbar}
+                autoHideDuration={2000}
+                onClose={handleClose}
+              >
+                <MuiAlert elevation={6} variant="filled" severity="success">
+                  ثبت نام شما با موفقیت انجام شد
+                </MuiAlert>
+              </Snackbar>
             </form>
           </Stack>
         </Box>

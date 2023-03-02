@@ -385,7 +385,7 @@ export default function ProductsList() {
                 productImage={product.image}
                 productTtile={product.title}
                 productPrice={product.price}
-                productRate={product.rating.rate}
+                // productRate={product.rating.rate}
                 ProductId={product.id}
                 offer={product.off}
               />

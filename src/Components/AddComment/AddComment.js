@@ -9,9 +9,14 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { React, useState } from "react";
+import { useForm } from "react-hook-form";
+
 import CommentSlider from "../CommentSlider/CommentSlider";
-import Input from "../Input/Input";
+import axios from "axios";
+
 import MyButton from "../MyButton/MyButton";
+import useFetch from "../../hooks/useFetch";
+import "./AddComment.css";
 
 export default function AddComment() {
   const [sliderInfo, setSliderInfo] = useState([
@@ -22,6 +27,27 @@ export default function AddComment() {
   ]);
 
   const [addRate, setAddRate] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { product, ispendingProduct } = useFetch(
+    `http://localhost:4000${window.location.pathname.slice(0, 11)}`
+  );
+  
+  console.log(product);
+  const submitHandeler = (data) => {
+    axios
+      .post(`http://localhost:4000/products/`, {
+        user: data.user,
+        commentText: data.commentText,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+  };
 
   return (
     <Stack
@@ -59,7 +85,7 @@ export default function AddComment() {
         >
           <Box
             component={"img"}
-            src="./images/jacket.jpg"
+            src={product.image}
             sx={{
               width: {
                 lg: "75%",
@@ -118,87 +144,111 @@ export default function AddComment() {
           marginTop: "1.5rem",
         }}
       >
-        <Input width="100%" lable="عنوان نظر شما (اجباری) *"></Input>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Input width="49%" lable="نقاط ضعف"></Input>
-          <Input width="49%" lable="نقاط قوت"></Input>
-        </Box>
-        <Typography
-          component="legend"
-          sx={{ fontSize: "1rem", margin: "0.5rem 0 0.3rem 0" }}
-        >
-          امتیاز شما
-        </Typography>
-        <Rating
-          value={addRate}
-          onChange={(event, newValue) => {
-            setAddRate(newValue);
-          }}
-        />
-        <Typography
-          sx={{
-            fontSize: "0.9rem",
-            color: "#9e9e9e",
-            margin: "1.5rem 0 1rem 0",
-          }}
-        >
-          دیدگاه شما
-        </Typography>
-
-        <TextareaAutosize
-          style={{
-            borderRadius: "0.6rem",
-            fontSize: "0.9rem",
-            width: "100%",
-            height: "9rem",
-            borderColor: "#B2B1B1",
-          }}
-        />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: "1rem",
-          }}
-        >
-          <Input width="49%" lable="نام"></Input>
-          <Input width="49%" lable="ایمیل"></Input>
-        </Box>
-        <Box sx={{ display: "flex", marginBottom: "1.5rem" }}>
-          <Checkbox
+        <form onSubmit={handleSubmit(submitHandeler)}>
+          <Box
             sx={{
-              p: 0,
-              ml: 1,
-              "&.Mui-checked": {
-                color: "#fb4208",
-              },
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "1.5rem",
+            }}
+          >
+            <Box sx={{ width: "49%" }}>
+              <label className="lable">نام کاربری</label>
+              <input
+                {...register("user", {
+                  required: "این فیلد الزامی است",
+                })}
+                type="text"
+                className="input-form"
+              />
+            </Box>
+            <Box sx={{ width: "49%" }}>
+              <label className="lable">ایمیل :</label>
+              <input
+                // {...register("password", {
+                //   required: "لطفا گذرواژه خود را وارد کنید .",
+                // })}
+                type="email"
+                className="input-form"
+              />
+            </Box>
+          </Box>
+          <Typography
+            component="legend"
+            sx={{
+              fontSize: "1rem",
+              margin: "0.5rem 0 0.3rem 0",
+              color: "#757373",
+            }}
+          >
+            امتیاز شما
+          </Typography>
+          <Rating
+            value={addRate}
+            onChange={(event, newValue) => {
+              setAddRate(newValue);
             }}
           />
           <Typography
             sx={{
-              fontSize: {
-                md: "0.9rem",
-                xs: "0.8rem",
-              },
+              fontSize: "0.9rem",
+              color: "#757373",
+              margin: "1.5rem 0 1rem 0",
             }}
           >
-            ذخیره نام، ایمیل و وبسایت من در مرورگر برای زمانی که دوباره دیدگاهی
-            می‌نویسم.
+            دیدگاه شما :
           </Typography>
-        </Box>
 
-        <MyButton
-          widthupmd="20%"
-          display="block"
-          marginBottom="1.5rem"
-          widthbetweenmdsm="25%"
-          widthdownsm="20%"
-        >
-          ثبت
-        </MyButton>
-        <Link style={{ fontSize: "0.9rem", textDecoration: "underLine" }}>
-          انصراف و بازگشت
-        </Link>
+          <TextareaAutosize
+            style={{
+              borderRadius: "0.6rem",
+              fontSize: "0.9rem",
+              width: "100%",
+              height: "9rem",
+              borderColor: "#757373",
+            }}
+            {...register("commentText", {
+              required: "این فیلد الزامی است",
+            })}
+          />
+
+          <Box sx={{ display: "flex", margin: "1.5rem 0" }}>
+            <Checkbox
+              sx={{
+                p: 0,
+                ml: 1,
+                "&.Mui-checked": {
+                  color: "#fb4208",
+                },
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: {
+                  md: "0.9rem",
+                  xs: "0.8rem",
+                },
+              }}
+            >
+              ذخیره نام، ایمیل و وبسایت من در مرورگر برای زمانی که دوباره
+              دیدگاهی می‌نویسم.
+            </Typography>
+          </Box>
+
+          <MyButton
+            widthupmd="20%"
+            display="block"
+            marginBottom="1.5rem"
+            widthbetweenmdsm="25%"
+            widthdownsm="20%"
+            type="submit"
+          >
+            ثبت
+          </MyButton>
+          <Link style={{ fontSize: "0.9rem", textDecoration: "underLine" }}>
+            انصراف و بازگشت
+          </Link>
+        </form>
       </Box>
     </Stack>
   );

@@ -1,5 +1,14 @@
-import React from "react";
-import { Box, InputBase, IconButton, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import {
+  Box,
+  InputBase,
+  IconButton,
+  List,
+  ListItemText,
+  Typography,
+  ListItem,
+  Divider,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -7,6 +16,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 import SearchBoxBtn from "../SearchBoxBtn/SearchBoxBtn";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Search = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -28,22 +39,17 @@ const Search = styled(Box)(({ theme }) => ({
   },
 }));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  padding: "0.2rem",
+  padding: "0.2rem 1rem",
   width: "100%",
 }));
-const IconButtonStyled = styled(IconButton)(({ theme }) => ({
-  "&.MuiIconButton-root": {
-    "&:hover": {
-      backgroundColor: "transparent",
-    },
-  },
-}));
+
 const SearchListBox = styled(Box)(({ theme }) => ({
   position: "relative",
   border: "1px solid #e2e2e2",
   borderRadius: "0.6rem",
   width: "87%",
-  zIndex: "10",
+  height: "20rem",
+  zIndex: "100",
   background: "#fff",
   top: "0.7rem",
   right: "2rem",
@@ -54,25 +60,20 @@ const SearchListBox = styled(Box)(({ theme }) => ({
 }));
 export default function SearchBox() {
   const [showList, setShowList] = useState(false);
-  const [hotBtns, setHotBtns] = useState([
-    { id: 1, name: "گوشی و موبایل", link: "" },
-    { id: 2, name: "آیفون", link: "" },
-    { id: 3, name: "اپل واچ", link: "" },
-    { id: 4, name: "ساعت مچی", link: "" },
-  ]);
+  const [productsSearch, setProductsSearch] = useState(null);
 
-  const focusInputHandeler = () => {
+  const [searchValue, setSearchValue] = useState("");
+
+  const productvalue = (e) => {
     setShowList(true);
-    console.log("f");
+    setSearchValue(e.target.value);
+    axios
+      .get(`http://localhost:4000/products?q=${searchValue}`)
+      .then((products) => {
+        setProductsSearch(products.data);
+      });
   };
-  const searchHandeler = () => {
-    console.log("s");
-  };
-  const blurInputHandler = () => {
-    console.log("b");
-    setShowList(false);
-  };
-
+  useEffect(() => {}, [productsSearch]);
   return (
     <Box
       sx={{
@@ -87,24 +88,39 @@ export default function SearchBox() {
       }}
     >
       <Search>
-        <IconButtonStyled onClick={searchHandeler}>
-          <SearchIcon />
-        </IconButtonStyled>
         <StyledInputBase
           placeholder="جستجو..."
-          onFocus={focusInputHandeler}
-          onBlur={blurInputHandler}
+          onChange={productvalue}
+          value={searchValue}
         />
       </Search>
       {showList && (
         <SearchListBox>
-          <Box sx={{ display: "flex", marginBottom: "1rem" }}>
-            <WhatshotIcon sx={{ marginLeft: "0.7rem" }} />
-            <Typography>جستجوی پرطرفدار</Typography>
-          </Box>
-          {hotBtns.map((btn) => (
-            <SearchBoxBtn key={btn.id} name={btn.name} />
-          ))}
+          {productsSearch &&
+            productsSearch.map((productSearch) => (
+              <>
+                <Link
+                  to={`products/${productSearch.id}`}
+                  key={productSearch.id}
+                >
+                  <Typography
+                    onClick={() => {
+                      setShowList(false)
+                      setSearchValue(productSearch.title)
+
+                    }}
+                    sx={{
+                      color: "#000",
+                      fontSize: "0.9rem",
+                      padding: "0.4rem 0",
+                    }}
+                  >
+                    {productSearch.title}
+                  </Typography>
+                </Link>
+                <Divider />
+              </>
+            ))}
         </SearchListBox>
       )}
     </Box>

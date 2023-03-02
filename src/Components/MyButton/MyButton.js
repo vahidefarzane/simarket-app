@@ -3,11 +3,13 @@ import { Button } from "@mui/material";
 export default function MyButton(props) {
   return (
     <Button
+    
       
       variant="contained"
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       onClick={props.onClick}
+      type={props.type}
       sx={{
         display:props.display,
         width:{

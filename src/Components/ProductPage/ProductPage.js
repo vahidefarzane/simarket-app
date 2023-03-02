@@ -30,6 +30,7 @@ import AddCommentIcon from "@mui/icons-material/AddComment";
 import ProductProgressInfos from "../ProductProgressInfos/ProductProgressInfos";
 import ReactImageMagnify from "react-image-magnify";
 import productsContext from "../../Contexts/ProductsContext";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -258,9 +259,18 @@ export default function ProductsList() {
     setvaluedata(newValue);
   };
 
-  const { product, ispendingProduct } = useFetch(
-    `http://localhost:4000${window.location.pathname}`
-  );
+  const [product, setProduct] = useState("");
+  const [ispendingProduct, setIspendingProduct] = useState(false);
+  
+  axios
+    .get(`http://localhost:4000${window.location.pathname}`)
+    .then((products) => {
+      setProduct(products.data);
+      setIspendingProduct(true)
+    });
+  useEffect(()=>{
+
+  },[product])
 
   const contextData = useContext(productsContext);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -591,11 +601,7 @@ export default function ProductsList() {
                   autoHideDuration={3000}
                   onClose={handleClose}
                 >
-                  <MuiAlert
-                    elevation={6}
-                    variant="filled"
-                    severity="success"
-                  >
+                  <MuiAlert elevation={6} variant="filled" severity="success">
                     محصول با موفقیت به سبد خرید اضافه شد
                   </MuiAlert>
                 </Snackbar>
@@ -810,7 +816,7 @@ export default function ProductsList() {
                       اگر این محصول را قبلا از این فروشگاه خریده باشید، نظر شما
                       به عنوان مالک محصول ثبت خواهد شد.
                     </Typography>
-                    <Link to="/addComment">
+                    <Link to={`/products/${product.id}/addcomment`}>
                       <MyButton
                         startIcon={
                           <AddCommentIcon
@@ -847,13 +853,30 @@ export default function ProductsList() {
                 <Box sx={{ margin: "4rem 0" }}>
                   <Typography
                     component={"h2"}
-                    sx={{ marginBottom: "1rem", fontWeight: "bold" }}
+                    sx={{ marginBottom: "2rem", fontWeight: "bold" }}
                   >
                     نظرات کاربران
                   </Typography>
-                  <Typography component={"p"} sx={{ fontSize: "0.9rem" }}>
-                    هیچ دیدگاهی برای این محصول نوشته نشده است.
-                  </Typography>
+                  <Box>
+                    {product.comments.map((comment) => (
+                      <>
+                        <Typography
+                          component="h3"
+                          sx={{ fontSize: "1.2rem", margin: " 1rem 2rem" }}
+                        >
+                          {comment.user} -
+                          <Typography component="span"> 1401/11/13</Typography>
+                        </Typography>
+                        <Typography
+                          component="p"
+                          sx={{ margin: "0 2rem 1rem" }}
+                        >
+                          {comment.commentText}
+                        </Typography>
+                        <Divider />
+                      </>
+                    ))}
+                  </Box>
                 </Box>
               </Stack>
             </TabPanel>

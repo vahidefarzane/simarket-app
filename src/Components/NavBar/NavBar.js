@@ -39,6 +39,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SearchBox from "../SearchBox/SearchBox";
 import HomeIcon from "@mui/icons-material/Home";
 import productsContext from "../../Contexts/ProductsContext";
+import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
 
 // desktop styled
 
@@ -184,8 +185,6 @@ export default function Navbar(props) {
   const contextData = useContext(productsContext);
 
   function removeUserCartProduct(productID) {}
-
-  const userName = localStorage.getItem("username");
 
   const mobileview = (
     <BoxMobileView>
@@ -504,20 +503,12 @@ export default function Navbar(props) {
           </Modal>
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box>
-            <Link to={userName? '/contactUs':"/login"}>
-              <MyButton
-                marginleft={"1.5rem"}
-                borderradius={"1.8rem"}
-                fontsize={"0.8rem"}
-                padding={"0.75rem 1.5rem"}
-              >
-                {userName || " ورود / ثبت نام"}
-              </MyButton>
-            </Link>
+          <Box sx={{display:'flex'}}>
+            <NavbarPanelBtn  />
+
             <IconButton
               aria-label="card"
-              sx={{ color: "#212121" }}
+              sx={{ color: "#212121",marginRight:'1.5rem' }}
               onClick={openCardHandler}
             >
               <Badge badgeContent={contextData.userCart.length} sx={badgeStyle}>

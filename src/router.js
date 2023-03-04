@@ -8,6 +8,7 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import Cart from "./Components/Cart/Cart";
 import Checkout from "./Components/Checkout/Checkout";
+import Panel from "./Components/Panel/Panel";
 const routes = [
   { path: "/", element: <Home /> },
   { path: "/productsList", element: <ProductsList /> },
@@ -18,6 +19,7 @@ const routes = [
   { path: "/register", element: <Register /> },
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },
+  { path: "/panel", element: <Panel /> },
 ];
 
 export default routes;

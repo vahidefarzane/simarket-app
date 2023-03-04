@@ -1,0 +1,12 @@
+.list-item-navbar {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  color: #000;
+  cursor: pointer;
+  transition: color 0.5s;
+  
+}
+.list-item-navbar:hover{
+    color: red;
+}

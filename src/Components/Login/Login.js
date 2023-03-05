@@ -146,7 +146,7 @@ export default function Login() {
                 
               >
                 <MuiAlert elevation={6} variant="filled" severity="success">
-                  شما با موفیت وارد شدید
+                  شما با موفقیت وارد شدید
                 </MuiAlert>
               </Snackbar>
               <Snackbar

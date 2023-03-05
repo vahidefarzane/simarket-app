@@ -134,7 +134,7 @@ export default function NavbarPanelBtn() {
                   />
                 </>
               ))}
-              <Link onClick={openDialog} to="" className="list-item-navbar">
+              <Link onClick={openDialog} to="/" className="list-item-navbar">
                 <Icon>
                   <LogoutOutlinedIcon />
                 </Icon>

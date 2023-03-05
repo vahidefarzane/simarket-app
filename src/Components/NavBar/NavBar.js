@@ -46,7 +46,7 @@ import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "white",
   color: "#212121",
-  height: "8rem",
+  height: "7rem",
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -70,10 +70,10 @@ const badgeStyle = {
 };
 const StyledList = styled(List)(() => ({
   padding: 0,
-  margin: "1rem 1rem 0 1rem",
+  margin: "0 1rem 0 1rem",
   display: "flex",
   fontSize: "0.8rem",
-  height: "5rem",
+  height: "4.5rem",
 }));
 
 // Responsive Style

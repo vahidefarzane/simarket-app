@@ -24,10 +24,19 @@ export default function Dashboard() {
           <Typography className="title-section">سفارش های من</Typography>
           <Button>مشاهده همه</Button>
         </Box>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex",flexWrap:'wrap' }}>
           {orderView.map((order) => (
-            <Box sx={{ display: "flex", alignItems: "center", width: "18rem" }}>
-              <order.icon sx={{ fontSize: "4rem", marginLeft: "0.8rem" }} />
+            <Box sx={{ display: "flex", alignItems: "center", width: {
+              md:"18rem",
+              xs:'14rem'
+            },marginBottom:{
+              md:0,
+              xs:'0.8rem'
+            } }}>
+              <order.icon sx={{ fontSize: {
+                md:'4rem',
+                xs:'3rem'
+              }, marginLeft: "0.8rem" }} />
               <Typography sx={{ fontSize: "0.9rem" }}>
                 {0} سفارش
                 <br /> {order.title}

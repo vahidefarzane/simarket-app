@@ -1,12 +1,44 @@
-.box-style{
-    padding: 1rem;
-    border: 1px solid #e3e3e3;
-    border-radius: 0.7rem;
-    margin-bottom: 1.5rem;
+.box-style {
+  padding: 1rem;
+  border: 1px solid #e3e3e3;
+  border-radius: 0.7rem;
+  margin-bottom: 1.5rem;
 }
-.title-section{
-    border-bottom: 1px solid #fb4707;
-    padding-bottom: 0.5rem;
-    font-weight: Bold !important;
-    font-size: 1.1rem !important;
+.title-section {
+  border-bottom: 1px solid #fb4707;
+  padding-bottom: 0.5rem;
+  font-weight: Bold !important;
+  font-size: 1.1rem !important;
+}
+
+.submit-btn-panel {
+  padding: 0.6rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 0.6rem;
+  background-color: rgb(160, 157, 157);
+  color: white;
+  cursor: pointer;
+}
+.lable-panel {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 1.1rem;
+  color: #333;
+  margin-top: 1.5rem;
+}
+.input-panel {
+  border: 1px solid #b2b1b1;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+.input-panel::placeholder {
+  font-size: 0.8rem;
+}
+
+.nessesary-field-style {
+  color: red;
+  font-size: 1.1rem;
+  margin-right: 0.1rem;
+  margin-left: 0.6rem;
 }

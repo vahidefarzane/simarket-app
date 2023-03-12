@@ -3,7 +3,10 @@ import { Box, Button, Typography } from "@mui/material";
 
 export default function Addresses() {
   return (
-    <Box className="box-style" sx={{ width: "50%" }}>
+    <Box className="box-style" sx={{ width: {
+      md:"50%",
+      xs:'100%'
+    } }}>
       <Box
         sx={{
           display: "flex",

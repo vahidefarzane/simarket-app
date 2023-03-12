@@ -85,11 +85,25 @@ export default function Panel() {
     <Box
       sx={{
         display: "flex",
-        padding: "1rem 2.5rem",
+        flexDirection: {
+          md: "row",
+          xs: "column",
+        },
+        padding: {
+          lg: "1rem 2.5rem",
+          xs: "1rem",
+        },
         justifyContent: "space-between",
       }}
     >
-      <Stack sx={{ width: "22%" }}>
+      <Stack
+        sx={{
+          width: {
+            lg: "22%",
+            md: "27%",
+          },
+        }}
+      >
         <Box
           className="box-style"
           sx={{
@@ -119,7 +133,17 @@ export default function Panel() {
             {userName}
           </Typography>
           <Box sx={{ display: "flex", color: "#666363" }}>
-            <BorderColorIcon sx={{ fontSize: "1rem", marginLeft: "0.4rem" }} />
+            <Link to="accountInfos">
+              <BorderColorIcon
+                sx={{
+                  fontSize: "1rem",
+                  marginLeft: "0.4rem",
+                  cursor: "pointer",
+                  color:"#333"
+                }}
+              />
+            </Link>
+
             <Typography sx={{ fontSize: "0.8rem" }}>
               اطلاعات حساب کاربری
             </Typography>
@@ -172,7 +196,14 @@ export default function Panel() {
           </List>
         </Box>
       </Stack>
-      <Stack sx={{ width: "76.5%" }}>
+      <Stack
+        sx={{
+          width: {
+            lg: "76.5%",
+            md: "71.5%",
+          },
+        }}
+      >
         <Outlet />
       </Stack>
     </Box>

@@ -21,7 +21,16 @@ export default function Orders() {
           }}
         >
           <Typography>محصولی در اینجا یافت شد.</Typography>
-          <MyButton href="/productsList">مشاهده محصولات</MyButton>
+          <MyButton
+            href="/productsList"
+            widthupmd="25%"
+            widthbetweenmdsm="25%"
+            widthdownsm="32%"
+            fontsizeupmd="0.9rem"
+            fontsizedownmd="0.8rem"
+          >
+            مشاهده محصولات
+          </MyButton>
         </Box>
       )}
     </>

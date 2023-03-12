@@ -503,12 +503,12 @@ export default function Navbar(props) {
           </Modal>
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box sx={{display:'flex'}}>
-            <NavbarPanelBtn  />
+          <Box sx={{ display: "flex" }}>
+            <NavbarPanelBtn />
 
             <IconButton
               aria-label="card"
-              sx={{ color: "#212121",marginRight:'1.5rem' }}
+              sx={{ color: "#212121", marginRight: "1.5rem" }}
               onClick={openCardHandler}
             >
               <Badge badgeContent={contextData.userCart.length} sx={badgeStyle}>

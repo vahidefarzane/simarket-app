@@ -20,7 +20,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import MuiAlert from "@mui/material/Alert";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import MyButton from "../MyButton/MyButton";
 import "./NavbarPanelBtn.css";
 
@@ -29,9 +29,24 @@ export default function NavbarPanelBtn() {
   const [loggoutSuccessSnackbar, setLoggoutSuccessSnackbar] = useState(false);
   const [dilog, setDialog] = useState(false);
   const [list, setList] = useState([
-    { id: 1, name: "پیشخوان", icon: <AccountCircleOutlinedIcon /> },
-    { id: 2, name: "سفارش ها", icon: <ListAltOutlinedIcon /> },
-    { id: 3, name: "علاقه مندی ها", icon: <FavoriteBorderOutlinedIcon /> },
+    {
+      id: 1,
+      name: "پیشخوان",
+      icon: <AccountCircleOutlinedIcon />,
+      to: "/panel/dashboard",
+    },
+    {
+      id: 2,
+      name: "سفارش ها",
+      icon: <ListAltOutlinedIcon />,
+      to: "/panel/orders",
+    },
+    {
+      id: 3,
+      name: "علاقه مندی ها",
+      icon: <FavoriteBorderOutlinedIcon />,
+      to: "/panel/favarates",
+    },
   ]);
   const userName = localStorage.getItem("username");
 
@@ -51,7 +66,7 @@ export default function NavbarPanelBtn() {
     setLoggoutSuccessSnackbar(true);
     setTimeout(() => {
       localStorage.removeItem("username");
-    }, 2000);
+    }, 1000);
   };
 
   const openDialog = () => {
@@ -120,7 +135,7 @@ export default function NavbarPanelBtn() {
                 <>
                   <Link
                     onClick={clickHandeler}
-                    to="/panel"
+                    to={listItem.to}
                     key={listItem.id}
                     className="list-item-navbar"
                   >
@@ -134,14 +149,15 @@ export default function NavbarPanelBtn() {
                   />
                 </>
               ))}
-              <Link onClick={openDialog} to="/" className="list-item-navbar">
+
+              <div onClick={openDialog} className="list-item-navbar">
                 <Icon>
-                  <LogoutOutlinedIcon />
+                  <LogoutOutlinedIcon sx={{color:"red"}} />
                 </Icon>
-                <Typography sx={{ padding: "0.5rem", fontSize: "0.9rem" }}>
+                <Typography sx={{ padding: "0.5rem", fontSize: "0.9rem" ,color:"red"}}>
                   خروج از سیستم
                 </Typography>
-              </Link>
+              </div>
               <Dialog open={dilog} onClose={closeDialog}>
                 <DialogContent>
                   <DialogContentText>
@@ -149,7 +165,9 @@ export default function NavbarPanelBtn() {
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={logOutAccountHandler}>بله</Button>
+                  <Link to="/">
+                    <Button onClick={logOutAccountHandler}>بله</Button>
+                  </Link>
                   <Button onClick={closeDialog}>خیر</Button>
                 </DialogActions>
               </Dialog>

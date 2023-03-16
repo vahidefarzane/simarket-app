@@ -40,6 +40,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import HomeIcon from "@mui/icons-material/Home";
 import productsContext from "../../Contexts/ProductsContext";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
+import useFetch from "../../hooks/useFetch";
 
 // desktop styled
 
@@ -90,8 +91,6 @@ const BoxMobileView = styled(Box)(({ theme }) => ({
 }));
 const BottomNavigationActionStyled = styled(BottomNavigationAction)(
   ({ theme }) => ({
-    minWidth: "1rem",
-    width: "25%",
     "&.Mui-selected": {
       color: " #fb4707",
     },
@@ -148,24 +147,8 @@ export default function Navbar(props) {
     setOpenLocation(false);
     localStorage.setItem("yourLocation", `${e.target.innerText}`);
   };
-  const [cities, setCities] = useState([
-    { id: 1, name: "خراسان رضوی" },
-    { id: 2, name: "تهران" },
-    { id: 3, name: "شیراز" },
-    { id: 4, name: "یزد" },
-    { id: 5, name: "اصفحان" },
-    { id: 6, name: "مازندران" },
-    { id: 7, name: "کرمان" },
-    { id: 7, name: "کرمان" },
-    { id: 7, name: "کرمان" },
-    { id: 7, name: "کرمان" },
-    { id: 7, name: "کرمان" },
-    { id: 7, name: "کرمان" },
-    { id: 7, name: "کرمان" },
-    { id: 7, name: "کرمان" },
-    { id: 7, name: "کرمان" },
-  ]);
 
+  const { cities, setCities } = useFetch("http://localhost:4000/cities");
   const [cardBar, setCardBar] = useState(false);
   const openCardHandler = () => {
     setCardBar(true);
@@ -186,6 +169,7 @@ export default function Navbar(props) {
 
   function removeUserCartProduct(productID) {}
 
+  const userName = localStorage.getItem("username");
   const mobileview = (
     <BoxMobileView>
       <Stack
@@ -196,8 +180,9 @@ export default function Navbar(props) {
           alignItems: "center",
           position: props.isSticky ? "fixed" : "unset",
           top: "0",
+          right: "0",
+          padding: "0.3rem",
           background: "#FFF",
-          padding: "1rem",
           zIndex: "999",
           boxShadow: props.isSticky
             ? "rgba(0, 0, 0, 0.24) 0px 3px 8px"
@@ -314,9 +299,34 @@ export default function Navbar(props) {
       >
         <SearchBox></SearchBox>
         <Box sx={{ flexGrow: 1 }} />
+
         <Link to="/login">
           <IconButton aria-label="login or register" sx={{ color: "#212121" }}>
-            <PersonOutlineOutlinedIcon />
+            {userName ? (
+              <Box>
+                <Typography
+                  component="span"
+                  sx={{
+                    fontSize: "0.6rem",
+                    position: "relative",
+                    color: "#000",
+                    backgroundColor: "green",
+                    right: "12px",
+                    bottom: "4px",
+                    color: "#fff",
+                    borderRadius: "50%",
+                    padding: "0.1rem 0.3rem",
+                  }}
+                >
+                  ✔
+                </Typography>
+                <PersonOutlineOutlinedIcon
+                  sx={{ "&.MuiSvgIcon-root": { fontSize: "2rem" } }}
+                />
+              </Box>
+            ) : (
+              <PersonOutlineOutlinedIcon sx={{ "&.MuiSvgIcon-root": { fontSize: "2rem",marginBottom:'0.35rem' } }} />
+            )}
           </IconButton>
         </Link>
         <IconButton
@@ -325,7 +335,9 @@ export default function Navbar(props) {
           onClick={openCardHandler}
         >
           <Badge badgeContent={contextData.userCart.length} sx={badgeStyle}>
-            <AddShoppingCartIcon />
+            <AddShoppingCartIcon
+              sx={{ marginBottom: "0.4rem", fontSize: "1.6rem" }}
+            />
           </Badge>
         </IconButton>
       </Stack>
@@ -366,7 +378,8 @@ export default function Navbar(props) {
         showLabels
         value={value}
         sx={{
-          justifyContent: "space-between",
+          display: "flex",
+          justifyContent: "space-around",
           boxShadow: "5px 6px 11px rgb(0 0 0 / 40%)",
           position: "fixed",
           bottom: 0,
@@ -374,29 +387,45 @@ export default function Navbar(props) {
           left: 0,
           zIndex: "1000",
           width: "100%",
+          paddingTop:'0.3rem'
         }}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
       >
-        <BottomNavigationActionStyled
-          label="خانه"
-          icon={<HomeIcon className="BottomNavigationAction" />}
-        />
-        <BottomNavigationActionStyled
-          label="دسته ها"
-          icon={<CategoryIcon className="BottomNavigationAction" />}
-        />
-        <BottomNavigationActionStyled
-          label="علاقه مندی ها"
-          icon={<FavoriteBorderIcon className="BottomNavigationAction" />}
-        />
-        <BottomNavigationActionStyled
-          label="حساب کاربری"
-          icon={
-            <PersonOutlineOutlinedIcon className="BottomNavigationAction" />
-          }
-        />
+        <Link to="/">
+          <BottomNavigationActionStyled
+            showLabel={true}
+            label="خانه"
+            icon={<HomeIcon className="BottomNavigationAction" />}
+          />
+        </Link>
+        <Link>
+          <BottomNavigationActionStyled
+            showLabel={true}
+
+            label="دسته ها"
+            icon={<CategoryIcon className="BottomNavigationAction" />}
+          />
+        </Link>
+        <Link to="/panel/favarates">
+          <BottomNavigationActionStyled
+            showLabel={true}
+
+            label="علاقه مندی ها"
+            icon={<FavoriteBorderIcon className="BottomNavigationAction" />}
+          />
+        </Link>
+        <Link to="/panel/dashboard">
+          <BottomNavigationActionStyled
+            showLabel={true}
+
+            label="حساب کاربری"
+            icon={
+              <PersonOutlineOutlinedIcon className="BottomNavigationAction" />
+            }
+          />
+        </Link>
       </BottomNavigation>
     </BoxMobileView>
   );
@@ -465,38 +494,39 @@ export default function Navbar(props) {
                     height: "400px",
                   }}
                 >
-                  {cities.map((city) => (
-                    <>
-                      <ListItem
-                        key={city.id}
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          width: "100%",
-                          padding: "0.3rem 0",
-                          cursor: "pointer",
-                          alignContent: "center",
-                        }}
-                      >
-                        <ListItemText
-                          componen="div"
-                          sx={{ textAlign: "right" }}
-                          onClick={(e) => cityHandeler(e)}
-                        >
-                          {city.name}
-                        </ListItemText>
-                        <ListItemIcon
+                  {cities &&
+                    cities.map((city) => (
+                      <>
+                        <ListItem
+                          key={city.id}
                           sx={{
                             display: "flex",
-                            justifyContent: "flex-end",
+                            justifyContent: "space-between",
+                            width: "100%",
+                            padding: "0.3rem 0",
+                            cursor: "pointer",
+                            alignContent: "center",
                           }}
                         >
-                          <ChevronLeftIcon sx={{ fontSize: "1.1rem" }} />
-                        </ListItemIcon>
-                      </ListItem>
-                      <Divider />
-                    </>
-                  ))}
+                          <ListItemText
+                            componen="div"
+                            sx={{ textAlign: "right" }}
+                            onClick={(e) => cityHandeler(e)}
+                          >
+                            {city.name}
+                          </ListItemText>
+                          <ListItemIcon
+                            sx={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                            }}
+                          >
+                            <ChevronLeftIcon sx={{ fontSize: "1.1rem" }} />
+                          </ListItemIcon>
+                        </ListItem>
+                        <Divider />
+                      </>
+                    ))}
                 </List>
               </Stack>
             </ModalStyled>

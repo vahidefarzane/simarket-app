@@ -5,11 +5,7 @@
       "title": "ست تیشرت و شلوار مردانه Paris مدل 19671 اسپرت ",
       "price": 485000,
       "numbersale": 150,
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "category": "تیشرت مردانه",
       "image": "/images/products/4.jpg",
       "rating": {
@@ -55,11 +51,7 @@
     {
       "id": 2,
       "title": "ست تیشرت و شلوار مردانه Nike مدل 21077",
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "price": 689000,
       "numbersale": 170,
       "category": "تیشرت مردانه",
@@ -102,11 +94,7 @@
     {
       "id": 3,
       "title": "تی شرت مردانه منان شهیدی مدل 3001158-26 سپرت ",
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "price": 335000,
       "numbersale": 280,
       "category": "تیشرت مردانه",
@@ -149,11 +137,7 @@
     {
       "id": 4,
       "title": "تی شرت آستین کوتاه مردانه آر اِن اِس مدل 12021314-23 ",
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "price": 329000,
       "numbersale": 15,
       "category": "تیشرت مردانه",
@@ -198,12 +182,7 @@
       "title": "کفش پیاده روی مردانه پاما مدل VR-821 کد G1592",
       "price": 865000,
       "numbersale": 325,
-      "size": [
-        40,
-        41,
-        42,
-        43
-      ],
+      "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
       "image": "/images/products/5.jpg",
       "rating": {
@@ -246,12 +225,7 @@
       "title": "کفش پیاده روی مردانه کلمبیا مدل FACET™ 15-811 ",
       "price": 885000,
       "numbersale": 12,
-      "size": [
-        40,
-        41,
-        42,
-        43
-      ],
+      "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
       "image": "/images/products/13.jpg",
       "rating": {
@@ -294,12 +268,7 @@
       "title": "کفش پیاده روی مردانه پاما مدل VR-824 کد G1600 ",
       "price": 765000,
       "numbersale": 658,
-      "size": [
-        40,
-        41,
-        42,
-        43
-      ],
+      "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
       "image": "/images/products/7.jpg",
       "rating": {
@@ -342,12 +311,7 @@
       "title": "کفش پیاده روی مردانه پاما مدل VR-822 کد G1602 ",
       "price": 550000,
       "numbersale": 40,
-      "size": [
-        40,
-        41,
-        42,
-        43
-      ],
+      "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
       "image": "/images/products/6.jpg",
       "rating": {
@@ -390,12 +354,7 @@
       "title": "کفش پیاده روی مردانه پاما مدل ساموئل کد G1421",
       "price": 256000,
       "numbersale": 89,
-      "size": [
-        40,
-        41,
-        42,
-        43
-      ],
+      "size": [40, 41, 42, 43],
       "category": "کیف و کفش",
       "image": "/images/products/8.jpg",
       "rating": {
@@ -606,11 +565,7 @@
       "title": "کاپشن مردانه Araz مدل 17435 اسپرت مردانه",
       "price": 652000,
       "numbersale": 45,
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "category": "هودی و سویشرت",
       "image": "/images/products/14.jpg",
       "rating": {
@@ -653,11 +608,7 @@
       "title": "هودی مردانه زی سا مدل 153156470 مانی سپرت",
       "price": 900000,
       "numbersale": 365,
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "category": "هودی و سویشرت",
       "image": "/images/products/16.jpg",
       "rating": {
@@ -700,11 +651,7 @@
       "title": "هودی مردانه فانتازیو کد ۲۶۳ سپرت پوش",
       "price": 856000,
       "numbersale": 57,
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "category": "هودی و سویشرت",
       "image": "/images/products/17.jpg",
       "rating": {
@@ -747,11 +694,7 @@
       "title": "هودی مردانه فانتازیو کد 143 یونی سپرت تک شیک  ",
       "price": 485000,
       "numbersale": 456,
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "category": "هودی و سویشرت",
       "image": "/images/products/15.jpg",
       "rating": {
@@ -794,11 +737,7 @@
       "title": "کت تک اسپرت مردانه مدل MONT4-۶4 set  ",
       "price": 485000,
       "numbersale": 47,
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "category": "کت شلوار",
       "image": "/images/products/18.jpg",
       "rating": {
@@ -841,11 +780,7 @@
       "title": "کت تک مردانه مدل LEN2-2 sport master",
       "price": 840000,
       "numbersale": 452,
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "category": "کت شلوار",
       "image": "/images/products/19.jpg",
       "rating": {
@@ -888,11 +823,7 @@
       "title": "کت تک مردانه مدل MONT 3-3 ست بانک",
       "price": 930000,
       "numbersale": 752,
-      "size": [
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "size": ["L", "XL", "XXL"],
       "category": "کت شلوار",
       "image": "/images/products/20.jpg",
       "rating": {
@@ -930,7 +861,6 @@
         }
       ]
     }
-    
   ],
   "categories": [
     {
@@ -983,5 +913,19 @@
       "password": 1376,
       "id": 1
     }
+  ],
+  "cities": [
+    { "id": 1, "name": "خراسان رضوی" },
+    { "id": 2, "name": "تهران" },
+    { "id": 3, "name": "شیراز" },
+    { "id": 4, "name": "یزد" },
+    { "id": 5, "name": "اصفحان" },
+    { "id": 6, "name": "مازندران" },
+    { "id": 7, "name": "کرمان" },
+    { "id": 8, "name": "بندر عباس" },
+    { "id": 9, "name": "سیستان و بلوچستان" },
+    { "id": 10, "name": "گرگان" },
+    { "id": 11, "name": "قم" },
+    { "id": 12, "name": "کرمانشاه" }
   ]
 }

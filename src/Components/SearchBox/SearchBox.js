@@ -16,11 +16,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 import SearchBoxBtn from "../SearchBoxBtn/SearchBoxBtn";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
+import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Search = styled(Box)(({ theme }) => ({
   display: "flex",
+  alignItems: "center",
   borderRadius: "0.7rem",
   color: "#212121",
   backgroundColor: "transparent",
@@ -39,23 +41,35 @@ const Search = styled(Box)(({ theme }) => ({
   },
 }));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  padding: "0.2rem 1rem",
+  padding: "0.2rem 1rem 0.2rem 0.2rem",
   width: "100%",
+  fontSize: "1rem",
+  [theme.breakpoints.up("sm")]: {
+    fontSize: "0.9rem",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.8rem",
+  },
 }));
 
 const SearchListBox = styled(Box)(({ theme }) => ({
-  position: "relative",
+  position: "absolute",
   border: "1px solid #e2e2e2",
   borderRadius: "0.6rem",
-  width: "87%",
-  height: "20rem",
+  width: "38%",
+  height: "21.5rem",
   zIndex: "100",
   background: "#fff",
-  top: "0.7rem",
-  right: "2rem",
-  padding: "1.5rem 2rem",
+  top: "4rem",
+  right: "11.5rem",
+  padding: "1rem",
+  overflowY: "auto",
   [theme.breakpoints.down("md")]: {
-    display: "none",
+    width: "100%",
+    right: "0",
+    top: "7rem",
+    padding: "0.5rem 0.6rem",
   },
 }));
 export default function SearchBox() {
@@ -74,6 +88,9 @@ export default function SearchBox() {
       });
   };
   useEffect(() => {}, [productsSearch]);
+  const clearInputSearch = () => {
+    setSearchValue("");
+  };
   return (
     <Box
       sx={{
@@ -82,7 +99,6 @@ export default function SearchBox() {
         height: "2.9rem",
         width: {
           md: "45%",
-          sm: "55%",
           xs: "70%",
         },
       }}
@@ -93,6 +109,12 @@ export default function SearchBox() {
           onChange={productvalue}
           value={searchValue}
         />
+        {searchValue && (
+          <CloseIcon
+            onClick={clearInputSearch}
+            sx={{ color: "#212121", marginLeft: "0.4rem", cursor: "pointer" }}
+          />
+        )}
       </Search>
       {showList && (
         <SearchListBox>
@@ -105,9 +127,8 @@ export default function SearchBox() {
                 >
                   <Typography
                     onClick={() => {
-                      setShowList(false)
-                      setSearchValue(productSearch.title)
-
+                      setShowList(false);
+                      setSearchValue(productSearch.title);
                     }}
                     sx={{
                       color: "#000",

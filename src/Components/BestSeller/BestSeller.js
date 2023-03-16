@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BestSeller() {
   const classes = useStyles();
-  const { allProducts, ispending } = useFetch("http://localhost:4000/products");
+  const { allProducts, ispending } = useFetch("http://localhost:4000/products?numbersale_gte=200&numbersale_lte=700");
 
   return (
     <Stack className={classes.bestSellerWrapper}>

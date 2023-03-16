@@ -15,6 +15,8 @@ export default function useFetch(url) {
   const [sortByPriceUp, setSortByPriceUp] = useState(null);
   const [sortByPriceDown, setSortByPriceDown] = useState(null);
 
+  const [cities,setCities]=useState(null)
+
   useEffect(() => {
     axios.get(url).then((products) => {
       setIsPending(true);
@@ -41,6 +43,9 @@ export default function useFetch(url) {
     axios.get(url).then((product) => {
       setSortByPriceDown(product.data);
     });
+    axios.get(url).then((cities) => {
+      setCities(cities.data);
+    });
   }, []);
   return {
     allProducts,
@@ -55,5 +60,7 @@ export default function useFetch(url) {
     sortBySale,
     sortByPriceUp,
     sortByPriceDown,
+    cities,
+setCities
   };
 }

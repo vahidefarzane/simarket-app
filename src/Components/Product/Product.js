@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     padding: " 1rem",
-    borderTop: "1px dashed #e2e2e2",
     [theme.breakpoints.between("md", "lg")]: {
       padding: "0.5rem 0.2rem",
     },
@@ -162,7 +161,7 @@ export default function Product(props) {
                 className={classes.productPriceNew}
                 sx={{ fontSize: "0.9rem" }}
               >
-                {productPrice} تومان
+                {productPrice - productPrice * (offer / 100)} تومان
               </Typography>
               <Typography
                 component={"span"}

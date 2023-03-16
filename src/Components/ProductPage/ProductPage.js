@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, React } from "react";
 import {
   Stack,
-  Slider,
+  Modal,
   Box,
   Typography,
   Divider,
@@ -25,12 +25,18 @@ import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
+import CloseIcon from "@mui/icons-material/Close";
 import { PropTypes } from "prop-types";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ProductProgressInfos from "../ProductProgressInfos/ProductProgressInfos";
 import ReactImageMagnify from "react-image-magnify";
 import productsContext from "../../Contexts/ProductsContext";
 import axios from "axios";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -261,16 +267,14 @@ export default function ProductsList() {
 
   const [product, setProduct] = useState("");
   const [ispendingProduct, setIspendingProduct] = useState(false);
-  
+
   axios
     .get(`http://localhost:4000${window.location.pathname}`)
     .then((products) => {
       setProduct(products.data);
-      setIspendingProduct(true)
+      setIspendingProduct(true);
     });
-  useEffect(()=>{
-
-  },[product])
+  useEffect(() => {}, [product]);
 
   const contextData = useContext(productsContext);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -318,6 +322,22 @@ export default function ProductsList() {
     }
   };
 
+  const [openShareBtns, setOpenShareBtns] = useState(false);
+
+  const openshare = () => {
+    setOpenShareBtns(true);
+  };
+  const handleCloseshare = () => {
+    setOpenShareBtns(false);
+  };
+
+  const [copyLink, setCopyLink] = useState("کپی لینک");
+  const copyLinkHandeler = () => {
+    setCopyLink("کپی شد");
+    setTimeout(() => {
+      setCopyLink("کپی لینک");
+    }, 2000);
+  };
   return (
     <>
       {ispendingProduct && (
@@ -332,7 +352,7 @@ export default function ProductsList() {
                 },
                 padding: {
                   md: "0 3rem 2rem 3rem",
-                  xs: "1rem 3rem",
+                  xs: "1rem",
                 },
               }}
             >
@@ -478,7 +498,7 @@ export default function ProductsList() {
                         fontWeight: "bold",
                       }}
                     >
-                      {product.price}
+                      {product.price - product.price * (product.off / 100)}
                     </Typography>
                   </Stack>
                 </Box>
@@ -532,9 +552,129 @@ export default function ProductsList() {
                         },
                       }}
                       startIcon={<ShareIcon sx={{ marginLeft: "0.7rem" }} />}
+                      onClick={openshare}
                     >
                       دوستاتو با خبر کن
                     </Button>
+                    <Modal
+                      open={openShareBtns}
+                      onClose={handleCloseshare}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box
+                        sx={{
+                          backgroundColor: "#fff",
+                          padding: "1rem",
+                          borderRadius: "0.6rem",
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          width: "29rem",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            paddingBottom: "0.5rem",
+                          }}
+                        >
+                          <Typography component="h2">اشتراک گذاری</Typography>
+                          <CloseIcon onClick={handleCloseshare} sx={{cursor:'pointer'}} />
+                        </Box>
+                        <Divider />
+                        <Typography
+                          sx={{ fontSize: "0.8rem", padding: "0.8rem 0" }}
+                        >
+                          با استفاده از روش‌های زیر می‌توانید این صفحه را با
+                          دوستان خود به اشتراک بگذارید.
+                        </Typography>
+                        <Divider />
+                        <Button
+                          onClick={copyLinkHandeler}
+                          sx={{
+                            width: "100%",
+                            border: "1px solid #878787 ",
+                            color: "#878787",
+                            marginTop: "0.8rem",
+                          }}
+                        >
+                          <ContentCopyIcon sx={{ marginLeft: "0.4rem" }} />
+                          {copyLink}
+                        </Button>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginTop: "0.9rem",
+                          }}
+                        >
+                          <Button
+                            sx={{
+                              width: "49%",
+                              background: "#25d366",
+                              color: "#fff",
+                              "&:hover":{
+                                backgroundColor:'#25d366'
+                              }
+                            }}
+                          >
+                            <WhatsAppIcon sx={{ marginLeft: "0.4rem" }} />
+                            واتساپ
+                          </Button>
+                          <Button
+                            sx={{
+                              width: "49%",
+                              background: "#3b5998",
+                              color: "#fff",
+                              "&:hover":{
+                                backgroundColor:'#3b5998'
+                              }
+                            }}
+                          >
+                            <FacebookIcon sx={{ marginLeft: "0.4rem" }} />
+                            فیسبوک
+                          </Button>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginTop: "0.3rem",
+                          }}
+                        >
+                          <Button
+                            sx={{
+                              width: "49%",
+                              background: "#139dd2",
+                              color: "#fff",
+                              "&:hover":{
+                                backgroundColor:'#139dd2'
+                              }
+                            }}
+                          >
+                            <TelegramIcon sx={{ marginLeft: "0.4rem" }} />
+                            تلگرام
+                          </Button>
+                          <Button
+                            sx={{
+                              width: "49%",
+                              background: "#4dcceb",
+                              color: "#fff",
+                              "&:hover":{
+                                backgroundColor:'#4dcceb'
+                              }
+                            }}
+                          >
+                            <TwitterIcon sx={{ marginLeft: "0.4rem" }} />
+                            توییتر
+                          </Button>
+                        </Box>
+                      </Box>
+                    </Modal>
                   </BoxShareProduct>
                 </Stack>
               </Box>

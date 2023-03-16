@@ -71,15 +71,17 @@ export default function Login() {
           width: {
             lg: "75%",
             md: "94%",
-            sm: "50%",
-            xs: "70%",
+            sm: "70%",
+            xs: "100%",
           },
           justifyContent: "center",
           margin: {
             md: "2rem 0",
             xs: "1rem 0",
           },
-          boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          boxShadow:{
+            sm: " rgba(0, 0, 0, 0.24) 0px 3px 8px"
+          },
           padding: {
             md: "2rem 1.5rem",
             xs: "1.5rem 1rem",

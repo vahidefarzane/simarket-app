@@ -9,12 +9,9 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  ListItem,
   ListItemButton,
-  ListItemText,
   List,
-  formLabelClasses,
-  Button,
+  
 } from "@mui/material";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
@@ -116,19 +113,13 @@ const H2ElemSideBar = styled(Typography)(({ theme }) => ({
   fontSize: "0.9rem",
   fontWeight: "600",
 }));
-const TextFieldStyled = styled(TextField)(({ theme }) => ({
-  "& .MuiInputBase-root": {
-    height: "2.5rem",
-    fontSize: "0.8rem",
-    marginLeft: "0.5rem",
-    color: "#81858b",
-  },
-}));
+
 const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
   transition: "none",
   color: " #4d4d4d",
   marginLeft: "0.3rem",
   display: "flex",
+  fontSize:'0.9rem',
 
   "&:hover": {
     background: "#ff6a00",
@@ -140,22 +131,16 @@ const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
     color: "#fff",
     borderRadius: "0.7rem",
   },
-  [theme.breakpoints.down("lg")]: {
+  [theme.breakpoints.down("md")]: {
     padding: "0.6rem",
   },
-  [theme.breakpoints.down("md")]: {
+  [theme.breakpoints.down("sm")]: {
     padding: "0.5rem",
-  },
-}));
-const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
-  "& .MuiTypography-root ": {
-    fontSize: "0.9rem",
+    fontSize:"0.8rem"
 
-    [theme.breakpoints.down("md")]: {
-      fontSize: "0.8rem",
-    },
   },
 }));
+
 
 export default function ProductsList() {
   const classes = useStyles();
@@ -169,12 +154,12 @@ export default function ProductsList() {
   // ================> Filter by Category <================
   const [filterbycategory, setfilterbycategory] = useState(null);
 
-  
 
   const checkboxHandler = (name, e) => {
-    setfilterbycategory(name);
+    let checked = e.target.checked;
+    // checked ? setCat((oldcat) => [...oldcat, name]) : <></>
+    checked ? setfilterbycategory(name) : setfilterbycategory(null);
   };
-
   // ================> Filter by price <================
 
   const [newValue, setNewValue] = useState(1000000);
@@ -240,28 +225,6 @@ export default function ProductsList() {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <H2ElemSideBar component={"h2"}>
-              فیلتر بر اساس دسته بندی :
-            </H2ElemSideBar>
-          </AccordionSummary>
-          <AccordionDetails>
-            {categoriesIsPenging &&
-              categories.map((category) => (
-                <Box className={classes.categoryBox}>
-                  <Checkbox
-                    onChange={(e) => checkboxHandler(category.name, e)}
-                  />
-                  <Typography component="span">{category.name}</Typography>
-                </Box>
-              ))}
-          </AccordionDetails>
-        </AccordionStyled>
-        <AccordionStyled defaultExpanded={true}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
             <H2ElemSideBar component={"h2"}>فیلتر بر اساس قیمت :</H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails sx={{ margin: " 0 0.7rem" }}>
@@ -307,13 +270,20 @@ export default function ProductsList() {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <H2ElemSideBar component={"h2"}>جستجو در محصولات :</H2ElemSideBar>
+            <H2ElemSideBar component={"h2"}>
+              فیلتر بر اساس دسته بندی :
+            </H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails>
-            <Box sx={{ display: "flex", marginTop: "1rem" }}>
-              <TextFieldStyled type="text" placeholder="جستجوی محصول ... " />
-              <MyButton>ثبت</MyButton>
-            </Box>
+            {categoriesIsPenging &&
+              categories.map((category) => (
+                <Box className={classes.categoryBox}>
+                  <Checkbox
+                    onChange={(e) => checkboxHandler(category.name, e)}
+                  />
+                  <Typography component="span">{category.name}</Typography>
+                </Box>
+              ))}
           </AccordionDetails>
         </AccordionStyled>
       </SideBarStyled>

@@ -4,7 +4,7 @@ import axios from "axios";
 export default function useFetch(url) {
   const [allProducts, setAllProducts] = useState("");
   const [ispending, setIsPending] = useState(false);
-  
+
   const [categories, setCategories] = useState("");
   const [categoriesIsPenging, setCategoriesIsPenging] = useState(false);
   const [bannerImgs, setBannerImgs] = useState("");
@@ -15,7 +15,10 @@ export default function useFetch(url) {
   const [sortByPriceUp, setSortByPriceUp] = useState(null);
   const [sortByPriceDown, setSortByPriceDown] = useState(null);
 
-  const [cities,setCities]=useState(null)
+  const [product, setProduct] = useState("");
+  const [ispendingProduct, setIspendingProduct] = useState(false);
+
+  const [cities, setCities] = useState(null);
 
   useEffect(() => {
     axios.get(url).then((products) => {
@@ -30,7 +33,7 @@ export default function useFetch(url) {
       setBannerImgsIsPending(true);
       setBannerImgs(bannerImg.data);
     });
-   
+
     axios.get(url).then((product) => {
       setSortByStars(product.data);
     });
@@ -46,6 +49,10 @@ export default function useFetch(url) {
     axios.get(url).then((cities) => {
       setCities(cities.data);
     });
+    axios.get(url).then((product) => {
+      setIspendingProduct(true);
+      setProduct(product.data);
+    });
   }, []);
   return {
     allProducts,
@@ -55,12 +62,14 @@ export default function useFetch(url) {
     categoriesIsPenging,
     bannerImgs,
     bannerImgsIsPending,
-    
+
     sortByStars,
     sortBySale,
     sortByPriceUp,
     sortByPriceDown,
     cities,
-setCities
+    setCities,
+    product,
+    ispendingProduct,
   };
 }

@@ -249,16 +249,11 @@ function a11yProps(index) {
 export default function ProductsList() {
   const classes = useStyles();
 
-  const [alignment, setAlignment] = useState("L");
-
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
   const [value, setValue] = useState("one");
 
-  const handleChange1 = (event, newValue) => {
-    setValue(newValue);
-  };
+  // const handleChange1 = (event, newValue) => {
+  //   setValue(newValue);
+  // };
   const [valuedata, setvaluedata] = useState(0);
 
   const handleChange3 = (event, newValue) => {
@@ -268,13 +263,27 @@ export default function ProductsList() {
   const [product, setProduct] = useState("");
   const [ispendingProduct, setIspendingProduct] = useState(false);
 
+  const [defaultSize, setDefaultSize] = useState(null);
+  const [alignment, setAlignment] = useState("defaultSize");
+
   axios
     .get(`http://localhost:4000${window.location.pathname}`)
     .then((products) => {
       setProduct(products.data);
       setIspendingProduct(true);
     });
-  useEffect(() => {}, [product]);
+
+  useEffect(() => {
+    // if (product.size.lenght === 3) {
+    //   setDefaultSize("L");
+    // } else {
+    //   setDefaultSize("40");
+    // }
+  }, [product]);
+
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
 
   const contextData = useContext(productsContext);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -583,7 +592,10 @@ export default function ProductsList() {
                           }}
                         >
                           <Typography component="h2">اشتراک گذاری</Typography>
-                          <CloseIcon onClick={handleCloseshare} sx={{cursor:'pointer'}} />
+                          <CloseIcon
+                            onClick={handleCloseshare}
+                            sx={{ cursor: "pointer" }}
+                          />
                         </Box>
                         <Divider />
                         <Typography
@@ -617,9 +629,9 @@ export default function ProductsList() {
                               width: "49%",
                               background: "#25d366",
                               color: "#fff",
-                              "&:hover":{
-                                backgroundColor:'#25d366'
-                              }
+                              "&:hover": {
+                                backgroundColor: "#25d366",
+                              },
                             }}
                           >
                             <WhatsAppIcon sx={{ marginLeft: "0.4rem" }} />
@@ -630,9 +642,9 @@ export default function ProductsList() {
                               width: "49%",
                               background: "#3b5998",
                               color: "#fff",
-                              "&:hover":{
-                                backgroundColor:'#3b5998'
-                              }
+                              "&:hover": {
+                                backgroundColor: "#3b5998",
+                              },
                             }}
                           >
                             <FacebookIcon sx={{ marginLeft: "0.4rem" }} />
@@ -651,9 +663,9 @@ export default function ProductsList() {
                               width: "49%",
                               background: "#139dd2",
                               color: "#fff",
-                              "&:hover":{
-                                backgroundColor:'#139dd2'
-                              }
+                              "&:hover": {
+                                backgroundColor: "#139dd2",
+                              },
                             }}
                           >
                             <TelegramIcon sx={{ marginLeft: "0.4rem" }} />
@@ -664,9 +676,9 @@ export default function ProductsList() {
                               width: "49%",
                               background: "#4dcceb",
                               color: "#fff",
-                              "&:hover":{
-                                backgroundColor:'#4dcceb'
-                              }
+                              "&:hover": {
+                                backgroundColor: "#4dcceb",
+                              },
                             }}
                           >
                             <TwitterIcon sx={{ marginLeft: "0.4rem" }} />
@@ -722,12 +734,11 @@ export default function ProductsList() {
                   value={alignment}
                   exclusive
                   onChange={handleChange}
-                  aria-label="Platform"
+                  aria-label="text alignment"
                 >
-                  {product.size &&
-                    product.size.map((size, index) => (
-                      <ToggleButton key={index}>{size}</ToggleButton>
-                    ))}
+                  {product.size.map((size) => (
+                    <ToggleButton value={size}>{size}</ToggleButton>
+                  ))}
                 </ToggleButtonGroup>
                 <MyButton
                   padding="0.9rem 0"

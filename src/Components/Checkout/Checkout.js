@@ -9,9 +9,9 @@ import {
   Radio,
   Button,
 } from "@mui/material";
-import Input from "../Input/Input";
-import SelectBox from "../SelectBox/SelectBox";
-import MyButton from "../MyButton/MyButton";
+import Input from "../../Components/Input/Input";
+import SelectBox from "../../Components/SelectBox/SelectBox";
+import MyButton from "../../Components/MyButton/MyButton";
 import productsContext from "../../Contexts/ProductsContext";
 
 export default function Checkout({ handleNext, handleBack }) {

@@ -1,13 +1,13 @@
-
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import MyButton from "../MyButton/MyButton";
+import MyButton from "../../Components/MyButton/MyButton";
 
-export default function Favarates() {
-  const [favarates, setFavarates] = useState(false);
+
+export default function Orders() {
+  const [orders, setOrders] = useState(false);
   return (
     <>
-      {favarates ? (
+      {orders ? (
         <Box>yes</Box>
       ) : (
         <Box

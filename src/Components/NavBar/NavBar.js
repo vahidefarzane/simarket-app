@@ -56,7 +56,6 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
     paddingTop: "0.2rem",
   },
 }));
-
 const LocationStyled = styled(Button)(() => ({
   borderRadius: "0.7rem",
   cursor: "pointer",

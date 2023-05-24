@@ -11,10 +11,10 @@ import { Link } from "react-router-dom";
 import { React, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import CommentSlider from "../CommentSlider/CommentSlider";
+import CommentSlider from "../../Components/CommentSlider/CommentSlider";
 import axios from "axios";
 
-import MyButton from "../MyButton/MyButton";
+import MyButton from "../../Components/MyButton/MyButton";
 import useFetch from "../../hooks/useFetch";
 import "./AddComment.css";
 
@@ -251,7 +251,10 @@ export default function AddComment() {
               >
                 ثبت
               </MyButton>
-              <Link to="" style={{ fontSize: "0.9rem", textDecoration: "underLine" }}>
+              <Link
+                to=""
+                style={{ fontSize: "0.9rem", textDecoration: "underLine" }}
+              >
                 انصراف و بازگشت
               </Link>
             </form>

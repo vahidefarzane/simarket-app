@@ -23,11 +23,11 @@ import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
 import { styled } from "@mui/material/styles";
-import MyButton from "../MyButton/MyButton";
-import SelectBox from "../SelectBox/SelectBox";
+import MyButton from "../../Components/MyButton/MyButton";
+import SelectBox from "../../Components/SelectBox/SelectBox";
 import Checkout from "../Checkout/Checkout";
-import OrderInfo from "../OrderInfo/OrderInfo";
-import Input from "../Input/Input";
+import OrderInfo from "../../Components/OrderInfo/OrderInfo";
+import Input from "../../Components/Input/Input";
 import Logo from "../../logo.png";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
@@ -39,7 +39,7 @@ import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/styles";
 
 import "./cart.css";
-import OrderReceived from "../OrderReceived/OrderReceived";
+import OrderReceived from "../../Components/OrderReceived/OrderReceived";
 
 const steps = ["سبد خرید", "صورتحساب", "فاکتور"];
 
@@ -155,7 +155,7 @@ export default function Cart() {
                   <Typography variant="caption"></Typography>
                 );
               }
-              
+
               return (
                 <Step key={label} {...stepProps}>
                   <StepLabel {...labelProps}>{label}</StepLabel>

@@ -11,17 +11,16 @@ import {
   AccordionDetails,
   ListItemButton,
   List,
-  
 } from "@mui/material";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-import Product from "../Product/Product";
+import Product from "../../Components/Product/Product";
 import SortIcon from "@mui/icons-material/Sort";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MyButton from "../MyButton/MyButton";
+import MyButton from "../../Components/MyButton/MyButton";
 import "./ProductsList.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -119,7 +118,7 @@ const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
   color: " #4d4d4d",
   marginLeft: "0.3rem",
   display: "flex",
-  fontSize:'0.9rem',
+  fontSize: "0.9rem",
 
   "&:hover": {
     background: "#ff6a00",
@@ -136,11 +135,9 @@ const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
   },
   [theme.breakpoints.down("sm")]: {
     padding: "0.5rem",
-    fontSize:"0.8rem"
-
+    fontSize: "0.8rem",
   },
 }));
-
 
 export default function ProductsList() {
   const classes = useStyles();
@@ -153,7 +150,6 @@ export default function ProductsList() {
 
   // ================> Filter by Category <================
   const [filterbycategory, setfilterbycategory] = useState(null);
-
 
   const checkboxHandler = (name, e) => {
     let checked = e.target.checked;

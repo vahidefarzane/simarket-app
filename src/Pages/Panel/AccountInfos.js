@@ -3,7 +3,7 @@ import { Box, Typography, Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 
 import { useForm } from "react-hook-form";
-import MyButton from "../MyButton/MyButton";
+import MyButton from "../../Components/MyButton/MyButton";
 
 export default function AccountInfos() {
   const [changeInfoAccount, setChangeIngoAccount] = useState(false);

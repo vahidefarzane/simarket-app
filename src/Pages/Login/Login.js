@@ -44,7 +44,7 @@ export default function Login() {
           localStorage.setItem("username", response.data[0].username);
           setLoginSuccessSnackbar(true);
           setTimeout(() => {
-            navigate('/')
+            navigate('/panel/dashboard')
           }, 2000);
         } else {
           setLoginFailedSnackbar(true);

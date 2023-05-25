@@ -20,27 +20,6 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import Logo from "../../logo.png";
 import MyButton from "../MyButton/MyButton";
 
-const FooterContainerStyled = styled(Stack)(({ theme }) => ({
-  backgroundColor: "#212121",
-  color: "#e8e8e8",
-  [theme.breakpoints.up("md")]: {
-    marginTop: "2rem",
-    padding: "2.3rem 1.5rem 0.5rem 1.5rem",
-  },
-  [theme.breakpoints.down("md")]: {
-    marginTop: "1.5rem",
-    padding: "2rem 1rem 4rem 1rem",
-  },
-}));
-const DesktopViewFooter = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.up("md")]: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
-}));
 const BtnFooter = styled(Button)(({ theme }) => ({
   backgroundColor: "transparent",
   border: " 1px solid #a1a3a8",
@@ -71,15 +50,7 @@ const TextFieldStyled = styled(TextField)(({ theme }) => ({
     width: " 100%",
   },
 }));
-const MobileViewFooter = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.up("md")]: {
-    display: "none",
-  },
-  [theme.breakpoints.down("md")]: {
-    display: "flex",
-    flexDirection: "column",
-  },
-}));
+
 export default function Footer() {
   const [footerMenu, setFooterMenu] = useState([
     {
@@ -108,8 +79,31 @@ export default function Footer() {
     },
   ]);
   return (
-    <FooterContainerStyled>
-      <DesktopViewFooter>
+    <Stack
+      sx={(theme) => ({
+        backgroundColor: "#212121",
+        color: "#e8e8e8",
+        [theme.breakpoints.up("md")]: {
+          marginTop: "2rem",
+          padding: "2.3rem 1.5rem 0.5rem 1.5rem",
+        },
+        [theme.breakpoints.down("md")]: {
+          marginTop: "1.5rem",
+          padding: "2rem 1rem 4rem 1rem",
+        },
+      })}
+    >
+      <Box
+        sx={(theme) => ({
+          [theme.breakpoints.up("md")]: {
+            display: "flex",
+            flexDirection: "column",
+          },
+          [theme.breakpoints.down("md")]: {
+            display: "none",
+          },
+        })}
+      >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box
             component="img"
@@ -292,8 +286,18 @@ export default function Footer() {
           با ذکر منبع بلامانع است. کلیه حقوق این سایت متعلق به پارس کالا
           می‌باشد.
         </Box>
-      </DesktopViewFooter>
-      <MobileViewFooter>
+      </Box>
+      <Box
+        sx={(theme) => ({
+          [theme.breakpoints.up("md")]: {
+            display: "none",
+          },
+          [theme.breakpoints.down("md")]: {
+            display: "flex",
+            flexDirection: "column",
+          },
+        })}
+      >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box
             component="img"
@@ -480,7 +484,7 @@ export default function Footer() {
           با ذکر منبع بلامانع است. کلیه حقوق این سایت متعلق به پارس کالا
           می‌باشد.
         </Box>
-      </MobileViewFooter>
-    </FooterContainerStyled>
+      </Box>
+    </Stack>
   );
 }

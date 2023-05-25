@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Stack, Box, Snackbar } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import Logo from "../../logo.png";
@@ -25,6 +25,9 @@ export default function Register() {
   const handleClose = () => {
     setRegisterSuccessSnackbar(false);
   };
+
+  const navigate = useNavigate();
+
   const submitHandeler = (data) => {
     axios
       .post("http://localhost:4000/users/", {
@@ -36,7 +39,8 @@ export default function Register() {
         console.log(response);
         setRegisterSuccessSnackbar(true);
         setTimeout(() => {
-          window.location.href = "http://localhost:3000/login";
+          navigate('/login')
+
         }, 2000);
       });
   };

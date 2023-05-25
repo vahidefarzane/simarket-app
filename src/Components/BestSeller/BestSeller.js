@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useFetch from "../../hooks/useFetch";
 import { Box, Stack } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import MyButton from "../MyButton/MyButton";
 import HomeProductBox from "../HomeProductBox/HomeProductBox";
 import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
 import "./BestSeller.css";
@@ -14,33 +12,30 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-const useStyles = makeStyles((theme) => ({
-  bestSellerWrapper: {
-    margin: "2rem 0",
-    backgroundColor: "#212121",
-    padding: "0 1rem",
-    display: "flex",
-    justifyContent: "space-between",
-    [theme.breakpoints.down("md")]: {
-      padding: "1rem",
-    },
-    [theme.breakpoints.down("sm")]: {
-      padding: "0.6rem 2rem",
-    },
-    [theme.breakpoints.down("xs")]: {
-      padding: "0.7rem 3rem",
-    },
-  },
-}));
-
 export default function BestSeller() {
-  const classes = useStyles();
-  const { allProducts, ispending } = useFetch("http://localhost:4000/products?numbersale_gte=200&numbersale_lte=700");
-
+  const { allProducts, ispending } = useFetch(
+    "http://localhost:4000/products?numbersale_gte=200&numbersale_lte=700"
+  );
   return (
-    <Stack className={classes.bestSellerWrapper}>
+    <Stack
+      sx={(theme) => ({
+        margin: "2rem 0",
+        backgroundColor: "#212121",
+        padding: "0 1rem",
+        display: "flex",
+        justifyContent: "space-between",
+        [theme.breakpoints.down("md")]: {
+          padding: "1rem",
+        },
+        [theme.breakpoints.down("sm")]: {
+          padding: "0.6rem 1rem",
+        },
+        [theme.breakpoints.down("xs")]: {
+          padding: "0.7rem 3rem",
+        },
+      })}
+    >
       <HomeTitleComponent title="پرفروش ترین محصولات" color="#fff" />
-
       <Box className="swiper-best-seller-product-wraper">
         <Swiper
           style={{
@@ -55,9 +50,9 @@ export default function BestSeller() {
           breakpoints={{
             300: {
               slidesPerView: 1,
-              spaceBetween: 10,
+              spaceBetween: 20,
             },
-            400: {
+            500: {
               slidesPerView: 2,
               spaceBetween: 10,
             },

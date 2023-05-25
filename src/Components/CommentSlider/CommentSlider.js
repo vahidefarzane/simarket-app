@@ -1,20 +1,5 @@
 import { React, useState, useEffect } from "react";
 import { Box, Typography, Slider } from "@mui/material";
-import { styled } from "@mui/material/styles";
-
-const SliderStyled = styled(Slider)(({ theme }) => ({
-  color: "#ff6a00",
-
-  [theme.breakpoints.up("md")]: {
-    width: "17rem",
-  },
-  [theme.breakpoints.between("sm","md")]: {
-    width: "16rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    width: "15rem",
-  },
-}));
 
 export default function CommentSlider(props) {
   const [satisfactionValue, setSatisfactionValue] = useState(50);
@@ -73,7 +58,20 @@ export default function CommentSlider(props) {
         {props.title}
       </Typography>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <SliderStyled
+        <Slider
+          sx={(theme) => ({
+            color: "#ff6a00",
+
+            [theme.breakpoints.up("md")]: {
+              width: "17rem",
+            },
+            [theme.breakpoints.between("sm", "md")]: {
+              width: "16rem",
+            },
+            [theme.breakpoints.down("sm")]: {
+              width: "15rem",
+            },
+          })}
           aria-label="Temperature"
           step={25}
           value={satisfactionValue}

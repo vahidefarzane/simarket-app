@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -9,75 +9,11 @@ import {
   Box,
   Rating,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
-import StarIcon from "@mui/icons-material/Star";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import "./Product.css";
 
-const useStyles = makeStyles((theme) => ({
-  productName: {},
-  productStockBox: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "0 1rem 0.5rem",
-  },
-  stockArchive: {
-    display: "flex",
-    justifyContent: "start",
-    alignItems: "center",
-  },
-  productPriceBox: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: " 1rem",
-    [theme.breakpoints.between("md", "lg")]: {
-      padding: "0.5rem 0.2rem",
-    },
-    [theme.breakpoints.down("sm")]: {
-      borderTop: "none",
-    },
-  },
-  productPriceLast: {
-    color: "#a8a8a8",
-    paddingRight: "0.6rem",
-    textDecoration: "line-through",
-    textAlign: "center",
-    [theme.breakpoints.between("md", "lg")]: {
-      paddingRight: "0.2rem",
-    },
-  },
-  productPriceOff: {
-    backgroundColor: " #fb4208",
-    color: "white",
-    fontWeight: "600",
-    borderRadius: "0.8rem",
-    padding: "0.6rem",
-  },
-}));
-const CardMediaStyled = styled(CardMedia)(({ theme }) => ({
-  padding: "1rem",
-  objectFit: "contain",
-  height: "13rem",
-  [theme.breakpoints.down("md")]: {
-    height: "13rem",
-    padding: "0.7rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    height: "14rem",
-  },
-}));
-
-const CardContentStyled = styled(CardContent)(({ theme }) => ({
-  padding: "0.2rem",
-  "&:last-child": {
-    paddingBottom: 0,
-  },
-}));
-
 export default function Product(props) {
-  const classes = useStyles();
   const {
     productImage,
     productTtile,
@@ -106,14 +42,33 @@ export default function Product(props) {
         }}
       >
         <Link to={`/products/${ProductId}`}>
-          <CardMediaStyled
+          <CardMedia
             component="img"
             image={productImage}
             alt={productTtile}
+            sx={(theme) => ({
+              padding: "1rem",
+              objectFit: "contain",
+              height: "13rem",
+              [theme.breakpoints.down("md")]: {
+                height: "13rem",
+                padding: "0.7rem",
+              },
+              [theme.breakpoints.down("sm")]: {
+                height: "14rem",
+              },
+            })}
           />
         </Link>
 
-        <CardContentStyled>
+        <CardContent
+          sx={{
+            padding: "0.2rem",
+            "&:last-child": {
+              paddingBottom: 0,
+            },
+          }}
+        >
           <Stack>
             <Typography
               component={"h3"}
@@ -121,13 +76,22 @@ export default function Product(props) {
             >
               {productTtile}
             </Typography>
-            <Box className={classes.productStockBox}>
-              <Box className={classes.stockArchive}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "0 1rem 0.5rem",
+              }}
+            >
+              <Box>
                 <IosShareIcon
                   sx={{
                     color: "#fb4707",
                     fontSize: "1.2rem",
                     marginLeft: "0rem",
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
                   }}
                 />
                 <Typography
@@ -147,32 +111,55 @@ export default function Product(props) {
                 />
               </Box>
             </Box>
-            <Box className={classes.productPriceBox}>
+            <Box
+              sx={(theme) => ({
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: " 1rem",
+                [theme.breakpoints.between("md", "lg")]: {
+                  padding: "0.5rem 0.2rem",
+                },
+                [theme.breakpoints.down("sm")]: {
+                  borderTop: "none",
+                },
+              })}
+            >
               <Typography
                 component={"del"}
-                className={classes.productPriceLast}
-                sx={{ fontSize: "0.9rem" }}
+                sx={(theme) => ({
+                  color: "#a8a8a8",
+                  fontSize: "0.9rem",
+                  paddingRight: "0.6rem",
+                  textDecoration: "line-through",
+                  textAlign: "center",
+                  [theme.breakpoints.between("md", "lg")]: {
+                    paddingRight: "0.2rem",
+                  },
+                })}
               >
                 {productPrice}
               </Typography>
 
-              <Typography
-                component={"span"}
-                className={classes.productPriceNew}
-                sx={{ fontSize: "0.9rem" }}
-              >
+              <Typography component={"span"} sx={{ fontSize: "0.9rem" }}>
                 {productPrice - productPrice * (offer / 100)} تومان
               </Typography>
               <Typography
                 component={"span"}
-                className={classes.productPriceOff}
-                sx={{ fontSize: "0.8rem" }}
+                sx={{
+                  fontSize: "0.8rem",
+                  backgroundColor: " #fb4208",
+                  color: "white",
+                  fontWeight: "600",
+                  borderRadius: "0.8rem",
+                  padding: "0.6rem",
+                }}
               >
                 {offer}%
               </Typography>
             </Box>
           </Stack>
-        </CardContentStyled>
+        </CardContent>
       </Card>
     </>
   );

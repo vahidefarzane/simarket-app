@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Stack, Box,Snackbar } from "@mui/material";
+import { Stack, Box, Snackbar } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
-
-import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Logo from "../../logo.png";
@@ -20,10 +19,6 @@ const ContainerImage = styled(Box)(({ theme }) => ({
   },
 }));
 
-const submitHandeler = (data) => {
-  console.log(data);
-};
-
 export default function Login() {
   const {
     register,
@@ -34,8 +29,10 @@ export default function Login() {
   const [loginFailedSnackbar, setLoginFailedSnackbar] = useState(false);
   const handleClose = () => {
     setLoginSuccessSnackbar(false);
-    setLoginFailedSnackbar(false)
+    setLoginFailedSnackbar(false);
   };
+
+  const navigate = useNavigate();
 
   const submitHandeler = (data) => {
     axios
@@ -44,15 +41,13 @@ export default function Login() {
       )
       .then((response) => {
         if (response.data.length) {
-          console.log(response.data[0].username);
           localStorage.setItem("username", response.data[0].username);
           setLoginSuccessSnackbar(true);
-
           setTimeout(() => {
-            window.location.href = "http://localhost:3000";
+            navigate('/')
           }, 2000);
         } else {
-          setLoginFailedSnackbar(true)
+          setLoginFailedSnackbar(true);
         }
       });
   };
@@ -79,8 +74,8 @@ export default function Login() {
             md: "2rem 0",
             xs: "1rem 0",
           },
-          boxShadow:{
-            sm: " rgba(0, 0, 0, 0.24) 0px 3px 8px"
+          boxShadow: {
+            sm: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
           },
           padding: {
             md: "2rem 1.5rem",
@@ -145,7 +140,6 @@ export default function Login() {
                 open={loginSuccessSnackbar}
                 autoHideDuration={2000}
                 onClose={handleClose}
-                
               >
                 <MuiAlert elevation={6} variant="filled" severity="success">
                   شما با موفقیت وارد شدید
@@ -155,10 +149,9 @@ export default function Login() {
                 open={loginFailedSnackbar}
                 autoHideDuration={2000}
                 onClose={handleClose}
-                
               >
                 <MuiAlert elevation={6} variant="filled" severity="error">
-              اطلاعات درست را وارد کنید
+                  اطلاعات درست را وارد کنید
                 </MuiAlert>
               </Snackbar>
             </form>

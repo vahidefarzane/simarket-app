@@ -736,7 +736,7 @@ export default function ProductsList() {
                   onChange={handleChange}
                   aria-label="text alignment"
                 >
-                  {product.size.map((size) => (
+                  {product.size && product.size.map((size) => (
                     <ToggleButton value={size}>{size}</ToggleButton>
                   ))}
                 </ToggleButtonGroup>

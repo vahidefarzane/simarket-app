@@ -1,27 +1,14 @@
-import { React, useState, useRef, useEffect } from "react";
-import {
-  Button,
-  Box,
-  Typography,
-  Divider,
-  Icon,
-  Snackbar,
-} from "@mui/material";
+import { React, useState } from "react";
+import { Button, Box, Typography, Divider, Icon } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import MuiAlert from "@mui/material/Alert";
-
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MyButton from "../MyButton/MyButton";
+import Modal from "../Modal/Modal";
 import "./NavbarPanelBtn.css";
 
 export default function NavbarPanelBtn() {
@@ -51,10 +38,10 @@ export default function NavbarPanelBtn() {
   const userName = localStorage.getItem("username");
 
   const openItemsPanel = () => {
-    if (showLists) {
-      setShowLists(false);
-    } else {
+    if (!showLists) {
       setShowLists(true);
+    } else {
+      setShowLists(false);
     }
   };
 
@@ -106,14 +93,25 @@ export default function NavbarPanelBtn() {
               />
             }
             endIcon={
-              <KeyboardArrowUpOutlinedIcon
-                sx={{
-                  "&.MuiSvgIcon-root": {
-                    fontSize: "1.2rem",
-                  },
-                  marginRight: "1rem",
-                }}
-              />
+              showLists ? (
+                <KeyboardArrowDownOutlinedIcon
+                  sx={{
+                    "&.MuiSvgIcon-root": {
+                      fontSize: "1.2rem",
+                    },
+                    marginRight: "1rem",
+                  }}
+                />
+              ) : (
+                <KeyboardArrowUpOutlinedIcon
+                  sx={{
+                    "&.MuiSvgIcon-root": {
+                      fontSize: "1.2rem",
+                    },
+                    marginRight: "1rem",
+                  }}
+                />
+              )
             }
           >
             {userName}
@@ -152,34 +150,22 @@ export default function NavbarPanelBtn() {
 
               <div onClick={openDialog} className="list-item-navbar">
                 <Icon>
-                  <LogoutOutlinedIcon sx={{color:"red"}} />
+                  <LogoutOutlinedIcon sx={{ color: "red" }} />
                 </Icon>
-                <Typography sx={{ padding: "0.5rem", fontSize: "0.9rem" ,color:"red"}}>
+                <Typography
+                  sx={{ padding: "0.5rem", fontSize: "0.9rem", color: "red" }}
+                >
                   خروج از سیستم
                 </Typography>
               </div>
-              <Dialog open={dilog} onClose={closeDialog}>
-                <DialogContent>
-                  <DialogContentText>
-                    آیا میخواهید از حساب خود خارج شوید؟
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Link to="/">
-                    <Button onClick={logOutAccountHandler}>بله</Button>
-                  </Link>
-                  <Button onClick={closeDialog}>خیر</Button>
-                </DialogActions>
-              </Dialog>
-              <Snackbar
-                open={loggoutSuccessSnackbar}
-                autoHideDuration={2000}
-                onClose={closeLoggoutAlertHandeler}
-              >
-                <MuiAlert elevation={6} variant="filled" severity="success">
-                  خروج از حساب با موفقیت انجام شد
-                </MuiAlert>
-              </Snackbar>
+
+              <Modal
+                dilog={dilog}
+                logOutAccountHandler={logOutAccountHandler}
+                closeDialog={closeDialog}
+                loggoutSuccessSnackbar={loggoutSuccessSnackbar}
+                closeLoggoutAlertHandeler={closeLoggoutAlertHandeler}
+              />
             </Box>
           )}
         </Box>

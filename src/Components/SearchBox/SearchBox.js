@@ -87,7 +87,9 @@ export default function SearchBox() {
         setProductsSearch(products.data);
       });
   };
-  useEffect(() => {}, [productsSearch]);
+  useEffect(() => {
+    
+  }, [productsSearch]);
   const clearInputSearch = () => {
     setSearchValue("");
   };

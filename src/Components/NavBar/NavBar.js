@@ -40,7 +40,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import HomeIcon from "@mui/icons-material/Home";
 import productsContext from "../../Contexts/ProductsContext";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
-import useFetch from "../../hooks/useFetch";
+import useAxios from "../../hooks/useFetch";
 
 // desktop styled
 
@@ -147,7 +147,7 @@ export default function Navbar(props) {
     localStorage.setItem("yourLocation", `${e.target.innerText}`);
   };
 
-  const { cities, setCities } = useFetch("http://localhost:4000/cities");
+  const { response: cities, isPending } = useAxios({ url: "/cities" });
   const [cardBar, setCardBar] = useState(false);
   const openCardHandler = () => {
     setCardBar(true);
@@ -324,7 +324,14 @@ export default function Navbar(props) {
                 />
               </Box>
             ) : (
-              <PersonOutlineOutlinedIcon sx={{ "&.MuiSvgIcon-root": { fontSize: "2rem",marginBottom:'0.35rem' } }} />
+              <PersonOutlineOutlinedIcon
+                sx={{
+                  "&.MuiSvgIcon-root": {
+                    fontSize: "2rem",
+                    marginBottom: "0.35rem",
+                  },
+                }}
+              />
             )}
           </IconButton>
         </Link>
@@ -386,7 +393,7 @@ export default function Navbar(props) {
           left: 0,
           zIndex: "1000",
           width: "100%",
-          paddingTop:'0.3rem'
+          paddingTop: "0.3rem",
         }}
         onChange={(event, newValue) => {
           setValue(newValue);
@@ -402,7 +409,6 @@ export default function Navbar(props) {
         <Link>
           <BottomNavigationActionStyled
             showLabel={true}
-
             label="دسته ها"
             icon={<CategoryIcon className="BottomNavigationAction" />}
           />
@@ -410,7 +416,6 @@ export default function Navbar(props) {
         <Link to="/panel/favarates">
           <BottomNavigationActionStyled
             showLabel={true}
-
             label="علاقه مندی ها"
             icon={<FavoriteBorderIcon className="BottomNavigationAction" />}
           />
@@ -418,7 +423,6 @@ export default function Navbar(props) {
         <Link to="/panel/dashboard">
           <BottomNavigationActionStyled
             showLabel={true}
-
             label="حساب کاربری"
             icon={
               <PersonOutlineOutlinedIcon className="BottomNavigationAction" />
@@ -493,7 +497,7 @@ export default function Navbar(props) {
                     height: "400px",
                   }}
                 >
-                  {cities &&
+                  {isPending &&
                     cities.map((city) => (
                       <>
                         <ListItem

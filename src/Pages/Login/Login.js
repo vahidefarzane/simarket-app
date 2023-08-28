@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Logo from "../../logo.png";
 import axios from "axios";
+import useAxios from "../../hooks/useAxios";
 
 const ContainerImage = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -25,8 +26,8 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [loginSuccessSnackbar, setLoginSuccessSnackbar] = useState(false);
-  const [loginFailedSnackbar, setLoginFailedSnackbar] = useState(false);
+  // const [loginSuccessSnackbar, setLoginSuccessSnackbar] = useState(false);
+  // const [loginFailedSnackbar, setLoginFailedSnackbar] = useState(false);
   const handleClose = () => {
     setLoginSuccessSnackbar(false);
     setLoginFailedSnackbar(false);
@@ -35,21 +36,23 @@ export default function Login() {
   const navigate = useNavigate();
 
   const submitHandeler = (data) => {
-    axios
-      .get(
-        `http://localhost:4000/users?username=${data.userName}&password=${data.password}`
-      )
-      .then((response) => {
-        if (response.data.length) {
-          localStorage.setItem("username", response.data[0].username);
-          setLoginSuccessSnackbar(true);
-          setTimeout(() => {
-            navigate('/panel/dashboard')
-          }, 2000);
-        } else {
-          setLoginFailedSnackbar(true);
-        }
-      });
+    const {
+      response: loginSuccessSnackbar,
+      setResponse: setLoginSuccessSnackbar,
+      error: loginFailedSnackbar,
+      setError: setLoginFailedSnackbar,
+    } = useAxios({
+      url: `/users?username=${data.userName}&password=${data.password}`,
+    });
+    if (response.data.length) {
+      localStorage.setItem("username", response.data[0].username);
+      setLoginSuccessSnackbar(true);
+      setTimeout(() => {
+        navigate("/panel/dashboard");
+      }, 2000);
+    } else {
+      setLoginFailedSnackbar(true);
+    }
   };
 
   return (

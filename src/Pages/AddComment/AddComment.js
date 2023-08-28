@@ -15,8 +15,8 @@ import CommentSlider from "../../Components/CommentSlider/CommentSlider";
 import axios from "axios";
 
 import MyButton from "../../Components/MyButton/MyButton";
-import useFetch from "../../hooks/useFetch";
 import "./AddComment.css";
+import useAxios from "../../hooks/useAxios";
 
 export default function AddComment() {
   const [sliderInfo, setSliderInfo] = useState([
@@ -33,13 +33,17 @@ export default function AddComment() {
     formState: { errors },
   } = useForm();
 
-  const { product, ispendingProduct } = useFetch(
-    `http://localhost:4000${window.location.pathname.slice(0, 12)}`
-  );
+  const { response: product, isPending } = useAxios({
+    url: `${window.location.pathname.slice(0, 12)}`,
+  });
+  // const { response: product, isPending } = useAxios({
+  //   method: POST,
+  //   url: "/products",
+  // });
 
   const submitHandeler = (data) => {
     axios
-      .post(`http://localhost:4000/products/`, {
+      .post(`http://localhost:4000`, {
         username: data.username,
         commentText: data.commentText,
       })
@@ -56,7 +60,7 @@ export default function AddComment() {
         borderRadius: "0.8rem",
       }}
     >
-      {ispendingProduct && (
+      {isPending && (
         <>
           <Box
             sx={{

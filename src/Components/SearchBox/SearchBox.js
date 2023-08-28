@@ -1,24 +1,9 @@
-import React, { useEffect } from "react";
-import {
-  Box,
-  InputBase,
-  IconButton,
-  List,
-  ListItemText,
-  Typography,
-  ListItem,
-  Divider,
-} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, InputBase, Typography, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
-
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useState } from "react";
-import SearchBoxBtn from "../SearchBoxBtn/SearchBoxBtn";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import useAxios from "../../hooks/useAxios";
 
 const Search = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -74,22 +59,18 @@ const SearchListBox = styled(Box)(({ theme }) => ({
 }));
 export default function SearchBox() {
   const [showList, setShowList] = useState(false);
-  const [productsSearch, setProductsSearch] = useState(null);
 
   const [searchValue, setSearchValue] = useState("");
+
+  const { response: productsSearch } = useAxios({
+    url: `/products?q=${searchValue}`,
+  });
 
   const productvalue = (e) => {
     setShowList(true);
     setSearchValue(e.target.value);
-    axios
-      .get(`http://localhost:4000/products?q=${searchValue}`)
-      .then((products) => {
-        setProductsSearch(products.data);
-      });
   };
-  useEffect(() => {
-    
-  }, [productsSearch]);
+  useEffect(() => {}, [searchValue]);
   const clearInputSearch = () => {
     setSearchValue("");
   };
@@ -120,30 +101,26 @@ export default function SearchBox() {
       </Search>
       {showList && (
         <SearchListBox>
-          {productsSearch &&
-            productsSearch.map((productSearch) => (
-              <>
-                <Link
-                  to={`products/${productSearch.id}`}
-                  key={productSearch.id}
+          {productsSearch?.map((productSearch) => (
+            <>
+              <Link to={`products/${productSearch.id}`} key={productSearch.id}>
+                <Typography
+                  onClick={() => {
+                    setShowList(false);
+                    setSearchValue(productSearch.title);
+                  }}
+                  sx={{
+                    color: "#000",
+                    fontSize: "0.9rem",
+                    padding: "0.4rem 0",
+                  }}
                 >
-                  <Typography
-                    onClick={() => {
-                      setShowList(false);
-                      setSearchValue(productSearch.title);
-                    }}
-                    sx={{
-                      color: "#000",
-                      fontSize: "0.9rem",
-                      padding: "0.4rem 0",
-                    }}
-                  >
-                    {productSearch.title}
-                  </Typography>
-                </Link>
-                <Divider />
-              </>
-            ))}
+                  {productSearch.title}
+                </Typography>
+              </Link>
+              <Divider />
+            </>
+          ))}
         </SearchListBox>
       )}
     </Box>

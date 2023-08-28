@@ -84,21 +84,20 @@ export default function ProductCommentProgressBar(props) {
         >
           {title}
         </Typography>
-       
-          <Typography
-            component={"h4"}
-            sx={{
-              fontSize: {
-                lg: "0.9rem",
-                md: "0.8rem",
-                xs: "0.8rem",
-              },
-              marginLeft: "0.5rem",
-            }}
-          >
-            {value}%
-          </Typography>
-        
+
+        <Typography
+          component={"h4"}
+          sx={{
+            fontSize: {
+              lg: "0.9rem",
+              md: "0.8rem",
+              xs: "0.8rem",
+            },
+            marginLeft: "0.5rem",
+          }}
+        >
+          {value}%
+        </Typography>
       </Box>
       <Box className={classes.ProgressBar} sx={{}}>
         <LinearProgressStyled variant="determinate" value={value} />

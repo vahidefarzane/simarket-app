@@ -1,13 +1,13 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import useAxios from "../../hooks/useAxios";
 import "./BannerAds.css";
 
 export default function BannerAds() {
-  const { bannerImgs, bannerImgsIsPending } = useFetch(
-    "http://localhost:4000/BannerImages"
-  );
+  const { response: bannerImgs, isPending } = useAxios({
+    url: "/BannerImages",
+  });
 
   return (
     <Box
@@ -21,7 +21,7 @@ export default function BannerAds() {
         },
       })}
     >
-      {bannerImgsIsPending &&
+      {isPending &&
         bannerImgs.map((bannerImg) => (
           <Link to={bannerImg.to} key={bannerImg.id}>
             <Box

@@ -22,6 +22,7 @@ import SortIcon from "@mui/icons-material/Sort";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MyButton from "../../Components/MyButton/MyButton";
 import "./ProductsList.css";
+import useAxios from "../../hooks/useAxios";
 
 const useStyles = makeStyles((theme) => ({
   productListContainer: {
@@ -141,12 +142,16 @@ const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
 
 export default function ProductsList() {
   const classes = useStyles();
-  const { allProducts, setAllProducts, ispending } = useFetch(
-    "http://localhost:4000/products"
-  );
-  const { categories, categoriesIsPenging } = useFetch(
-    "http://localhost:4000/categories"
-  );
+  const {
+    response: allProducts,
+    setResponse: setAllProducts,
+    ispending: isPendingProducts,
+  } = useAxios({
+    url: "/products",
+  });
+  const { response: categories, isPending: isPendingCategories } = useAxios({
+    url: "/categories",
+  });
 
   // ================> Filter by Category <================
   const [filterbycategory, setfilterbycategory] = useState(null);
@@ -168,36 +173,36 @@ export default function ProductsList() {
     console.log(newValue);
   };
 
-  useEffect(() => {
-    if (filterbycategory) {
-      axios
-        .get(
-          `http://localhost:4000/products?category=${filterbycategory}&price_gte=0&price_lte=${newValue}`
-        )
-        .then((product) => {
-          setAllProducts(product.data);
-        });
-    } else {
-      axios
-        .get(`http://localhost:4000/products?price_gte=0&price_lte=${newValue}`)
-        .then((product) => {
-          setAllProducts(product.data);
-        });
-    }
-  }, [newValue, filterbycategory]);
+  // useEffect(() => {
+  //   if (filterbycategory) {
+  //     const { response : product } = useAxios({
+  //       url: `/products?category=${filterbycategory}&price_gte=0&price_lte=${newValue}`,
+  //     });
+  //     const { response : product } = useAxios({
+  //       url: `http://localhost:4000/products?category=${filterbycategory}&price_gte=0&price_lte=${newValue}`,
+  //     });
 
-  const { sortByStars } = useFetch(
-    "http://localhost:4000/products?_sort=rating.rate&_order=desc"
-  );
-  const { sortBySale } = useFetch(
-    "http://localhost:4000/products?_sort=numbersale&_order=desc"
-  );
-  const { sortByPriceUp } = useFetch(
-    "http://localhost:4000/products?_sort=price"
-  );
-  const { sortByPriceDown } = useFetch(
-    "http://localhost:4000/products?_sort=price&_order=desc"
-  );
+  //   } else {
+  //     axios
+  //       .get(`http://localhost:4000/products?price_gte=0&price_lte=${newValue}`)
+  //       .then((product) => {
+  //         setAllProducts(product.data);
+  //       });
+  //   }
+  // }, [newValue, filterbycategory]);
+
+  const { response: sortByStars } = useAxios({
+    url: "/products?_sort=rating.rate&_order=desc",
+  });
+  const { response: sortBySale } = useAxios({
+    url: "/products?_sort=numbersale&_order=desc",
+  });
+  const { response: sortByPriceUp } = useAxios({
+    url: "/products?_sort=price",
+  });
+  const { response: sortByPriceDown } = useAxios({
+    url: "/products?_sort=price&_order=desc",
+  });
 
   const sortByStartsHandeler = () => {
     setAllProducts(sortByStars);

@@ -1,5 +1,4 @@
 import React from "react";
-import useFetch from "../../hooks/useFetch";
 import { Box, Stack } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
@@ -11,11 +10,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import useAxios from "../../hooks/useAxios";
 
 export default function BestSeller() {
-  const { allProducts, ispending } = useFetch(
-    "http://localhost:4000/products?numbersale_gte=200&numbersale_lte=700"
-  );
+  const { response: allProducts, isPending } = useAxios({
+    url: "/products?numbersale_gte=200&numbersale_lte=700",
+  });
   return (
     <Stack
       sx={(theme) => ({
@@ -76,7 +76,7 @@ export default function BestSeller() {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {ispending &&
+          {isPending &&
             allProducts.map((product) => (
               <SwiperSlide key={product.id}>
                 <HomeProductBox

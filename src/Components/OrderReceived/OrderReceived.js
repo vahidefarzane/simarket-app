@@ -136,6 +136,7 @@ export default function OrderReceived({ handleBack }) {
         >
           {infos.map((info) => (
             <Stack
+              key={info.id}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -281,33 +282,32 @@ export default function OrderReceived({ handleBack }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {contextData.userCart &&
-            contextData.userCart.map((tableCell) => (
-              <TableRow key={tableCell.id}>
-                <TableCell
-                  align="right"
-                  sx={{
-                    fontSize: {
-                      sm: "1rem",
-                      xs: "0.8rem",
-                    },
-                  }}
-                >
-                  {tableCell.title}
-                </TableCell>
-                <TableCell
-                  align="right"
-                  sx={{
-                    fontSize: {
-                      sm: "1rem",
-                      xs: "0.8rem",
-                    },
-                  }}
-                >
-                  {tableCell.price}
-                </TableCell>
-              </TableRow>
-            ))}
+          {contextData.userCart?.map((tableCell) => (
+            <TableRow key={tableCell.id}>
+              <TableCell
+                align="right"
+                sx={{
+                  fontSize: {
+                    sm: "1rem",
+                    xs: "0.8rem",
+                  },
+                }}
+              >
+                {tableCell.title}
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{
+                  fontSize: {
+                    sm: "1rem",
+                    xs: "0.8rem",
+                  },
+                }}
+              >
+                {tableCell.price}
+              </TableCell>
+            </TableRow>
+          ))}
 
           {tableCells.map((tableCell) => (
             <TableRow key={tableCell.id}>

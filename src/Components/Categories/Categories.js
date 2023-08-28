@@ -1,13 +1,11 @@
 import React from "react";
 import { Stack, Box } from "@mui/material";
 import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
-import useFetch from "../../hooks/useFetch";
 import "./Categories.css";
+import useAxios from "../../hooks/useAxios";
 
 export default function Categories() {
-  const { categories, categoriesIsPenging } = useFetch(
-    "http://localhost:4000/categories"
-  );
+  const { response: categories, isPending } = useAxios({ url: "/categories" });
 
   return (
     <Stack
@@ -35,7 +33,7 @@ export default function Categories() {
           },
         })}
       >
-        {categoriesIsPenging &&
+        {isPending &&
           categories.map((category) => (
             <Box
               key={category.id}

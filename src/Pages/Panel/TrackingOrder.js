@@ -1,18 +1,21 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import useAxios from "../../hooks/useAxios";
 import "./Panel.css";
+import { useState } from "react";
 
 export default function TrackingOrder() {
-  const submitHandeler = (data) => {
-    axios
-      .get(`http://localhost:4000/users?password=${data.orderNumber}`)
-      .then((response) => {
-        console.log(response.data);
-      });
-  };
+  const[url,setUrl] = useState("")
 
+  const { response } = useAxios({
+    method: "get",
+    url
+  });
+  const SubmitHandeler = (data) => {
+    setUrl(`/users?password=${data.orderNumber}`)
+   
+  };
   const {
     register,
     handleSubmit,
@@ -27,7 +30,7 @@ export default function TrackingOrder() {
       >
         از این فرم جهت پیگیری وضعیت سفارش استفاده نمایید.
       </Typography>
-      <form onSubmit={handleSubmit(submitHandeler)}>
+      <form onSubmit={handleSubmit(SubmitHandeler)}>
         <label className="lable-panel">شماره سفارش</label>
         <input
           {...register("orderNumber", {

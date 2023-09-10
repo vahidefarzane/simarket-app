@@ -3,9 +3,13 @@ import { Stack, Box } from "@mui/material";
 import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
 import "./Categories.css";
 import useAxios from "../../hooks/useAxios";
+import Loading from "../Loading/Loading";
 
 export default function Categories() {
-  const { response: categories, isPending } = useAxios({ url: "/categories" });
+  const { response: categories, loading } = useAxios({
+    method: "get",
+    url: "/categories",
+  });
 
   return (
     <Stack
@@ -33,7 +37,9 @@ export default function Categories() {
           },
         })}
       >
-        {isPending &&
+        {loading ? (
+          <Loading />
+        ) : (
           categories.map((category) => (
             <Box
               key={category.id}
@@ -102,7 +108,8 @@ export default function Categories() {
                 {category.name}
               </Stack>
             </Box>
-          ))}
+          ))
+        )}
       </Box>
     </Stack>
   );

@@ -10,13 +10,11 @@ import {
 import { Link } from "react-router-dom";
 import { React, useState } from "react";
 import { useForm } from "react-hook-form";
-
 import CommentSlider from "../../Components/CommentSlider/CommentSlider";
-import axios from "axios";
-
 import MyButton from "../../Components/MyButton/MyButton";
 import "./AddComment.css";
 import useAxios from "../../hooks/useAxios";
+import Loading from "../../Components/Loading/Loading";
 
 export default function AddComment() {
   const [sliderInfo, setSliderInfo] = useState([
@@ -33,23 +31,19 @@ export default function AddComment() {
     formState: { errors },
   } = useForm();
 
-  const { response: product, isPending } = useAxios({
+  const { response: product, loading } = useAxios({
     url: `${window.location.pathname.slice(0, 12)}`,
   });
-  // const { response: product, isPending } = useAxios({
-  //   method: POST,
-  //   url: "/products",
-  // });
 
-  const submitHandeler = (data) => {
-    axios
-      .post(`http://localhost:4000`, {
+  const SubmitHandeler = (data) => {
+    useAxios({
+      method: "post",
+      url: "/products",
+      body: {
         username: data.username,
         commentText: data.commentText,
-      })
-      .then((response) => {
-        console.log(response);
-      });
+      },
+    });
   };
 
   return (
@@ -60,7 +54,9 @@ export default function AddComment() {
         borderRadius: "0.8rem",
       }}
     >
-      {isPending && (
+      {loading ? (
+        <Loading />
+      ) : (
         <>
           <Box
             sx={{
@@ -151,7 +147,7 @@ export default function AddComment() {
               marginTop: "1.5rem",
             }}
           >
-            <form onSubmit={handleSubmit(submitHandeler)}>
+            <form onSubmit={handleSubmit(SubmitHandeler)}>
               <Box
                 sx={{
                   display: "flex",

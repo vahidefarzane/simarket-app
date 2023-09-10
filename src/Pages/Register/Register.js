@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Stack, Box, Snackbar } from "@mui/material";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import Logo from "../../logo.png";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import useAxios from "../../hooks/useAxios";
 import "./Register.css";
 
 const ContainerImage = styled(Box)(({ theme }) => ({
@@ -21,30 +21,34 @@ const ContainerImage = styled(Box)(({ theme }) => ({
 }));
 
 export default function Register() {
-  const [registerSuccessSnackbar, setRegisterSuccessSnackbar] = useState(false);
+  const [successfulRegistrationNotif, setSuccessfulRegistrationNotif] =
+    useState(false);
   const handleClose = () => {
-    setRegisterSuccessSnackbar(false);
+    setSuccessfulRegistrationNotif(false);
   };
 
   const navigate = useNavigate();
-
-  const submitHandeler = (data) => {
-    axios
-      .post("http://localhost:4000/users/", {
-        username: data.userName,
-        email: data.email,
-        password: data.password,
-      })
-      .then((response) => {
-        console.log(response);
-        setRegisterSuccessSnackbar(true);
-        setTimeout(() => {
-          navigate('/login')
-
-        }, 2000);
-      });
-  };
-
+  const [newUser, setNewUser] = useState(null);
+  useAxios({
+    method: "post",
+    url: "/users",
+    body: newUser,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  function SubmitHandeler(data) {
+    setNewUser({
+      username: data.userName,
+      email: data.email,
+      password: data.password,
+    }) 
+    setSuccessfulRegistrationNotif(true)
+    setTimeout(() => {
+    navigate('/login')
+  }, 2000);
+  }
+  
   const {
     register,
     handleSubmit,
@@ -102,7 +106,7 @@ export default function Register() {
                 src={Logo}
               ></Box>
             </Box>
-            <form onSubmit={handleSubmit(submitHandeler)}>
+            <form onSubmit={handleSubmit(SubmitHandeler)}>
               <label className="lable">نام کاربری :</label>
               <input
                 {...register("userName", {
@@ -137,7 +141,7 @@ export default function Register() {
                 </span>
               </div>
               <Snackbar
-                open={registerSuccessSnackbar}
+                open={successfulRegistrationNotif}
                 autoHideDuration={2000}
                 onClose={handleClose}
               >

@@ -7,6 +7,8 @@ import Footer from "./Components/Footer/Footer";
 import productsContext from "./Contexts/ProductsContext";
 import "./App.css";
 
+// import { CartProvider } from "./Contexts/CartContext";
+
 function App() {
   const [isSticky, setSticky] = useState(false);
   const handleScroll = () => {

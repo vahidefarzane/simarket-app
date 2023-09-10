@@ -11,9 +11,12 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import useAxios from "../../hooks/useAxios";
+import Loading from "../Loading/Loading";
+
 
 export default function BestSeller() {
-  const { response: allProducts, isPending } = useAxios({
+  const { response: allProducts, loading } = useAxios({
+    method:'get',
     url: "/products?numbersale_gte=200&numbersale_lte=700",
   });
   return (
@@ -76,7 +79,7 @@ export default function BestSeller() {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {isPending &&
+          {loading ? <Loading /> :
             allProducts.map((product) => (
               <SwiperSlide key={product.id}>
                 <HomeProductBox

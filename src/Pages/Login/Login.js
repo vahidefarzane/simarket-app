@@ -5,7 +5,6 @@ import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Logo from "../../logo.png";
-import axios from "axios";
 import useAxios from "../../hooks/useAxios";
 
 const ContainerImage = styled(Box)(({ theme }) => ({
@@ -21,38 +20,38 @@ const ContainerImage = styled(Box)(({ theme }) => ({
 }));
 
 export default function Login() {
+  const [successfulLoginNotif, setSuccessfulLoginNotif] = useState(null);
+  const [failedLoginNotif, setFailedLoginNotif] = useState(null);
+  const [url, setUrl] = useState("");
+  const { response:userLogin } = useAxios({
+    method: "get",
+    url,
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // const [loginSuccessSnackbar, setLoginSuccessSnackbar] = useState(false);
-  // const [loginFailedSnackbar, setLoginFailedSnackbar] = useState(false);
   const handleClose = () => {
-    setLoginSuccessSnackbar(false);
-    setLoginFailedSnackbar(false);
+    setSuccessfulLoginNotif(false);
+    setFailedLoginNotif(false);
   };
 
   const navigate = useNavigate();
 
-  const submitHandeler = (data) => {
-    const {
-      response: loginSuccessSnackbar,
-      setResponse: setLoginSuccessSnackbar,
-      error: loginFailedSnackbar,
-      setError: setLoginFailedSnackbar,
-    } = useAxios({
-      url: `/users?username=${data.userName}&password=${data.password}`,
-    });
-    if (response.data.length) {
-      localStorage.setItem("username", response.data[0].username);
-      setLoginSuccessSnackbar(true);
-      setTimeout(() => {
-        navigate("/panel/dashboard");
-      }, 2000);
-    } else {
-      setLoginFailedSnackbar(true);
-    }
+  const SubmitHandeler = (data) => {
+    setUrl(`/users?username=${data.username}&password=${data.password}`);
+    console.log(userLogin);
+
+    // if (userLogin.length) {
+    //   localStorage.setItem("username", userLogin.username);
+    //   setSuccessfulLoginNotif(true);
+    //   // setTimeout(() => {
+    //   //   navigate("/panel/dashboard");
+    //   // }, 2000);
+    // } else {
+    //   setFailedLoginNotif(true);
+    // }
   };
 
   return (
@@ -109,16 +108,16 @@ export default function Login() {
                 src={Logo}
               ></Box>
             </Box>
-            <form onSubmit={handleSubmit(submitHandeler)}>
+            <form onSubmit={handleSubmit(SubmitHandeler)}>
               <label className="lable">نام کاربری :</label>
               <input
-                {...register("userName", {
+                {...register("username", {
                   required: "لطفا نام کاربری خود را وارد کنید .",
                 })}
                 type="text"
                 className="input-form"
               />
-              <p className="alert">{errors.userName?.message}</p>
+              <p className="alert">{errors.username?.message}</p>
 
               <label className="lable">گذرواژه :</label>
               <input
@@ -140,7 +139,7 @@ export default function Login() {
                 </span>
               </div>
               <Snackbar
-                open={loginSuccessSnackbar}
+                open={successfulLoginNotif}
                 autoHideDuration={2000}
                 onClose={handleClose}
               >
@@ -149,7 +148,7 @@ export default function Login() {
                 </MuiAlert>
               </Snackbar>
               <Snackbar
-                open={loginFailedSnackbar}
+                open={failedLoginNotif}
                 autoHideDuration={2000}
                 onClose={handleClose}
               >

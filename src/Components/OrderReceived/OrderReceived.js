@@ -94,7 +94,6 @@ export default function OrderReceived({ handleBack }) {
     { id: 4, product: "قیمت نهایی:	", total: contextData.totalPrice },
   ]);
 
-  console.log(contextData);
 
   return (
     <Box>

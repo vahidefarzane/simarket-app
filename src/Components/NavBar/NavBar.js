@@ -40,7 +40,8 @@ import SearchBox from "../SearchBox/SearchBox";
 import HomeIcon from "@mui/icons-material/Home";
 import productsContext from "../../Contexts/ProductsContext";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
-import useAxios from "../../hooks/useFetch";
+import useAxios from "../../hooks/useAxios";
+import Loading from "../Loading/Loading";
 
 // desktop styled
 
@@ -147,7 +148,10 @@ export default function Navbar(props) {
     localStorage.setItem("yourLocation", `${e.target.innerText}`);
   };
 
-  const { response: cities, isPending } = useAxios({ url: "/cities" });
+  const { response: cities, loading: loadingCities } = useAxios({
+    method:"get",
+    url: "/cities",
+  });
   const [cardBar, setCardBar] = useState(false);
   const openCardHandler = () => {
     setCardBar(true);
@@ -497,7 +501,9 @@ export default function Navbar(props) {
                     height: "400px",
                   }}
                 >
-                  {isPending &&
+                  {loadingCities ? (
+                    <Loading />
+                  ) : (
                     cities.map((city) => (
                       <>
                         <ListItem
@@ -529,7 +535,8 @@ export default function Navbar(props) {
                         </ListItem>
                         <Divider />
                       </>
-                    ))}
+                    ))
+                  )}
                 </List>
               </Stack>
             </ModalStyled>

@@ -3,7 +3,7 @@ import { Select, MenuItem, Typography, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export default function SelectBox(props) {
-  const [age, setAge] = useState("dfghjk");
+  const [age, setAge] = useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);

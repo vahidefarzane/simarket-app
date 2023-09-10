@@ -63,6 +63,7 @@ export default function SearchBox() {
   const [searchValue, setSearchValue] = useState("");
 
   const { response: productsSearch } = useAxios({
+    method:'get',
     url: `/products?q=${searchValue}`,
   });
 

@@ -16,13 +16,13 @@ import axios from "axios";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import Product from "../../Components/Product/Product";
 import SortIcon from "@mui/icons-material/Sort";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MyButton from "../../Components/MyButton/MyButton";
 import "./ProductsList.css";
 import useAxios from "../../hooks/useAxios";
+import Loading from '../../Components/Loading/Loading'
 
 const useStyles = makeStyles((theme) => ({
   productListContainer: {
@@ -145,11 +145,13 @@ export default function ProductsList() {
   const {
     response: allProducts,
     setResponse: setAllProducts,
-    ispending: isPendingProducts,
+    loading: isPendingProducts,
   } = useAxios({
+    method: "get",
     url: "/products",
   });
-  const { response: categories, isPending: isPendingCategories } = useAxios({
+  const { response: categories, loading: isPendingCategories } = useAxios({
+    method: "get",
     url: "/categories",
   });
 
@@ -276,7 +278,7 @@ export default function ProductsList() {
             </H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails>
-            {categoriesIsPenging &&
+            {isPendingCategories ? <Loading/> :
               categories.map((category) => (
                 <Box className={classes.categoryBox}>
                   <Checkbox
@@ -349,7 +351,7 @@ export default function ProductsList() {
           </List>
         </Box>
         <Box className={classes.allProductsList}>
-          {ispending &&
+          {isPendingProducts ? <Loading/> :
             allProducts.map((product) => (
               <Product
                 key={product.id}

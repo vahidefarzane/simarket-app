@@ -1,14 +1,16 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
+import Loading from "../Loading/Loading";
 import "./BannerAds.css";
 
 export default function BannerAds() {
-  const { response: bannerImgs, isPending } = useAxios({
+  const { response: bannerImgs, loading } = useAxios({
     url: "/BannerImages",
+    method: "get",
   });
-
+  
   return (
     <Box
       sx={(theme) => ({
@@ -21,7 +23,9 @@ export default function BannerAds() {
         },
       })}
     >
-      {isPending &&
+      {loading ? (
+        <Loading />
+      ) : (
         bannerImgs.map((bannerImg) => (
           <Link to={bannerImg.to} key={bannerImg.id}>
             <Box
@@ -36,7 +40,8 @@ export default function BannerAds() {
               src={bannerImg.src}
             />
           </Link>
-        ))}
+        ))
+      )}
     </Box>
   );
 }

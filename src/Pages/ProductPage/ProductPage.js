@@ -19,7 +19,6 @@ import MuiTabs from "@mui/material/Tabs";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import MyButton from "../../Components/MyButton/MyButton";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
@@ -37,6 +36,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import useAxios from "../../hooks/useAxios";
+import Loading from '../../Components/Loading/Loading'
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -260,26 +261,21 @@ export default function ProductsList() {
     setvaluedata(newValue);
   };
 
-  const [product, setProduct] = useState("");
-  const [ispendingProduct, setIspendingProduct] = useState(false);
-
   const [defaultSize, setDefaultSize] = useState(null);
   const [alignment, setAlignment] = useState("defaultSize");
 
-  axios
-    .get(`http://localhost:4000${window.location.pathname}`)
-    .then((products) => {
-      setProduct(products.data);
-      setIspendingProduct(true);
-    });
+  const { response: product, loading: loadingProduct } = useAxios({
+    method: "get",
+    url: `${window.location.pathname}`,
+  });
 
-  useEffect(() => {
-    // if (product.size.lenght === 3) {
-    //   setDefaultSize("L");
-    // } else {
-    //   setDefaultSize("40");
-    // }
-  }, [product]);
+  // useEffect(() => {
+  //   // if (product.size.lenght === 3) {
+  //   //   setDefaultSize("L");
+  //   // } else {
+  //   //   setDefaultSize("40");
+  //   // }
+  // }, [product]);
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -349,7 +345,9 @@ export default function ProductsList() {
   };
   return (
     <>
-      {ispendingProduct && (
+      {loadingProduct ? (
+        <Loading />
+      ) : (
         <Stack className={classes.productPageContainer}>
           <Box className={classes.productInfoContainer}>
             <Box
@@ -736,9 +734,10 @@ export default function ProductsList() {
                   onChange={handleChange}
                   aria-label="text alignment"
                 >
-                  {product.size && product.size.map((size) => (
-                    <ToggleButton value={size}>{size}</ToggleButton>
-                  ))}
+                  {product.size &&
+                    product.size.map((size) => (
+                      <ToggleButton value={size}>{size}</ToggleButton>
+                    ))}
                 </ToggleButtonGroup>
                 <MyButton
                   padding="0.9rem 0"

@@ -7,7 +7,7 @@ import "./BannerAds.css";
 
 export default function BannerAds() {
   const { response: bannerImgs, loading } = useAxios({
-    url: "/BannerImages",
+    url: "/bannerimages",
     method: "get",
   });
   
@@ -26,7 +26,7 @@ export default function BannerAds() {
       {loading ? (
         <Loading />
       ) : (
-        bannerImgs.map((bannerImg) => (
+        bannerImgs?.map((bannerImg) => (
           <Link to={bannerImg.to} key={bannerImg.id}>
             <Box
               sx={(theme) => ({

@@ -13,23 +13,21 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import MyButton from "../MyButton/MyButton";
-import productsContext from "../../Contexts/ProductsContext";
 
 export default function OrderInfo({ handleNext }) {
-  const contextData = useContext(productsContext);
 
   const changeNumber = (e) => {
-    contextData.setProductNumber(e.target.value);
+    // contextData.setProductNumber(e.target.value);
   };
 
   const plusProductHandler = (e, price) => {
-    contextData.setProductNumber((prevNumber) => prevNumber + 1);
-    console.log(contextData.productNumber, price);
+    // contextData.setProductNumber((prevNumber) => prevNumber + 1);
+    // console.log(contextData.productNumber, price);
   };
   const minusProductHandler = () => {
-    contextData.setProductNumber((prevNumber) => prevNumber - 1);
+    // contextData.setProductNumber((prevNumber) => prevNumber - 1);
   };
-  useEffect(() => {}, [contextData.productNumber]);
+  // useEffect(() => {}, [contextData.productNumber]);
 
   return (
     <Box
@@ -57,7 +55,7 @@ export default function OrderInfo({ handleNext }) {
           },
         }}
       >
-        {contextData.userCart.map((productsInfo) => (
+        {[].map((productsInfo) => (
           <>
             <Box
               sx={{
@@ -153,9 +151,9 @@ export default function OrderInfo({ handleNext }) {
                           color: " #ff6a00",
                           textAlign: "center",
                         }}
-                        value={contextData.productNumber}
+                        value={1}
                       >
-                        {contextData.productNumber}
+                        {1}
                       </InputBase>
                       <IconButton
                         onClick={minusProductHandler}
@@ -270,7 +268,7 @@ export default function OrderInfo({ handleNext }) {
         <Box className="card-info-container">
           <Typography className="card-info">قیمت کالا ها</Typography>
           <Typography className="card-info">
-            {contextData.totalPrice}
+            {1}
           </Typography>
         </Box>
         <Box className="card-info-container">
@@ -287,7 +285,7 @@ export default function OrderInfo({ handleNext }) {
         <Box className="card-info-container">
           <Typography className="card-info-main">مجموع</Typography>
           <Typography className="card-info-main">
-            {contextData.totalPrice}
+            {1}
           </Typography>
         </Box>
         <MyButton

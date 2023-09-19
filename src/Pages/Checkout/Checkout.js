@@ -12,10 +12,9 @@ import {
 import Input from "../../Components/Input/Input";
 import SelectBox from "../../Components/SelectBox/SelectBox";
 import MyButton from "../../Components/MyButton/MyButton";
-import productsContext from "../../Contexts/ProductsContext";
 
 export default function Checkout({ handleNext, handleBack }) {
-  const contextData = useContext(productsContext);
+  // const contextData = useContext(productsContext);
 
   return (
     <>
@@ -169,7 +168,7 @@ export default function Checkout({ handleNext, handleBack }) {
             <Box className="card-info-container">
               <Typography className="card-info">قیمت کالا ها</Typography>
               <Typography className="card-info">
-                {contextData.totalPrice}
+                {1}
               </Typography>
             </Box>
             <Box className="card-info-container">
@@ -186,7 +185,7 @@ export default function Checkout({ handleNext, handleBack }) {
             <Box className="card-info-container">
               <Typography className="card-info-main">مجموع</Typography>
               <Typography className="card-info-main">
-                {contextData.totalPrice}
+                {1}
               </Typography>
             </Box>
           </Box>

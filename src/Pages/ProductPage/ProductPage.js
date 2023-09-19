@@ -29,7 +29,6 @@ import { PropTypes } from "prop-types";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ProductProgressInfos from "../../Components/ProductProgressInfos/ProductProgressInfos";
 import ReactImageMagnify from "react-image-magnify";
-import productsContext from "../../Contexts/ProductsContext";
 import axios from "axios";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -37,7 +36,8 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import useAxios from "../../hooks/useAxios";
-import Loading from '../../Components/Loading/Loading'
+import Loading from '../../Components/Loading/Loading';
+import {useCartContext} from '../../Contexts/CartContext';
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -249,6 +249,7 @@ function a11yProps(index) {
 }
 export default function ProductsList() {
   const classes = useStyles();
+  const {addToCart} =useCartContext()
 
   const [value, setValue] = useState("one");
 
@@ -281,51 +282,50 @@ export default function ProductsList() {
     setAlignment(newAlignment);
   };
 
-  const contextData = useContext(productsContext);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleClose = (event, reason) => {
     setOpenSnackbar(false);
   };
-  const addToCart = (product) => {
-    setOpenSnackbar(true);
-    contextData.setTotalPrice((prevPrice) => prevPrice + product.price);
+  // const addToCart = (product) => {
+  //   setOpenSnackbar(true);
+  //   contextData.setTotalPrice((prevPrice) => prevPrice + product.price);
 
-    let isInUserCart = contextData.userCart.some(
-      (bagProduct) => bagProduct.title === product.title
-    );
+  //   let isInUserCart = contextData.userCart.some(
+  //     (bagProduct) => bagProduct.title === product.title
+  //   );
 
-    if (!isInUserCart) {
-      let newUserCartProduct = {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        image: product.image,
-        count: 1,
-      };
+  //   if (!isInUserCart) {
+  //     let newUserCartProduct = {
+  //       id: product.id,
+  //       title: product.title,
+  //       price: product.price,
+  //       image: product.image,
+  //       count: 1,
+  //     };
 
-      contextData.setUserCart((prevProducts) => [
-        ...prevProducts,
-        newUserCartProduct,
-      ]);
-    } else {
-      let userCart = [...contextData.userCart];
+  //     contextData.setUserCart((prevProducts) => [
+  //       ...prevProducts,
+  //       newUserCartProduct,
+  //     ]);
+  //   } else {
+  //     let userCart = [...contextData.userCart];
 
-      userCart.some((bagProduct) => {
-        if (bagProduct.title === product.title) {
-          bagProduct.count += 1;
-          contextData.setProductNumber(bagProduct.count);
-          contextData.setTotalPrice(
-            (prevPrice) => prevPrice + product.price * contextData.productNumber
-          );
+  //     userCart.some((bagProduct) => {
+  //       if (bagProduct.title === product.title) {
+  //         bagProduct.count += 1;
+  //         contextData.setProductNumber(bagProduct.count);
+  //         contextData.setTotalPrice(
+  //           (prevPrice) => prevPrice + product.price * contextData.productNumber
+  //         );
 
-          return true;
-        }
-      });
+  //         return true;
+  //       }
+  //     });
 
-      contextData.setUserCart(userCart);
-    }
-  };
+  //     contextData.setUserCart(userCart);
+  //   }
+  // };
 
   const [openShareBtns, setOpenShareBtns] = useState(false);
 

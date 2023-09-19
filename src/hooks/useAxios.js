@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://clothing-online-shop.iran.liara.run";
 
 const useAxios = ({
   url,

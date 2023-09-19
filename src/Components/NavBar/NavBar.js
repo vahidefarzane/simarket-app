@@ -38,7 +38,6 @@ import "./NavBar.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SearchBox from "../SearchBox/SearchBox";
 import HomeIcon from "@mui/icons-material/Home";
-import productsContext from "../../Contexts/ProductsContext";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
@@ -149,8 +148,8 @@ export default function Navbar(props) {
   };
 
   const { response: cities, loading: loadingCities } = useAxios({
-    method:"get",
     url: "/cities",
+    method: "get",
   });
   const [cardBar, setCardBar] = useState(false);
   const openCardHandler = () => {
@@ -168,7 +167,6 @@ export default function Navbar(props) {
   const closeMenuBar = () => {
     setShowMenu(false);
   };
-  const contextData = useContext(productsContext);
 
   function removeUserCartProduct(productID) {}
 
@@ -344,7 +342,7 @@ export default function Navbar(props) {
           sx={{ color: "#212121" }}
           onClick={openCardHandler}
         >
-          <Badge badgeContent={contextData.userCart.length} sx={badgeStyle}>
+          <Badge badgeContent={5} sx={badgeStyle}>
             <AddShoppingCartIcon
               sx={{ marginBottom: "0.4rem", fontSize: "1.6rem" }}
             />
@@ -504,7 +502,7 @@ export default function Navbar(props) {
                   {loadingCities ? (
                     <Loading />
                   ) : (
-                    cities.map((city) => (
+                    cities?.map((city) => (
                       <>
                         <ListItem
                           key={city.id}
@@ -551,7 +549,7 @@ export default function Navbar(props) {
               sx={{ color: "#212121", marginRight: "1.5rem" }}
               onClick={openCardHandler}
             >
-              <Badge badgeContent={contextData.userCart.length} sx={badgeStyle}>
+              <Badge badgeContent={4} sx={badgeStyle}>
                 <AddShoppingCartIcon sx={{ fontSize: "1.8rem" }} />
               </Badge>
             </IconButton>
@@ -599,9 +597,9 @@ export default function Navbar(props) {
                       height: "88vh",
                     }}
                   >
-                    {contextData.userCart.length !== 0 ? (
+                    {1 !== 0 ? (
                       <Box sx={{ padding: "0 0.5rem" }}>
-                        {contextData.userCart.map((product) => (
+                        {[].map((product) => (
                           <>
                             <Box
                               sx={{
@@ -660,7 +658,7 @@ export default function Navbar(props) {
                           مجموع :
                         </Typography>
                         <Typography fontWeight="bold" fontSize="1.1rem">
-                          {contextData.totalPrice}
+                          {1}
                         </Typography>
                       </Box>
                       <Box

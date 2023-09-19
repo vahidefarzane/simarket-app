@@ -4,10 +4,9 @@ import { Stack } from "@mui/material";
 import routes from "./router";
 import NavBar from "./Components/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
-import productsContext from "./Contexts/ProductsContext";
+import { CartProvider } from "./Contexts/CartContext";
 import "./App.css";
 
-// import { CartProvider } from "./Contexts/CartContext";
 
 function App() {
   const [isSticky, setSticky] = useState(false);
@@ -26,34 +25,15 @@ function App() {
     };
   }, []);
   const router = useRoutes(routes);
-  
-  const [userCart, setUserCart] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [productNumber, setProductNumber] = useState(null);
-
-
 
   return (
-    <>
-     <productsContext.Provider
-        value={{
-          userCart,
-          setUserCart,
-          totalPrice,
-          setTotalPrice,
-          productNumber,
-          setProductNumber,
-
-        }}
-        >
+    <CartProvider>
       <Stack className="main">
         <NavBar isSticky={isSticky} />
         {router}
         <Footer />
       </Stack>
-      </productsContext.Provider>
-    
-    </>
+    </CartProvider>
   );
 }
 

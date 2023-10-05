@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://clothing-online-shop.iran.liara.run";
+axios.defaults.baseURL = "https://shop-with-react.vercel.app";
 
 const useAxios = ({
   url,

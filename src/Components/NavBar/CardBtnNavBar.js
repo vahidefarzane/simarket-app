@@ -48,13 +48,14 @@ export default function CardBtnNavBar() {
         transitionDuration={700}
       >
         <Box
-          sx={{
-            width: {
-              md: "26rem",
-              sm: "24rem",
-              xs: "100%",
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: {
+              width: "26rem",
             },
-          }}
+            [theme.breakpoints.down("sm")]: {
+              width: "100vw",
+            },
+          })}
         >
           <Box
             component="div"

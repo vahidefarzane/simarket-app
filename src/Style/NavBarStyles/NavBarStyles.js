@@ -11,8 +11,6 @@ import { styled } from "@mui/material/styles";
 
 export const DrawerStyled = styled(Drawer)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
-    with: "80%",
-    height: "100vh",
     borderRadius: 0,
     padding: "1.5rem",
   },

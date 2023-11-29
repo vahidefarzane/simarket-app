@@ -64,10 +64,9 @@ export default function Categories() {
                   borderRadius: "1.2rem",
                 },
                 [theme.breakpoints.down("sm")]: {
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "start",
-                  alignItems: "center",
+                 
+                  
+                  
                   width: "48%",
                   margin: "0.1rem",
                   padding: "0.5rem",

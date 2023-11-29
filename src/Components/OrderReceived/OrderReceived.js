@@ -21,16 +21,9 @@ import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
 import MyButton from "../MyButton/MyButton";
 import { styled } from "@mui/material/styles";
 
-const BoxFullWidth = styled(Box)(({ theme }) => ({
-  width: "100%",
-  border: "1px solid #E3E3E3",
-  padding: "1.5rem",
-  borderRadius: "0.8rem",
-  margin: "1rem 0",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-}));
+import {BoxFullWidth} from "../../Style/styles"
+
+
 
 export default function OrderReceived({ handleBack }) {
   const [infos] = useState([

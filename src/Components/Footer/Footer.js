@@ -19,37 +19,9 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Logo from "../../logo.png";
 import MyButton from "../MyButton/MyButton";
+import { BtnFooter,NumberBox,TextFieldStyled} from "../../Style/styles"
 
-const BtnFooter = styled(Button)(({ theme }) => ({
-  backgroundColor: "transparent",
-  border: " 1px solid #a1a3a8",
-  borderRadius: "0.6rem",
-  color: "#a1a3a8",
-  [theme.breakpoints.down("md")]: {
-    padding: "0.5rem 0.5rem 0.5rem 0.2rem",
-    maxHeight: "2.9rem",
-  },
-  [theme.breakpoints.up("md")]: {
-    padding: "1.5rem 1.5rem 1.5rem 1.2rem",
-    maxHeight: "3.1rem",
-  },
-}));
-const NumberBox = styled(Typography)(({ theme }) => ({
-  fontSize: "0.85rem",
-}));
-const TextFieldStyled = styled(TextField)(({ theme }) => ({
-  borderRadius: "0.6rem",
-  fontSize: "0.3rem",
-  marginLeft: "0.7rem",
-  background: "#e3e3e6",
-  color: "#81858b",
-  [theme.breakpoints.down("md")]: {
-    width: " 70%",
-  },
-  [theme.breakpoints.up("md")]: {
-    width: " 100%",
-  },
-}));
+
 
 export default function Footer() {
   const [footerMenu, setFooterMenu] = useState([

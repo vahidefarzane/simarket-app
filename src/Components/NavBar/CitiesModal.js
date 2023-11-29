@@ -17,9 +17,8 @@ import Loading from "../Loading/Loading";
 import useAxios from "../../hooks/useAxios";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
-import { ModalStyled, LocationStyled } from "../../Style/NavBarStyles/NavBarStyles";
-import "../../Style/NavBarStyles/NavBar.css";
-
+import { ModalStyled, LocationStyled } from "../../Style/styles";
+import "./NavBar.css";
 
 export default function CitiesModal() {
   const { response: cities, loading: loadingCities } = useAxios({

@@ -36,7 +36,7 @@ export default function HomeProductBox(props) {
                 lg: "16rem",
                 md: "15rem",
                 sm: "12rem",
-                xs: "12rem",
+                xs: "11rem",
               },
               [theme.breakpoints.down("md")]: {
                 height: "17rem",

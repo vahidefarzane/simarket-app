@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Box, Toolbar, ListItem, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../logo.png";
-import "../../Style/NavBarStyles/NavBar.css";
+import "./NavBar.css";
 import SearchBox from "../SearchBox/SearchBox";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
 import CitiesModal from "./CitiesModal";
@@ -10,7 +10,7 @@ import CardBtnNavBar from "./CardBtnNavBar";
 import {
   StyledAppBar,
   StyledList,
-} from "../../Style/NavBarStyles/NavBarStyles";
+} from "../../Style/styles";
 
 function DesktopNavBar({ isSticky }) {
   return (

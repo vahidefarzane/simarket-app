@@ -13,17 +13,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-const ImageBannerStyled = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
-  [theme.breakpoints.up("md")]: {
-    display: "flex",
-    flexDirection: "column",
-    width: "33%",
-    justifyContent: "space-between",
-  },
-}));
+
+import {ImageBannerStyled} from "../../Style/styles"
+
 
 export default function Header() {
   return (

@@ -1,12 +1,11 @@
 import React from "react";
 import {
   Box,
-  LinearProgress,
-  linearProgressClasses,
+ 
   Typography,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
+import {LinearProgressStyled} from "../../Style/styles"
 
 const useStyles = makeStyles((theme) => ({
   ProgressContainer: {
@@ -52,18 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LinearProgressStyled = styled(LinearProgress)(({ theme }) => ({
-  height: 8,
-  borderRadius: 5,
-  display: "flex",
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: "#ebebeb",
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: "#ff6a00",
-  },
-}));
+
 
 export default function ProductCommentProgressBar(props) {
   const classes = useStyles();

@@ -4,11 +4,8 @@ import { Link } from "react-router-dom";
 import MyButton from "../MyButton/MyButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import "../../Style/NavBarStyles/NavBar.css";
-import {
-  DrawerStyled,
-  BadgeStyled,
-} from "../../Style/NavBarStyles/NavBarStyles";
+import "./NavBar.css";
+import { DrawerStyled, BadgeStyled } from "../../Style/styles";
 
 export default function CardBtnNavBar() {
   const [cardBar, setCardBar] = useState(false);

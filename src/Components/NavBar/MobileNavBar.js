@@ -28,9 +28,8 @@ import {
   NavContainer,
   BottomNavigationActionStyled,
   MenuBarStyled,
-} from "../../Style/NavBarStyles/NavBarStyles";
-import "../../Style/NavBarStyles/NavBar.css";
-
+} from "../../Style/styles";
+import "./NavBar.css";
 
 function MobileNavBar({ isSticky }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -214,65 +213,65 @@ function MobileNavBar({ isSticky }) {
       </Stack>
 
       <CitiesModal />
-      <BottomNavigationMenu />
+      {/* <BottomNavigationMenu /> */}
     </NavContainer>
   );
 }
 
-function BottomNavigationMenu() {
-  const [bottomNavigationValue, setBottomNavigationValue] = useState(0);
-  return (
-    <BottomNavigation
-      showLabels
-      value={bottomNavigationValue}
-      sx={{
-        display: "flex",
-        justifyContent: "space-around",
-        boxShadow: "5px 6px 11px rgb(0 0 0 / 40%)",
-        position: "fixed",
-        bottom: 0,
-        right: 0,
-        left: 0,
-        zIndex: "1000",
-        width: "100%",
-        paddingTop: "0.3rem",
-      }}
-      onChange={(event, newValue) => {
-        setBottomNavigationValue(newValue);
-      }}
-    >
-      <Link to="/">
-        <BottomNavigationActionStyled
-          showLabel={true}
-          label="خانه"
-          icon={<HomeIcon className="BottomNavigationAction" />}
-        />
-      </Link>
-      <Link>
-        <BottomNavigationActionStyled
-          showLabel={true}
-          label="دسته ها"
-          icon={<CategoryIcon className="BottomNavigationAction" />}
-        />
-      </Link>
-      <Link to="/panel/favarates">
-        <BottomNavigationActionStyled
-          showLabel={true}
-          label="علاقه مندی ها"
-          icon={<FavoriteBorderIcon className="BottomNavigationAction" />}
-        />
-      </Link>
-      <Link to="/panel/dashboard">
-        <BottomNavigationActionStyled
-          showLabel={true}
-          label="حساب کاربری"
-          icon={
-            <PersonOutlineOutlinedIcon className="BottomNavigationAction" />
-          }
-        />
-      </Link>
-    </BottomNavigation>
-  );
-}
+// function BottomNavigationMenu() {
+//   const [bottomNavigationValue, setBottomNavigationValue] = useState(0);
+//   return (
+//     <BottomNavigation
+//       showLabels
+//       value={bottomNavigationValue}
+//       sx={{
+//         display: "flex",
+//         justifyContent: "space-around",
+//         boxShadow: "5px 6px 11px rgb(0 0 0 / 40%)",
+//         position: "fixed",
+//         bottom: 0,
+//         right: 0,
+//         left: 0,
+//         zIndex: "1000",
+//         width: "100%",
+//         paddingTop: "0.3rem",
+//       }}
+//       onChange={(event, newValue) => {
+//         setBottomNavigationValue(newValue);
+//       }}
+//     >
+//       <Link to="/">
+//         <BottomNavigationActionStyled
+//           showLabel={true}
+//           label="خانه"
+//           icon={<HomeIcon className="BottomNavigationAction" />}
+//         />
+//       </Link>
+//       <Link>
+//         <BottomNavigationActionStyled
+//           showLabel={true}
+//           label="دسته ها"
+//           icon={<CategoryIcon className="BottomNavigationAction" />}
+//         />
+//       </Link>
+//       <Link to="/panel/favarates">
+//         <BottomNavigationActionStyled
+//           showLabel={true}
+//           label="علاقه مندی ها"
+//           icon={<FavoriteBorderIcon className="BottomNavigationAction" />}
+//         />
+//       </Link>
+//       <Link to="/panel/dashboard">
+//         <BottomNavigationActionStyled
+//           showLabel={true}
+//           label="حساب کاربری"
+//           icon={
+//             <PersonOutlineOutlinedIcon className="BottomNavigationAction" />
+//           }
+//         />
+//       </Link>
+//     </BottomNavigation>
+//   );
+// }
 
 export default MobileNavBar;

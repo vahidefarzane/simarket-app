@@ -1,10 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-
 import { React, useState } from "react";
-
 import {
-  Badge,
   Box,
   IconButton,
   List,
@@ -25,17 +22,12 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HomeIcon from "@mui/icons-material/Home";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-
-import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import CategoryIcon from "@mui/icons-material/Category";
 import Logo from "../../logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import SearchBox from "../SearchBox/SearchBox";
-import CardModal from "../CardModal/CardModal";
 import CitiesModal from "../CitiesModal/CitiesModal";
+import CardBtnNavBar from "./CardBtnNavBar";
 
 const NavContainer = styled(Box)(({ theme }) => ({
   padding: "0.8rem 0.7rem ",
@@ -60,13 +52,7 @@ const MenuBarStyled = styled(Drawer)(({ theme }) => ({
     display: "none",
   },
 }));
-const BadgeStyled = styled(Badge)(({ theme }) => ({
-  color: "#000",
-  "& .MuiBadge-badge": {
-    backgroundColor: theme.palette.primary.main,
-    color: "#fff",
-  },
-}));
+
 
 function MobileNavBar({ isSticky }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -78,23 +64,8 @@ function MobileNavBar({ isSticky }) {
   const closeMenuBar = () => {
     setShowMenu(false);
   };
-  const [openLocation, setOpenLocation] = useState(false);
-  const handleOpenLocation = () => setOpenLocation(true);
-  const handleCloselocation = () => setOpenLocation(false);
-
-  const cityHandeler = (e) => {
-    setOpenLocation(false);
-    localStorage.setItem("yourLocation", `${e.target.innerText}`);
-  };
-  const [cardBar, setCardBar] = useState(false);
-  const openCardHandler = () => {
-    setCardBar(true);
-  };
-  const closeCardHandler = () => {
-    console.log("hi");
-    setCardBar(false);
-  };
-
+ 
+ 
   return (
     <NavContainer>
       <Stack
@@ -262,59 +233,10 @@ function MobileNavBar({ isSticky }) {
             )}
           </IconButton>
         </Link>
-        <IconButton
-          aria-label="show 17 new notifications"
-          color="primary"
-          onClick={openCardHandler}
-        >
-          <BadgeStyled badgeContent={4}>
-            <AddShoppingCartIcon
-              sx={{ marginBottom: "0.4rem", fontSize: "1.6rem" }}
-            />
-          </BadgeStyled>
-          {cardBar && (
-            <CardModal cardBar={cardBar} closeCardHandler={closeCardHandler} />
-          )}
-        </IconButton>
+        <CardBtnNavBar/>
       </Stack>
-      <Stack
-        direction="row"
-        sx={{
-          width: "100%",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginTop: "0.7rem",
-          borderTop: "1px solid #e2e2e2",
-          borderBottom: "1px solid #e2e2e2",
-        }}
-      >
-        <Stack
-          direction="row"
-          sx={{
-            width: "100%",
-            justifyContent: "start",
-            alignItems: "center",
-            margin: "0.2rem 0",
-          }}
-          onClick={handleOpenLocation}
-        >
-          <CitiesModal
-            openLocation={openLocation}
-            handleCloselocation={handleCloselocation}
-            cityHandeler={cityHandeler}
-          />
-          <IconButton>
-            <FmdGoodOutlinedIcon sx={{ color: "primary.main" }} />
-          </IconButton>
-          <Typography sx={{ fontSize: "0.7rem" }}>
-            {localStorage.getItem("yourLocation") ||
-              "مکان را جهت فیلتر محصولات انتخاب کنید"}
-          </Typography>
-        </Stack>
-        <IconButton>
-          <ChevronLeftIcon sx={{ color: "primary.main" }} />
-        </IconButton>
-      </Stack>
+      
+      <CitiesModal/>
       <BottomNavigationMenu />
     </NavContainer>
   );

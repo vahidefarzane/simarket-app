@@ -52,7 +52,7 @@ export default function CardBtnNavBar() {
             width: {
               md: "26rem",
               sm: "24rem",
-              xs: "100vw",
+              xs: "100%",
             },
           }}
         >

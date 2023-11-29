@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 
 import MobileNavBar from "./MobileNavBar";
 import DesktopNavBar from "./DesktopNavBar";
-import "./NavBar.css"
 
 export default function Navbar(props) {
   return (

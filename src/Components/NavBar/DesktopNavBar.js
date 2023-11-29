@@ -1,45 +1,18 @@
 import { Link } from "react-router-dom";
-import { React, useState } from "react";
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  List,
-  ListItem,
-  Typography,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Box, Toolbar, ListItem, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../logo.png";
-import "./NavBar.css";
+import "../../Style/NavBarStyles/NavBar.css";
 import SearchBox from "../SearchBox/SearchBox";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
-import CitiesModal from "../CitiesModal/CitiesModal";
+import CitiesModal from "./CitiesModal";
 import CardBtnNavBar from "./CardBtnNavBar";
-
-const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: "white",
-  color: "#212121",
-  height: "7rem",
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
-  [theme.breakpoints.up("md")]: {
-    display: "flex",
-    paddingTop: "0.3rem",
-  },
-}));
-
-const StyledList = styled(List)(() => ({
-  padding: 0,
-  margin: "0 1rem 0 1rem",
-  display: "flex",
-  fontSize: "0.8rem",
-  height: "4.5rem",
-}));
+import {
+  StyledAppBar,
+  StyledList,
+} from "../../Style/NavBarStyles/NavBarStyles";
 
 function DesktopNavBar({ isSticky }) {
-
   return (
     <StyledAppBar sx={{ position: isSticky ? "fixed" : "unset" }}>
       <Toolbar>

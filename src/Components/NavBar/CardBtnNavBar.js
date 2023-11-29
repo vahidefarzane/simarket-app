@@ -1,34 +1,15 @@
-import {
-  Box,
-  Typography,
-  Drawer,
-  IconButton,
-  Divider,
-  Badge,
-} from "@mui/material";
+import { useState } from "react";
+import { Box, Typography, IconButton, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import MyButton from "../MyButton/MyButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { styled } from "@mui/material/styles";
-import "../NavBar/NavBar.css";
-import { useState } from "react";
+import "../../Style/NavBarStyles/NavBar.css";
+import {
+  DrawerStyled,
+  BadgeStyled,
+} from "../../Style/NavBarStyles/NavBarStyles";
 
-const DrawerStyled = styled(Drawer)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    with: "100%",
-    height: "100vh",
-    borderRadius: 0,
-    padding: "1.5rem",
-  },
-}));
-const BadgeStyled = styled(Badge)(({ theme }) => ({
-  color: "#000",
-  "& .MuiBadge-badge": {
-    backgroundColor: theme.palette.primary.main,
-    color: "#fff",
-  },
-}));
 export default function CardBtnNavBar() {
   const [cardBar, setCardBar] = useState(false);
   const openCardHandler = () => {

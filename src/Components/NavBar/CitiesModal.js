@@ -9,9 +9,7 @@ import {
   ListItemText,
   ListItemIcon,
   IconButton,
-  Button,
 } from "@mui/material";
-import { styled, useTheme } from "@mui/material/styles";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
@@ -19,37 +17,11 @@ import Loading from "../Loading/Loading";
 import useAxios from "../../hooks/useAxios";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
-import "../NavBar/NavBar.css";
+import { ModalStyled, LocationStyled } from "../../Style/NavBarStyles/NavBarStyles";
+import "../../Style/NavBarStyles/NavBar.css";
 
-const ModalStyled = styled(Box)(({ theme }) => ({
-  backgroundColor: "#fff",
-  [theme.breakpoints.down("sm")]: {
-    with: "100%",
-    height: "100vh",
-    borderRadius: 0,
-    padding: "1.5rem",
-  },
-  [theme.breakpoints.up("sm")]: {
-    padding: "2rem",
-    borderRadius: "0.6rem",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "34rem",
-  },
-  [theme.breakpoints.down("xs")]: {
-    padding: "1rem 0.5rem",
-  },
-}));
-const LocationStyled = styled(Button)(() => ({
-  borderRadius: "0.7rem",
-  cursor: "pointer",
-  border: "1px solid #e2e2e2",
-  height: "3rem",
-}));
+
 export default function CitiesModal() {
-  const theme = useTheme();
   const { response: cities, loading: loadingCities } = useAxios({
     url: "/cities",
     method: "get",

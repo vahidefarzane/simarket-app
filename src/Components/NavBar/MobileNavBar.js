@@ -1,6 +1,5 @@
-import { styled } from "@mui/material/styles";
-import { Link } from "react-router-dom";
 import { React, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   IconButton,
@@ -9,10 +8,7 @@ import {
   Stack,
   Typography,
   Divider,
-  BottomNavigationAction,
-  Drawer,
 } from "@mui/material";
-
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
@@ -26,32 +22,14 @@ import CategoryIcon from "@mui/icons-material/Category";
 import Logo from "../../logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchBox from "../SearchBox/SearchBox";
-import CitiesModal from "../CitiesModal/CitiesModal";
+import CitiesModal from "./CitiesModal";
 import CardBtnNavBar from "./CardBtnNavBar";
-
-const NavContainer = styled(Box)(({ theme }) => ({
-  padding: "0.8rem 0.7rem ",
-  [theme.breakpoints.down("md")]: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  [theme.breakpoints.up("md")]: {
-    display: "none",
-  },
-}));
-const BottomNavigationActionStyled = styled(BottomNavigationAction)(
-  ({ theme }) => ({
-    "&.Mui-selected": {
-      color: theme.palette.primary.main,
-    },
-    [theme.breakpoints.down("sm")]: {},
-  })
-);
-const MenuBarStyled = styled(Drawer)(({ theme }) => ({
-  [theme.breakpoints.up("md")]: {
-    display: "none",
-  },
-}));
+import {
+  NavContainer,
+  BottomNavigationActionStyled,
+  MenuBarStyled,
+} from "../../Style/NavBarStyles/NavBarStyles";
+import "../../Style/NavBarStyles/NavBar.css";
 
 
 function MobileNavBar({ isSticky }) {
@@ -64,8 +42,7 @@ function MobileNavBar({ isSticky }) {
   const closeMenuBar = () => {
     setShowMenu(false);
   };
- 
- 
+
   return (
     <NavContainer>
       <Stack
@@ -233,10 +210,10 @@ function MobileNavBar({ isSticky }) {
             )}
           </IconButton>
         </Link>
-        <CardBtnNavBar/>
+        <CardBtnNavBar />
       </Stack>
-      
-      <CitiesModal/>
+
+      <CitiesModal />
       <BottomNavigationMenu />
     </NavContainer>
   );

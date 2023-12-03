@@ -5,6 +5,7 @@ import BestSeller from "../../Components/BestSeller/BestSeller";
 import BannerAds from "../../Components/BannerAds/BannerAds";
 import Categories from "../../Components/Categories/Categories";
 import "./Home.css";
+import NewsLetter from "../../Components/NewsLetter/NewsLetter";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <BestSeller />
       <BannerAds />
       <Categories />
+      <NewsLetter/>
     </div>
   );
 }

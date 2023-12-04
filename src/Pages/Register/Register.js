@@ -8,17 +8,7 @@ import { useForm } from "react-hook-form";
 import useAxios from "../../hooks/useAxios";
 import "./Register.css";
 
-const ContainerImage = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.up("md")]: {
-    display: "flex",
-    width: "55%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
-}));
+import {ContainerImage} from '../../Style/styles'
 
 export default function Register() {
   const [successfulRegistrationNotif, setSuccessfulRegistrationNotif] =

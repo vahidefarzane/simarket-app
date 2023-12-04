@@ -11,8 +11,18 @@ import {
   LinearProgress,
   linearProgressClasses,
   InputBase,
+  Stack,
+  Accordion,
+  ListItemButton,
+  Slider,
+  Tabs,
+  Paper
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import MuiToggleButton from "@mui/material/ToggleButton";
+import StepConnector, {
+  stepConnectorClasses,
+} from "@mui/material/StepConnector";
 
 //navbar styles
 export const DrawerStyled = styled(Drawer)(({ theme }) => ({
@@ -228,17 +238,185 @@ export const SearchListBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-
 export const HotBtn = styled(Button)(({ theme }) => ({
   border: "1px solid #e2e2e2",
   borderRadius: "1.5rem",
   background: "transparent",
   marginLeft: "0.5rem",
   color: "#000",
-  padding:'0.5rem 0.2rem',
+  padding: "0.5rem 0.2rem",
   "&:hover": {
     background: "#ff6a00",
-    color:'#fff',
-    border:'1px solid #ff6a00'
+    color: "#fff",
+    border: "1px solid #ff6a00",
   },
+}));
+
+//product page
+
+export const ToggleButton = styled(MuiToggleButton)(({ theme }) => ({
+  "&.MuiButtonBase-root": {
+    width: "6rem",
+    color: "#000",
+    fontWeight: "bold",
+    [theme.breakpoints.between("md", "lg")]: {
+      width: "5rem",
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      width: "4rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "5rem",
+    },
+  },
+  "&.MuiButtonBase-root:not(:last-of-type), &.MuiButtonBase-root:last-of-type":
+    {
+      borderTopRightRadius: "0.7rem",
+      borderBottomRightRadius: " 0.7rem",
+      borderTopLeftRadius: "0.7rem",
+      borderBottomLeftRadius: " 0.7rem",
+      marginLeft: "0.7rem",
+      border: "1px solid #ff6a00",
+    },
+  "&.Mui-selected, &.Mui-selected:hover": {
+    color: "#fff",
+    backgroundColor: "#ff6a00",
+  },
+}));
+export const TabsStyled = styled(Tabs)(({ theme }) => ({
+  display: "flex",
+  "& .MuiTabs-indicator": {
+    backgroundColor: "#ff6a00",
+  },
+  "& .MuiTab-root.Mui-selected": {
+    color: "#ff6a00",
+  },
+}));
+export const BoxShareProduct = styled(Box)(({ theme }) => ({
+  display: "flex",
+  [theme.breakpoints.between("md", "lg")]: {
+    display: "none",
+  },
+}));
+
+//product list
+
+export const SideBarStyled = styled(Stack)(({ theme }) => ({
+  width: "22%",
+  position: "sticky",
+  top: "1rem",
+  height: "120vh",
+  bottom: "1rem",
+  [theme.breakpoints.between("md", "lg")]: {
+    width: "29%",
+  },
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
+export const AccordionStyled = styled(Accordion)(({ theme }) => ({
+  border: "1px solid  #e4e4e4",
+  boxShadow: "0 2px 4px 0 rgb(0 0 0 / 3%)",
+  borderRadius: "0.7rem",
+  margin: "0.5rem 0",
+  "&::before": {
+    display: "none",
+  },
+  "&:first-of-type": {
+    borderTopLeftRadius: "0.7rem",
+    borderTopRightRadius: "0.7rem",
+  },
+  "&:last-of-type": {
+    borderBottomLeftRadius: "0.7rem",
+    borderBottomRightRadius: "0.7rem",
+  },
+  "&.Mui-expanded": {
+    margin: "0.5rem 0",
+  },
+}));
+export const CustomSlider = styled(Slider)(({ theme }) => ({
+  "& .MuiSlider-thumb": {
+    backgroundColor: "#fff",
+    border: "1px solid blue",
+    width: "1.1rem",
+    height: "1.1rem",
+  },
+  "& .MuiSlider-track": {
+    height: "2px",
+  },
+}));
+export const H2ElemSideBar = styled(Typography)(({ theme }) => ({
+  fontSize: "0.9rem",
+  fontWeight: "600",
+}));
+
+export const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
+  transition: "none",
+  color: " #4d4d4d",
+  marginLeft: "0.3rem",
+  display: "flex",
+  fontSize: "0.9rem",
+
+  "&:hover": {
+    background: "#ff6a00",
+    color: "#fff",
+    borderRadius: "0.7rem",
+  },
+  "&:focus": {
+    background: "#ff6a00",
+    color: "#fff",
+    borderRadius: "0.7rem",
+  },
+  [theme.breakpoints.down("md")]: {
+    padding: "0.6rem",
+  },
+  [theme.breakpoints.down("sm")]: {
+    padding: "0.5rem",
+    fontSize: "0.8rem",
+  },
+}));
+
+
+//cart
+
+export const QontoConnector = styled(StepConnector)(({ theme }) => ({
+  [`&.${stepConnectorClasses.active}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      borderColor: " #ff6a00",
+      borderTopWidth: 2,
+      borderRadius: 1,
+    },
+  },
+
+  [`& .${stepConnectorClasses.line}`]: {
+    borderColor: "#eaeaf0",
+    borderTopWidth: 2,
+    borderRadius: 1,
+  },
+}));
+
+//login 
+export const ContainerImage = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up("md")]: {
+    display: "flex",
+    width: "55%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
+
+
+//panel
+
+
+export const PaperStyled = styled(Paper)(({ theme }) => ({
+  borderRadius: "0.7rem",
+  marginBottom: "0.7rem",
+  padding: "1rem",
+
+  // [theme.breakpoints.down("md")]: {},
+  // [theme.breakpoints.up("md")]: {},
 }));

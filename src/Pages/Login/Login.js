@@ -6,18 +6,9 @@ import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Logo from "../../logo.png";
 import useAxios from "../../hooks/useAxios";
+import {ContainerImage} from '../../Style/styles'
 
-const ContainerImage = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.up("md")]: {
-    display: "flex",
-    width: "55%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
-}));
+
 
 export default function Login() {
   const [successfulLoginNotif, setSuccessfulLoginNotif] = useState(null);

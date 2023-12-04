@@ -22,7 +22,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MyButton from "../../Components/MyButton/MyButton";
 import "./ProductsList.css";
 import useAxios from "../../hooks/useAxios";
-import Loading from '../../Components/Loading/Loading'
+import Loading from "../../Components/Loading/Loading";
+import {
+  SideBarStyled,
+  AccordionStyled,
+  CustomSlider,
+  H2ElemSideBar,
+  ListItemButtonHeader,
+} from "../../Style/styles";
 
 const useStyles = makeStyles((theme) => ({
   productListContainer: {
@@ -65,80 +72,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
 }));
-const SideBarStyled = styled(Stack)(({ theme }) => ({
-  width: "22%",
-  position: "sticky",
-  top: "1rem",
-  height: "120vh",
-  bottom: "1rem",
-  [theme.breakpoints.between("md", "lg")]: {
-    width: "29%",
-  },
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
-}));
-const AccordionStyled = styled(Accordion)(({ theme }) => ({
-  border: "1px solid  #e4e4e4",
-  boxShadow: "0 2px 4px 0 rgb(0 0 0 / 3%)",
-  borderRadius: "0.7rem",
-  margin: "0.5rem 0",
-  "&::before": {
-    display: "none",
-  },
-  "&:first-of-type": {
-    borderTopLeftRadius: "0.7rem",
-    borderTopRightRadius: "0.7rem",
-  },
-  "&:last-of-type": {
-    borderBottomLeftRadius: "0.7rem",
-    borderBottomRightRadius: "0.7rem",
-  },
-  "&.Mui-expanded": {
-    margin: "0.5rem 0",
-  },
-}));
-const CustomSlider = styled(Slider)(({ theme }) => ({
-  "& .MuiSlider-thumb": {
-    backgroundColor: "#fff",
-    border: "1px solid blue",
-    width: "1.1rem",
-    height: "1.1rem",
-  },
-  "& .MuiSlider-track": {
-    height: "2px",
-  },
-}));
-const H2ElemSideBar = styled(Typography)(({ theme }) => ({
-  fontSize: "0.9rem",
-  fontWeight: "600",
-}));
 
-const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
-  transition: "none",
-  color: " #4d4d4d",
-  marginLeft: "0.3rem",
-  display: "flex",
-  fontSize: "0.9rem",
-
-  "&:hover": {
-    background: "#ff6a00",
-    color: "#fff",
-    borderRadius: "0.7rem",
-  },
-  "&:focus": {
-    background: "#ff6a00",
-    color: "#fff",
-    borderRadius: "0.7rem",
-  },
-  [theme.breakpoints.down("md")]: {
-    padding: "0.6rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    padding: "0.5rem",
-    fontSize: "0.8rem",
-  },
-}));
 
 export default function ProductsList() {
   const classes = useStyles();
@@ -278,7 +212,9 @@ export default function ProductsList() {
             </H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails>
-            {isPendingCategories ? <Loading/> :
+            {isPendingCategories ? (
+              <Loading />
+            ) : (
               categories.map((category) => (
                 <Box className={classes.categoryBox}>
                   <Checkbox
@@ -286,7 +222,8 @@ export default function ProductsList() {
                   />
                   <Typography component="span">{category.name}</Typography>
                 </Box>
-              ))}
+              ))
+            )}
           </AccordionDetails>
         </AccordionStyled>
       </SideBarStyled>
@@ -351,7 +288,9 @@ export default function ProductsList() {
           </List>
         </Box>
         <Box className={classes.allProductsList}>
-          {isPendingProducts ? <Loading/> :
+          {isPendingProducts ? (
+            <Loading />
+          ) : (
             allProducts.map((product) => (
               <Product
                 key={product.id}
@@ -362,7 +301,8 @@ export default function ProductsList() {
                 ProductId={product.id}
                 offer={product.off}
               />
-            ))}
+            ))
+          )}
         </Box>
       </Stack>
     </Box>

@@ -14,8 +14,7 @@ import {
   Snackbar,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
-import MuiToggleButton from "@mui/material/ToggleButton";
-import MuiTabs from "@mui/material/Tabs";
+
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
@@ -38,6 +37,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import useAxios from "../../hooks/useAxios";
 import Loading from '../../Components/Loading/Loading';
 import {useCartContext} from '../../Contexts/CartContext';
+import {ToggleButton,TabsStyled,BoxShareProduct} from '../../Style/styles'
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -172,50 +172,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const ToggleButton = styled(MuiToggleButton)(({ theme }) => ({
-  "&.MuiButtonBase-root": {
-    width: "6rem",
-    color: "#000",
-    fontWeight: "bold",
-    [theme.breakpoints.between("md", "lg")]: {
-      width: "5rem",
-    },
-    [theme.breakpoints.between("sm", "md")]: {
-      width: "4rem",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "5rem",
-    },
-  },
-  "&.MuiButtonBase-root:not(:last-of-type), &.MuiButtonBase-root:last-of-type":
-    {
-      borderTopRightRadius: "0.7rem",
-      borderBottomRightRadius: " 0.7rem",
-      borderTopLeftRadius: "0.7rem",
-      borderBottomLeftRadius: " 0.7rem",
-      marginLeft: "0.7rem",
-      border: "1px solid #ff6a00",
-    },
-  "&.Mui-selected, &.Mui-selected:hover": {
-    color: "#fff",
-    backgroundColor: "#ff6a00",
-  },
-}));
-const TabsStyled = styled(Tabs)(({ theme }) => ({
-  display: "flex",
-  "& .MuiTabs-indicator": {
-    backgroundColor: "#ff6a00",
-  },
-  "& .MuiTab-root.Mui-selected": {
-    color: "#ff6a00",
-  },
-}));
-const BoxShareProduct = styled(Box)(({ theme }) => ({
-  display: "flex",
-  [theme.breakpoints.between("md", "lg")]: {
-    display: "none",
-  },
-}));
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 

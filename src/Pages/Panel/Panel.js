@@ -22,15 +22,8 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import "./Panel.css";
+import {PaperStyled} from '../../Style/styles'
 
-const PaperStyled = styled(Paper)(({ theme }) => ({
-  borderRadius: "0.7rem",
-  marginBottom: "0.7rem",
-  padding: "1rem",
-
-  // [theme.breakpoints.down("md")]: {},
-  // [theme.breakpoints.up("md")]: {},
-}));
 
 export default function Panel() {
   const userName = localStorage.getItem("username");

@@ -19,9 +19,7 @@ import {
   StepLabel,
 } from "@mui/material";
 import { TextareaAutosize } from "@mui/base";
-import StepConnector, {
-  stepConnectorClasses,
-} from "@mui/material/StepConnector";
+
 import { styled } from "@mui/material/styles";
 import MyButton from "../../Components/MyButton/MyButton";
 import SelectBox from "../../Components/SelectBox/SelectBox";
@@ -40,24 +38,11 @@ import { ThemeProvider } from "@mui/styles";
 
 import "./cart.css";
 import OrderReceived from "../../Components/OrderReceived/OrderReceived";
+import {QontoConnector} from '../../Style/styles'
 
 const steps = ["سبد خرید", "صورتحساب", "فاکتور"];
 
-const QontoConnector = styled(StepConnector)(({ theme }) => ({
-  [`&.${stepConnectorClasses.active}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      borderColor: " #ff6a00",
-      borderTopWidth: 2,
-      borderRadius: 1,
-    },
-  },
 
-  [`& .${stepConnectorClasses.line}`]: {
-    borderColor: "#eaeaf0",
-    borderTopWidth: 2,
-    borderRadius: 1,
-  },
-}));
 
 export default function Cart() {
   // const [activeStep, setActiveStep] = useState(0);

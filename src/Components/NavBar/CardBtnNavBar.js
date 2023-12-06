@@ -17,7 +17,7 @@ export default function CardBtnNavBar() {
   const closeCardHandler = () => {
     setCardBar(false);
   };
-  const { cart, remove ,total } = useContext(CartContext);
+  const { cart, remove, total } = useContext(CartContext);
 
   const handelremove = (productID) => {
     remove(productID);
@@ -53,11 +53,14 @@ export default function CardBtnNavBar() {
       >
         <Box
           sx={(theme) => ({
-            [theme.breakpoints.up("sm")]: {
+            [theme.breakpoints.up("md")]: {
               width: "26rem",
             },
-            [theme.breakpoints.down("sm")]: {
-              width: "100vw",
+            [theme.breakpoints.between("xs", "md")]: {
+              width: "80%",
+            },
+            [theme.breakpoints.down("xs")]: {
+              width: "100%",
             },
           })}
         >
@@ -81,7 +84,7 @@ export default function CardBtnNavBar() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              height: "88vh",
+              height: "80vh",
             }}
           >
             {cart.length !== 0 ? (
@@ -126,13 +129,21 @@ export default function CardBtnNavBar() {
               </Box>
             ) : (
               <>
-                <Box sx={{ display: "flex",flexDirection:"column",alignItems:"center" }}>
-                  <Typography sx={{margin:"1rem 0"}}> در سبد خرید شما محصولی وجود ندارد.</Typography>
-                  <Link to="/productsList"  onClick={closeCardHandler}>
-                  مشاهده محصولات
-                </Link>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography sx={{ margin: "1rem 0" }}>
+                    {" "}
+                    در سبد خرید شما محصولی وجود ندارد.
+                  </Typography>
+                  <Link to="/productsList" onClick={closeCardHandler}>
+                    مشاهده محصولات
+                  </Link>
                 </Box>
-                
               </>
             )}
 

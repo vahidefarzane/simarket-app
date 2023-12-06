@@ -73,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function ProductsList() {
   const classes = useStyles();
   const {
@@ -88,6 +87,8 @@ export default function ProductsList() {
     method: "get",
     url: "/categories",
   });
+
+  
 
   // ================> Filter by Category <================
   const [filterbycategory, setfilterbycategory] = useState(null);
@@ -291,17 +292,7 @@ export default function ProductsList() {
           {isPendingProducts ? (
             <Loading />
           ) : (
-            allProducts.map((product) => (
-              <Product
-                key={product.id}
-                productImage={product.image}
-                productTtile={product.title}
-                productPrice={product.price}
-                // productRate={product.rating.rate}
-                ProductId={product.id}
-                offer={product.off}
-              />
-            ))
+            allProducts.map((product) => <Product product={product} />)
           )}
         </Box>
       </Stack>

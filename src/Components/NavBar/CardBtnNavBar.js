@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Box, Typography, IconButton, Divider } from "@mui/material";
+import { Box, Typography, IconButton, Divider, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import MyButton from "../MyButton/MyButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "./NavBar.css";
 import { DrawerStyled, BadgeStyled } from "../../Style/styles";
+import { useContext } from "react";
+import { CartContext } from "../../Contexts/CartContext";
 
 export default function CardBtnNavBar() {
   const [cardBar, setCardBar] = useState(false);
@@ -14,6 +16,11 @@ export default function CardBtnNavBar() {
   };
   const closeCardHandler = () => {
     setCardBar(false);
+  };
+  const { cart, remove ,total } = useContext(CartContext);
+
+  const handelremove = (productID) => {
+    remove(productID);
   };
   return (
     <>
@@ -27,7 +34,7 @@ export default function CardBtnNavBar() {
           },
         }}
       >
-        <BadgeStyled badgeContent={4}>
+        <BadgeStyled badgeContent={cart.length}>
           <AddShoppingCartIcon
             sx={{
               fontSize: {
@@ -77,9 +84,9 @@ export default function CardBtnNavBar() {
               height: "88vh",
             }}
           >
-            {1 !== 0 ? (
+            {cart.length !== 0 ? (
               <Box sx={{ padding: "0 0.5rem" }}>
-                {[].map((product) => (
+                {cart.map((product) => (
                   <>
                     <Box
                       sx={{
@@ -89,7 +96,10 @@ export default function CardBtnNavBar() {
                         padding: "0 1rem",
                       }}
                     >
-                      <IconButton sx={{ p: 0 }}>
+                      <IconButton
+                        sx={{ p: 0 }}
+                        onClick={() => handelremove(product.id)}
+                      >
                         <CloseIcon />
                       </IconButton>
                       <Box
@@ -115,9 +125,15 @@ export default function CardBtnNavBar() {
                 ))}
               </Box>
             ) : (
-              <Box sx={{ margin: "1rem Auto" }}>
-                در سبد خرید شما محصولی وجود ندارد.
-              </Box>
+              <>
+                <Box sx={{ display: "flex",flexDirection:"column",alignItems:"center" }}>
+                  <Typography sx={{margin:"1rem 0"}}> در سبد خرید شما محصولی وجود ندارد.</Typography>
+                  <Link to="/productsList"  onClick={closeCardHandler}>
+                  مشاهده محصولات
+                </Link>
+                </Box>
+                
+              </>
             )}
 
             <Box sx={{ borderTop: "1px solid #E0E0E0" }}>
@@ -132,7 +148,7 @@ export default function CardBtnNavBar() {
                   مجموع :
                 </Typography>
                 <Typography fontWeight="bold" fontSize="1.1rem">
-                  {1}
+                  {total} تومان
                 </Typography>
               </Box>
               <Box

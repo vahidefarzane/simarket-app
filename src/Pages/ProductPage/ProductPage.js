@@ -17,7 +17,7 @@ import MuiAlert from "@mui/material/Alert";
 
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MyButton from "../../Components/MyButton/MyButton";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
@@ -35,9 +35,9 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import useAxios from "../../hooks/useAxios";
-import Loading from '../../Components/Loading/Loading';
-import {useCartContext} from '../../Contexts/CartContext';
-import {ToggleButton,TabsStyled,BoxShareProduct} from '../../Style/styles'
+import Loading from "../../Components/Loading/Loading";
+import { CartContext } from "../../Contexts/CartContext";
+import { ToggleButton, TabsStyled, BoxShareProduct } from "../../Style/styles";
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -204,11 +204,14 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-export default function ProductsList() {
-  const classes = useStyles();
-  const {addToCart} =useCartContext()
 
-  const [value, setValue] = useState("one");
+export default function ProductPage() {
+  const classes = useStyles();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const { addToCart } = useContext(CartContext);
+  const productID = useParams();
+
+  // const [value, setValue] = useState("one");
 
   // const handleChange1 = (event, newValue) => {
   //   setValue(newValue);
@@ -219,12 +222,12 @@ export default function ProductsList() {
     setvaluedata(newValue);
   };
 
-  const [defaultSize, setDefaultSize] = useState(null);
+  // const [defaultSize, setDefaultSize] = useState(null);
   const [alignment, setAlignment] = useState("defaultSize");
 
   const { response: product, loading: loadingProduct } = useAxios({
     method: "get",
-    url: `${window.location.pathname}`,
+    url: `/products/${productID.productid}`,
   });
 
   // useEffect(() => {
@@ -239,50 +242,14 @@ export default function ProductsList() {
     setAlignment(newAlignment);
   };
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-
   const handleClose = (event, reason) => {
     setOpenSnackbar(false);
   };
-  // const addToCart = (product) => {
-  //   setOpenSnackbar(true);
-  //   contextData.setTotalPrice((prevPrice) => prevPrice + product.price);
 
-  //   let isInUserCart = contextData.userCart.some(
-  //     (bagProduct) => bagProduct.title === product.title
-  //   );
-
-  //   if (!isInUserCart) {
-  //     let newUserCartProduct = {
-  //       id: product.id,
-  //       title: product.title,
-  //       price: product.price,
-  //       image: product.image,
-  //       count: 1,
-  //     };
-
-  //     contextData.setUserCart((prevProducts) => [
-  //       ...prevProducts,
-  //       newUserCartProduct,
-  //     ]);
-  //   } else {
-  //     let userCart = [...contextData.userCart];
-
-  //     userCart.some((bagProduct) => {
-  //       if (bagProduct.title === product.title) {
-  //         bagProduct.count += 1;
-  //         contextData.setProductNumber(bagProduct.count);
-  //         contextData.setTotalPrice(
-  //           (prevPrice) => prevPrice + product.price * contextData.productNumber
-  //         );
-
-  //         return true;
-  //       }
-  //     });
-
-  //     contextData.setUserCart(userCart);
-  //   }
-  // };
+  const handelAdd = (product) => {
+    addToCart(product);
+    setOpenSnackbar(true);
+  };
 
   const [openShareBtns, setOpenShareBtns] = useState(false);
 
@@ -699,7 +666,7 @@ export default function ProductsList() {
                 <MyButton
                   padding="0.9rem 0"
                   borderradius="0.9rem"
-                  onClick={() => addToCart(product)}
+                  onClick={() => handelAdd(product)}
                 >
                   افزودن به سبد خرید
                 </MyButton>

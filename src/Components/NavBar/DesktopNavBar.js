@@ -7,12 +7,11 @@ import SearchBox from "../SearchBox/SearchBox";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
 import CitiesModal from "./CitiesModal";
 import CardBtnNavBar from "./CardBtnNavBar";
-import {
-  StyledAppBar,
-  StyledList,
-} from "../../Style/styles";
+import { StyledAppBar, StyledList } from "../../Style/styles";
+
 
 function DesktopNavBar({ isSticky }) {
+ 
   return (
     <StyledAppBar sx={{ position: isSticky ? "fixed" : "unset" }}>
       <Toolbar>

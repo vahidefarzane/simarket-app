@@ -18,6 +18,8 @@ import Orders from "./Pages/Panel/Orders";
 import TrackingOrder from "./Pages/Panel/TrackingOrder";
 import AccountInfos from "./Pages/Panel/AccountInfos";
 import AddAddress from "./Pages/Panel/AddAddress";
+import OrderInfo from "./Components/OrderInfo/OrderInfo";
+import OrderReceived from "./Components/OrderReceived/OrderReceived";
 const routes = [
   { path: "/", element: <Home /> },
   { path: "/productsList", element: <ProductsList /> },
@@ -26,8 +28,16 @@ const routes = [
   { path: "/products/:productid/addcomment", element: <AddComment /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
-  { path: "/cart", element: <Cart /> },
-  { path: "/checkout", element: <Checkout /> },
+  {
+    path: "/cart/",
+    element: <Cart />,
+    children: [
+      { path: "orderInfo", element: <OrderInfo /> },
+      { path: "checkout", element: <Checkout /> },
+      { path: "orderReceived", element: <OrderReceived /> },
+    ],
+  },
+
   {
     path: "/panel/",
     element: <Panel />,

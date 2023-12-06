@@ -1,48 +1,18 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import {
   Stack,
   Box,
   Typography,
   Stepper,
   Step,
-  Button,
-  StepButton,
-  Divider,
-  IconButton,
-  InputBase,
-  FormControlLabel,
-  Checkbox,
-  FormControl,
-  RadioGroup,
-  Radio,
-  FormLabel,
   StepLabel,
 } from "@mui/material";
-import { TextareaAutosize } from "@mui/base";
-
-import { styled } from "@mui/material/styles";
-import MyButton from "../../Components/MyButton/MyButton";
-import SelectBox from "../../Components/SelectBox/SelectBox";
 import Checkout from "../Checkout/Checkout";
-import OrderInfo from "../../Components/OrderInfo/OrderInfo";
-import Input from "../../Components/Input/Input";
 import Logo from "../../logo.png";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import BeenhereIcon from "@mui/icons-material/Beenhere";
-
-import { createTheme } from "@mui/material/styles";
-import { ThemeProvider } from "@mui/styles";
-
 import "./cart.css";
 import OrderReceived from "../../Components/OrderReceived/OrderReceived";
-import {QontoConnector} from '../../Style/styles'
-
+import OrderInfo from "../../Components/OrderInfo/OrderInfo";
 const steps = ["سبد خرید", "صورتحساب", "فاکتور"];
-
-
 
 export default function Cart() {
   // const [activeStep, setActiveStep] = useState(0);
@@ -51,12 +21,6 @@ export default function Cart() {
   //     setActiveStep(step);
 
   // };
-
-  // const [cities, setCities] = useState({
-  //   Iran: ["Tabriz", "Tehran", "Shiraz", "Esfahan", "Mashhad"],
-  //   Turkey: ["Istanbul", "Ezmir", "Ankara", "Antaliya"],
-  //   US: ["Los Angles", "San Diego", "Chicago"],
-  // });
 
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());

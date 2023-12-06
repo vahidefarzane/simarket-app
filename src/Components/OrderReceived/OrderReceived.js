@@ -21,11 +21,11 @@ import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
 import MyButton from "../MyButton/MyButton";
 import { styled } from "@mui/material/styles";
 
-import {BoxFullWidth} from "../../Style/styles"
-
-
+import { BoxFullWidth } from "../../Style/styles";
+import { CartContext } from "../../Contexts/CartContext";
 
 export default function OrderReceived({ handleBack }) {
+  const { total } = useContext(CartContext);
   const [infos] = useState([
     {
       id: 1,
@@ -43,7 +43,7 @@ export default function OrderReceived({ handleBack }) {
       id: 3,
       icon: CreditCardOutlinedIcon,
       title: " قیمت نهایی:",
-      dec: `${1000} تومان`,
+      dec: `${total} تومان`,
     },
     {
       id: 4,
@@ -82,9 +82,8 @@ export default function OrderReceived({ handleBack }) {
     { id: 1, product: "حمل و نقل:	", total: "رایگان" },
     { id: 2, product: "مالیات بر ارزش افزوده:	", total: "0 تومان" },
     { id: 3, product: "روش پرداخت:	", total: "انتقال مستقیم بانکی " },
-    { id: 4, product: "قیمت نهایی:	", total: "1000" },
+    { id: 4, product: "قیمت نهایی:	", total: `${total} تومان` },
   ]);
-
 
   return (
     <Box>

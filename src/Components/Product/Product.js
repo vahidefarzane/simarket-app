@@ -1,5 +1,3 @@
-import { React } from "react";
-import { Link } from "react-router-dom";
 import {
   Card,
   CardMedia,
@@ -9,20 +7,11 @@ import {
   Box,
   Rating,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import "./Product.css";
+import { Link } from "react-router-dom";
 
-export default function Product(props) {
-  const {
-    productImage,
-    productTtile,
-    productPrice,
-    productRate,
-    ProductId,
-    offer,
-  } = props;
-
+export default function Product({ product }) {
   return (
     <>
       <Card
@@ -41,11 +30,11 @@ export default function Product(props) {
           },
         }}
       >
-        <Link to={`/products/${ProductId}`}>
+        <Link to={`/products/${product.id}`}>
           <CardMedia
             component="img"
-            image={productImage}
-            alt={productTtile}
+            image={product.image}
+            alt={product.title}
             sx={(theme) => ({
               padding: "1rem",
               objectFit: "contain",
@@ -74,7 +63,7 @@ export default function Product(props) {
               component={"h3"}
               sx={{ height: "4.5rem", textAlign: "center", fontSize: "0.9rem" }}
             >
-              {productTtile}
+              {product.title}
             </Typography>
             <Box
               sx={{
@@ -105,7 +94,7 @@ export default function Product(props) {
                 <Rating
                   name="half-rating"
                   precision={1}
-                  value={productRate}
+                  value={product.rating.rate}
                   size="small"
                   readOnly
                 />
@@ -138,11 +127,11 @@ export default function Product(props) {
                   },
                 })}
               >
-                {productPrice}
+                {product.price}
               </Typography>
 
               <Typography component={"span"} sx={{ fontSize: "0.9rem" }}>
-                {productPrice - productPrice * (offer / 100)} تومان
+                {product.price - product.price * (product.off / 100)} تومان
               </Typography>
               <Typography
                 component={"span"}
@@ -155,7 +144,7 @@ export default function Product(props) {
                   padding: "0.6rem",
                 }}
               >
-                {offer}%
+                {product.off}%
               </Typography>
             </Box>
           </Stack>

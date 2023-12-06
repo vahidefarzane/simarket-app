@@ -60,7 +60,7 @@ export default function CardBtnNavBar() {
               width: "80%",
             },
             [theme.breakpoints.down("xs")]: {
-              width: "100%",
+              width: "5rem",
             },
           })}
         >

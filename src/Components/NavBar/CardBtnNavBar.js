@@ -53,15 +53,17 @@ export default function CardBtnNavBar() {
       >
         <Box
           sx={(theme) => ({
-            [theme.breakpoints.up("md")]: {
+            [theme.breakpoints.up("sm")]: {
               width: "26rem",
             },
-            [theme.breakpoints.between("xs", "md")]: {
-              width: "80%",
+            [theme.breakpoints.down("sm")]: {
+              width: "100vw",
             },
-            [theme.breakpoints.down("xs")]: {
-              width: "5rem",
-            },
+
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            height: "100vh",
           })}
         >
           <Box
@@ -72,6 +74,7 @@ export default function CardBtnNavBar() {
               backgroundColor: "#EF394E",
               display: "flex",
               justifyContent: "space-between",
+              
             }}
           >
             <Typography sx={{ fontSize: "0.9rem" }}>
@@ -84,7 +87,7 @@ export default function CardBtnNavBar() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              height: "80vh",
+              height: "100vh",
             }}
           >
             {cart.length !== 0 ? (
@@ -147,12 +150,12 @@ export default function CardBtnNavBar() {
               </>
             )}
 
-            <Box sx={{ borderTop: "1px solid #E0E0E0" }}>
+            <Box sx={{ borderTop: "1px solid #E0E0E0", padding: "1.5rem" }}>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
-                  padding: "1rem",
+                  padding: "1rem 0",
                 }}
               >
                 <Typography fontWeight="bold" fontSize="1.1rem">
@@ -167,7 +170,6 @@ export default function CardBtnNavBar() {
                   display: "flex",
                   justifyContent: "space-between",
                   width: "100%",
-                  padding: "0 1rem",
                 }}
               >
                 <Link

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
-import Logo from "../../logo.png";
+import Logo from "../../Components/Logo/Logo";
 import useAxios from "../../hooks/useAxios";
 import {ContainerImage} from '../../Style/styles'
 
@@ -90,14 +90,7 @@ export default function Login() {
         >
           <Stack sx={{ width: "85%" }}>
             <Box sx={{ margin: "auto", marginBottom: "2rem" }}>
-              <Box
-                component="img"
-                sx={{
-                  width: 130,
-                }}
-                alt="Your logo"
-                src={Logo}
-              ></Box>
+             <Logo/>
             </Box>
             <form onSubmit={handleSubmit(SubmitHandeler)}>
               <label className="lable">نام کاربری :</label>

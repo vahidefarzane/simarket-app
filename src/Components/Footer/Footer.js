@@ -17,7 +17,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import Logo from "../../logo.png";
+import Logo from "../Logo/Logo";
 import MyButton from "../MyButton/MyButton";
 import { BtnFooter,NumberBox,TextFieldStyled} from "../../Style/styles"
 
@@ -77,14 +77,7 @@ export default function Footer() {
         })}
       >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box
-            component="img"
-            sx={{
-              width: 150,
-            }}
-            alt="Your logo"
-            src={Logo}
-          ></Box>
+          <Logo/>
           <BtnFooter
             endIcon={<KeyboardArrowUpIcon sx={{ marginRight: "0.7rem" }} />}
           >

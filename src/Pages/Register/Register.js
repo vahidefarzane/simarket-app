@@ -3,7 +3,7 @@ import { Stack, Box, Snackbar } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
-import Logo from "../../logo.png";
+import Logo from "../../Components/Logo/Logo";
 import { useForm } from "react-hook-form";
 import useAxios from "../../hooks/useAxios";
 import "./Register.css";
@@ -87,14 +87,8 @@ export default function Register() {
         >
           <Stack sx={{ width: "90%" }}>
             <Box sx={{ margin: "1rem auto" }}>
-              <Box
-                component="img"
-                sx={{
-                  width: 150,
-                }}
-                alt="Your logo"
-                src={Logo}
-              ></Box>
+             <Logo/>
+
             </Box>
             <form onSubmit={handleSubmit(SubmitHandeler)}>
               <label className="lable">نام کاربری :</label>

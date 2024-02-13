@@ -25,3 +25,8 @@
 .bill {
   width: 40%;
 }
+
+.logo-header {
+  display: flex;
+  align-items: center;
+}

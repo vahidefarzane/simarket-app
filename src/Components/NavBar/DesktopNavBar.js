@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Box, Toolbar, ListItem, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Logo from "../../logo.png";
+import Logo from "../Logo/Logo";
 import "./NavBar.css";
 import SearchBox from "../SearchBox/SearchBox";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
@@ -9,23 +9,11 @@ import CitiesModal from "./CitiesModal";
 import CardBtnNavBar from "./CardBtnNavBar";
 import { StyledAppBar, StyledList } from "../../Style/styles";
 
-
 function DesktopNavBar({ isSticky }) {
- 
   return (
     <StyledAppBar sx={{ position: isSticky ? "fixed" : "unset" }}>
       <Toolbar>
-        <Link to="/">
-          <Box
-            component="img"
-            sx={{
-              height: 50,
-              width: 130,
-            }}
-            alt="Your logo"
-            src={Logo}
-          ></Box>
-        </Link>
+        <Logo/>
 
         <SearchBox></SearchBox>
         <CitiesModal />

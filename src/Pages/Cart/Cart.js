@@ -8,7 +8,7 @@ import {
   StepLabel,
 } from "@mui/material";
 import Checkout from "../Checkout/Checkout";
-import Logo from "../../logo.png";
+import Logo from "../../Components/Logo/Logo";
 import "./cart.css";
 import OrderReceived from "../../Components/OrderReceived/OrderReceived";
 import OrderInfo from "../../Components/OrderInfo/OrderInfo";
@@ -67,7 +67,7 @@ export default function Cart() {
           padding: "1rem",
         }}
       >
-        <Box component="img" src={Logo} sx={{ width: "15%", margin: "1rem" }} />
+        <Logo />
         <Box
           sx={{
             width: {

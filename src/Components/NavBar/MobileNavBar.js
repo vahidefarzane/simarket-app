@@ -19,7 +19,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
-import Logo from "../../logo.png";
+import Logo from "../Logo/Logo";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchBox from "../SearchBox/SearchBox";
 import CitiesModal from "./CitiesModal";
@@ -81,15 +81,7 @@ function MobileNavBar({ isSticky }) {
               }}
             >
               <Link to="/" style={{ display: "flex" }}>
-                <Box
-                  component="img"
-                  src={Logo}
-                  sx={{
-                    width: "40%",
-                    margin: "auto",
-                    padding: "1rem 0",
-                  }}
-                ></Box>
+                <Logo />
               </Link>
               <List>
                 {[
@@ -145,14 +137,7 @@ function MobileNavBar({ isSticky }) {
           </MenuBarStyled>
         )}
         <Link to="/">
-          <Box
-            component="img"
-            sx={{
-              width: 100,
-            }}
-            alt="Your logo"
-            src={Logo}
-          ></Box>
+          <Logo/>
         </Link>
         <IconButton color="inherit">
           <HelpOutlineOutlinedIcon />

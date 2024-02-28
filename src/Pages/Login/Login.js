@@ -58,7 +58,7 @@ export default function Login() {
 
   const SubmitHandeler = async (data) => {
     const response = await fetch(
-      `http://localhost:4000/users?username=${data.username}&password=${data.password}`
+      `https://online-shop-json-server.onrender.com/users?username=${data.username}&password=${data.password}`
     );
     const result = await response.json();
     if (result.length) {

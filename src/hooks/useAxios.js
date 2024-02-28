@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://online-shop-json-server.onrender.com";
 
 const useAxios = () => {
   const [response, setResponse] = useState([]);

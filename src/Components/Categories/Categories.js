@@ -4,12 +4,23 @@ import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
 import "./Categories.css";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function Categories() {
-  const { response: categories, loading } = useAxios({
-    method: "get",
-    url: "/categories",
-  });
+  const [data, error, loading, axiosFetch] = useAxios();
+  const getData = () => {
+    axiosFetch({
+      axiosInstance: axios,
+      method: "GET",
+      url: "/categories",
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+   
+
 
   return (
     <Stack
@@ -40,7 +51,7 @@ export default function Categories() {
         {loading ? (
           <Loading />
         ) : (
-          categories.map((category) => (
+          data.map((category) => (
             <Box
               key={category.id}
               sx={(theme) => ({
@@ -64,9 +75,6 @@ export default function Categories() {
                   borderRadius: "1.2rem",
                 },
                 [theme.breakpoints.down("sm")]: {
-                 
-                  
-                  
                   width: "48%",
                   margin: "0.1rem",
                   padding: "0.5rem",

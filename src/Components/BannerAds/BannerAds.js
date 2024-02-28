@@ -2,13 +2,22 @@ import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
+import axios from "axios";
+import { useEffect } from "react";
+
 
 export default function BannerAds() {
-  const { response: bannerImgs, loading } = useAxios({
-    url: "/bannerimages",
-    method: "get",
-  });
-
+  const [data, error, loading, axiosFetch] = useAxios();
+  const getData = () => {
+    axiosFetch({
+      axiosInstance: axios,
+      method: "GET",
+      url: "/bannerimages",
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <Box
       sx={(theme) => ({
@@ -24,7 +33,7 @@ export default function BannerAds() {
       {loading ? (
         <Loading />
       ) : (
-        bannerImgs?.map((bannerImg) => (
+        data?.map((bannerImg) => (
           <Link to={bannerImg.to} key={bannerImg.id}>
             <Box
               sx={(theme) => ({

@@ -12,13 +12,22 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
-
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function BestSeller() {
-  const { response: allProducts, loading } = useAxios({
-    method:'get',
-    url: "/products?numbersale_gte=200&numbersale_lte=700",
-  });
+ 
+  const [data, error, loading, axiosFetch] = useAxios();
+  const getData = () => {
+    axiosFetch({
+      axiosInstance: axios,
+      method: "GET",
+      url: "/products?numbersale_gte=200&numbersale_lte=700",
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <Stack
       sx={(theme) => ({
@@ -79,8 +88,10 @@ export default function BestSeller() {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {loading ? <Loading /> :
-            allProducts.map((product) => (
+          {loading ? (
+            <Loading />
+          ) : (
+            data.map((product) => (
               <SwiperSlide key={product.id}>
                 <HomeProductBox
                   productId={product.id}
@@ -91,7 +102,8 @@ export default function BestSeller() {
                   isSlider={true}
                 />
               </SwiperSlide>
-            ))}
+            ))
+          )}
         </Swiper>
       </Box>
     </Stack>

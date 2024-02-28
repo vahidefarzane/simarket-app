@@ -20,7 +20,7 @@
     "react-hook-form": "^7.43.2",
     "react-icons": "^4.7.1",
     "react-image-magnify": "^2.7.4",
-    "react-router-dom": "^6.4.5",
+    "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
     "swiper": "^8.4.5",
     "web-vitals": "^2.1.4"

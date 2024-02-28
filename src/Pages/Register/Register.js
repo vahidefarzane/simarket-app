@@ -2,13 +2,14 @@ import { useState } from "react";
 import { Stack, Box, Snackbar } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
-import { styled } from "@mui/material/styles";
 import Logo from "../../Components/Logo/Logo";
 import { useForm } from "react-hook-form";
 import useAxios from "../../hooks/useAxios";
 import "./Register.css";
+import { useEffect } from "react";
+import axios from "axios";
 
-import {ContainerImage} from '../../Style/styles'
+import { ContainerImage } from "../../Style/styles";
 
 export default function Register() {
   const [successfulRegistrationNotif, setSuccessfulRegistrationNotif] =
@@ -16,29 +17,37 @@ export default function Register() {
   const handleClose = () => {
     setSuccessfulRegistrationNotif(false);
   };
-
   const navigate = useNavigate();
-  const [newUser, setNewUser] = useState(null);
-  useAxios({
-    method: "post",
-    url: "/users",
-    body: newUser,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  function SubmitHandeler(data) {
-    setNewUser({
-      username: data.userName,
-      email: data.email,
-      password: data.password,
-    }) 
-    setSuccessfulRegistrationNotif(true)
-    setTimeout(() => {
-    navigate('/login')
-  }, 2000);
+
+  const [data, error, loading, axiosFetch] = useAxios();
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    console.log(user);
+    if (user.username !== undefined) {
+      setSuccessfulRegistrationNotif(true);
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    }
+  },[user]);
+  async function SubmitHandeler(user) {
+    await axiosFetch({
+      axiosInstance: axios,
+      method: "POST",
+      url: "/users",
+      requestConfig: {
+        username: user.userName,
+        email: user.email,
+        password: user.password,
+      },
+    });
+    setUser({
+      username: user.userName,
+      email: user.email,
+      password: user.password,
+    });
   }
-  
+
   const {
     register,
     handleSubmit,
@@ -87,8 +96,7 @@ export default function Register() {
         >
           <Stack sx={{ width: "90%" }}>
             <Box sx={{ margin: "1rem auto" }}>
-             <Logo/>
-
+              <Logo />
             </Box>
             <form onSubmit={handleSubmit(SubmitHandeler)}>
               <label className="lable">نام کاربری :</label>

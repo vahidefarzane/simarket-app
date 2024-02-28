@@ -1,37 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://online-shop-json-server.onrender.com";
+axios.defaults.baseURL = "http://localhost:4000";
 
-const useAxios = ({
-  url,
-  method,
-  body = null,
-  headers = null,
-  startOpration = false,
-}) => {
-  const [response, setResponse] = useState(null);
+const useAxios = () => {
+  const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); //different!
 
-  const fetchData = async () => {
+  const axiosFetch = async (configObj) => {
+    const { axiosInstance, method, url, requestConfig = {} } = configObj;
+
     try {
-      const res = await axios[method](url, body, headers);
-      setLoading(false);
+      const res = await axiosInstance[method.toLowerCase()](url, {
+        ...requestConfig,
+      });
+
+
       setResponse(res.data);
     } catch (err) {
+      console.log(err.message);
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-    if(!startOpration){
-
-    }
-  }, [url, method, body, headers]);
-
-  return { response, setResponse, error, setError, loading, setLoading };
+  return [response, error, loading, axiosFetch];
 };
 
 export default useAxios;

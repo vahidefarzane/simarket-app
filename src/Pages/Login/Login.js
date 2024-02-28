@@ -6,18 +6,16 @@ import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Logo from "../../Components/Logo/Logo";
 import useAxios from "../../hooks/useAxios";
-import {ContainerImage} from '../../Style/styles'
-
-
+import { ContainerImage } from "../../Style/styles";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function Login() {
   const [successfulLoginNotif, setSuccessfulLoginNotif] = useState(null);
   const [failedLoginNotif, setFailedLoginNotif] = useState(null);
-  const [url, setUrl] = useState("");
-  const { response:userLogin } = useAxios({
-    method: "get",
-    url,
-  });
+
+  const [response, error, loading, axiosFetch] = useAxios();
+
   const {
     register,
     handleSubmit,
@@ -30,21 +28,51 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const SubmitHandeler = (data) => {
-    setUrl(`/users?username=${data.username}&password=${data.password}`);
-    console.log(userLogin);
+  // useEffect(() => {
+  //   console.log(response);
+  //   if (response.length !== 0) {
+  //     localStorage.setItem("username", response.username);
+  //     setSuccessfulLoginNotif(true);
+  //     setTimeout(() => {
+  //       navigate("/");
+  //     }, 2000);
+  //   }
+  //   if (error.length) {
+  //     setFailedLoginNotif(true);
+  //   }
+  // }, [user]);
 
-    // if (userLogin.length) {
-    //   localStorage.setItem("username", userLogin.username);
-    //   setSuccessfulLoginNotif(true);
-    //   // setTimeout(() => {
-    //   //   navigate("/panel/dashboard");
-    //   // }, 2000);
-    // } else {
-    //   setFailedLoginNotif(true);
-    // }
+  const [user, setUser] = useState({});
+  // useEffect(() => {
+  //   if (user.username !== undefined) {
+  //     localStorage.setItem("username", user.username);
+  //     setSuccessfulLoginNotif(true);
+  //     setTimeout(() => {
+  //       navigate("/");
+  //     }, 2000);
+  //   }
+  //   if (error.length) {
+  //     setFailedLoginNotif(true);
+  //   }
+  // }, [user]);
+
+  const SubmitHandeler = async (data) => {
+    const response = await fetch(
+      `http://localhost:4000/users?username=${data.username}&password=${data.password}`
+    );
+    const result = await response.json();
+    if (result.length) {
+      localStorage.setItem("username", data.username);
+      setSuccessfulLoginNotif(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } else {
+      setFailedLoginNotif(true);
+    }
+    if (error.length) {
+    }
   };
-
   return (
     <Stack
       sx={{
@@ -90,7 +118,7 @@ export default function Login() {
         >
           <Stack sx={{ width: "85%" }}>
             <Box sx={{ margin: "auto", marginBottom: "2rem" }}>
-             <Logo/>
+              <Logo />
             </Box>
             <form onSubmit={handleSubmit(SubmitHandeler)}>
               <label className="lable">نام کاربری :</label>

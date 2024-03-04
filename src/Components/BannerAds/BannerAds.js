@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
-import axios from "axios";
 import { useEffect } from "react";
 
 
@@ -10,7 +9,6 @@ export default function BannerAds() {
   const [data, error, loading, axiosFetch] = useAxios();
   const getData = () => {
     axiosFetch({
-      axiosInstance: axios,
       method: "GET",
       url: "/bannerimages",
     });

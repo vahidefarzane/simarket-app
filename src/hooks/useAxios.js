@@ -6,13 +6,13 @@ axios.defaults.baseURL = "https://online-shop-json-server.onrender.com";
 const useAxios = () => {
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true); //different!
+  const [loading, setLoading] = useState(true); 
 
   const axiosFetch = async (configObj) => {
-    const { axiosInstance, method, url, requestConfig = {} } = configObj;
+    const { method, url, requestConfig = {} } = configObj;
 
     try {
-      const res = await axiosInstance[method.toLowerCase()](url, {
+      const res = await axios[method.toLowerCase()](url, {
         ...requestConfig,
       });
 
@@ -26,7 +26,7 @@ const useAxios = () => {
     }
   };
 
-  return [response, error, loading, axiosFetch];
+  return [response, error, loading, axiosFetch]
 };
 
 export default useAxios;

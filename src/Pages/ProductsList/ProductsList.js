@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Product from "../../Components/Product/Product";
 import SortIcon from "@mui/icons-material/Sort";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -75,84 +75,65 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductsList() {
   const classes = useStyles();
-  const {
-    response: allProducts,
-    setResponse: setAllProducts,
-    loading: isPendingProducts,
-  } = useAxios({
-    method: "get",
-    url: "/products",
-  });
-  const { response: categories, loading: isPendingCategories } = useAxios({
-    method: "get",
-    url: "/categories",
-  });
-
-  
-
-  // ================> Filter by Category <================
-  const [filterbycategory, setfilterbycategory] = useState(null);
-
-  const checkboxHandler = (name, e) => {
-    let checked = e.target.checked;
-    // checked ? setCat((oldcat) => [...oldcat, name]) : <></>
-    checked ? setfilterbycategory(name) : setfilterbycategory(null);
+  const [categories, errorCat, loadingCat, axiosFetchCat] = useAxios();
+  const getCategories = () => {
+    axiosFetchCat({
+      method: "GET",
+      url: "/categories",
+    });
   };
-  // ================> Filter by price <================
+  useEffect(() => {
+    getCategories();
+  }, []);
 
-  const [newValue, setNewValue] = useState(1000000);
-  const [value, setValue] = useState([100000, 1100000]);
-  const handleChange = (event, newval) => {
-    setValue(newval);
-    setNewValue(newval[1] - newval[0]);
+  const [
+    productFiltered,
+    productFilteredError,
+    productFilteredLoading,
+    axiosFetchfilter,
+  ] = useAxios();
+  // const [url, setURL] = useState("");
+  const [categoryUrl, setCategoryUrl] = useState("");
+  const [priceUrl, setPriceUrl] = useState("");
+  const [sortUrl, seySortUrl] = useState("");
+  const handelfilter = (e, propertyName, propertyValue) => {
+    if (propertyName === "category") {
+      let checked = e?.target?.checked;
+      if (checked) {
+        const newPath = `${propertyName}=${propertyValue}`;
+        if (categoryUrl === "") {
+          setCategoryUrl((prev) => {
+            return prev + newPath;
+          });
+        } else {
+          setCategoryUrl((prev) => {
+            return prev + "&" + newPath;
+          });
+        }
+      }
+      if (!checked) {
+        setCategoryUrl(() => {
+          return categoryUrl.replace(`${propertyName}=${propertyValue}`, "");
+        });
+      }
+    }
+    if (propertyName === "price") {
+      const newPath = `price_lte=${propertyValue[1]}&price_gte=${propertyValue[0]}`;
+      setPriceUrl(newPath);
+    }
+    if (propertyName === "_sort") {
+      const newPath = `_sort=${propertyValue}`;
+      seySortUrl(newPath);
+    }
   };
-  const filterProductPrice = () => {
-    console.log(newValue);
-  };
+  useEffect(() => {
+    axiosFetchfilter({
+      method: "GET",
+      url: `products?${categoryUrl}&${priceUrl}&${sortUrl}`,
+    });
+  }, [categoryUrl, priceUrl,sortUrl]);
 
-  // useEffect(() => {
-  //   if (filterbycategory) {
-  //     const { response : product } = useAxios({
-  //       url: `/products?category=${filterbycategory}&price_gte=0&price_lte=${newValue}`,
-  //     });
-  //     const { response : product } = useAxios({
-  //       url: `http://localhost:4000/products?category=${filterbycategory}&price_gte=0&price_lte=${newValue}`,
-  //     });
-
-  //   } else {
-  //     axios
-  //       .get(`http://localhost:4000/products?price_gte=0&price_lte=${newValue}`)
-  //       .then((product) => {
-  //         setAllProducts(product.data);
-  //       });
-  //   }
-  // }, [newValue, filterbycategory]);
-
-  const { response: sortByStars } = useAxios({
-    url: "/products?_sort=rating.rate&_order=desc",
-  });
-  const { response: sortBySale } = useAxios({
-    url: "/products?_sort=numbersale&_order=desc",
-  });
-  const { response: sortByPriceUp } = useAxios({
-    url: "/products?_sort=price",
-  });
-  const { response: sortByPriceDown } = useAxios({
-    url: "/products?_sort=price&_order=desc",
-  });
-
-  const sortByStartsHandeler = () => {
-    setAllProducts(sortByStars);
-  };
-  const sortBySaleHandeler = () => {
-    setAllProducts(sortBySale);
-  };
-  const sortByPriceUpHandeler = () => {
-    setAllProducts(sortByPriceUp);
-  };
-  const sortByPriceDownHandeler = () => {
-    setAllProducts(sortByPriceDown);
-  };
+  const [pricelimite, setPricelimite] = useState([100000, 1100000]);
 
   return (
     <Box className={classes.productListContainer}>
@@ -167,8 +148,11 @@ export default function ProductsList() {
           </AccordionSummary>
           <AccordionDetails sx={{ margin: " 0 0.7rem" }}>
             <CustomSlider
-              value={value}
-              onChange={handleChange}
+              value={pricelimite}
+              onChange={(e, newval) => {
+                handelfilter(e, "price", newval);
+                setPricelimite(newval);
+              }}
               min={100000}
               max={1100000}
             />
@@ -180,10 +164,10 @@ export default function ProductsList() {
               }}
             >
               <Typography sx={{ fontSize: "0.9rem" }}>
-                {value[1] + "  تومان"}
+                {pricelimite[1] + "  تومان"}
               </Typography>
               <Typography sx={{ fontSize: "0.9rem" }}>
-                {value[0] + "  تومان"}
+                {pricelimite[0] + "  تومان"}
               </Typography>
             </Box>
             <Box
@@ -194,12 +178,7 @@ export default function ProductsList() {
                 fontSize: "1rem",
                 fontWeight: "bold",
               }}
-            >
-              {newValue + "   تومان"}
-            </Box>
-            <MyButton widthupmd="100%" onClick={filterProductPrice}>
-              صافی
-            </MyButton>
+            ></Box>
           </AccordionDetails>
         </AccordionStyled>
         <AccordionStyled defaultExpanded={true}>
@@ -213,13 +192,13 @@ export default function ProductsList() {
             </H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails>
-            {isPendingCategories ? (
+            {loadingCat ? (
               <Loading />
             ) : (
               categories.map((category) => (
                 <Box className={classes.categoryBox}>
                   <Checkbox
-                    onChange={(e) => checkboxHandler(category.name, e)}
+                    onChange={(e) => handelfilter(e, "category", category.name)}
                   />
                   <Typography component="span">{category.name}</Typography>
                 </Box>
@@ -264,35 +243,51 @@ export default function ProductsList() {
 
           <List sx={{ display: "flex", padding: "0", flexWrap: "wrap" }}>
             <Box>
-              <ListItemButtonHeader>پیشفرض</ListItemButtonHeader>
+              <ListItemButtonHeader
+                onClick={(e) => handelfilter(e, "_sort", "")}
+              >
+                پیشفرض
+              </ListItemButtonHeader>
             </Box>
             <Box>
-              <ListItemButtonHeader onClick={sortByStartsHandeler}>
+              <ListItemButtonHeader
+                onClick={(e) =>
+                  handelfilter(e, "_sort", "rating.rate&_order=desc")
+                }
+              >
                 محبوب ترین
               </ListItemButtonHeader>
             </Box>
             <Box>
-              <ListItemButtonHeader onClick={sortBySaleHandeler}>
+              <ListItemButtonHeader
+                onClick={(e) =>
+                  handelfilter(e, "_sort", "numbersale&_order=desc")
+                }
+              >
                 پر فروش ترین
               </ListItemButtonHeader>
             </Box>
             <Box>
-              <ListItemButtonHeader onClick={sortByPriceUpHandeler}>
+              <ListItemButtonHeader
+                onClick={(e) => handelfilter(e, "_sort", "price")}
+              >
                 ارزان ترین
               </ListItemButtonHeader>
             </Box>
             <Box>
-              <ListItemButtonHeader onClick={sortByPriceDownHandeler}>
+              <ListItemButtonHeader
+                onClick={(e) => handelfilter(e, "_sort", "price&_order=desc")}
+              >
                 گران ترین
               </ListItemButtonHeader>
             </Box>
           </List>
         </Box>
         <Box className={classes.allProductsList}>
-          {isPendingProducts ? (
+          {productFilteredLoading ? (
             <Loading />
           ) : (
-            allProducts.map((product) => <Product product={product} />)
+            productFiltered.map((product) => <Product product={product} />)
           )}
         </Box>
       </Stack>

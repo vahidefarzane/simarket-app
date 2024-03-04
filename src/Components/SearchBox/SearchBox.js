@@ -4,24 +4,28 @@ import { styled } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
-import {Search,StyledInputBase,SearchListBox} from "../../Style/styles"
-
+import { Search, StyledInputBase, SearchListBox } from "../../Style/styles";
 
 export default function SearchBox() {
   const [showList, setShowList] = useState(false);
 
   const [searchValue, setSearchValue] = useState("");
 
-  const { response: productsSearch } = useAxios({
-    method:'get',
-    url: `/products?q=${searchValue}`,
-  });
+  const [data, error, loading, axiosFetch]= useAxios();
+  const getData = () => {
+    axiosFetch({
+      method: "GET",
+      url: `/products?q=${searchValue}`,
+    });
+  };
 
-  const productvalue = (e) => {
+  const handelChangeSearchbar = (e) => {
     setShowList(true);
     setSearchValue(e.target.value);
   };
-  useEffect(() => {}, [searchValue]);
+  useEffect(() => {
+    getData();
+  }, [searchValue]);
   const clearInputSearch = () => {
     setSearchValue("");
   };
@@ -40,7 +44,7 @@ export default function SearchBox() {
       <Search>
         <StyledInputBase
           placeholder="جستجو..."
-          onChange={productvalue}
+          onChange={handelChangeSearchbar}
           value={searchValue}
         />
         {searchValue && (
@@ -52,7 +56,18 @@ export default function SearchBox() {
       </Search>
       {showList && (
         <SearchListBox>
-          {productsSearch?.map((productSearch) => (
+          {data.length ? (
+            <CloseIcon
+              onClick={() => {
+                setShowList(false);
+              }}
+              sx={{ cursor: "pointer" }}
+            />
+          ) : (
+            ""
+          )}
+
+          {data.length ? (data?.map((productSearch) => (
             <>
               <Link to={`products/${productSearch.id}`} key={productSearch.id}>
                 <Typography
@@ -71,7 +86,7 @@ export default function SearchBox() {
               </Link>
               <Divider />
             </>
-          ))}
+          ))) : (<Typography>یافت نشد</Typography>)}
         </SearchListBox>
       )}
     </Box>

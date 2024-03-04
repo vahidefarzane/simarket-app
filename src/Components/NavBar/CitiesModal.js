@@ -16,16 +16,21 @@ import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import Loading from "../Loading/Loading";
 import useAxios from "../../hooks/useAxios";
 import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ModalStyled, LocationStyled } from "../../Style/styles";
 import "./NavBar.css";
 
 export default function CitiesModal() {
-  const { response: cities, loading: loadingCities } = useAxios({
-    url: "/cities",
-    method: "get",
-  });
-
+  const [data, error, loading,axiosFetch] = useAxios();
+  const getData = () => {
+    axiosFetch({
+      method: "GET",
+      url: "/cities",
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   const [openLocation, setOpenLocation] = useState(false);
   const handleOpenLocation = () => setOpenLocation(true);
   const handleCloselocation = () => setOpenLocation(false);
@@ -128,10 +133,10 @@ export default function CitiesModal() {
                 height: "400px",
               }}
             >
-              {loadingCities ? (
+              {loading ? (
                 <Loading />
               ) : (
-                cities?.map((city) => (
+                data?.map((city) => (
                   <>
                     <ListItem
                       key={city.id}

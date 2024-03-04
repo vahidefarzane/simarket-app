@@ -13,14 +13,12 @@ import "swiper/css/scrollbar";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
 import { useEffect } from "react";
-import axios from "axios";
 
 export default function BestSeller() {
  
-  const [data, error, loading, axiosFetch] = useAxios();
+  const [data, error, loading,axiosFetch] = useAxios();
   const getData = () => {
     axiosFetch({
-      axiosInstance: axios,
       method: "GET",
       url: "/products?numbersale_gte=200&numbersale_lte=700",
     });

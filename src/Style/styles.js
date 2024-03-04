@@ -16,7 +16,7 @@ import {
   ListItemButton,
   Slider,
   Tabs,
-  Paper
+  Paper,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MuiToggleButton from "@mui/material/ToggleButton";
@@ -222,7 +222,7 @@ export const SearchListBox = styled(Box)(({ theme }) => ({
   border: "1px solid #e2e2e2",
   borderRadius: "0.6rem",
   width: "38%",
-  height: "21.5rem",
+  maxHeight: "21rem",
   zIndex: "100",
   background: "#fff",
   top: "4rem",
@@ -375,7 +375,6 @@ export const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
   },
 }));
 
-
 //cart
 
 export const QontoConnector = styled(StepConnector)(({ theme }) => ({
@@ -394,7 +393,7 @@ export const QontoConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
-//login 
+//login
 export const ContainerImage = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     display: "flex",
@@ -407,9 +406,7 @@ export const ContainerImage = styled(Box)(({ theme }) => ({
   },
 }));
 
-
 //panel
-
 
 export const PaperStyled = styled(Paper)(({ theme }) => ({
   borderRadius: "0.7rem",

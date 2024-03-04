@@ -225,10 +225,21 @@ export default function ProductPage() {
   // const [defaultSize, setDefaultSize] = useState(null);
   const [alignment, setAlignment] = useState("defaultSize");
 
-  const { response: product, loading: loadingProduct } = useAxios({
-    method: "get",
-    url: `/products/${productID.productid}`,
-  });
+  // const { response: product, loading: loadingProduct } = useAxios({
+  //   method: "get",
+  //   url: `/products/${productID.productid}`,
+  // });
+
+  const [data, error, loading, axiosFetch] = useAxios();
+  const getData = () => {
+    axiosFetch({
+      method: "GET",
+      url: `/products/${productID.productid}`,
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   // useEffect(() => {
   //   // if (product.size.lenght === 3) {
@@ -269,7 +280,7 @@ export default function ProductPage() {
   };
   return (
     <>
-      {loadingProduct ? (
+      {loading ? (
         <Loading />
       ) : (
         <Stack className={classes.productPageContainer}>
@@ -292,12 +303,12 @@ export default function ProductPage() {
                 smallImage={{
                   isFluidWidth: true,
                   alt: "Phasellus laoreet",
-                  src: product.image,
+                  src: data.image,
                 }}
                 largeImage={{
                   width: 800,
                   height: 900,
-                  src: product.image,
+                  src: data.image,
                 }}
                 enlargedImageContainerStyle={{
                   background: "#fff",
@@ -325,7 +336,7 @@ export default function ProductPage() {
                   },
                 }}
               >
-                {product.title}
+                {data.title}
               </Typography>
               <Box className={classes.productDetailsPart1}>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -358,7 +369,7 @@ export default function ProductPage() {
                       marginRight: "0.2rem",
                     }}
                   >
-                    {product.category}
+                    {data.category}
                   </Typography>
                 </Box>
                 <Box
@@ -368,10 +379,10 @@ export default function ProductPage() {
                     fontSize: "0.8rem",
                   }}
                 >
-                  {product.rating.count}
+                  {data.rating.count}
                   <Rating
                     name="read-only"
-                    value={product.rating.rate}
+                    value={data.rating.rate}
                     readOnly
                     sx={{ marginRight: "0.5rem" }}
                   />
@@ -401,7 +412,7 @@ export default function ProductPage() {
                       fontWeight: "bold",
                     }}
                   >
-                    {product.off}%
+                    {data.off}%
                   </Typography>
                   <Stack>
                     <Typography
@@ -415,7 +426,7 @@ export default function ProductPage() {
                         marginBottom: "1rem",
                       }}
                     >
-                      {product.price}
+                      {data.price}
                     </Typography>
                     <Typography
                       component={"span"}
@@ -429,7 +440,7 @@ export default function ProductPage() {
                         fontWeight: "bold",
                       }}
                     >
-                      {product.price - product.price * (product.off / 100)}
+                      {data.price - data.price * (data.off / 100)}
                     </Typography>
                   </Stack>
                 </Box>
@@ -622,7 +633,7 @@ export default function ProductPage() {
                   },
                 }}
               >
-                {product.size && (
+                {data.size && (
                   <Typography
                     component={"h4"}
                     sx={{
@@ -658,15 +669,15 @@ export default function ProductPage() {
                   onChange={handleChange}
                   aria-label="text alignment"
                 >
-                  {product.size &&
-                    product.size.map((size) => (
+                  {data.size &&
+                    data.size.map((size) => (
                       <ToggleButton value={size}>{size}</ToggleButton>
                     ))}
                 </ToggleButtonGroup>
                 <MyButton
                   padding="0.9rem 0"
                   borderradius="0.9rem"
-                  onClick={() => handelAdd(product)}
+                  onClick={() => handelAdd(data)}
                 >
                   افزودن به سبد خرید
                 </MyButton>
@@ -749,7 +760,7 @@ export default function ProductPage() {
                       },
                     }}
                   >
-                    {product.title}
+                    {data.title}
                   </Typography>
                 </Box>
                 <Typography
@@ -804,7 +815,7 @@ export default function ProductPage() {
                       },
                     }}
                   >
-                    {product.title}
+                    {data.title}
                   </Typography>
                 </Stack>
                 <Box
@@ -836,7 +847,7 @@ export default function ProductPage() {
                       },
                     }}
                   >
-                    {product.commentBar.map((progressInfos) => (
+                    {data.commentBar.map((progressInfos) => (
                       <ProductProgressInfos
                         key={progressInfos.id}
                         title={progressInfos.title}
@@ -890,7 +901,7 @@ export default function ProductPage() {
                       اگر این محصول را قبلا از این فروشگاه خریده باشید، نظر شما
                       به عنوان مالک محصول ثبت خواهد شد.
                     </Typography>
-                    <Link to={`/products/${product.id}/addcomment`}>
+                    <Link to={`/products/${data.id}/addcomment`}>
                       <MyButton
                         startIcon={
                           <AddCommentIcon
@@ -932,7 +943,7 @@ export default function ProductPage() {
                     نظرات کاربران
                   </Typography>
                   <Box>
-                    {product.comments.map((comment) => (
+                    {data.comments.map((comment) => (
                       <>
                         <Typography
                           component="h3"

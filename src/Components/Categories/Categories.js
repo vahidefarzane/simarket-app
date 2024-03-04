@@ -5,13 +5,11 @@ import "./Categories.css";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
 import { useEffect } from "react";
-import axios from "axios";
 
 export default function Categories() {
-  const [data, error, loading, axiosFetch] = useAxios();
+  const [data, error, loading,axiosFetch] = useAxios();
   const getData = () => {
     axiosFetch({
-      axiosInstance: axios,
       method: "GET",
       url: "/categories",
     });

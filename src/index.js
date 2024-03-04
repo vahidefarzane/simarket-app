@@ -10,10 +10,8 @@ import {theme} from "./Style/theme/theme"
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider theme={theme}>
-  <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
   </ThemeProvider>
 );

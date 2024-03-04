@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.04839ea1.css",
+    "main.js": "/static/js/main.3c21907f.js",
+    "static/media/Vazir-FD-WOL.ttf": "/static/media/Vazir-FD-WOL.22679c959dc40b2b2cff.ttf",
+    "index.html": "/index.html",
+    "main.04839ea1.css.map": "/static/css/main.04839ea1.css.map",
+    "main.3c21907f.js.map": "/static/js/main.3c21907f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04839ea1.css",
+    "static/js/main.3c21907f.js"
+  ]
+}

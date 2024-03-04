@@ -10,6 +10,8 @@ import {
   AccordionSummary,
   AccordionDetails,
   ListItemButton,
+  ButtonGroup,
+  Button,
   List,
 } from "@mui/material";
 import axios from "axios";
@@ -28,7 +30,7 @@ import {
   AccordionStyled,
   CustomSlider,
   H2ElemSideBar,
-  ListItemButtonHeader,
+  SortButton,
 } from "../../Style/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,11 +40,17 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     [theme.breakpoints.down("md")]: {
       padding: "1rem",
+      flexDirection: "column",
     },
   },
   categoryBox: {
     display: "flex",
     alignItems: "center",
+  },
+  categoryTitle: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "5rem",
+    },
   },
   productListBox: {
     boxShadow: "0 2px 4px 0 rgb(0 0 0 / 3%)",
@@ -69,7 +77,13 @@ const useStyles = makeStyles((theme) => ({
   allProductsList: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "start",
+  },
+  accordionDetails: {
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      flexWrap: "wrap",
+    },
   },
 }));
 
@@ -92,7 +106,6 @@ export default function ProductsList() {
     productFilteredLoading,
     axiosFetchfilter,
   ] = useAxios();
-  // const [url, setURL] = useState("");
   const [categoryUrl, setCategoryUrl] = useState("");
   const [priceUrl, setPriceUrl] = useState("");
   const [sortUrl, seySortUrl] = useState("");
@@ -131,7 +144,7 @@ export default function ProductsList() {
       method: "GET",
       url: `products?${categoryUrl}&${priceUrl}&${sortUrl}`,
     });
-  }, [categoryUrl, priceUrl,sortUrl]);
+  }, [categoryUrl, priceUrl, sortUrl]);
 
   const [pricelimite, setPricelimite] = useState([100000, 1100000]);
 
@@ -191,7 +204,7 @@ export default function ProductsList() {
               فیلتر بر اساس دسته بندی :
             </H2ElemSideBar>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails className={classes.accordionDetails}>
             {loadingCat ? (
               <Loading />
             ) : (
@@ -200,7 +213,16 @@ export default function ProductsList() {
                   <Checkbox
                     onChange={(e) => handelfilter(e, "category", category.name)}
                   />
-                  <Typography component="span">{category.name}</Typography>
+                  <Typography
+                    component="span"
+                    sx={(theme) => ({
+                      [theme.breakpoints.down("sm")]: {
+                        fontSize: "0.8rem",
+                      },
+                    })}
+                  >
+                    {category.name}
+                  </Typography>
                 </Box>
               ))
             )}
@@ -240,48 +262,41 @@ export default function ProductsList() {
               مرتب سازی بر اساس:
             </Typography>
           </Box>
-
-          <List sx={{ display: "flex", padding: "0", flexWrap: "wrap" }}>
-            <Box>
-              <ListItemButtonHeader
-                onClick={(e) => handelfilter(e, "_sort", "")}
-              >
-                پیشفرض
-              </ListItemButtonHeader>
-            </Box>
-            <Box>
-              <ListItemButtonHeader
-                onClick={(e) =>
-                  handelfilter(e, "_sort", "rating.rate&_order=desc")
-                }
-              >
-                محبوب ترین
-              </ListItemButtonHeader>
-            </Box>
-            <Box>
-              <ListItemButtonHeader
-                onClick={(e) =>
-                  handelfilter(e, "_sort", "numbersale&_order=desc")
-                }
-              >
-                پر فروش ترین
-              </ListItemButtonHeader>
-            </Box>
-            <Box>
-              <ListItemButtonHeader
-                onClick={(e) => handelfilter(e, "_sort", "price")}
-              >
-                ارزان ترین
-              </ListItemButtonHeader>
-            </Box>
-            <Box>
-              <ListItemButtonHeader
-                onClick={(e) => handelfilter(e, "_sort", "price&_order=desc")}
-              >
-                گران ترین
-              </ListItemButtonHeader>
-            </Box>
-          </List>
+          <ButtonGroup
+            aria-label="Basic button group"
+            sx={{ display: "flex", padding: "0", flexWrap: "wrap" }}
+          >
+            <SortButton
+              autoFocus
+              onClick={(e) => {
+                handelfilter(e, "_sort", "");
+              }}
+            >
+              پیشفرض
+            </SortButton>
+            <SortButton
+              onClick={(e) => {
+                handelfilter(e, "_sort", "rating.rate&_order=desc");
+              }}
+            >
+              محبوب ترین
+            </SortButton>
+            <SortButton
+              onClick={(e) =>
+                handelfilter(e, "_sort", "numbersale&_order=desc")
+              }
+            >
+              پر فروش ترین
+            </SortButton>
+            <SortButton onClick={(e) => handelfilter(e, "_sort", "price")}>
+              ارزان ترین
+            </SortButton>
+            <SortButton
+              onClick={(e) => handelfilter(e, "_sort", "price&_order=desc")}
+            >
+              گران ترین
+            </SortButton>
+          </ButtonGroup>
         </Box>
         <Box className={classes.allProductsList}>
           {productFilteredLoading ? (

@@ -301,16 +301,30 @@ export const BoxShareProduct = styled(Box)(({ theme }) => ({
 //product list
 
 export const SideBarStyled = styled(Stack)(({ theme }) => ({
-  width: "22%",
-  position: "sticky",
-  top: "1rem",
-  height: "120vh",
-  bottom: "1rem",
+  // width: "22%",
+  [theme.breakpoints.up("lg")]: {
+    width: "25%",
+    position: "sticky",
+    height: "120vh",
+    bottom: "0.5rem",
+    marginLeft: "0.5rem",
+  },
   [theme.breakpoints.between("md", "lg")]: {
     width: "29%",
+    position: "sticky",
+    height: "120vh",
+    bottom: "0.5rem",
+    marginLeft: "0.5rem",
   },
+  [theme.breakpoints.between("sm", "md")]: {
+    display: "flex",
+    flexDirection: "row !important",
+  },
+
   [theme.breakpoints.down("md")]: {
-    display: "none",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
   },
 }));
 export const AccordionStyled = styled(Accordion)(({ theme }) => ({
@@ -329,8 +343,24 @@ export const AccordionStyled = styled(Accordion)(({ theme }) => ({
     borderBottomLeftRadius: "0.7rem",
     borderBottomRightRadius: "0.7rem",
   },
-  "&.Mui-expanded": {
-    margin: "0.5rem 0",
+  [theme.breakpoints.up("md")]: {
+    "&.Mui-expanded": {
+      margin: "0.5rem 0",
+    },
+  },
+
+  [theme.breakpoints.between("sm", "md")]: {
+    width: "50%",
+    "&.Mui-expanded": {
+      margin: "0 0 0 0.5rem",
+    },
+    
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+    "&.Mui-expanded": {
+      margin: "0.5rem 0",
+    },
   },
 }));
 export const CustomSlider = styled(Slider)(({ theme }) => ({
@@ -349,22 +379,19 @@ export const H2ElemSideBar = styled(Typography)(({ theme }) => ({
   fontWeight: "600",
 }));
 
-export const ListItemButtonHeader = styled(ListItemButton)(({ theme }) => ({
-  transition: "none",
+export const SortButton = styled(Button)(({ theme }) => ({
   color: " #4d4d4d",
-  marginLeft: "0.3rem",
+  margin: "0.3rem",
   display: "flex",
   fontSize: "0.9rem",
-
-  "&:hover": {
+  outline: "none",
+  border: "none",
+  "&:hover,&:focus,&.active": {
     background: "#ff6a00",
     color: "#fff",
-    borderRadius: "0.7rem",
-  },
-  "&:focus": {
-    background: "#ff6a00",
-    color: "#fff",
-    borderRadius: "0.7rem",
+    borderRadius: "0",
+    outline: "none",
+    border: "none",
   },
   [theme.breakpoints.down("md")]: {
     padding: "0.6rem",

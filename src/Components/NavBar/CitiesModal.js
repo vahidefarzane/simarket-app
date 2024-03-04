@@ -90,10 +90,10 @@ export default function CitiesModal() {
           onClick={handleOpenLocation}
         >
           <Stack textAlign="right" marginRight="0.5rem">
-            <Typography fontSize="0.7rem" color="#212121">
+            <Typography fontSize="0.8rem" color="#212121">
               انتخاب مکان
             </Typography>
-            <Typography fontSize="0.8rem">
+            <Typography fontSize="0.7rem">
               {localStorage.getItem("yourLocation") || "مکان شما"}
             </Typography>
           </Stack>

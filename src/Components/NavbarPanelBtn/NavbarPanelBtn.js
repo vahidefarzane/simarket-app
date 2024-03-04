@@ -173,8 +173,8 @@ export default function NavbarPanelBtn() {
         <Link to="/login">
           <MyButton
             borderradius={"1.8rem"}
-            fontsize={"0.8rem"}
-            padding={"0.75rem 1.5rem"}
+            fontsize={"0.7rem"}
+            padding={"0.6rem 1rem"}
           >
             ورود / ثبت نام
           </MyButton>

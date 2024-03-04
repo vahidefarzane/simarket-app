@@ -23,10 +23,10 @@ export default function Product({ product }) {
             xs: "100%",
           },
           height: {
-            lg: "24rem",
-            md: "23rem",
-            sm: "23rem",
-            xs: "25rem",
+            lg: "24.5rem",
+            md: "24rem",
+            sm: "25rem",
+            xs: "26rem",
           },
         }}
       >

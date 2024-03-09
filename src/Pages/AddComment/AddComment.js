@@ -6,15 +6,18 @@ import {
   Rating,
   TextareaAutosize,
   Checkbox,
+  Snackbar,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import CommentSlider from "../../Components/CommentSlider/CommentSlider";
 import MyButton from "../../Components/MyButton/MyButton";
 import "./AddComment.css";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../../Components/Loading/Loading";
+import { useParams, useNavigate } from "react-router-dom";
+import MuiAlert from "@mui/material/Alert";
 
 export default function AddComment() {
   const [sliderInfo, setSliderInfo] = useState([
@@ -31,19 +34,53 @@ export default function AddComment() {
     formState: { errors },
   } = useForm();
 
-  const { response: product, loading } = useAxios({
-    url: `${window.location.pathname.slice(0, 12)}`,
-  });
+  // ======================>Get Product  <======================
 
-  const SubmitHandeler = (data) => {
-    useAxios({
-      method: "post",
-      url: "/products",
-      body: {
-        username: data.username,
-        commentText: data.commentText,
+  const { productid } = useParams();
+  const [product, error, loading, axiosFetch] = useAxios();
+  const getData = () => {
+    axiosFetch({
+      method: "GET",
+      url: `/products/${productid}`,
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  // ======================> Post Comment <========================
+  const [commentPost, errorCommentPost, ld, axiosFetchComment] = useAxios();
+  const [comment, setComment] = useState({});
+  useEffect(() => {}, [comment, commentPost]);
+
+  const SubmitHandeler = (commentdata) => {
+    axiosFetch({
+      method: "POST",
+      url: "/comments",
+      requestConfig: {
+        productId: productid,
+        user: commentdata.user,
+        comment: commentdata.comment,
       },
     });
+    setComment({
+      productId: productid,
+      user: commentdata.user,
+      comment: commentdata.comment,
+    });
+
+    setSuccessfulCommentPost(true);
+    setTimeout(() => {
+      navigate(`/products/${productid}`);
+    }, 2000);
+  };
+
+  const navigate = useNavigate();
+
+  const [successfulCommentPost, setSuccessfulCommentPost] = useState(null);
+
+  const handleCloseNotif = () => {
+    setSuccessfulCommentPost(false);
   };
 
   return (
@@ -119,7 +156,7 @@ export default function AddComment() {
                   marginBottom: "1.5rem",
                 }}
               >
-                تی شرت مردانه منان شهیدی مدل
+                {product.title}
               </Typography>
               <Divider />
               <Box
@@ -158,13 +195,13 @@ export default function AddComment() {
                 <Box sx={{ width: "49%" }}>
                   <label className="lable">نام کاربری</label>
                   <input
-                    {...register("username", {
+                    {...register("user", {
                       required: "این فیلد الزامی است.",
                     })}
                     type="text"
                     className="input-form"
                   />
-                  <p className="alert">{errors.username?.message}</p>
+                  <p className="alert">{errors.user?.message}</p>
                 </Box>
                 <Box sx={{ width: "49%" }}>
                   <label className="lable">ایمیل :</label>
@@ -212,11 +249,11 @@ export default function AddComment() {
                   height: "9rem",
                   borderColor: "#757373",
                 }}
-                {...register("commentText", {
+                {...register("comment", {
                   required: "لطفا دیدگاه خود را وارد کنید.",
                 })}
               />
-              <p className="alert">{errors.commentText?.message}</p>
+              <p className="alert">{errors.comment?.message}</p>
 
               <Box sx={{ display: "flex", margin: "1.5rem 0" }}>
                 <Checkbox
@@ -251,6 +288,15 @@ export default function AddComment() {
               >
                 ثبت
               </MyButton>
+              <Snackbar
+                open={successfulCommentPost}
+                autoHideDuration={2000}
+                onClose={handleCloseNotif}
+              >
+                <MuiAlert elevation={6} variant="filled" severity="success">
+                  نظر شما با موفقیت ثبت شد
+                </MuiAlert>
+              </Snackbar>
               <Link
                 to=""
                 style={{ fontSize: "0.9rem", textDecoration: "underLine" }}

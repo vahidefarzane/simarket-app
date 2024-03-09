@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Stack, Box, Snackbar } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useSubmit,
+  useRouteError,
+  useActionData,
+  redirect,
+} from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
@@ -9,70 +16,41 @@ import useAxios from "../../hooks/useAxios";
 import { ContainerImage } from "../../Style/styles";
 import { useEffect } from "react";
 import axios from "axios";
+import { httpService } from "../../hooks/useAxios";
 
 export default function Login() {
-  const [successfulLoginNotif, setSuccessfulLoginNotif] = useState(null);
-  const [failedLoginNotif, setFailedLoginNotif] = useState(null);
-
-  const [response, error, loading, axiosFetch] = useAxios();
-
+  const [formNotification, setFormNotification] = useState(false);
+  const handleCloseNotification = () => {
+    setFormNotification(false);
+  };
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const handleClose = () => {
-    setSuccessfulLoginNotif(false);
-    setFailedLoginNotif(false);
+
+  const submitForm = useSubmit();
+
+  const routeError = useRouteError();
+  const onSubmit = (data) => {
+    submitForm(data, { method: "POST" });
   };
 
-  const navigate = useNavigate();
+  const isSuccessOperation = useActionData();
 
-  // useEffect(() => {
-  //   console.log(response);
-  //   if (response.length !== 0) {
-  //     localStorage.setItem("username", response.username);
-  //     setSuccessfulLoginNotif(true);
-  //     setTimeout(() => {
-  //       navigate("/");
-  //     }, 2000);
-  //   }
-  //   if (error.length) {
-  //     setFailedLoginNotif(true);
-  //   }
-  // }, [user]);
-
-  const [user, setUser] = useState({});
-  // useEffect(() => {
-  //   if (user.username !== undefined) {
-  //     localStorage.setItem("username", user.username);
-  //     setSuccessfulLoginNotif(true);
-  //     setTimeout(() => {
-  //       navigate("/");
-  //     }, 2000);
-  //   }
-  //   if (error.length) {
-  //     setFailedLoginNotif(true);
-  //   }
-  // }, [user]);
-
-  const SubmitHandeler = async (data) => {
-    const response = await fetch(
-      `https://online-shop-json-server.onrender.com/users?username=${data.username}&password=${data.password}`
-    );
-    const result = await response.json();
-    if (result.length) {
-      localStorage.setItem("username", data.username);
-      setSuccessfulLoginNotif(true);
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    } else {
-      setFailedLoginNotif(true);
+  useEffect(() => {
+    // if (isSuccessOperation) {
+    //   setFormNotification(true);
+    //   setTimeout(() => {
+    //     navigate("/");
+    //   }, 2000);
+    // }
+    if (routeError) {
+      setFormNotification(true);
+      console.log(routeError);
     }
-    if (error.length) {
-    }
-  };
+  }, [isSuccessOperation, routeError]);
+
   return (
     <Stack
       sx={{
@@ -120,16 +98,16 @@ export default function Login() {
             <Box sx={{ margin: "auto", marginBottom: "2rem" }}>
               <Logo />
             </Box>
-            <form onSubmit={handleSubmit(SubmitHandeler)}>
-              <label className="lable">نام کاربری :</label>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <label className="lable">ایمیل</label>
               <input
-                {...register("username", {
-                  required: "لطفا نام کاربری خود را وارد کنید .",
+                {...register("email", {
+                  required: "لطفا ایمیل خود را وارد کنید .",
                 })}
                 type="text"
                 className="input-form"
               />
-              <p className="alert">{errors.username?.message}</p>
+              <p className="alert">{errors.email?.message}</p>
 
               <label className="lable">گذرواژه :</label>
               <input
@@ -151,22 +129,24 @@ export default function Login() {
                 </span>
               </div>
               <Snackbar
-                open={successfulLoginNotif}
+                open={formNotification}
                 autoHideDuration={2000}
-                onClose={handleClose}
+                onClose={handleCloseNotification}
               >
-                <MuiAlert elevation={6} variant="filled" severity="success">
-                  شما با موفقیت وارد شدید
-                </MuiAlert>
-              </Snackbar>
-              <Snackbar
-                open={failedLoginNotif}
-                autoHideDuration={2000}
-                onClose={handleClose}
-              >
-                <MuiAlert elevation={6} variant="filled" severity="error">
-                  اطلاعات درست را وارد کنید
-                </MuiAlert>
+                {routeError ? (
+                  <MuiAlert elevation={6} variant="filled" severity="error">
+                    {routeError?.message === "Network Error" &&
+                      "لطفا از اتصال خود به اینترنت مطمئن شوید"}
+                    {routeError?.response?.data === "Cannot find user" &&
+                      "حساب کاربری با این ایمیل موجود نیست"}
+                    {routeError?.response?.data === "Incorrect password" &&
+                      "گذرواژه اشتباه است"}
+                  </MuiAlert>
+                ) : (
+                  <MuiAlert elevation={6} variant="filled" severity="success">
+                    {"شما با موفقیت وارد شدید"}
+                  </MuiAlert>
+                )}
               </Snackbar>
             </form>
           </Stack>
@@ -184,3 +164,15 @@ export default function Login() {
     </Stack>
   );
 }
+
+export async function loginAction({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const response = await httpService.post("/login", data);
+  if (response.status === 200) {
+    localStorage.setItem("username", "کاربر");
+    localStorage.setItem("token", response?.data.accessToken);
+    return redirect("/");
+  }
+}
+

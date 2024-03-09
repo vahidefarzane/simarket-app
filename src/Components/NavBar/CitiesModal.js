@@ -137,9 +137,9 @@ export default function CitiesModal() {
                 <Loading />
               ) : (
                 data?.map((city) => (
-                  <>
+                  <Box  key={city.id}>
                     <ListItem
-                      key={city.id}
+                     
                       sx={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -166,7 +166,7 @@ export default function CitiesModal() {
                       </ListItemIcon>
                     </ListItem>
                     <Divider />
-                  </>
+                  </Box>
                 ))
               )}
             </List>

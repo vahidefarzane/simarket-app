@@ -1,5 +1,3 @@
-import Home from "./Pages/Home/Home";
-import Categories from "./Components/Categories/Categories";
 import ProductsList from "./Pages/ProductsList/ProductsList";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import ProductPage from "./Pages/ProductPage/ProductPage";
@@ -20,42 +18,66 @@ import AccountInfos from "./Pages/Panel/AccountInfos";
 import AddAddress from "./Pages/Panel/AddAddress";
 import OrderInfo from "./Components/OrderInfo/OrderInfo";
 import OrderReceived from "./Components/OrderReceived/OrderReceived";
-const routes = [
-  { path: "/", element: <Home /> },
-  { path: "/productsList", element: <ProductsList /> },
-  { path: "/contactUs", element: <ContactUs /> },
-  { path: "/products/:productid", element: <ProductPage /> },
-  { path: "/products/:productid/addcomment", element: <AddComment /> },
-  { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register /> },
-  {
-    path: "/cart/",
-    element: <Cart />,
-    children: [
-      { path: "orderInfo", element: <OrderInfo /> },
-      { path: "checkout", element: <Checkout /> },
-      { path: "orderReceived", element: <OrderReceived /> },
-    ],
-  },
+import MainLayout from "./Layouts/main-layout";
+import Home from "./Pages/Home/Home";
 
+import { createBrowserRouter } from "react-router-dom";
+import { registerAction } from "./Pages/Register/Register";
+import { loginAction } from "./Pages/Login/Login";
+
+const router = createBrowserRouter([
   {
-    path: "/panel/",
-    element: <Panel />,
+    path: "/",
+    
+    element: <MainLayout />,
     children: [
-      { path: "accountInfos", element: <AccountInfos /> },
+      { element: <Home />, index: true },
+      // { path: "/productsList", element: <ProductsList /> },
+      // { path: "/contactUs", element: <ContactUs /> },
+      // { path: "/products/:productid", element: <ProductPage /> },
+      // { path: "/products/:productid/addcomment", element: <AddComment /> },
       {
-        path: "addresses/",
-        element: <Addresses />,
+        path: "/login",
+        element: <Login />,
+        action: loginAction,
+        errorElement: <Login />,
       },
-      { path: "addAddress", element: <AddAddress /> },
-      { path: "comments", element: <Comments /> },
-      { path: "dashboard", element: <Dashboard /> },
-      { path: "favarates", element: <Favarates /> },
-      { path: "notification", element: <Notification /> },
-      { path: "orders", element: <Orders /> },
-      { path: "trackingOrder", element: <TrackingOrder /> },
+      {
+        path: "/register",
+        element: <Register />,
+        action: registerAction,
+        errorElement: <Register />,
+      },
+      // {
+      //   path: "/cart/",
+      //   element: <Cart />,
+      //   children: [
+      //     { path: "orderInfo", element: <OrderInfo /> },
+      //     { path: "checkout", element: <Checkout /> },
+      //     { path: "orderReceived", element: <OrderReceived /> },
+      //   ],
+      // },
+
+      // {
+      //   path: "/panel/",
+      //   element: <Panel />,
+      //   children: [
+      //     { path: "accountInfos", element: <AccountInfos /> },
+      //     {
+      //       path: "addresses/",
+      //       element: <Addresses />,
+      //     },
+      //     { path: "addAddress", element: <AddAddress /> },
+      //     { path: "comments", element: <Comments /> },
+      //     { path: "dashboard", element: <Dashboard /> },
+      //     { path: "favarates", element: <Favarates /> },
+      //     { path: "notification", element: <Notification /> },
+      //     { path: "orders", element: <Orders /> },
+      //     { path: "trackingOrder", element: <TrackingOrder /> },
+      //   ],
+      // },
     ],
   },
-];
+]);
 
-export default routes;
+export default router;

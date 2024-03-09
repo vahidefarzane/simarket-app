@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { useRoutes } from "react-router-dom";
 import { Stack } from "@mui/material";
-import routes from "./router";
 import NavBar from "./Components/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
 import { CartProvider } from "./Contexts/CartContext";
 import "./App.css";
-
+import router from "./router";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
   const [isSticky, setSticky] = useState(false);
@@ -24,15 +23,10 @@ function App() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const router = useRoutes(routes);
 
   return (
     <CartProvider>
-      <Stack className="main">
-        <NavBar isSticky={isSticky} />
-        {router}
-        <Footer />
-      </Stack>
+      <RouterProvider router={router} />
     </CartProvider>
   );
 }

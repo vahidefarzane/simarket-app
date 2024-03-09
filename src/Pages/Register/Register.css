@@ -3,7 +3,6 @@
   font-size: 0.9rem;
   margin: 0.7rem 0;
   color: #757373;
-  
 }
 .input-form {
   border: 1px solid #b2b1b1;
@@ -13,6 +12,17 @@
 }
 .submit-btn {
   background-image: linear-gradient(to right, #fb4208, #ff6a00);
+  color: white;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.4rem 0;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: block;
+}
+.submit-btn:disabled {
+  background-image: linear-gradient(to right, #db905b, #db905b);
   color: white;
   border-radius: 0.5rem;
   width: 100%;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
 import { useEffect } from "react";
-
+import { httpService } from "../../hooks/useAxios";
 
 export default function BannerAds() {
   const [data, error, loading, axiosFetch] = useAxios();
@@ -16,6 +16,9 @@ export default function BannerAds() {
   useEffect(() => {
     getData();
   }, []);
+
+  //  const response = httpService.get("bannerimages");
+  // console.log(response);
   return (
     <Box
       sx={(theme) => ({
@@ -54,3 +57,15 @@ export default function BannerAds() {
     </Box>
   );
 }
+
+
+export async function BannerImagesLoader() {
+  return defer({
+    bannerImages: loadBannerImages(),
+  });
+}
+
+const loadBannerImages = async () => {
+  const response = await httpService.get("/bannerimages");
+  return response.data;
+};

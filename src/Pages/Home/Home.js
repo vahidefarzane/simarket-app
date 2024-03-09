@@ -8,7 +8,6 @@ import "./Home.css";
 import NewsLetter from "../../Components/NewsLetter/NewsLetter";
 
 export default function Home({searchParams}) {
-  console.log(searchParams);
   return (
     <div className="home-container">
       <Header />

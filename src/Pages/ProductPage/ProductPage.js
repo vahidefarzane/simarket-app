@@ -209,46 +209,39 @@ export default function ProductPage() {
   const classes = useStyles();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const { addToCart } = useContext(CartContext);
-  const productID = useParams();
+  const { productid } = useParams();
 
-  // const [value, setValue] = useState("one");
-
-  // const handleChange1 = (event, newValue) => {
-  //   setValue(newValue);
-  // };
   const [valuedata, setvaluedata] = useState(0);
 
   const handleChange3 = (event, newValue) => {
     setvaluedata(newValue);
   };
-
-  // const [defaultSize, setDefaultSize] = useState(null);
   const [alignment, setAlignment] = useState("defaultSize");
 
-  // const { response: product, loading: loadingProduct } = useAxios({
-  //   method: "get",
-  //   url: `/products/${productID.productid}`,
-  // });
+  // ================> Get Product <====================
 
   const [data, error, loading, axiosFetch] = useAxios();
-  const getData = () => {
+  const getProducts = () => {
     axiosFetch({
       method: "GET",
-      url: `/products/${productID.productid}`,
+      url: `/products/${productid}`,
+    });
+  };
+  useEffect(() => {
+    getProducts();
+  }, []);
+  // ================> Get Comments <====================
+  const [comments, errorComments, loadingComments, axiosFetchComments] =
+    useAxios();
+  const getData = () => {
+    axiosFetchComments({
+      method: "GET",
+      url: `/comments?productId=${productid}`,
     });
   };
   useEffect(() => {
     getData();
   }, []);
-
-  // useEffect(() => {
-  //   // if (product.size.lenght === 3) {
-  //   //   setDefaultSize("L");
-  //   // } else {
-  //   //   setDefaultSize("40");
-  //   // }
-  // }, [product]);
-
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
@@ -943,24 +936,30 @@ export default function ProductPage() {
                     نظرات کاربران
                   </Typography>
                   <Box>
-                    {data.comments.map((comment) => (
-                      <>
-                        <Typography
-                          component="h3"
-                          sx={{ fontSize: "1.2rem", margin: " 1rem 2rem" }}
-                        >
-                          {comment.user} -
-                          <Typography component="span"> 1401/11/13</Typography>
-                        </Typography>
-                        <Typography
-                          component="p"
-                          sx={{ margin: "0 2rem 1rem" }}
-                        >
-                          {comment.commentText}
-                        </Typography>
-                        <Divider />
-                      </>
-                    ))}
+                    {comments.length ? (
+                      comments.map((comment) => (
+                        <>
+                          <Typography
+                            component="h3"
+                            sx={{ fontSize: "1.2rem", margin: " 1rem 2rem" }}
+                          >
+                            {comment.user} -
+                            <Typography component="span">1401/11/13</Typography>
+                          </Typography>
+                          <Typography
+                            component="p"
+                            sx={{ margin: "0 2rem 1rem" }}
+                          >
+                            {comment.comment}
+                          </Typography>
+                          <Divider />
+                        </>
+                      ))
+                    ) : (
+                      <Typography component="p" sx={{ margin: "0 2rem 1rem" }}>
+                        برای این محصول نظری ثبت نشده است
+                      </Typography>
+                    )}
                   </Box>
                 </Box>
               </Stack>

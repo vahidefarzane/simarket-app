@@ -55,15 +55,16 @@ export default function CardBtnNavBar() {
           sx={(theme) => ({
             [theme.breakpoints.up("sm")]: {
               width: "26rem",
+              height: "100vh",
             },
             [theme.breakpoints.down("sm")]: {
               width: "100vw",
+              height: "90vh",
             },
 
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            height: "100vh",
           })}
         >
           <Box
@@ -74,7 +75,6 @@ export default function CardBtnNavBar() {
               backgroundColor: "#EF394E",
               display: "flex",
               justifyContent: "space-between",
-              
             }}
           >
             <Typography sx={{ fontSize: "0.9rem" }}>

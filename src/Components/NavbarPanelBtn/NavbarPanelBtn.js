@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import { Button, Box, Typography, Divider, Icon } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
@@ -6,13 +6,13 @@ import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDown
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MyButton from "../MyButton/MyButton";
 import Modal from "../Modal/Modal";
 import "./NavbarPanelBtn.css";
 
 export default function NavbarPanelBtn() {
-  const [showLists, setShowLists] = useState(false);
+  const [showList, setShowList] = useState(false);
   const [loggoutSuccessSnackbar, setLoggoutSuccessSnackbar] = useState(false);
   const [dilog, setDialog] = useState(false);
   const [list, setList] = useState([
@@ -35,27 +35,28 @@ export default function NavbarPanelBtn() {
       to: "/panel/favarates",
     },
   ]);
-  const userName = localStorage.getItem("username");
 
   const openItemsPanel = () => {
-    if (!showLists) {
-      setShowLists(true);
+    console.log(dilog);
+    if (!showList) {
+      setShowList(true);
     } else {
-      setShowLists(false);
+      setShowList(false);
     }
   };
 
-  const clickHandeler = () => {
-    setShowLists(false);
+  const handelSelectItem = () => {
+    setShowList(false);
   };
-  const logOutAccountHandler = () => {
+  const HandelLogoutUser = () => {
     setDialog(false);
     setLoggoutSuccessSnackbar(true);
     setTimeout(() => {
       localStorage.removeItem("username");
+      localStorage.removeItem("token");
     }, 1000);
   };
-
+  const username = localStorage.getItem("username");
   const openDialog = () => {
     setDialog(true);
   };
@@ -67,9 +68,28 @@ export default function NavbarPanelBtn() {
     setLoggoutSuccessSnackbar(false);
   };
 
+  const location = useLocation();
+  // const ref = useRef();
+  // useEffect(() => {
+  //   const checkIfClickOutside = (e) => {
+  //     if (
+  //       showList &&
+  //       !dilog &&
+  //       ref.current &&
+  //       !ref.current.contains(e.target)
+  //     ) {
+  //       setShowList(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", checkIfClickOutside);
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", checkIfClickOutside);
+  //   };
+  // }, [showList]);
   return (
     <Box>
-      {userName ? (
+      {username ? (
         <Box>
           <Button
             sx={{
@@ -93,7 +113,7 @@ export default function NavbarPanelBtn() {
               />
             }
             endIcon={
-              showLists ? (
+              showList ? (
                 <KeyboardArrowDownOutlinedIcon
                   sx={{
                     "&.MuiSvgIcon-root": {
@@ -114,9 +134,9 @@ export default function NavbarPanelBtn() {
               )
             }
           >
-            {userName}
+            {username}
           </Button>
-          {showLists && (
+          {showList && (
             <Box
               sx={{
                 position: "absolute",
@@ -130,11 +150,10 @@ export default function NavbarPanelBtn() {
               }}
             >
               {list.map((listItem) => (
-                <>
+                <Box key={listItem.id}>
                   <Link
-                    onClick={clickHandeler}
+                    onClick={handelSelectItem}
                     to={listItem.to}
-                    key={listItem.id}
                     className="list-item-navbar"
                   >
                     <Icon>{listItem.icon}</Icon>
@@ -145,7 +164,7 @@ export default function NavbarPanelBtn() {
                   <Divider
                     sx={{ color: "#e2e2e2", width: "90%", margin: "0 auto" }}
                   />
-                </>
+                </Box>
               ))}
 
               <div onClick={openDialog} className="list-item-navbar">
@@ -161,7 +180,7 @@ export default function NavbarPanelBtn() {
 
               <Modal
                 dilog={dilog}
-                logOutAccountHandler={logOutAccountHandler}
+                logOutAccountHandler={HandelLogoutUser}
                 closeDialog={closeDialog}
                 loggoutSuccessSnackbar={loggoutSuccessSnackbar}
                 closeLoggoutAlertHandeler={closeLoggoutAlertHandeler}

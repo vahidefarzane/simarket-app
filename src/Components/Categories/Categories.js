@@ -1,24 +1,21 @@
-import React from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Stack, Box } from "@mui/material";
 import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
 import "./Categories.css";
-import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
-import { useEffect } from "react";
+import { httpService } from "../../hooks/useAxios";
 
 export default function Categories() {
-  const [data, error, loading,axiosFetch] = useAxios();
-  const getData = () => {
-    axiosFetch({
-      method: "GET",
-      url: "/categories",
-    });
+  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
+
+  const fetchData = async () => {
+    const response = await httpService.get("/categories");
+    setData(response.status === 200 ? response.data : []);
   };
   useEffect(() => {
-    getData();
+    fetchData();
   }, []);
-   
-
 
   return (
     <Stack
@@ -46,10 +43,8 @@ export default function Categories() {
           },
         })}
       >
-        {loading ? (
-          <Loading />
-        ) : (
-          data.map((category) => (
+        <Suspense fallback={<Loading />}>
+          {data.map((category) => (
             <Box
               key={category.id}
               sx={(theme) => ({
@@ -113,8 +108,8 @@ export default function Categories() {
                 {category.name}
               </Stack>
             </Box>
-          ))
-        )}
+          ))}
+        </Suspense>
       </Box>
     </Stack>
   );

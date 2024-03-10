@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, React } from "react";
+import { useContext, useEffect, useState, React, Suspense } from "react";
 import {
   Stack,
   Modal,
@@ -16,8 +16,7 @@ import {
 import MuiAlert from "@mui/material/Alert";
 
 import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import MyButton from "../../Components/MyButton/MyButton";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
@@ -28,7 +27,6 @@ import { PropTypes } from "prop-types";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ProductProgressInfos from "../../Components/ProductProgressInfos/ProductProgressInfos";
 import ReactImageMagnify from "react-image-magnify";
-import axios from "axios";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TelegramIcon from "@mui/icons-material/Telegram";
@@ -38,6 +36,7 @@ import useAxios from "../../hooks/useAxios";
 import Loading from "../../Components/Loading/Loading";
 import { CartContext } from "../../Contexts/CartContext";
 import { ToggleButton, TabsStyled, BoxShareProduct } from "../../Style/styles";
+import { httpInterceptedService } from "../../hooks/useAxios";
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -220,28 +219,56 @@ export default function ProductPage() {
 
   // ================> Get Product <====================
 
-  const [data, error, loading, axiosFetch] = useAxios();
-  const getProducts = () => {
-    axiosFetch({
-      method: "GET",
-      url: `/products/${productid}`,
-    });
+  // const [data, error, loading, axiosFetch] = useAxios();
+  // const getProducts = () => {
+  //   axiosFetch({
+  //     method: "GET",
+  //     url: `/products/${productid}`,
+  //   });
+  // };
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const fetchProduct = async () => {
+    const response = await httpInterceptedService.get(`/products/${productid}`);
+    setData(response.status === 200 ? response.data : []);
+    if (response.data) {
+      setLoading(false);
+    }
   };
   useEffect(() => {
-    getProducts();
+    fetchProduct();
   }, []);
+
   // ================> Get Comments <====================
-  const [comments, errorComments, loadingComments, axiosFetchComments] =
-    useAxios();
-  const getData = () => {
-    axiosFetchComments({
-      method: "GET",
-      url: `/comments?productId=${productid}`,
-    });
+  // const [comments, errorComments, loadingComments, axiosFetchComments] =
+  //   useAxios();
+  // const getData = () => {
+  //   axiosFetchComments({
+  //     method: "GET",
+  //     url: `/comments?productId=${productid}`,
+  //   });
+  // };
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
+  const [comments, setComments] = useState([]);
+  // const [error, setError] = useState("");
+  const fetchComment = async () => {
+    const response = await httpInterceptedService.get(
+      `/comments?productId=${productid}`
+    );
+    setComments(response.status === 200 ? response.data : []);
   };
   useEffect(() => {
-    getData();
+    fetchComment();
   }, []);
+
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
@@ -249,7 +276,6 @@ export default function ProductPage() {
   const handleClose = (event, reason) => {
     setOpenSnackbar(false);
   };
-
   const handelAdd = (product) => {
     addToCart(product);
     setOpenSnackbar(true);
@@ -372,10 +398,10 @@ export default function ProductPage() {
                     fontSize: "0.8rem",
                   }}
                 >
-                  {data.rating.count}
+                  {/* {data.rating.count} */}
                   <Rating
                     name="read-only"
-                    value={data.rating.rate}
+                    // value={data.rating.rate}
                     readOnly
                     sx={{ marginRight: "0.5rem" }}
                   />
@@ -662,10 +688,9 @@ export default function ProductPage() {
                   onChange={handleChange}
                   aria-label="text alignment"
                 >
-                  {data.size &&
-                    data.size.map((size) => (
-                      <ToggleButton value={size}>{size}</ToggleButton>
-                    ))}
+                  {data?.size?.map((size) => (
+                    <ToggleButton value={size}>{size}</ToggleButton>
+                  ))}
                 </ToggleButtonGroup>
                 <MyButton
                   padding="0.9rem 0"
@@ -840,7 +865,7 @@ export default function ProductPage() {
                       },
                     }}
                   >
-                    {data.commentBar.map((progressInfos) => (
+                    {data.commentBar?.map((progressInfos) => (
                       <ProductProgressInfos
                         key={progressInfos.id}
                         title={progressInfos.title}
@@ -936,7 +961,7 @@ export default function ProductPage() {
                     نظرات کاربران
                   </Typography>
                   <Box>
-                    {comments.length ? (
+                    {comments.length !== 0 ? (
                       comments.map((comment) => (
                         <>
                           <Typography

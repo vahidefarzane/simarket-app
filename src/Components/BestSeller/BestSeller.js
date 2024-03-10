@@ -1,30 +1,31 @@
-import React from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Box, Stack } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import HomeProductBox from "../HomeProductBox/HomeProductBox";
 import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
+import Loading from "../Loading/Loading";
+import { httpService } from "../../hooks/useAxios";
+
 import "./BestSeller.css";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import useAxios from "../../hooks/useAxios";
-import Loading from "../Loading/Loading";
-import { useEffect } from "react";
 
 export default function BestSeller() {
- 
-  const [data, error, loading,axiosFetch] = useAxios();
-  const getData = () => {
-    axiosFetch({
-      method: "GET",
-      url: "/products?numbersale_gte=200&numbersale_lte=700",
-    });
+  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
+
+  const fetchData = async () => {
+    const response = await httpService.get(
+      "/products?numbersale_gte=200&numbersale_lte=700"
+    );
+    setData(response.status === 200 ? response.data : []);
   };
   useEffect(() => {
-    getData();
+    fetchData();
   }, []);
   return (
     <Stack
@@ -86,10 +87,8 @@ export default function BestSeller() {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {loading ? (
-            <Loading />
-          ) : (
-            data.map((product) => (
+          <Suspense fallback={<Loading />}>
+            {data.map((product) => (
               <SwiperSlide key={product.id}>
                 <HomeProductBox
                   productId={product.id}
@@ -100,8 +99,8 @@ export default function BestSeller() {
                   isSlider={true}
                 />
               </SwiperSlide>
-            ))
-          )}
+            ))}
+          </Suspense>
         </Swiper>
       </Box>
     </Stack>

@@ -354,7 +354,6 @@ export const AccordionStyled = styled(Accordion)(({ theme }) => ({
     "&.Mui-expanded": {
       margin: "0 0 0 0.5rem",
     },
-    
   },
   [theme.breakpoints.down("sm")]: {
     width: "100%",

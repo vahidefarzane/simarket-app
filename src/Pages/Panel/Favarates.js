@@ -23,7 +23,7 @@ export default function Favarates() {
             borderRadius: "0.7rem",
           }}
         >
-          <Typography>محصولی در اینجا یافت شد.</Typography>
+          <Typography>محصولی در اینجا یافت نشد.</Typography>
           <MyButton
             href="/productsList"
             widthupmd="25%"

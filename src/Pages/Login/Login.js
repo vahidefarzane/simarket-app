@@ -172,7 +172,6 @@ export async function loginAction({ request }) {
   if (response.status === 200) {
     localStorage.setItem("username", "کاربر");
     localStorage.setItem("token", response?.data.accessToken);
-    return redirect("/");
+    return redirect("/productsList");
   }
 }
-

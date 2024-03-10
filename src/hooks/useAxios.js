@@ -18,13 +18,7 @@ const useAxios = () => {
       });
       setResponse(res.data);
     } catch (err) {
-      if(err.response.data === "Email already exists"){
-        setError("حساب کاربری با این ایمیل موجود است");
-      }
-      if(err.response.data === "Password is too short"){
-        setError("رمز عبور کوتاه است");
-      }
-      ;
+      setError(err);
     } finally {
       setLoading(false);
     }
@@ -35,13 +29,23 @@ const useAxios = () => {
 
 export default useAxios;
 
-
 // const BASE_URL = "http://localhost:4000";
 const BASE_URL = "https://online-shop-json-server.onrender.com";
 
 export const httpService = axios.create({
   baseURL: BASE_URL,
 });
+export const httpInterceptedService = axios.create({
+  baseURL: BASE_URL,
+});
 
-
-
+httpInterceptedService.interceptors.request.use(
+  async (config) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    }
+    return config;
+  },
+  (error) => {Promise.reject(error)}
+);

@@ -68,8 +68,8 @@ export default function SearchBox() {
           )}
 
           {data.length ? (data?.map((productSearch) => (
-            <>
-              <Link to={`products/${productSearch.id}`} key={productSearch.id}>
+            <Box key={productSearch.id} >
+              <Link to={`products/${productSearch.id}`} >
                 <Typography
                   onClick={() => {
                     setShowList(false);
@@ -85,7 +85,7 @@ export default function SearchBox() {
                 </Typography>
               </Link>
               <Divider />
-            </>
+            </Box>
           ))) : (<Typography>یافت نشد</Typography>)}
         </SearchListBox>
       )}

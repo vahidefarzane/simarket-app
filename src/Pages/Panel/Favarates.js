@@ -1,9 +1,7 @@
-
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 
-import MyButton from "../../Components/MyButton/MyButton";
-
+import MyButton from "../../Components/CustomButton";
 
 export default function Favarates() {
   const [favarates, setFavarates] = useState(false);

@@ -13,7 +13,7 @@ import {
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
-import Loading from "../Loading/Loading";
+import Loading from "../Loading";
 import useAxios from "../../hooks/useAxios";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState, useEffect } from "react";
@@ -21,7 +21,7 @@ import { ModalStyled, LocationStyled } from "../../Style/styles";
 import "./NavBar.css";
 
 export default function CitiesModal() {
-  const [data, error, loading,axiosFetch] = useAxios();
+  const [data, error, loading, axiosFetch] = useAxios();
   const getData = () => {
     axiosFetch({
       method: "GET",
@@ -137,9 +137,8 @@ export default function CitiesModal() {
                 <Loading />
               ) : (
                 data?.map((city) => (
-                  <Box  key={city.id}>
+                  <Box key={city.id}>
                     <ListItem
-                     
                       sx={{
                         display: "flex",
                         justifyContent: "space-between",

@@ -2,11 +2,10 @@ import React, { Suspense, useEffect, useState } from "react";
 import { Box, Stack } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import HomeProductBox from "../HomeProductBox/HomeProductBox";
-import HomeTitleComponent from "../HomeTitleComponent/HomeTitleComponent";
-import Loading from "../Loading/Loading";
+import HomeProductBox from "../HomeProductBox";
+import HomeTitleComponent from "../HomeTitleComponent";
+import Loading from "../Loading";
 import { httpService } from "../../hooks/useAxios";
-
 import "./BestSeller.css";
 
 import "swiper/css";

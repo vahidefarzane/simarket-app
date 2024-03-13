@@ -19,9 +19,9 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
-import Logo from "../Logo/Logo";
+import Logo from "../Logo";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchBox from "../SearchBox/SearchBox";
+import SearchBox from "../SearchBox";
 import CitiesModal from "./CitiesModal";
 import CardBtnNavBar from "./CardBtnNavBar";
 import {
@@ -137,7 +137,7 @@ function MobileNavBar({ isSticky }) {
           </MenuBarStyled>
         )}
         <Link to="/">
-          <Logo/>
+          <Logo />
         </Link>
         <IconButton color="inherit">
           <HelpOutlineOutlinedIcon />

@@ -1,9 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import { Box, Toolbar, ListItem, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Logo from "../Logo/Logo";
+import Logo from "../Logo";
 import "./NavBar.css";
-import SearchBox from "../SearchBox/SearchBox";
+import SearchBox from "../SearchBox";
 import NavbarPanelBtn from "../NavbarPanelBtn/NavbarPanelBtn";
 import CitiesModal from "./CitiesModal";
 import CardBtnNavBar from "./CardBtnNavBar";
@@ -35,7 +35,6 @@ function DesktopNavBar({ isSticky }) {
               fontSize: "0.85rem",
               paddingLeft: "1rem",
               fontWeight: "bold",
-              
             }}
           >
             دسته بندی

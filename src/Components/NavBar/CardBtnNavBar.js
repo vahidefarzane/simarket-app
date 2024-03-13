@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Typography, IconButton, Divider, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import MyButton from "../MyButton/MyButton";
+import MyButton from "../CustomButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "./NavBar.css";

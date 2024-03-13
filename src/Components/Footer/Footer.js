@@ -17,11 +17,9 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import Logo from "../Logo/Logo";
-import MyButton from "../MyButton/MyButton";
-import { BtnFooter,NumberBox,TextFieldStyled} from "../../Style/styles"
-
-
+import Logo from "../Logo";
+import MyButton from "../CustomButton";
+import { BtnFooter, NumberBox, TextFieldStyled } from "../../Style/styles";
 
 export default function Footer() {
   const [footerMenu, setFooterMenu] = useState([
@@ -77,7 +75,7 @@ export default function Footer() {
         })}
       >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Logo/>
+          <Logo />
           <BtnFooter
             endIcon={<KeyboardArrowUpIcon sx={{ marginRight: "0.7rem" }} />}
           >

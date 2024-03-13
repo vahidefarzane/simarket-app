@@ -1,11 +1,11 @@
-import ProductsList from "./Pages/ProductsList/ProductsList";
-import ContactUs from "./Pages/ContactUs/ContactUs";
-import ProductPage from "./Pages/ProductPage/ProductPage";
-import AddComment from "./Pages/AddComment/AddComment";
-import Login from "./Pages/Login/Login";
+import ProductsList from "./Pages/ProductsList";
+import ContactUs from "./Pages/ContactUs";
+import ProductPage from "./Pages/ProductPage";
+import AddComment from "./Pages/AddComment";
+import Login from "./Pages/Login";
 import Register from "./Pages/Register/Register";
 import Cart from "./Pages/Cart/Cart";
-import Checkout from "./Pages/Checkout/Checkout";
+import Checkout from "./Pages/Checkout";
 import Panel from "./Pages/Panel/Panel";
 import Addresses from "./Pages/Panel/Addresses";
 import Comments from "./Pages/Panel/Comments";
@@ -16,14 +16,15 @@ import Orders from "./Pages/Panel/Orders";
 import TrackingOrder from "./Pages/Panel/TrackingOrder";
 import AccountInfos from "./Pages/Panel/AccountInfos";
 import AddAddress from "./Pages/Panel/AddAddress";
-import OrderInfo from "./Components/OrderInfo/OrderInfo";
-import OrderReceived from "./Components/OrderReceived/OrderReceived";
+import OrderInfo from "./Components/OrderInfo";
+import OrderReceived from "./Components/OrderReceived";
 import MainLayout from "./Layouts/main-layout";
-import Home from "./Pages/Home/Home";
+import Home from "./Pages/Home";
 
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { registerAction } from "./Pages/Register/Register";
-import { loginAction } from "./Pages/Login/Login";
+import { loginAction } from "./Pages/Login";
+import NotFound from "./Pages/NotFound";
 
 const token = localStorage.getItem("token");
 const PrivateRoute = ({ children }) => {
@@ -104,6 +105,7 @@ const router = createBrowserRouter([
           { path: "trackingOrder", element: <TrackingOrder /> },
         ],
       },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);

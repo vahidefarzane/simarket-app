@@ -7,11 +7,11 @@ import {
   Step,
   StepLabel,
 } from "@mui/material";
-import Checkout from "../Checkout/Checkout";
-import Logo from "../../Components/Logo/Logo";
+import Checkout from "../Checkout";
+import Logo from "../../Components/Logo";
 import "./cart.css";
-import OrderReceived from "../../Components/OrderReceived/OrderReceived";
-import OrderInfo from "../../Components/OrderInfo/OrderInfo";
+import OrderReceived from "../../Components/OrderReceived";
+import OrderInfo from "../../Components/OrderInfo";
 const steps = ["سبد خرید", "صورتحساب", "فاکتور"];
 
 export default function Cart() {

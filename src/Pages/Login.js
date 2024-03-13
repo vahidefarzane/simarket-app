@@ -1,30 +1,29 @@
 import { useState, useEffect } from "react";
 import { Stack, Box, Snackbar } from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
 import {
   Link,
-  useActionData,
-  useNavigate,
   useSubmit,
   useRouteError,
+  useActionData,
+  redirect,
 } from "react-router-dom";
-import Logo from "../../Components/Logo";
+import MuiAlert from "@mui/material/Alert";
 import { useForm } from "react-hook-form";
-import "./Register.css";
-import { httpService } from "../../hooks/useAxios";
-import { ContainerImage } from "../../Style/styles";
+import Logo from "../Components/Logo";
+import { ContainerImage } from "../Style/styles";
+import { httpService } from "../hooks/useAxios";
 
-export default function Register() {
+export default function Login() {
   const [formNotification, setFormNotification] = useState(false);
   const handleCloseNotification = () => {
     setFormNotification(false);
   };
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const submitForm = useSubmit();
 
   const routeError = useRouteError();
@@ -34,12 +33,11 @@ export default function Register() {
 
   const isSuccessOperation = useActionData();
 
-  const navigate = useNavigate();
   useEffect(() => {
     if (isSuccessOperation) {
       setFormNotification(true);
       setTimeout(() => {
-        navigate("/login");
+        navigate("/");
       }, 2000);
     }
     if (routeError) {
@@ -61,7 +59,7 @@ export default function Register() {
           width: {
             lg: "75%",
             md: "94%",
-            sm: "60%",
+            sm: "70%",
             xs: "100%",
           },
           justifyContent: "center",
@@ -69,7 +67,9 @@ export default function Register() {
             md: "2rem 0",
             xs: "1rem 0",
           },
-          boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          boxShadow: {
+            sm: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          },
           padding: {
             md: "2rem 1.5rem",
             xs: "1.5rem 1rem",
@@ -85,31 +85,24 @@ export default function Register() {
             },
             display: "flex",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <Stack sx={{ width: "90%" }}>
-            <Box sx={{ margin: "1rem auto" }}>
+          <Stack sx={{ width: "85%" }}>
+            <Box sx={{ margin: "auto", marginBottom: "2rem" }}>
               <Logo />
             </Box>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <label className="lable">نام کاربری :</label>
-              <input
-                {...register("userName", {
-                  required: "لطفا نام کاربری خود را وارد کنید .",
-                })}
-                type="text"
-                className="input-form"
-              />
-              <p className="alert">{errors.userName?.message}</p>
-              <label className="lable">ایمیل :</label>
+              <label className="lable">ایمیل</label>
               <input
                 {...register("email", {
                   required: "لطفا ایمیل خود را وارد کنید .",
                 })}
-                type="email"
+                type="text"
                 className="input-form"
               />
               <p className="alert">{errors.email?.message}</p>
+
               <label className="lable">گذرواژه :</label>
               <input
                 {...register("password", {
@@ -119,15 +112,14 @@ export default function Register() {
                 className="input-form"
               />
               <p className="alert">{errors.password?.message}</p>
-              <input
-                type="submit"
-                className="submit-btn"
-                value={isSuccessOperation ? "در حال ثبت نام" : "ثبت نام"}
-                disabled={isSuccessOperation}
-              />
+              <input type="submit" className="submit-btn" value="ورود" />
               <div className="link-container">
                 <span className="link">
-                  قبلا ثبت نام کردید؟ <Link to="/login">ورود</Link>
+                  رمز عبور خود را فراموش کردید؟
+                  <Link to="/register">بازیابی رمز عبور</Link>
+                </span>
+                <span className="link">
+                  قبلا ثبت نام نکردید؟ <Link to="/register">ثبت نام</Link>
                 </span>
               </div>
               <Snackbar
@@ -137,16 +129,16 @@ export default function Register() {
               >
                 {routeError ? (
                   <MuiAlert elevation={6} variant="filled" severity="error">
-                    {routeError?.response?.data === "Network Error" &&
+                    {routeError?.message === "Network Error" &&
                       "لطفا از اتصال خود به اینترنت مطمئن شوید"}
-                    {routeError?.response?.data === "Email already exists" &&
-                      "حساب کاربری با این ایمیل موجود است"}
-                    {routeError?.response?.data === "Password is too short" &&
-                      "گذرواژه کوتاه است"}
+                    {routeError?.response?.data === "Cannot find user" &&
+                      "حساب کاربری با این ایمیل موجود نیست"}
+                    {routeError?.response?.data === "Incorrect password" &&
+                      "گذرواژه اشتباه است"}
                   </MuiAlert>
                 ) : (
                   <MuiAlert elevation={6} variant="filled" severity="success">
-                    {" ثبت نام شما با موفقیت انجام شد"}
+                    {"شما با موفقیت وارد شدید"}
                   </MuiAlert>
                 )}
               </Snackbar>
@@ -156,7 +148,7 @@ export default function Register() {
 
         <ContainerImage>
           <Box
-            sx={{ width: "87%", height: "29rem" }}
+            sx={{ width: "85%", height: "27rem" }}
             component="img"
             alt="Your logo"
             src="./images/login.png"
@@ -167,9 +159,13 @@ export default function Register() {
   );
 }
 
-export async function registerAction({ request }) {
+export async function loginAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  const response = await httpService.post("/users", data);
-  return response.status === 201;
+  const response = await httpService.post("/login", data);
+  if (response.status === 200) {
+    localStorage.setItem("username", "کاربر");
+    localStorage.setItem("token", response?.data.accessToken);
+    return redirect("/productsList");
+  }
 }

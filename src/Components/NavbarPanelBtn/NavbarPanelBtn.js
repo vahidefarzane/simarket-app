@@ -7,8 +7,8 @@ import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Link, useLocation } from "react-router-dom";
-import MyButton from "../MyButton/MyButton";
-import Modal from "../Modal/Modal";
+import MyButton from "../CustomButton";
+import Modal from "../Modal";
 import "./NavbarPanelBtn.css";
 
 export default function NavbarPanelBtn() {

@@ -11,16 +11,6 @@
   font-size: 18px;
   background: #fff;
 }
-/* .mySwiper {
-  margin: 0.5rem;
-} */
-
-/* .swiper-button-prev::after {
-  border-radius: 1rem 0 0 1rem;
-}
-.swiper-button-next::after {
-  border-radius: 0 1rem 1rem 0;
-}  */
 .swiper-image-box img {
   object-fit: cover;
   width: 100%;

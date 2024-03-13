@@ -25,7 +25,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { registerAction } from "./Pages/Register/Register";
 import { loginAction } from "./Pages/Login";
 import NotFound from "./Pages/NotFound";
-
+import UnhandledException from "./Pages/UnhandledException";
 const token = localStorage.getItem("token");
 const PrivateRoute = ({ children }) => {
   return token ? children : <Navigate to="/login" />;
@@ -34,7 +34,7 @@ const PrivateRoute = ({ children }) => {
 const router = createBrowserRouter([
   {
     path: "/",
-
+    errorElement: <UnhandledException />,
     element: <MainLayout />,
     children: [
       { element: <Home />, index: true },

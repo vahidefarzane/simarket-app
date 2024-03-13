@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://online-shop-json-server.onrender.com";
-// axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 const useAxios = () => {
   const [response, setResponse] = useState([]);
@@ -29,10 +28,8 @@ const useAxios = () => {
 
 export default useAxios;
 
-// const BASE_URL = "http://localhost:4000";
-const BASE_URL = "https://online-shop-json-server.onrender.com";
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const httpService = axios.create({
-  baseURL: BASE_URL,
+  baseURL:baseUrl,
 });
-

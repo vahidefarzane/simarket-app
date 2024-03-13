@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.04839ea1.css",
-    "main.js": "/static/js/main.3c64f736.js",
+    "main.css": "/static/css/main.b1296f2d.css",
+    "main.js": "/static/js/main.0f16fdc6.js",
     "static/media/Vazir-FD-WOL.ttf": "/static/media/Vazir-FD-WOL.22679c959dc40b2b2cff.ttf",
     "index.html": "/index.html",
-    "main.04839ea1.css.map": "/static/css/main.04839ea1.css.map",
-    "main.3c64f736.js.map": "/static/js/main.3c64f736.js.map"
+    "main.b1296f2d.css.map": "/static/css/main.b1296f2d.css.map",
+    "main.0f16fdc6.js.map": "/static/js/main.0f16fdc6.js.map"
   },
   "entrypoints": [
-    "static/css/main.04839ea1.css",
-    "static/js/main.3c64f736.js"
+    "static/css/main.b1296f2d.css",
+    "static/js/main.0f16fdc6.js"
   ]
 }

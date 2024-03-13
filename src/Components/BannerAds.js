@@ -10,6 +10,7 @@ export default function BannerAds() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
+
   const fetchData = async () => {
     const response = await httpService.get("/bannerimages");
     if (response.status === 200) {

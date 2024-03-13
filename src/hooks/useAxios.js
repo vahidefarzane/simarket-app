@@ -35,17 +35,4 @@ const BASE_URL = "https://online-shop-json-server.onrender.com";
 export const httpService = axios.create({
   baseURL: BASE_URL,
 });
-export const httpInterceptedService = axios.create({
-  baseURL: BASE_URL,
-});
 
-httpInterceptedService.interceptors.request.use(
-  async (config) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      window.location.href = "/login";
-    }
-    return config;
-  },
-  (error) => {Promise.reject(error)}
-);

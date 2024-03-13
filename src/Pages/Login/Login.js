@@ -1,21 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Stack, Box, Snackbar } from "@mui/material";
 import {
   Link,
-  useNavigate,
   useSubmit,
   useRouteError,
   useActionData,
   redirect,
 } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
-import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Logo from "../../Components/Logo/Logo";
-import useAxios from "../../hooks/useAxios";
 import { ContainerImage } from "../../Style/styles";
-import { useEffect } from "react";
-import axios from "axios";
 import { httpService } from "../../hooks/useAxios";
 
 export default function Login() {
@@ -39,15 +34,14 @@ export default function Login() {
   const isSuccessOperation = useActionData();
 
   useEffect(() => {
-    // if (isSuccessOperation) {
-    //   setFormNotification(true);
-    //   setTimeout(() => {
-    //     navigate("/");
-    //   }, 2000);
-    // }
+    if (isSuccessOperation) {
+      setFormNotification(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
     if (routeError) {
       setFormNotification(true);
-      console.log(routeError);
     }
   }, [isSuccessOperation, routeError]);
 

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Box, Toolbar, ListItem, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../Logo/Logo";
@@ -13,7 +13,7 @@ function DesktopNavBar({ isSticky }) {
   return (
     <StyledAppBar sx={{ position: isSticky ? "fixed" : "unset" }}>
       <Toolbar>
-        <Logo/>
+        <Logo />
 
         <SearchBox></SearchBox>
         <CitiesModal />
@@ -28,30 +28,43 @@ function DesktopNavBar({ isSticky }) {
       </Toolbar>
 
       <StyledList>
-        <Link className="list-item-links">
-          <ListItem className="list-item">
-            <MenuIcon sx={{ marginLeft: "0.7rem" }} />
-            <Typography
-              sx={{
-                borderLeft: "2px solid",
-                fontSize: "0.85rem",
-                paddingLeft: "1rem",
-                fontWeight: "bold",
-              }}
-            >
-              دسته بندی
-            </Typography>
-          </ListItem>
+        <Link className="categories-navbar">
+          <MenuIcon sx={{ marginLeft: "0.7rem" }} />
+          <Typography
+            sx={{
+              fontSize: "0.85rem",
+              paddingLeft: "1rem",
+              fontWeight: "bold",
+              
+            }}
+          >
+            دسته بندی
+          </Typography>
         </Link>
-        <Link className="list-item-links" to="/">
-          <ListItem className="list-item">صفحه اصلی</ListItem>
-        </Link>
-        <Link className="list-item-links" to="/productsList">
-          <ListItem className="list-item">لیست کالاها</ListItem>
-        </Link>
-        <Link className="list-item-links" to="/contactUs">
-          <ListItem className="list-item">تماس با ما</ListItem>
-        </Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "list-item-active" : "list-item-links"
+          }
+          to="/"
+        >
+          صفحه اصلی
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "list-item-active" : "list-item-links"
+          }
+          to="/productsList"
+        >
+          لیست کالاها
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "list-item-active" : "list-item-links"
+          }
+          to="/contactUs"
+        >
+          تماس با ما
+        </NavLink>
       </StyledList>
     </StyledAppBar>
   );

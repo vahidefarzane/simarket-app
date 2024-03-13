@@ -1,11 +1,9 @@
 import { Stack, Box, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
 import "./ContactUs.css";
 
 export default function ContactUs() {
   return (
     <Stack sx={{ padding: "2rem 4rem" }}>
-      
       <Typography
         component={"p"}
         sx={{ marginBottom: "1rem", lineHeight: "2rem" }}

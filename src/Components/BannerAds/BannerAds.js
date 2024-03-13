@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Await } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../Loading/Loading";
 import { useEffect, useState, Suspense } from "react";
@@ -8,10 +8,16 @@ import { httpService } from "../../hooks/useAxios";
 export default function BannerAds() {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     const response = await httpService.get("/bannerimages");
-    setData(response.status === 200 ? response.data : []);
+    if (response.status === 200) {
+      setLoading(false);
+      setData(response.data);
+    } else {
+      setError("");
+    }
   };
   useEffect(() => {
     fetchData();
@@ -34,8 +40,10 @@ export default function BannerAds() {
         },
       })}
     >
-      <Suspense fallback={<Loading />}>
-        {data?.map((bannerImg) => (
+      {loading ? (
+        <Loading />
+      ) : (
+        data.map((bannerImg) => (
           <Link to={bannerImg.to} key={bannerImg.id}>
             <Box
               sx={(theme) => ({
@@ -54,8 +62,8 @@ export default function BannerAds() {
               src={bannerImg.src}
             />
           </Link>
-        ))}
-      </Suspense>
+        ))
+      )}
     </Box>
   );
 }

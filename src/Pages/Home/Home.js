@@ -7,7 +7,7 @@ import Categories from "../../Components/Categories/Categories";
 import "./Home.css";
 import NewsLetter from "../../Components/NewsLetter/NewsLetter";
 
-export default function Home({searchParams}) {
+export default function Home({ searchParams }) {
   return (
     <div className="home-container">
       <Header />
@@ -15,7 +15,7 @@ export default function Home({searchParams}) {
       <BestSeller />
       <BannerAds />
       <Categories />
-      <NewsLetter/>
+      <NewsLetter />
     </div>
   );
 }

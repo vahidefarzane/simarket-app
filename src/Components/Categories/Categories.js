@@ -8,10 +8,16 @@ import { httpService } from "../../hooks/useAxios";
 export default function Categories() {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     const response = await httpService.get("/categories");
-    setData(response.status === 200 ? response.data : []);
+    if (response.status === 200) {
+      setLoading(false);
+      setData(response.data);
+    } else {
+      setError("");
+    }
   };
   useEffect(() => {
     fetchData();
@@ -43,8 +49,10 @@ export default function Categories() {
           },
         })}
       >
-        <Suspense fallback={<Loading />}>
-          {data.map((category) => (
+        {loading ? (
+          <Loading />
+        ) : (
+          data.map((category) => (
             <Box
               key={category.id}
               sx={(theme) => ({
@@ -108,8 +116,8 @@ export default function Categories() {
                 {category.name}
               </Stack>
             </Box>
-          ))}
-        </Suspense>
+          ))
+        )}
       </Box>
     </Stack>
   );

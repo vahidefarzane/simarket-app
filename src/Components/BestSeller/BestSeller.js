@@ -17,16 +17,23 @@ import "swiper/css/scrollbar";
 export default function BestSeller() {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     const response = await httpService.get(
       "/products?numbersale_gte=200&numbersale_lte=700"
     );
-    setData(response.status === 200 ? response.data : []);
+    if (response.status === 200) {
+      setLoading(false);
+      setData(response.data);
+    } else {
+      setError("");
+    }
   };
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <Stack
       sx={(theme) => ({
@@ -87,8 +94,10 @@ export default function BestSeller() {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          <Suspense fallback={<Loading />}>
-            {data.map((product) => (
+          {loading ? (
+            <Loading />
+          ) : (
+            data.map((product) => (
               <SwiperSlide key={product.id}>
                 <HomeProductBox
                   productId={product.id}
@@ -99,8 +108,8 @@ export default function BestSeller() {
                   isSlider={true}
                 />
               </SwiperSlide>
-            ))}
-          </Suspense>
+            ))
+          )}
         </Swiper>
       </Box>
     </Stack>

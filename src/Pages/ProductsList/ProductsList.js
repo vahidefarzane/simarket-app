@@ -25,6 +25,8 @@ import MyButton from "../../Components/MyButton/MyButton";
 import "./ProductsList.css";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../../Components/Loading/Loading";
+import { httpService } from "../../hooks/useAxios";
+
 import {
   SideBarStyled,
   AccordionStyled,
@@ -62,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("md")]: {
       width: "100%",
-      marginTop :'1rem'
+      marginTop: "1rem",
     },
   },
   productListHead: {
@@ -90,15 +92,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductsList() {
   const classes = useStyles();
-  const [categories, errorCat, loadingCat, axiosFetchCat] = useAxios();
-  const getCategories = () => {
-    axiosFetchCat({
-      method: "GET",
-      url: "/categories",
-    });
+
+  // =============> Fetch Categories  <=============
+  const [categories, setCategories] = useState([]);
+  const [categoriesError, setCategoriesError] = useState("");
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
+
+  const fetchCategories = async () => {
+    const response = await httpService.get("/categories");
+    if (response.status === 200) {
+      setCategoriesLoading(false);
+      setCategories(response.data);
+    } else {
+      setCategoriesError("");
+    }
   };
   useEffect(() => {
-    getCategories();
+    fetchCategories();
   }, []);
 
   const [
@@ -147,7 +157,6 @@ export default function ProductsList() {
       url: `products?${categoryUrl}&${priceUrl}&${sortUrl}`,
     });
   }, [categoryUrl, priceUrl, sortUrl]);
-
 
   return (
     <Box className={classes.productListContainer}>
@@ -206,7 +215,7 @@ export default function ProductsList() {
             </H2ElemSideBar>
           </AccordionSummary>
           <AccordionDetails className={classes.accordionDetails}>
-            {loadingCat ? (
+            {categoriesLoading ? (
               <Loading />
             ) : (
               categories.map((category) => (
@@ -303,7 +312,9 @@ export default function ProductsList() {
           {productFilteredLoading ? (
             <Loading />
           ) : (
-            productFiltered.map((product) => <Product key={product.id} product={product} />)
+            productFiltered.map((product) => (
+              <Product key={product.id} product={product} />
+            ))
           )}
         </Box>
       </Stack>

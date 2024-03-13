@@ -26,7 +26,6 @@ import { registerAction } from "./Pages/Register/Register";
 import { loginAction } from "./Pages/Login/Login";
 
 const token = localStorage.getItem("token");
-console.log(token);
 const PrivateRoute = ({ children }) => {
   return token ? children : <Navigate to="/login" />;
 };

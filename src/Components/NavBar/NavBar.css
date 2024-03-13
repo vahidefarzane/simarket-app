@@ -1,11 +1,21 @@
 .list-item-links {
+  height: 2rem;
   color: #212121;
-}
-.list-item {
-  height: 2.8rem;
   font-weight: bold;
+  margin: 0.8rem 0.5rem 0;
 }
-.list-item:hover {
+.categories-navbar {
+  display: flex;
+  color: #212121;
+  font-weight: bold;
+  margin: 0.5rem;
+  border-left: 2px solid #212121;
+}
+.list-item-active {
+  height: 2rem;
+  color: #212121;
+  font-weight: bold;
+  margin: 0.8rem 0.5rem 0;
   border-bottom: 2px solid #fb4707;
 }
 .BottomNavigationAction {

@@ -36,7 +36,7 @@ import useAxios from "../../hooks/useAxios";
 import Loading from "../../Components/Loading/Loading";
 import { CartContext } from "../../Contexts/CartContext";
 import { ToggleButton, TabsStyled, BoxShareProduct } from "../../Style/styles";
-import { httpInterceptedService } from "../../hooks/useAxios";
+import { httpService } from "../../hooks/useAxios";
 
 const useStyles = makeStyles((theme) => ({
   productPageContainer: {
@@ -234,10 +234,13 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const fetchProduct = async () => {
-    const response = await httpInterceptedService.get(`/products/${productid}`);
-    setData(response.status === 200 ? response.data : []);
-    if (response.data) {
+    const response = await httpService.get(`/products/${productid}`);
+
+    if (response.data === 200) {
       setLoading(false);
+      setData(response.data);
+    } else {
+      setError(response.error);
     }
   };
   useEffect(() => {
@@ -260,9 +263,7 @@ export default function ProductPage() {
   const [comments, setComments] = useState([]);
   // const [error, setError] = useState("");
   const fetchComment = async () => {
-    const response = await httpInterceptedService.get(
-      `/comments?productId=${productid}`
-    );
+    const response = await httpService.get(`/comments?productId=${productid}`);
     setComments(response.status === 200 ? response.data : []);
   };
   useEffect(() => {
